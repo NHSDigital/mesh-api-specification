@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Mock",
   "scripts": {
+    "lint": "find . -type f -name '*.js' ! -name '.eslintrc.js' | grep -v 'node_modules/' | xargs eslint",
     "start": "node app.js --use_strict"
   },
   "main": "app.js",
   "dependencies": {
     "apimocker": "^0.4.13"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
   }
 }

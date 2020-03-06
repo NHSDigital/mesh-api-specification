@@ -50,7 +50,6 @@ There are `make` commands that alias some of this functionality:
  * `publish` -- Outputs the specification as a **single file** into the `dist/` directory
  * `serve` -- Serves a preview of the specification in human-readable format
  * `generate-examples` -- generate example objects from the specification
- * `validate` -- validate generated examples against FHIR R4
 
 ### Running tests
 #### End-to-end tests

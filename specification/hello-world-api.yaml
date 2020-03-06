@@ -15,6 +15,9 @@ info:
     - `GET /hello/world` - an example of an open-access endpoint
     - `GET /hello/application` - an example of an application-restricted endpoint
     - `GET /hello/user` - an example of a user-restricted endpoint
+  contact:
+    name: TBC
+    email: tbc@nhs.net
 
 servers:
   - url: https://emea-demo8-test.apigee.net/v1
@@ -45,6 +48,8 @@ paths:
                     example: "Hello world!"
               example:
                 message: "Hello world!"
+      tags:
+        - hello
 
   /hello/application:
     get:
@@ -75,6 +80,8 @@ paths:
           description: Missing or invalid API Key
       security:
         - api_key: []
+      tags:
+        - hello
 
   /hello/user:
     get:
@@ -111,6 +118,8 @@ paths:
       security:
         - oAuth2AuthCode:
             - nhsperson
+      tags:
+        - hello
 
 components:
 
@@ -133,3 +142,6 @@ components:
   schemas:
     Greeting:
       $ref: components/schemas/Greeting.yaml
+
+tags:
+  - name: hello

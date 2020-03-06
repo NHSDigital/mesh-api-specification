@@ -55,9 +55,6 @@ jobs:
       - name: Lint
         run: make lint
 
-      - name: Check resources are valid FHIR 4.0.1
-        run: make validate
-
       - name: Compile spec
         run: make publish
 
