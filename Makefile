@@ -39,11 +39,10 @@ clean:
 
 generate-examples: publish clean
 	mkdir -p dist/examples
-	poetry run python scripts/generate_examples.py dist/template-api.json dist/examples
+	poetry run python scripts/generate_examples.py dist/hello-world-api.json dist/examples
 
 update-examples: generate-examples
-	#TODO copy and standardise examples e.g.:
-	jq -rM . <dist/examples/resources/Patient.json >specification/components/examples/Patient.json
+	jq -rM . <dist/examples/resources/Greeting.json >specification/components/examples/Greeting.json
 	make publish
 
 check-licenses:

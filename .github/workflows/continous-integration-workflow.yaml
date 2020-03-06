@@ -83,8 +83,8 @@ jobs:
       - name: Store distributable schema
         uses: actions/upload-artifact@v1
         with:
-          name: template-api-${{ env.SPEC_VERSION }}+${{ github.run_id }}.json
-          path: ./dist/template-api.json
+          name: hello-world-api-${{ env.SPEC_VERSION }}+${{ github.run_id }}.json
+          path: ./dist/hello-world-api.json
 
       - name: Create release (master only)
         id: create-release
@@ -105,8 +105,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./dist/template-api.json
-          asset_name: template-api.json
+          asset_path: ./dist/hello-world-api.json
+          asset_name: hello-world-api.json
           asset_content_type: application/json
 
       #TODO uncomment when ready to deploy
