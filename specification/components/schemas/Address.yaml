@@ -1,0 +1,54 @@
+type: object
+description: An address associated with a person.
+properties:
+  id:
+    type: string
+    description: Unique system identifier for this address.
+    readOnly: true
+    example: '123'
+  period:
+    type: object
+    description: The dates between which this address is linked to this patient.
+    required:
+      - start
+    properties:
+      start:
+        type: string
+        format: date
+        description: Date which patient became associated with this address, in format `yyyy-mm-dd`.
+        example: 2020-01-01
+      end:
+        type: string
+        format: date
+        description: Date at which patient is no longer associated with this address, in format `yyyy-mm-dd`.
+        example: 2020-12-31
+  use:
+    type: string
+    description: Purpose of this address.
+    enum: [home, work, temp, old, billing] # TODO: how do we map usual, correspondence, temporary, other?
+    example: work
+  type:
+    type: string
+    description: Type of address. Postal-only (aka correspondence) addresses can be used to communicate, but are not where the person associated with this address can be usually found.
+    enum: [postal, physical, both]
+    example: both
+  line:
+    type: array
+    description: All lines of the address except the postal code.
+    items:
+      type: string
+    example:
+      - NHS Digital
+      - Whitehall II
+      - Whitehall Quay
+      - Leeds
+      - West Yorkshire
+  postalCode:
+    type: string
+    description: Postal code of the address.
+    example: "LS1 6AE"
+  extension:
+    type: array
+    description: Postal address file (PAF) key associated with this address formatted as a FHIR extension. Empty if no PAF key for the address is known, or an object specifying the code system of the address key and the value of the address key. 
+    items:
+      $ref: 'extensions/AddressKey.yaml'
