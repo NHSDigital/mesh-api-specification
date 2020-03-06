@@ -5,22 +5,20 @@ python = "^3.8"
 [tool.poetry]
 name = "apim-definitions"
 version = "0.0.1-alpha"
-description = "FHIR PDS API Definitions"
+description = "Template API Definitions"
 
 license = "MIT"
 
 authors = [
-    "Laurence Pakenham-Smith <laurence.smith2@nhs.net>",
-    "Alex Hawdon <alex.hawdon1@nhs.net>",
-    "Tony Heap <tony.heap1@nhs.net>"
+    #TODO add authors
 ]
 
 readme = 'README.md'
 
-repository = "https://github.com/NHSDigital/personal-demographics-service-api"
+repository = "https://github.com/NHSDigital/template-api"
 homepage = ""
 
-keywords = ["healthcare", "uk", "nhs", "demographics"]
+keywords = ["healthcare", "uk", "nhs"] #TODO add additional keywords
 
 
 [tool.poetry.dependencies]

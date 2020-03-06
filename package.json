@@ -1,17 +1,17 @@
 {
   "name": "apim-definitions",
   "version": "0.0.1",
-  "description": "OAS (Swagger v3) API Definition for Patient Information",
+  "description": "OAS (Swagger v3) API Definition for Template API",
   "scripts": {
-    "lint": "node_modules/.bin/speccy lint specification/patient-demographics-service-api.yaml --skip default-and-example-are-redundant",
-    "test": "node_modules/.bin/newman run tests/e2e/personal-demographics-service-sandbox.json -e $API_TEST_ENV_FILE_PATH --reporters html,cli,htmlextra --reporter-htmlextra-logs --reporter-htmlextra-darkTheme",
-    "publish": "mkdir -p dist && node_modules/.bin/speccy resolve specification/patient-demographics-service-api.yaml -i | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > dist/patient-demographics-service-api.json",
-    "serve": "node_modules/.bin/speccy serve dist/patient-demographics-service-api.json",
+    "lint": "node_modules/.bin/speccy lint specification/template-api.yaml --skip default-and-example-are-redundant",
+    "test": "node_modules/.bin/newman run tests/e2e/template-api-sandbox.json -e $API_TEST_ENV_FILE_PATH --reporters html,cli,htmlextra --reporter-htmlextra-logs --reporter-htmlextra-darkTheme",
+    "publish": "mkdir -p dist && node_modules/.bin/speccy resolve specification/template-api.yaml -i | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > dist/template-api.json",
+    "serve": "node_modules/.bin/speccy serve dist/template-api.json",
     "check-licenses": "node_modules/.bin/license-checker --failOn GPL --failOn LGPL"
   },
   "author": "NHS Digital",
   "license": "MIT",
-  "homepage": "https://github.com/NHSDigital/personal-demographics-service-api",
+  "homepage": "https://github.com/NHSDigital/template-api",
   "dependencies": {
     "speccy": "^0.11.0"
   },

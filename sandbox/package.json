@@ -1,7 +1,7 @@
 {
-    "name": "pds-api-sandbox",
+    "name": "template-api-sandbox",
     "version": "0.0.1",
-    "description": "Patient Information API Sandbox Server",
+    "description": "Template API Sandbox Server",
     "main": "app.js",
     "scripts": {
         "lint": "find . -type f -name '*.js' ! -name '.eslintrc.js' | grep -v 'node_modules/' | xargs eslint",
