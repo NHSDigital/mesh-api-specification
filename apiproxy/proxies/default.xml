@@ -60,7 +60,7 @@
         </Response>
     </PreFlow>
     <HTTPProxyConnection>
-        <BasePath>/v1/hello</BasePath>
+        <BasePath>/PROXY_BASE_PATH</BasePath>
         <Properties/>
         <VirtualHost>default</VirtualHost>
         <VirtualHost>secure</VirtualHost>
