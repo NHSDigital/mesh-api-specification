@@ -8,3 +8,12 @@ newman/
 
 __pycache__/
 .envrc
+
+### IntelliJ IDEA ###
+.idea/*
+.idea
+*.iws
+*.iml
+*.ipr
+!.idea/codeStyles
+!.idea/runConfigurations
