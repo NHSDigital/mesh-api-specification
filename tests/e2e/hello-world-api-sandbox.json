@@ -1,375 +1,93 @@
 {
-	"info": {
-		"_postman_id": "a75d8ee1-7c0b-4eeb-8cf7-329e3a74ae90",
-		"name": "Hello World API Sandbox",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Hello World",
-			"item": [
-				{
-					"name": "Hello World - Success",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "18e6611a-f47a-4bb1-8540-c1bab62695ab",
-								"exec": [
-									"pm.environment.set(\"expected_greeting\", \"Hello World!\");"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "83d1055f-42ef-440d-bcbb-d41fab641862",
-								"exec": [
-									"pm.test(\"Returns status code 200 OK\", () => {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Returns correct mock response\", () => {",
-									"    const responseJson = pm.response.json()",
-									"    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
-									"    pm.expect(responseJson.message).to.eql(expectedGreeting)",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/hello/world",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"hello",
-								"world"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Hello Application",
-			"item": [
-				{
-					"name": "Hello Application - No API Key",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "d01d1204-0537-4057-ae8f-5f0bcd263318",
-								"exec": [
-									"pm.environment.set(\"expected_error_message\", \"Failed to resolve API Key variable request.header.apikey\")",
-									"pm.environment.set(\"expected_error_code\", \"steps.oauth.v2.FailedToResolveAPIKey\")"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "7db28433-ca04-473c-b071-83c869f738d2",
-								"exec": [
-									"pm.test(\"Returns status code 401 Unauthorized\", () => {",
-									"    pm.response.to.have.status(401);",
-									"});",
-									"",
-									"pm.test(\"Returns correct error response\", () => {",
-									"    const responseJson = pm.response.json()",
-									"    const expectedErrorMessage = pm.environment.get(\"expected_error_message\")",
-									"    const expectedErrorCode = pm.environment.get(\"expected_error_code\")",
-									"    pm.expect(responseJson.fault.faultstring).to.eql(expectedErrorMessage)",
-									"    pm.expect(responseJson.fault.detail.errorcode).to.eql(expectedErrorCode)",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/hello/application",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"hello",
-								"application"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Hello Application - Invalid API Key",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "73877845-3b01-4a61-961d-3c31843ca661",
-								"exec": [
-									"pm.environment.set(\"expected_error_message\", \"Invalid ApiKey\")",
-									"pm.environment.set(\"expected_error_code\", \"oauth.v2.InvalidApiKey\")"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "4227c843-8c34-4ed8-9b7f-a45c19924652",
-								"exec": [
-									"pm.test(\"Returns status code 401 Unauthorized\", () => {",
-									"    pm.response.to.have.status(401);",
-									"});",
-									"",
-									"pm.test(\"Returns correct error response\", () => {",
-									"    const responseJson = pm.response.json()",
-									"    const expectedErrorMessage = pm.environment.get(\"expected_error_message\")",
-									"    const expectedErrorCode = pm.environment.get(\"expected_error_code\")",
-									"    pm.expect(responseJson.fault.faultstring).to.eql(expectedErrorMessage)",
-									"    pm.expect(responseJson.fault.detail.errorcode).to.eql(expectedErrorCode)",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "value",
-									"value": "not-a-real-api-key",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "apikey",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/hello/application",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"hello",
-								"application"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Hello Application - Success",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "53f13eb1-ba5b-4b93-b097-0402451eea4d",
-								"exec": [
-									"pm.environment.set(\"expected_greeting\", \"Hello Application!\");"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "12c54e38-7d1a-41c4-bb93-97143efdf21e",
-								"exec": [
-									"pm.test(\"Returns status code 200 OK\", () => {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Returns correct mock response\", () => {",
-									"    const responseJson = pm.response.json()",
-									"    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
-									"    pm.expect(responseJson.message).to.eql(expectedGreeting)",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "value",
-									"value": "{{api_key}}",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "apikey",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/hello/application",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"hello",
-								"application"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Hello User",
-			"item": [
-				{
-					"name": "Hello User - Missing Access Token",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "f8a32132-f985-426d-aabb-4a27d78203a8",
-								"exec": [
-									"pm.environment.set(\"expected_error_message\", \"Invalid access token\")",
-									"pm.environment.set(\"expected_error_code\", \"oauth.v2.InvalidAccessToken\")"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "8108e1cf-1744-4a46-bdf8-da22875f9802",
-								"exec": [
-									"pm.test(\"Returns status code 401 Unauthorized\", () => {",
-									"    pm.response.to.have.status(401);",
-									"});",
-									"",
-									"pm.test(\"Returns correct error response\", () => {",
-									"    const responseJson = pm.response.json()",
-									"    const expectedErrorMessage = pm.environment.get(\"expected_error_message\")",
-									"    const expectedErrorCode = pm.environment.get(\"expected_error_code\")",
-									"    pm.expect(responseJson.fault.faultstring).to.eql(expectedErrorMessage)",
-									"    pm.expect(responseJson.fault.detail.errorcode).to.eql(expectedErrorCode)",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "oauth2",
-							"oauth2": [
-								{
-									"key": "addTokenTo",
-									"value": "header",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/hello/user",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"hello",
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Hello User - Invalid Access Token",
-					"request": {
-						"auth": {
-							"type": "oauth2",
-							"oauth2": [
-								{
-									"key": "addTokenTo",
-									"value": "header",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/hello/user",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"hello",
-								"user"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "ae78af2b-9e9f-477c-aa3d-3395650967dc",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "212cdb5c-8e1b-424a-bf3b-b06314fbece2",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"id": "068f4244-0756-4c67-8700-d2b244e61fd9",
-			"key": "api_key",
-			"value": "xlNAz98DIP3I7xQDR7BnOdG9tGxKyBll",
-			"type": "string"
-		}
-	],
-	"protocolProfileBehavior": {}
+  "info": {
+    "_postman_id": "f165b5e7-772f-40c7-8e7f-6b76f4f02d2b",
+    "name": "Hello World API Sandbox",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Hello World",
+      "item": [
+        {
+          "name": "Hello World - Success",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "18e6611a-f47a-4bb1-8540-c1bab62695ab",
+                "exec": [
+                  "pm.environment.set(\"expected_greeting\", \"Hello World!\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "83d1055f-42ef-440d-bcbb-d41fab641862",
+                "exec": [
+                  "pm.test(\"Returns status code 200 OK\", () => {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Returns correct mock response\", () => {",
+                  "    const responseJson = pm.response.json()",
+                  "    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
+                  "    pm.expect(responseJson.message).to.eql(expectedGreeting)",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/world",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "world"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "ae78af2b-9e9f-477c-aa3d-3395650967dc",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "212cdb5c-8e1b-424a-bf3b-b06314fbece2",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "068f4244-0756-4c67-8700-d2b244e61fd9",
+      "key": "api_key",
+      "value": "xlNAz98DIP3I7xQDR7BnOdG9tGxKyBll",
+      "type": "string"
+    }
+  ],
+  "protocolProfileBehavior": {}
 }

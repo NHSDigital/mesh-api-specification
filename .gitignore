@@ -17,3 +17,6 @@ __pycache__/
 *.ipr
 !.idea/codeStyles
 !.idea/runConfigurations
+
+### Mac ###
+.DS_Store
