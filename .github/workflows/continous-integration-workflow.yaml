@@ -117,7 +117,7 @@ jobs:
       #   run: make deploy-spec
 
       - name: Deploy to API Proxy (inc Sandbox) to Apigee (master only)
-        if: github.ref == 'refs/remotes/origin/APM-399-create-hello-world-api'
+        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
         env:
           APIGEE_USERNAME: ${{ secrets.APIGEE_USER }}
           APIGEE_PASSWORD: ${{ secrets.APIGEE_PASS }}
