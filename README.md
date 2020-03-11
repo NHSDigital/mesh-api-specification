@@ -115,8 +115,52 @@ Procedure:
 
 ## Deployment
 
-### Specification
+#### Environment variables
+
+You need a apgiee account to deploy to apigee, this account needs to have 2FA turned of
+* `APIGEE_USERNAME` - apigee username
+* `APIGEE_PASSWORD` - apigee password
+
+Navigate to develop/specs in the apigee ui and select the spec you want to update, the APIGEE_SPEC_ID is the last id in the url
+.../specs/folder/.../editor/{APIGEE_SPEC_ID}
+* `APIGEE_SPEC_ID`
+
+Navigate to publish/portals
+In chrome open the developer tools to monitor network traffic
+For the portal that your spec belongs to click on "manage spec snapshot"
+Then click "update snapshot" the APIGEE_PORTAL_API_ID will be the number in the network tab.
+* `APIGEE_PORTAL_API_ID`
+
+This is the value in the top left corner of the apigee web-console
+* `APIGEE_ORGANIZATION`
+
+Comma-separated list of environments to deploy to (e.g. `test,prod`)
+* `APIGEE_ENVIRONMENTS`
+
+Name of the API Proxy for deployment
+* `APIGEE_APIPROXY`
+
+The proxy's base path (must be unique)
+* `APIGEE_BASE_PATH`
+
+Name of the environment you are running tests against
+* `ENVIRONMENT`
+
+The base url of the proxy when deployed to apigee
+* `API_TEST_URL`
+
+### github deployment
+
+github uses github actions to deploy the code to apigee. The github action uses secrets to populate environment variables.
+You need a github secret for each environment variable. Each of the above environment variables need an equivalent secret in github for
+the deployment to work.
+
+### local deployment
+
+#### Specification
 Update the API Specification and derived documentation in the Portal.
+
+This will only allow you to update an existing spec, so you have to create the spec first using the apigee web console.
 
 `make deploy-spec` with environment variables:
 
@@ -125,17 +169,21 @@ Update the API Specification and derived documentation in the Portal.
 * `APIGEE_SPEC_ID`
 * `APIGEE_PORTAL_API_ID`
 
-### API Proxy & Sandbox Service
+#### API Proxy & Sandbox Service
 Redeploy the API Proxy and hosted Sandbox service.
+
+If you use the same APIGEE_APIPROXY it will just create a new revision of the api proxy.
+
+If you use the same APIGEE_BASE_PATH as an existing api proxy it will cause problems.
 
 `make deploy-proxy` with environment variables:
 
 * `APIGEE_USERNAME`
 * `APIGEE_PASSWORD`
 * `APIGEE_ORGANIZATION`
-* `APIGEE_ENVIRONMENTS` - Comma-separated list of environments to deploy to (e.g. `test,prod`)
-* `APIGEE_APIPROXY` - Name of the API Proxy for deployment
-* `APIGEE_BASE_PATH` - The proxy's base path (must be unique)
+* `APIGEE_ENVIRONMENTS`
+* `APIGEE_APIPROXY`
+* `APIGEE_BASE_PATH`
 
 :bulb: Specify your own API Proxy (with base path) for use during development.
 
