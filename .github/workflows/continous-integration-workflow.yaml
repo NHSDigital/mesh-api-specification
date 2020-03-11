@@ -85,7 +85,7 @@ jobs:
 
       - name: Create release (master only)
         id: create-release
-        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        if: github.ref == 'refs/heads/master'
         uses: actions/create-release@v1
         continue-on-error: true
         env:
@@ -108,7 +108,7 @@ jobs:
 
       #TODO uncomment when ready to deploy
       - name: Deploy OAS Spec to Apigee (master only)
-        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        if: github.ref == 'refs/heads/master'
         env:
           APIGEE_USERNAME: ${{ secrets.APIGEE_USER }}
           APIGEE_PASSWORD: ${{ secrets.APIGEE_PASS }}
@@ -117,7 +117,7 @@ jobs:
         run: make deploy-spec
 
       - name: Deploy to API Proxy (inc Sandbox) to Apigee (master only)
-        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        if: github.ref == 'refs/heads/master'
         env:
           APIGEE_USERNAME: ${{ secrets.APIGEE_USER }}
           APIGEE_PASSWORD: ${{ secrets.APIGEE_PASS }}
@@ -128,7 +128,7 @@ jobs:
         run: make deploy-proxy
 
       - name: Run sandbox tests (master only)
-        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        if: github.ref == 'refs/heads/master'
         env:
           API_TEST_ENV_FILE_PATH: "tests/e2e/environments/sandbox.postman_environment.json"
           API_TEST_URL: ${{ secrets.API_TEST_URL }}
@@ -138,11 +138,11 @@ jobs:
           make test
 
       - name: Copy sandbox test report (master only)
-        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        if: github.ref == 'refs/heads/master'
         run: cat newman/*.html > dist/sandbox-tests.html && rm newman/*.html
 
       - name: Store sandbox test result artifact (master only)
-        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-artifact@v1
         with:
           name: sandbox-tests-${{ env.SPEC_VERSION }}+${{ github.run_id }}.html
