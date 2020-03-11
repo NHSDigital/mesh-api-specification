@@ -137,13 +137,13 @@ jobs:
           poetry run python scripts/template.py -f tests/e2e/environments/postman_environment.json.template --env > tests/e2e/environments/sandbox.postman_environment.json
           make test
 
-      # - name: Copy sandbox test report (master only)
-      #   if: github.ref == 'refs/heads/master'
-      #   run: cat newman/*.html > dist/sandbox-tests.html && rm newman/*.html
+      - name: Copy sandbox test report (master only)
+        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        run: cat newman/*.html > dist/sandbox-tests.html && rm newman/*.html
 
-      # - name: Store sandbox test result artifact (master only)
-      #   if: github.ref == 'refs/heads/master'
-      #   uses: actions/upload-artifact@v1
-      #   with:
-      #     name: sandbox-tests-${{ env.SPEC_VERSION }}+${{ github.run_id }}.html
-      #     path: ./dist/sandbox-tests.html
+      - name: Store sandbox test result artifact (master only)
+        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        uses: actions/upload-artifact@v1
+        with:
+          name: sandbox-tests-${{ env.SPEC_VERSION }}+${{ github.run_id }}.html
+          path: ./dist/sandbox-tests.html
