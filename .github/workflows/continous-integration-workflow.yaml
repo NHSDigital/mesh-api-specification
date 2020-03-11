@@ -107,14 +107,14 @@ jobs:
           asset_content_type: application/json
 
       #TODO uncomment when ready to deploy
-      # - name: Deploy to OAS Spec to Apigee (master only)
-      #   if: github.ref == 'refs/heads/master'
-      #   env:
-      #     APIGEE_USERNAME: ${{ secrets.APIGEE_USER }}
-      #     APIGEE_PASSWORD: ${{ secrets.APIGEE_PASS }}
-      #     APIGEE_PORTAL_API_ID: ${{ secrets.APIGEE_PORTAL_API_ID }}
-      #     APIGEE_SPEC_ID: ${{ secrets.APIGEE_SPEC_ID }}
-      #   run: make deploy-spec
+      - name: Deploy to OAS Spec to Apigee (master only)
+        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        env:
+          APIGEE_USERNAME: ${{ secrets.APIGEE_USER }}
+          APIGEE_PASSWORD: ${{ secrets.APIGEE_PASS }}
+          APIGEE_PORTAL_API_ID: ${{ secrets.APIGEE_PORTAL_API_ID }}
+          APIGEE_SPEC_ID: ${{ secrets.APIGEE_SPEC_ID }}
+        run: make deploy-spec
 
       - name: Deploy to API Proxy (inc Sandbox) to Apigee (master only)
         if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
