@@ -85,7 +85,7 @@ jobs:
 
       - name: Create release (master only)
         id: create-release
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
         uses: actions/create-release@v1
         continue-on-error: true
         env:
@@ -95,7 +95,7 @@ jobs:
           release_name: ${{ env.SPEC_VERSION }}
 
       - name: Upload spec release asset
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
         uses: actions/upload-release-asset@v1
         continue-on-error: true
         env:
