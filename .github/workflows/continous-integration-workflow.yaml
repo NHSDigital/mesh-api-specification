@@ -127,15 +127,15 @@ jobs:
           APIGEE_BASE_PATH: hello
         run: make deploy-proxy
 
-       - name: Run sandbox tests (master only)
-         if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
-         env:
-           API_TEST_ENV_FILE_PATH: "tests/e2e/environments/sandbox.postman_environment.json"
-           API_TEST_URL: ${{ secrets.API_TEST_URL }}
-           ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
-         run: |
-           poetry run python scripts/template.py -f tests/e2e/environments/postman_environment.json.template --env > tests/e2e/environments/sandbox.postman_environment.json
-           make test
+      - name: Run sandbox tests (master only)
+        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        env:
+          API_TEST_ENV_FILE_PATH: "tests/e2e/environments/sandbox.postman_environment.json"
+          API_TEST_URL: ${{ secrets.API_TEST_URL }}
+          ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
+        run: |
+          poetry run python scripts/template.py -f tests/e2e/environments/postman_environment.json.template --env > tests/e2e/environments/sandbox.postman_environment.json
+          make test
 
       # - name: Copy sandbox test report (master only)
       #   if: github.ref == 'refs/heads/master'
