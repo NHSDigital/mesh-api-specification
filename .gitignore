@@ -20,3 +20,5 @@ __pycache__/
 
 ### Mac ###
 .DS_Store
+
+sandbox.postman_environment.json

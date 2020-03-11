@@ -53,7 +53,7 @@ There are `make` commands that alias some of this functionality:
 
 ### Running tests
 #### End-to-end tests
-To run tests, you need to supply an environment. A `local` environment and an environment template are included under `tests/e2e/environments`.
+To run tests, you need to supply an environment. A `local` environment and an environment template is included under `tests/e2e/environments`.
 
 Set the following environment variables for local testing:
  * `ENVIRONMENT`: `local`
