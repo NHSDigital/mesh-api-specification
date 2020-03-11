@@ -107,7 +107,7 @@ jobs:
           asset_content_type: application/json
 
       #TODO uncomment when ready to deploy
-      - name: Deploy to OAS Spec to Apigee (master only)
+      - name: Deploy OAS Spec to Apigee (master only)
         if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
         env:
           APIGEE_USERNAME: ${{ secrets.APIGEE_USER }}
