@@ -32,8 +32,8 @@ $ make install
 ```
 
 #### Updating hooks
-You can install some pre-commit hooks to ensure you can't commit invalid spec changes by accident. These are also run
-in CI, but it's useful to run them locally too.
+Some pre-commit hooks are installed as part of the install command above to ensure you can't commit invalid spec changes by accident. These are also run
+in CI.
 
 ```
 $ make install-hooks
@@ -117,9 +117,9 @@ Procedure:
 
 #### Environment variables
 
-You need a apgiee account to deploy to apigee, this account needs to have 2FA turned of
-* `APIGEE_USERNAME` - apigee username
-* `APIGEE_PASSWORD` - apigee password
+You need a apgiee account to deploy to apigee, this account needs to have 2FA turned off
+* `APIGEE_USERNAME` - your apigee username
+* `APIGEE_PASSWORD` - your apigee password
 
 Navigate to develop/specs in the apigee ui and select the spec you want to update, the APIGEE_SPEC_ID is the last id in the url
 .../specs/folder/.../editor/{APIGEE_SPEC_ID}
@@ -153,7 +153,8 @@ The base url of the proxy when deployed to apigee
 
 github uses github actions to deploy the code to apigee. The github action uses secrets to populate environment variables.
 You need a github secret for each environment variable. Each of the above environment variables need an equivalent secret in github for
-the deployment to work.
+the deployment to work. These are pre-populated for you [here](https://github.com/NHSDigital/hello-world-api/settings/secrets/new). 
+If you get a 404 for this page you will need to update your github account permissions.
 
 ### local deployment
 
