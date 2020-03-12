@@ -95,7 +95,7 @@ jobs:
           release_name: ${{ env.SPEC_VERSION }}
 
       - name: Upload spec release asset
-        if: github.ref == 'refs/heads/APM-399-create-hello-world-api'
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-release-asset@v1
         continue-on-error: true
         env:
