@@ -1,8 +1,8 @@
-# personal-demographics-service-api
+# hello-world-api
 
-![Build](https://github.com/NHSDigital/personal-demographics-service-api/workflows/Build/badge.svg?branch=master)
+![Build](https://github.com/NHSDigital/hello-world-api/workflows/Build/badge.svg?branch=master)
 
-This is a RESTful HL7® FHIR® API specification for the *Personal Demographics Service*.
+This is a RESTful HL7® FHIR® API specification for the *Hello World API*.
 
 * `specification/` This [Open API Specification](https://swagger.io/docs/specification/about/) describes the endpoints, methods and messages exchanged by the API. Use it to generate interactive documentation; the contract between the API and its consumers.
 * `sandbox/` This NodeJS application implements a mock implementation of the service. Use it as a back-end service to the interactive documentation to illustrate interactions and concepts. It is not intended to provide an exhaustive/faithful environment suitable for full development and testing.
@@ -12,7 +12,7 @@ This is a RESTful HL7® FHIR® API specification for the *Personal Demographics 
 Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://emea-demo8-nhsdportal.apigee.io/).
 
 ## Contributing
-Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/personal-demographics-service-api/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/personal-demographics-service-api/blob/master/CODE_OF_CONDUCT.md).
+Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/hello-world-api/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/hello-world-api/blob/master/CODE_OF_CONDUCT.md).
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
@@ -32,8 +32,8 @@ $ make install
 ```
 
 #### Updating hooks
-You can install some pre-commit hooks to ensure you can't commit invalid spec changes by accident. These are also run
-in CI, but it's useful to run them locally too.
+Some pre-commit hooks are installed as part of the install command above to ensure you can't commit invalid spec changes by accident. These are also run
+in CI.
 
 ```
 $ make install-hooks
@@ -50,7 +50,6 @@ There are `make` commands that alias some of this functionality:
  * `publish` -- Outputs the specification as a **single file** into the `dist/` directory
  * `serve` -- Serves a preview of the specification in human-readable format
  * `generate-examples` -- generate example objects from the specification
- * `validate` -- validate generated examples against FHIR R4
 
 ### Running tests
 #### End-to-end tests
@@ -116,8 +115,53 @@ Procedure:
 
 ## Deployment
 
-### Specification
+#### Environment variables
+
+You need a apgiee account to deploy to apigee, this account needs to have 2FA turned off
+* `APIGEE_USERNAME` - your apigee username
+* `APIGEE_PASSWORD` - your apigee password
+
+Navigate to develop/specs in the apigee ui and select the spec you want to update, the APIGEE_SPEC_ID is the last id in the url
+.../specs/folder/.../editor/{APIGEE_SPEC_ID}
+* `APIGEE_SPEC_ID`
+
+Navigate to publish/portals
+In chrome open the developer tools to monitor network traffic
+For the portal that your spec belongs to click on "manage spec snapshot"
+Then click "update snapshot" the APIGEE_PORTAL_API_ID will be the number in the network tab.
+* `APIGEE_PORTAL_API_ID`
+
+This is the value in the top left corner of the apigee web-console
+* `APIGEE_ORGANIZATION`
+
+Comma-separated list of environments to deploy to (e.g. `test,prod`)
+* `APIGEE_ENVIRONMENTS`
+
+Name of the API Proxy for deployment
+* `APIGEE_APIPROXY`
+
+The proxy's base path (must be unique)
+* `APIGEE_BASE_PATH`
+
+Name of the environment you are running tests against
+* `ENVIRONMENT`
+
+The base url of the proxy when deployed to apigee
+* `API_TEST_URL`
+
+### Github Deployment
+
+github uses github actions to deploy the code to apigee. The github action uses secrets to populate environment variables.
+You need a github secret for each environment variable. Each of the above environment variables need an equivalent secret in github for
+the deployment to work. These are pre-populated for you [here](https://github.com/NHSDigital/hello-world-api/settings/secrets/new). 
+If you get a 404 for this page you will need to update your github account permissions.
+
+### Local Deployment
+
+#### Specification
 Update the API Specification and derived documentation in the Portal.
+
+This will only allow you to update an existing spec, so you have to create the spec first using the apigee web console.
 
 `make deploy-spec` with environment variables:
 
@@ -126,17 +170,21 @@ Update the API Specification and derived documentation in the Portal.
 * `APIGEE_SPEC_ID`
 * `APIGEE_PORTAL_API_ID`
 
-### API Proxy & Sandbox Service
+#### API Proxy & Sandbox Service
 Redeploy the API Proxy and hosted Sandbox service.
+
+If you use the same APIGEE_APIPROXY it will just create a new revision of the api proxy.
+
+If you use the same APIGEE_BASE_PATH as an existing api proxy it will cause problems.
 
 `make deploy-proxy` with environment variables:
 
 * `APIGEE_USERNAME`
 * `APIGEE_PASSWORD`
 * `APIGEE_ORGANIZATION`
-* `APIGEE_ENVIRONMENTS` - Comma-separated list of environments to deploy to (e.g. `test,prod`)
-* `APIGEE_APIPROXY` - Name of the API Proxy for deployment
-* `APIGEE_BASE_PATH` - The proxy's base path (must be unique)
+* `APIGEE_ENVIRONMENTS`
+* `APIGEE_APIPROXY`
+* `APIGEE_BASE_PATH`
 
 :bulb: Specify your own API Proxy (with base path) for use during development.
 

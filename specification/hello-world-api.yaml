@@ -1,0 +1,147 @@
+# This is an OpenAPI Specification (https://swagger.io/specification/)
+# for the Hello World API
+# owned by NHS Digital (https://digital.nhs.uk/)
+openapi: "3.0.0"
+
+info:
+  version: "0.0.1"
+  title: Hello World API
+  description: |
+    ## Overview
+    Use this API alongside our [tutorials](https://digital.nhs.uk/developer/api-tutorials) to learn how to connect to our APIs.
+
+    ## Endpoints
+    To see details for specific endpoints, select from the list on the left hand side of the page:
+    - `GET /hello/world` - an example of an open-access endpoint
+    - `GET /hello/application` - an example of an application-restricted endpoint
+    - `GET /hello/user` - an example of a user-restricted endpoint
+  contact:
+    name: API Management Support
+    email: api.management@nhs.net
+
+servers:
+  - url: https://emea-demo8-test.apigee.net
+    description: Test Environment
+  - url: https://emea-demo8-prod.apigee.net
+    description: Production Environment
+
+paths:
+
+  /hello/world:
+    get:
+      summary: Say hello world.
+      operationId: getHello
+      description: |
+        Get a "Hello world!" response from an open-access endpoint.
+
+        Use this API alongside our [open-access REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#open-access-rest-api-tutorial) to learn how to connect to our APIs.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Hello world!"
+              example:
+                message: "Hello world!"
+      tags:
+        - hello
+
+  /hello/application:
+    get:
+      summary: Say hello application.
+      operationId: getHelloApiKey
+      description: |
+        Get a "Hello application!" response from an application-restricted endpoint.
+
+        Use this API alongside our [application-restricted REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#application-restricted-rest-api-tutorial) to learn how to connect to our APIs.
+
+        Requires that an API Key is presented in the 'apikey' header along with the request.  <br/><br/>
+
+        Example API Key to use -  xlNAz98DIP3I7xQDR7BnOdG9tGxKyBll
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Hello application!"
+              example:
+                message: "Hello application!"
+        '401':
+          description: Missing or invalid API Key
+      security:
+        - api_key: []
+      tags:
+        - hello
+
+  /hello/user:
+    get:
+      summary: Say hello user.
+      operationId: getHelloToken
+      description: |
+        Get a "Hello user!" response from a user-restricted endpoint.
+
+        Use this API alongside our [user-restricted REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#user-restricted-rest-api-tutorial) to learn how to connect to our APIs.
+
+        Requires that an OAuth 2.0 Access Token is presented in the 'Authorization' header along with the request.<br/><br/>
+
+        Use the following credentials to obtain the access token: <br/>
+        `client_id` (API Key) -  xlNAz98DIP3I7xQDR7BnOdG9tGxKyBll  <br/>
+        `client_secret` (Secret) - X9zDVizlhqaBFKsK  <br/>
+        Username: 910000000001  <br/>
+        Password: Password1
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Hello user!"
+              example:
+                message: "Hello user!"
+        '401':
+          description: Missing or invalid OAuth 2.0 Access Token
+      security:
+        - oAuth2AuthCode:
+            - nhsperson
+      tags:
+        - hello
+
+components:
+
+  securitySchemes:
+
+    api_key:
+      type: apiKey
+      name: apikey
+      in: header
+
+    oAuth2AuthCode:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://emea-demo8-test.apigee.net/oauth2/authorize
+          tokenUrl: https://emea-demo8-test.apigee.net/oauth2/token
+          scopes:
+            nhsperson: Grants read access
+
+  schemas:
+    Greeting:
+      $ref: components/schemas/Greeting.yaml
+
+tags:
+  - name: hello

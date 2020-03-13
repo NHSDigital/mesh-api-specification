@@ -1,0 +1,93 @@
+{
+  "info": {
+    "_postman_id": "f165b5e7-772f-40c7-8e7f-6b76f4f02d2b",
+    "name": "Hello World API Sandbox",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Hello World",
+      "item": [
+        {
+          "name": "Hello World - Success",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "18e6611a-f47a-4bb1-8540-c1bab62695ab",
+                "exec": [
+                  "pm.environment.set(\"expected_greeting\", \"Hello World!\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "83d1055f-42ef-440d-bcbb-d41fab641862",
+                "exec": [
+                  "pm.test(\"Returns status code 200 OK\", () => {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Returns correct mock response\", () => {",
+                  "    const responseJson = pm.response.json()",
+                  "    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
+                  "    pm.expect(responseJson.message).to.eql(expectedGreeting)",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/world",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "world"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "ae78af2b-9e9f-477c-aa3d-3395650967dc",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "212cdb5c-8e1b-424a-bf3b-b06314fbece2",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "068f4244-0756-4c67-8700-d2b244e61fd9",
+      "key": "api_key",
+      "value": "xlNAz98DIP3I7xQDR7BnOdG9tGxKyBll",
+      "type": "string"
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
