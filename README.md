@@ -53,7 +53,7 @@ There are `make` commands that alias some of this functionality:
 
 ### Running tests
 #### End-to-end tests
-To run tests, you need to supply an environment. A `local` environment and an environment template is included under `tests/e2e/environments`.
+To run tests, you need to supply an environment. A `local` environment and an environment template are included under `tests/e2e/environments`.
 
 Set the following environment variables for local testing:
  * `ENVIRONMENT`: `local`
@@ -149,14 +149,14 @@ Name of the environment you are running tests against
 The base url of the proxy when deployed to apigee
 * `API_TEST_URL`
 
-### github deployment
+### Github Deployment
 
 github uses github actions to deploy the code to apigee. The github action uses secrets to populate environment variables.
 You need a github secret for each environment variable. Each of the above environment variables need an equivalent secret in github for
 the deployment to work. These are pre-populated for you [here](https://github.com/NHSDigital/hello-world-api/settings/secrets/new). 
 If you get a 404 for this page you will need to update your github account permissions.
 
-### local deployment
+### Local Deployment
 
 #### Specification
 Update the API Specification and derived documentation in the Portal.

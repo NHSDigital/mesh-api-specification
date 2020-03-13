@@ -16,8 +16,8 @@ info:
     - `GET /hello/application` - an example of an application-restricted endpoint
     - `GET /hello/user` - an example of a user-restricted endpoint
   contact:
-    name: TBC
-    email: tbc@nhs.net
+    name: API Management Support
+    email: api.management@nhs.net
 
 servers:
   - url: https://emea-demo8-test.apigee.net/v1

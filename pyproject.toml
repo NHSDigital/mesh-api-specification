@@ -10,7 +10,7 @@ description = "Hello World API Definitions"
 license = "MIT"
 
 authors = [
-    #TODO add authors
+    "Paul Walkington <paul.walkington1@nhs.net>"
 ]
 
 readme = 'README.md'

@@ -106,7 +106,6 @@ jobs:
           asset_name: hello-world-api.json
           asset_content_type: application/json
 
-      #TODO uncomment when ready to deploy
       - name: Deploy OAS Spec to Apigee (master only)
         if: github.ref == 'refs/heads/master'
         env:
