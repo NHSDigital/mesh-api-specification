@@ -20,9 +20,9 @@ info:
     email: api.management@nhs.net
 
 servers:
-  - url: https://emea-demo8-test.apigee.net/v1
+  - url: https://emea-demo8-test.apigee.net
     description: Test Environment
-  - url: https://emea-demo8-prod.apigee.net/v1
+  - url: https://emea-demo8-prod.apigee.net
     description: Production Environment
 
 paths:
@@ -134,8 +134,8 @@ components:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: https://emea-demo8-test.apigee.net/oauth2/v1/authorize
-          tokenUrl: https://emea-demo8-test.apigee.net/oauth2/v1/token
+          authorizationUrl: https://emea-demo8-test.apigee.net/oauth2/authorize
+          tokenUrl: https://emea-demo8-test.apigee.net/oauth2/token
           scopes:
             nhsperson: Grants read access
 
