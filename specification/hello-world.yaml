@@ -20,10 +20,12 @@ info:
     email: api.management@nhs.net
 
 servers:
-  - url: https://emea-demo8-test.apigee.net
-    description: Test Environment
-  - url: https://emea-demo8-prod.apigee.net
-    description: Production Environment
+  - url: 'https://sandbox.api.service.nhs.uk/hello-world'
+    description: Sandbox environment.
+  - url: 'https://int.api.service.nhs.uk/hello-world'
+    description: Integration test environment.
+  - url: 'https://api.service.nhs.uk/hello-world'
+    description: 'Production environment (not yet available: see "API status and roadmap").'
 
 paths:
 
@@ -59,10 +61,6 @@ paths:
         Get a "Hello application!" response from an application-restricted endpoint.
 
         Use this API alongside our [application-restricted REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#application-restricted-rest-api-tutorial) to learn how to connect to our APIs.
-
-        Requires that an API Key is presented in the 'apikey' header along with the request.  <br/><br/>
-
-        Example API Key to use -  xlNAz98DIP3I7xQDR7BnOdG9tGxKyBll
       responses:
         '200':
           description: Successful response
@@ -92,14 +90,6 @@ paths:
 
         Use this API alongside our [user-restricted REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#user-restricted-rest-api-tutorial) to learn how to connect to our APIs.
 
-        Requires that an OAuth 2.0 Access Token is presented in the 'Authorization' header along with the request.<br/><br/>
-
-        Use the following credentials to obtain the access token: <br/>
-        `client_id` (API Key) -  xlNAz98DIP3I7xQDR7BnOdG9tGxKyBll  <br/>
-        `client_secret` (Secret) - X9zDVizlhqaBFKsK  <br/>
-        Username: 910000000001  <br/>
-        Password: Password1
-
       responses:
         '200':
           description: Successful response
@@ -117,7 +107,7 @@ paths:
           description: Missing or invalid OAuth 2.0 Access Token
       security:
         - oAuth2AuthCode:
-            - nhsperson
+            - hello
       tags:
         - hello
 
@@ -134,10 +124,10 @@ components:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: https://emea-demo8-test.apigee.net/oauth2/authorize
-          tokenUrl: https://emea-demo8-test.apigee.net/oauth2/token
+          authorizationUrl: https://sandbox.api.service.nhs.uk/oauth2/authorize
+          tokenUrl: https://sandbox.api.service.nhs.uk/oauth2/token
           scopes:
-            nhsperson: Grants read access
+            hello: Grants read access
 
   schemas:
     Greeting:
