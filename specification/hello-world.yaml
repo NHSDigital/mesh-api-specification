@@ -20,8 +20,12 @@ info:
     email: api.management@nhs.net
 
 servers:
-  - url: https://sandbox.api.service.nhs.uk
-    description: Test Environment
+  - url: 'https://sandbox.api.service.nhs.uk/hello-world'
+    description: Sandbox environment.
+  - url: 'https://int.api.service.nhs.uk/hello-world'
+    description: Integration test environment.
+  - url: 'https://api.service.nhs.uk/hello-world'
+    description: 'Production environment (not yet available: see "API status and roadmap").'
 
 paths:
 
