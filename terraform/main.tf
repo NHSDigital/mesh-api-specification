@@ -19,5 +19,5 @@ module "hello-world" {
   apigee_environment = var.apigee_environment
   proxy_type         = "sandbox"
   namespace          = var.namespace
-  make_api_product   = false
+  make_api_product   = true
 }
