@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage-RemoveAuthorizationHeader">
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage-RemoveApiKeyHeader">
     <Remove>
         <Headers>
-            <Header name="Authorization"/>
+            <Header name="apikey"/>
         </Headers>
     </Remove>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
