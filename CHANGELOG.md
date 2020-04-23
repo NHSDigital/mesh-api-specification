@@ -1,5 +1,8 @@
 # Changelog
 
+## 2020-04-23
+* Add step in pipeline to replace invalid characters in the branch name 
+
 ## 2020-03-06
 * Copied template and replaced references to the repo name.
 * Copied Open API spec from existing implementation on Apigee.
