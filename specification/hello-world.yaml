@@ -106,15 +106,13 @@ paths:
         '401':
           description: Missing or invalid OAuth 2.0 Access Token
       security:
-        - oAuth2AuthCode:
-            - hello
+        - oAuth2AuthCode: []
       tags:
         - hello
 
 components:
 
   securitySchemes:
-
     api_key:
       type: apiKey
       name: apikey
@@ -126,8 +124,7 @@ components:
         authorizationCode:
           authorizationUrl: https://sandbox.api.service.nhs.uk/oauth2/authorize
           tokenUrl: https://sandbox.api.service.nhs.uk/oauth2/token
-          scopes:
-            hello: Grants read access
+          scopes: {}
 
   schemas:
     Greeting:

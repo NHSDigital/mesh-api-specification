@@ -1,5 +1,12 @@
+name: "$(SourceBranchName)+$(BuildID)"
+
 trigger:
-    - master
+    branches:
+        include:
+            - tags/refs/v*
+    tags:
+        include:
+            - v*
 
 pr:
     branches:
@@ -16,7 +23,6 @@ jobs:
           PIP_CACHE_DIR: ".poetry"
       steps:
           - checkout: self
-
           - bash: echo "##vso[task.setvariable variable=BRANCH_NAME]`echo $(System.PullRequest.SourceBranch) | sed -r 's/[/|\\@":<>?*]+/-/g'`"
             displayName: Set and replace invalid characters in branch name
 
