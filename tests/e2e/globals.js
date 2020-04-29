@@ -35,7 +35,9 @@ function nhsIdLogin(username, password, login_url, callback) {
 }
 
 function writeGlobals(token) {
-  let globals = JSON.parse(fs.readFileSync("e2e/globals.json"));
+  fs.copyFileSync('e2e/local.globals.json', 'e2e/deploy.globals.json');
+
+  let globals = JSON.parse(fs.readFileSync("e2e/deploy.globals.json"));
   const tokenGlobal = {
     "key": "token",
     "value": token,
@@ -49,7 +51,7 @@ function writeGlobals(token) {
   }
 
   console.log(globals);
-  fs.writeFileSync('e2e/globals.json', JSON.stringify(globals));
+  fs.writeFileSync('e2e/deploy.globals.json', JSON.stringify(globals));
 }
 
 function main(args) {
