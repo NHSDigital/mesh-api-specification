@@ -1,6 +1,6 @@
 {
 	"id": "f6516e5f-26bb-45d5-a4a5-ad6e17416db5",
-	"name": "local",
+	"name": "internal-qa",
 	"values": [
 		{
 			"key": "base_url",
