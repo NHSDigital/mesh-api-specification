@@ -6,7 +6,12 @@
 			"key": "base_url",
 			"value": "https://internal-qa-sandbox.api.service.nhs.uk/hello-world",
 			"enabled": true
-		}
+		},
+    {
+      "key": "apikey",
+      "value": "kBA3SpCsP1T1o3yizn7RuRhG1PTPEv4N",
+      "enabled": true
+    }
 	],
 	"_postman_variable_scope": "environment",
 	"_postman_exported_at": "2020-03-06T15:58:24.883Z",

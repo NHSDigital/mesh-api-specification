@@ -8,7 +8,6 @@ Usage:
 
 
 const fs = require('fs')
-const path = require('path')
 const docopt = require('docopt').docopt
 const puppeteer = require('puppeteer')
 
@@ -50,7 +49,6 @@ function writeGlobals(token) {
     }
   }
 
-  console.log(globals);
   fs.writeFileSync('e2e/deploy.globals.json', JSON.stringify(globals));
 }
 
