@@ -14,7 +14,11 @@ const puppeteer = require('puppeteer')
 function nhsIdLogin(username, password, login_url, callback) {
   (async () => {
     console.log('Oauth journey on ' + login_url)
-    const browser = await puppeteer.launch({ headless: true })
+    const browser = await puppeteer.launch({
+      executablePath: process.env.CHROME_BIN || null,
+      args: ['--no-sandbox', '--headless', '--disable-gpu']
+    });
+
     const page = await browser.newPage()
     await page.goto(login_url, { waitUntil: 'networkidle2' })
     await page.click('#start')
