@@ -2,23 +2,13 @@
   "id": "f936d3f4-2f37-4f56-82b1-f3d1c7505404",
   "values": [
     {
-      "key": "expected_greeting_open_access",
-      "value": "Hello World!",
-      "enabled": true
-    },
-    {
-      "key": "expected_greeting_application",
-      "value": "Hello Application!",
-      "enabled": true
-    },
-    {
-      "key": "expected_greeting_user",
-      "value": "Hello User!",
-      "enabled": true
-    },
-    {
       "key": "token",
       "value": "dummy_token",
+      "enabled": true
+    },
+    {
+      "key": "apikey",
+      "value": "dummy_application_restricted_apikey",
       "enabled": true
     }
   ],

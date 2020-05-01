@@ -6,11 +6,6 @@
       "key": "base_url",
       "value": "https://internal-dev.api.service.nhs.uk/hello-world",
       "enabled": true
-    },
-    {
-      "key": "apikey",
-      "value": "Too5BdPayTQACdw1AJK1rD4nKUD0Ag7J",
-      "enabled": true
     }
   ],
   "_postman_variable_scope": "environment",

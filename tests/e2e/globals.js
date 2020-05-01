@@ -1,19 +1,19 @@
 doc = `
 API Management Postman Test Runner
 Usage:
-  test-runner.js <username> <password> <token_app_url>
+  test-runner.js <username> <password> <apikey> <token_app_url>
   test-runner.js -h | --help
   -h --help  Show this text.
 `
-
 
 const fs = require('fs')
 const docopt = require('docopt').docopt
 const puppeteer = require('puppeteer')
 
-function nhsIdLogin(username, password, login_url, callback) {
+function nhsIdLogin(username, password, apikey, login_url, callback) {
   (async () => {
     console.log('Oauth journey on ' + login_url)
+
     const browser = await puppeteer.launch({
       executablePath: process.env.CHROME_BIN || null,
       args: ['--no-sandbox', '--headless', '--disable-gpu']
@@ -29,16 +29,17 @@ function nhsIdLogin(username, password, login_url, callback) {
     await page.waitForNavigation()
 
     let credentialsJSON = await page.$eval('body > div > div > pre', e => e.innerText)
-    let cred = credentialsJSON.replace(/'/g, '"')
-    let c = JSON.parse(cred)
+    let credentials = credentialsJSON.replace(/'/g, '"')
+    let credentialsObject = JSON.parse(credentials)
 
     await browser.close();
-    callback(c.access_token)
+
+    callback(credentialsObject.access_token, apikey)
   })()
 }
 
-function writeGlobals(token) {
-  fs.copyFileSync('e2e/local.globals.json', 'e2e/deploy.globals.json');
+function writeGlobals(token, apikey) {
+  fs.copyFileSync("e2e/local.globals.json", "e2e/deploy.globals.json");
 
   let globals = JSON.parse(fs.readFileSync("e2e/deploy.globals.json"));
   const tokenGlobal = {
@@ -47,9 +48,18 @@ function writeGlobals(token) {
     "enabled": true
   };
 
-  for(let index in globals.values) {
-    if (globals.values[index].key === "token") {
-      globals.values[index] = tokenGlobal;
+  const apikeyGlobal = {
+    "key": "apikey",
+    "value": apikey,
+    "enabled": true
+  };
+
+  for(let i = 0; i < globals.values.length; i++) {
+    if (globals.values[i].key === "token") {
+      globals.values[i] = tokenGlobal;
+    }
+    if (globals.values[i].key === "apikey") {
+      globals.values[i] = apikeyGlobal;
     }
   }
 
@@ -60,6 +70,7 @@ function main(args) {
   nhsIdLogin(
     args['<username>'],
     args['<password>'],
+    args['<apikey>'],
     args['<token_app_url>'],
     writeGlobals,
   )

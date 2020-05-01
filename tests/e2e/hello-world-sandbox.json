@@ -29,7 +29,7 @@
 							"",
 							"pm.test(\"Returns correct mock response\", () => {",
 							"    const responseJson = pm.response.json()",
-							"    const expectedGreeting = pm.globals.get(\"expected_greeting_open_access\")",
+							"    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
 							"    pm.expect(responseJson.message).to.eql(expectedGreeting)",
 							"})"
 						],
@@ -61,7 +61,8 @@
 					"script": {
 						"id": "18e6611a-f47a-4bb1-8540-c1bab62695ab",
 						"exec": [
-							"pm.environment.set(\"expected_greeting\", \"Hello World!\");"
+							"pm.environment.set(\"expected_greeting\", \"Hello Application!\");",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -77,7 +78,7 @@
 							"",
 							"pm.test(\"Returns correct mock response\", () => {",
 							"    const responseJson = pm.response.json()",
-							"    const expectedGreeting = pm.globals.get(\"expected_greeting_application\")",
+							"    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
 							"    pm.expect(responseJson.message).to.eql(expectedGreeting)",
 							"})"
 						],
@@ -131,7 +132,7 @@
 					"script": {
 						"id": "18e6611a-f47a-4bb1-8540-c1bab62695ab",
 						"exec": [
-							"pm.environment.set(\"expected_greeting\", \"Hello World!\");"
+							"pm.environment.set(\"expected_greeting\", \"Hello User!\");"
 						],
 						"type": "text/javascript"
 					}
@@ -147,7 +148,7 @@
 							"",
 							"pm.test(\"Returns correct mock response\", () => {",
 							"    const responseJson = pm.response.json()",
-							"    const expectedGreeting = pm.globals.get(\"expected_greeting_user\")",
+							"    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
 							"    pm.expect(responseJson.message).to.eql(expectedGreeting)",
 							"})"
 						],
