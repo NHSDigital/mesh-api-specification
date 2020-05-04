@@ -75,8 +75,8 @@ function writeEnvVariables(base_url, apigee_environment){
     "value": base_url,
     "enabled": true
   }; 
-  if (envVariables.values[i].key === "base_url") {
-    envVariables.values[i] = baseUrl;
+  if (envVariables.values[0].key === "base_url") {
+    envVariables.values[0] = baseUrl;
   }
   fs.writeFileSync(`e2e/environments/${apigee_environment}.postman.json`, JSON.stringify(baseUrl));
 }
