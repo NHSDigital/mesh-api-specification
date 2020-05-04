@@ -43,12 +43,7 @@ function writeGlobals(token, apikey) {
   fs.copyFileSync("e2e/local.globals.json", "e2e/deploy.globals.json");
 
   let globals = JSON.parse(fs.readFileSync("e2e/deploy.globals.json"));
-  const baseUrlGlobal = {
-    "key": "base_url",
-    "value": base_url,
-    "enabled": true
-  };
-
+ 
   const tokenGlobal = {
     "key": "token",
     "value": token,
@@ -62,9 +57,6 @@ function writeGlobals(token, apikey) {
   };
 
   for(let i = 0; i < globals.values.length; i++) {
-    if (globals.values[i].key === "base_url") {
-      globals.values[i] = baseUrlGlobal;
-    }
     if (globals.values[i].key === "token") {
       globals.values[i] = tokenGlobal;
     }
