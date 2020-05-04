@@ -1,7 +1,7 @@
 doc = `
 API Management Postman Test Runner
 Usage:
-  test-runner.js <username> <password> <base_url> <apikey> <token_app_url>
+  test-runner.js <username> <password> <apigee_environment> <base_url> <apikey> <token_app_url>
   test-runner.js -h | --help
   -h --help  Show this text.
 `
@@ -10,7 +10,7 @@ const fs = require('fs')
 const docopt = require('docopt').docopt
 const puppeteer = require('puppeteer')
 
-function nhsIdLogin(username, password, base_url, apikey, login_url, writeGlobals, writeEnvVariables) {
+function nhsIdLogin(username, password, apigee_environment, base_url, apikey, login_url, writeGlobals, writeEnvVariables) {
   (async () => {
     console.log('Oauth journey on ' + login_url)
 
@@ -35,7 +35,7 @@ function nhsIdLogin(username, password, base_url, apikey, login_url, writeGlobal
     await browser.close();
 
     writeGlobals(credentialsObject.access_token, apikey)
-    writeEnvVariables(base_url)
+    writeEnvVariables(base_url, apigee_environment)
   })()
 }
 
@@ -68,8 +68,8 @@ function writeGlobals(token, apikey) {
   fs.writeFileSync('e2e/deploy.globals.json', JSON.stringify(globals));
 }
 
-function writeEnvVariables(base_url){
-  let envVariables = JSON.parse(fs.readFileSync(`e2e/environments/${apigee_env}.postman.json`));
+function writeEnvVariables(base_url, apigee_environment){
+  let envVariables = JSON.parse(fs.readFileSync(`e2e/environments/${apigee_environment}.postman.json`));
   const baseUrl = {
     "key": "base_url",
     "value": base_url,
@@ -78,13 +78,14 @@ function writeEnvVariables(base_url){
   if (envVariables.values[i].key === "base_url") {
     envVariables.values[i] = baseUrl;
   }
-  fs.writeFileSync(`e2e/environments/${apigee_env}.postman.json`, JSON.stringify(baseUrl));
+  fs.writeFileSync(`e2e/environments/${apigee_environment}.postman.json`, JSON.stringify(baseUrl));
 }
 
 function main(args) {
   nhsIdLogin(
     args['<username>'],
     args['<password>'],
+    args['<apigee_environment>'],
     args['<base_url>'],
     args['<apikey>'],
     args['<token_app_url>'],
