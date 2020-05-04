@@ -5,7 +5,7 @@
 	"values": [
 	  {
 		"key": "base_url",
-		"value": "{{base_url}}",
+		"value": "base_url",
 		"enabled": true
 	  }
 	],

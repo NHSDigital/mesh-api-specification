@@ -10,7 +10,7 @@ const fs = require('fs')
 const docopt = require('docopt').docopt
 const puppeteer = require('puppeteer')
 
-function nhsIdLogin(username, password, base_url, apikey, login_url, callback) {
+function nhsIdLogin(username, password, base_url, apikey, login_url, writeGlobals, writeEnvVariables) {
   (async () => {
     console.log('Oauth journey on ' + login_url)
 
@@ -34,11 +34,12 @@ function nhsIdLogin(username, password, base_url, apikey, login_url, callback) {
 
     await browser.close();
 
-    callback(base_url, credentialsObject.access_token, apikey)
+    writeGlobals(credentialsObject.access_token, apikey)
+    writeEnvVariables(base_url)
   })()
 }
 
-function writeGlobals(base_url, token, apikey) {
+function writeGlobals(token, apikey) {
   fs.copyFileSync("e2e/local.globals.json", "e2e/deploy.globals.json");
 
   let globals = JSON.parse(fs.readFileSync("e2e/deploy.globals.json"));
@@ -75,6 +76,19 @@ function writeGlobals(base_url, token, apikey) {
   fs.writeFileSync('e2e/deploy.globals.json', JSON.stringify(globals));
 }
 
+function writeEnvVariables(base_url){
+  let envVariables = JSON.parse(fs.readFileSync(`e2e/environments/${apigee_env}.postman.json`));
+  const baseUrl = {
+    "key": "base_url",
+    "value": base_url,
+    "enabled": true
+  }; 
+  if (envVariables.values[i].key === "base_url") {
+    envVariables.values[i] = baseUrl;
+  }
+  fs.writeFileSync(`e2e/environments/${apigee_env}.postman.json`, JSON.stringify(baseUrl));
+}
+
 function main(args) {
   nhsIdLogin(
     args['<username>'],
@@ -83,6 +97,7 @@ function main(args) {
     args['<apikey>'],
     args['<token_app_url>'],
     writeGlobals,
+    writeEnvVariables,
   )
 }
 
