@@ -1,7 +1,7 @@
 doc = `
 API Management Postman Test Runner
 Usage:
-  test-runner.js <username> <password> <apikey> <token_app_url>
+  test-runner.js <username> <password> <base_url> <apikey> <token_app_url>
   test-runner.js -h | --help
   -h --help  Show this text.
 `
@@ -10,7 +10,7 @@ const fs = require('fs')
 const docopt = require('docopt').docopt
 const puppeteer = require('puppeteer')
 
-function nhsIdLogin(username, password, apikey, login_url, callback) {
+function nhsIdLogin(username, password, base_url, apikey, login_url, callback) {
   (async () => {
     console.log('Oauth journey on ' + login_url)
 
@@ -34,14 +34,20 @@ function nhsIdLogin(username, password, apikey, login_url, callback) {
 
     await browser.close();
 
-    callback(credentialsObject.access_token, apikey)
+    callback(base_url, credentialsObject.access_token, apikey)
   })()
 }
 
-function writeGlobals(token, apikey) {
+function writeGlobals(base_url, token, apikey) {
   fs.copyFileSync("e2e/local.globals.json", "e2e/deploy.globals.json");
 
   let globals = JSON.parse(fs.readFileSync("e2e/deploy.globals.json"));
+  const baseUrlGlobal = {
+    "key": "base_url",
+    "value": base_url,
+    "enabled": true
+  };
+
   const tokenGlobal = {
     "key": "token",
     "value": token,
@@ -55,6 +61,9 @@ function writeGlobals(token, apikey) {
   };
 
   for(let i = 0; i < globals.values.length; i++) {
+    if (globals.values[i].key === "base_url") {
+      globals.values[i] = baseUrlGlobal;
+    }
     if (globals.values[i].key === "token") {
       globals.values[i] = tokenGlobal;
     }
@@ -70,6 +79,7 @@ function main(args) {
   nhsIdLogin(
     args['<username>'],
     args['<password>'],
+    args['<base_url>'],
     args['<apikey>'],
     args['<token_app_url>'],
     writeGlobals,
