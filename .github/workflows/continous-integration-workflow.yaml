@@ -66,13 +66,6 @@ jobs:
           API_TEST_ENV_FILE_PATH: "tests/e2e/environments/local.postman_environment.json"
         run: make test
 
-      - name: Store local test result artifact
-        if: always()
-        uses: actions/upload-artifact@v1
-        with:
-          name: local-tests-${{ env.SPEC_VERSION }}+${{ github.run_id }}.html
-          path: ./build/local-tests.html
-
       - name: Store distributable schema
         uses: actions/upload-artifact@v1
         with:
@@ -132,9 +125,3 @@ jobs:
           poetry run python scripts/template.py -f tests/e2e/environments/postman_environment.json.template --env > tests/e2e/environments/sandbox.postman_environment.json
           make test
 
-      - name: Store sandbox test result artifact (master only)
-        if: github.ref == 'refs/heads/master'
-        uses: actions/upload-artifact@v1
-        with:
-          name: sandbox-tests-${{ env.SPEC_VERSION }}+${{ github.run_id }}.html
-          path: ./dist/sandbox-tests.html
