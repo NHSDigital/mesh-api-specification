@@ -1,93 +1,234 @@
 {
-  "info": {
-    "_postman_id": "f165b5e7-772f-40c7-8e7f-6b76f4f02d2b",
-    "name": "Hello World API Sandbox",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Hello World",
-      "item": [
-        {
-          "name": "Hello World - Success",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "id": "18e6611a-f47a-4bb1-8540-c1bab62695ab",
-                "exec": [
-                  "pm.environment.set(\"expected_greeting\", \"Hello World!\");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "id": "83d1055f-42ef-440d-bcbb-d41fab641862",
-                "exec": [
-                  "pm.test(\"Returns status code 200 OK\", () => {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "",
-                  "pm.test(\"Returns correct mock response\", () => {",
-                  "    const responseJson = pm.response.json()",
-                  "    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
-                  "    pm.expect(responseJson.message).to.eql(expectedGreeting)",
-                  "})"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/hello/world",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "hello/world"
-              ]
-            }
-          },
-          "response": []
-        }
-      ],
-      "protocolProfileBehavior": {}
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "id": "ae78af2b-9e9f-477c-aa3d-3395650967dc",
-        "type": "text/javascript",
-        "exec": [
-          ""
-        ]
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "id": "212cdb5c-8e1b-424a-bf3b-b06314fbece2",
-        "type": "text/javascript",
-        "exec": [
-          ""
-        ]
-      }
-    }
-  ],
-  "variable": [
-    {
-      "id": "068f4244-0756-4c67-8700-d2b244e61fd9",
-      "key": "api_key",
-      "value": "xlNAz98DIP3I7xQDR7BnOdG9tGxKyBll",
-      "type": "string"
-    }
-  ],
-  "protocolProfileBehavior": {}
+	"info": {
+		"_postman_id": "3641e336-7a59-4ce9-a6b1-9b1bce0be512",
+		"name": "Hello World API Sandbox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello World - Open access",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0c8c24ba-2462-4217-ba73-e13979a08c69",
+						"exec": [
+							"pm.environment.set(\"expected_greeting\", \"Hello World!\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "367cc013-a720-405f-a8c8-385032da1cd1",
+						"exec": [
+							"pm.test(\"Returns status code 200 OK\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns correct mock response\", () => {",
+							"    const responseJson = pm.response.json()",
+							"    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
+							"    pm.expect(responseJson.message).to.eql(expectedGreeting)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/hello/world",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hello",
+						"world"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hello World - Application Restricted",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ab0ed901-0437-4694-852d-116091ac4387",
+						"exec": [
+							"pm.environment.set(\"expected_greeting\", \"Hello Application!\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "bf5af5a9-0330-4e65-b9ab-819d12e8647f",
+						"exec": [
+							"pm.test(\"Returns status code 200 OK\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns correct mock response\", () => {",
+							"    const responseJson = pm.response.json()",
+							"    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
+							"    pm.expect(responseJson.message).to.eql(expectedGreeting)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{apikey}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the apikey header generated by Postman.",
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/hello/application",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hello",
+						"application"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hello World - User Restricted",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4f5cf672-d5f3-4f75-842a-ae431e051d21",
+						"exec": [
+							"pm.environment.set(\"expected_greeting\", \"Hello User!\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4df65138-80c4-4644-b352-5270e2a42c3d",
+						"exec": [
+							"pm.test(\"Returns status code 200 OK\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns correct mock response\", () => {",
+							"    const responseJson = pm.response.json()",
+							"    const expectedGreeting = pm.environment.get(\"expected_greeting\")",
+							"    pm.expect(responseJson.message).to.eql(expectedGreeting)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{token}}",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/hello/user",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hello",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "047efd32-3b9f-4ebf-979d-806d66fc9167",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "05b508f0-c6f0-49bb-9cb6-a85cfb66f193",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "da32e1e6-3ade-420b-b575-0f79b94b56bf",
+			"key": "api_key",
+			"value": "xlNAz98DIP3I7xQDR7BnOdG9tGxKyBll",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
 }
