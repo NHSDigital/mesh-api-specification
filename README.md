@@ -117,7 +117,7 @@ Procedure:
 
 #### Environment variables
 
-You need a apgiee account to deploy to apigee, this account needs to have 2FA turned off
+You need a apgiee account to deploy to apigee
 * `APIGEE_USERNAME` - your apigee username
 * `APIGEE_PASSWORD` - your apigee password
 
@@ -151,10 +151,10 @@ The base url of the proxy when deployed to apigee
 
 ### Github Deployment
 
-github uses github actions to deploy the code to apigee. The github action uses secrets to populate environment variables.
-You need a github secret for each environment variable. Each of the above environment variables need an equivalent secret in github for
+Github uses Github actions to deploy the code to apigee. The Github action uses secrets to populate environment variables.
+You need a Github secret for each environment variable. Each of the above environment variables need an equivalent secret in Github for
 the deployment to work. These are pre-populated for you [here](https://github.com/NHSDigital/hello-world-api/settings/secrets/new). 
-If you get a 404 for this page you will need to update your github account permissions.
+If you get a 404 for this page you will need to update your Github account permissions.
 
 ### Local Deployment
 

@@ -6,6 +6,9 @@
     "lint": "find . -type f -name '*.js' ! -name '.eslintrc.js' | grep -v 'node_modules/' | xargs eslint",
     "start": "node app.js --use_strict"
   },
+  "author": "NHS Digital",
+  "license": "(MIT OR OGL)",
+  "homepage": "https://github.com/NHSDigital/hello-world-api",
   "main": "app.js",
   "dependencies": {
     "apimocker": "^1.1.4"

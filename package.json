@@ -10,7 +10,7 @@
     "check-licenses": "node_modules/.bin/license-checker --failOn GPL --failOn LGPL"
   },
   "author": "NHS Digital",
-  "license": "MIT",
+  "license": "(MIT OR OGL)",
   "homepage": "https://github.com/NHSDigital/hello-world-api",
   "dependencies": {
     "speccy": "^0.11.0"
