@@ -9,7 +9,7 @@
     "test": "node_modules/.bin/newman run e2e/hello-world-sandbox.json -e e2e/environments/$APIGEE_ENVIRONMENT.postman.json --globals e2e/deploy.globals.json --reporters junit"
   },
   "author": "",
-  "license": "ISC",
+  "license": "(MIT OR OGL)",
   "dependencies": {
     "docopt": "^0.6.2",
     "newman": "^5.0.0",

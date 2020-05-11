@@ -22,10 +22,6 @@ info:
 servers:
   - url: 'https://sandbox.api.service.nhs.uk/hello-world'
     description: Sandbox environment.
-  - url: 'https://int.api.service.nhs.uk/hello-world'
-    description: Integration test environment.
-  - url: 'https://api.service.nhs.uk/hello-world'
-    description: 'Production environment (not yet available: see "API status and roadmap").'
 
 paths:
 
@@ -76,6 +72,10 @@ paths:
                 message: "Hello application!"
         '401':
           description: Missing or invalid API Key
+          content: 
+            application/json:
+              example:
+                message: "Invalid ApiKey"
       security:
         - api_key: []
       tags:
@@ -105,6 +105,10 @@ paths:
                 message: "Hello user!"
         '401':
           description: Missing or invalid OAuth 2.0 Access Token
+          content: 
+            application/json:
+              example:
+                message: "Invalid access token"
       security:
         - oAuth2AuthCode: []
       tags:

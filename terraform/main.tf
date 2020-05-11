@@ -21,5 +21,4 @@ module "hello-world" {
   namespace          = var.namespace
   make_api_product   = length(var.namespace) == 0
   api_product_display_name = "Hello World Api"
-  api_product_description  = "TODO: Link to docs when they are published"
 }
