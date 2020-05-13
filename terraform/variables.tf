@@ -38,6 +38,12 @@ variable "status_cake_contact_group" {
     default = ""
 }
 
+variable "force_sandbox" {
+    type = bool
+    description = "Force a sandbox deploy instead of trying to detect if the deploy is happenning in a sandbox env"
+    default = true
+}
+
 // FIXME: remove it
 variable "covid-19-testing-channel-availability-host" {
     type = string
