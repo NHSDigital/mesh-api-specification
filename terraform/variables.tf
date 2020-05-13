@@ -18,3 +18,29 @@ variable "namespace" {
   description = "Namespace to deploy proxies etc. in to, for canaries or deploys. To make it prettier, start with a hyphen (e.g. '-apm-123')."
   default = ""
 }
+
+// FIXME remove default values
+variable "status_cake_username" {
+    type = string
+    description = "Statuscake username for monitoring and alerting"
+    default = ""
+}
+
+variable "status_cake_api_key" {
+    type = string
+    description = "Statuscake apikey for monitoring and alerting"
+    default = ""
+}
+
+variable "status_cake_contact_group" {
+    type = string
+    description = "Statuscake Contact Group for monitoring and alerting"
+    default = ""
+}
+
+// FIXME: remove it
+variable "covid-19-testing-channel-availability-host" {
+    type = string
+    description = "Ignore"
+    default = ""
+}
