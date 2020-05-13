@@ -25,6 +25,13 @@
             "responses": {
                 "get": {"httpStatus": 200, "mockFile": "hellouser.json"}
             }
-        }
+        },
+        "_status": {
+          "latency": 20,
+          "verbs": ["get"],
+          "responses": {
+            "get": {"httpStatus": 200, "mockFile": "status.json"}
+          }
+      }
     }
 }

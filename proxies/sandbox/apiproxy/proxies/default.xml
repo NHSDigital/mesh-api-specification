@@ -37,6 +37,9 @@
   <RouteRule name="NoRoute">
     <Condition>request.verb == "OPTIONS" AND request.header.origin != null AND request.header.Access-Control-Request-Method != null</Condition>
   </RouteRule>
+  <RouteRule name="Ping">
+    <Condition>(proxy.pathsuffix MatchesPath "/_check") and (request.verb = "GET")</Condition>
+  </RouteRule>
   <RouteRule name="sandbox">
     <TargetEndpoint>sandbox</TargetEndpoint>
   </RouteRule>

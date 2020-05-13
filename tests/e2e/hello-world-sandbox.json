@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3641e336-7a59-4ce9-a6b1-9b1bce0be512",
+		"_postman_id": "81e0e015-b3be-4582-81a2-9b38cd095fe1",
 		"name": "Hello World API Sandbox",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -194,6 +194,48 @@
 					"path": [
 						"hello",
 						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hello World - Status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0c8c24ba-2462-4217-ba73-e13979a08c69",
+						"exec": [
+							"pm.environment.set(\"expected_greeting\", \"Hello World!\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "367cc013-a720-405f-a8c8-385032da1cd1",
+						"exec": [
+							"pm.test(\"Returns status code 200 OK\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/_status",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"_status"
 					]
 				}
 			},
