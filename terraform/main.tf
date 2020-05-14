@@ -13,7 +13,7 @@ terraform {
 }
 
 module "hello-world" {
-  source             = "github.com/NHSDigital/api-platform-service-module/AMB-52-monitoring-and-alerting-with-statuscake"
+  source             = "github.com/NHSDigital/api-platform-service-module.git?ref=AMB-52-monitoring-and-alerting-with-statuscake"
   name               = "hello-world"
   path               = "hello-world"
   apigee_environment = var.apigee_environment
