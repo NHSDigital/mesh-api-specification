@@ -21,4 +21,7 @@ module "hello-world" {
   namespace          = var.namespace
   make_api_product   = length(var.namespace) == 0
   api_product_display_name = "Hello World Api"
+  status_cake_username = var.status_cake_username
+  status_cake_api_key = var.status_cake_api_key
+  status_cake_contact_group = var.status_cake_contact_group
 }
