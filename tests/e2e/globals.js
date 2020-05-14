@@ -43,7 +43,7 @@ function writeGlobals(token, apikey) {
   fs.copyFileSync("e2e/local.globals.json", "e2e/deploy.globals.json");
 
   let globals = JSON.parse(fs.readFileSync("e2e/deploy.globals.json"));
- 
+
   const tokenGlobal = {
     "key": "token",
     "value": token,
@@ -74,11 +74,11 @@ function writeEnvVariables(base_url, apigee_environment){
     "key": "base_url",
     "value": base_url,
     "enabled": true
-  }; 
+  };
   if (envVariables.values[0].key === "base_url") {
     envVariables.values[0] = baseUrl;
   }
-  fs.writeFileSync(`e2e/environments/${apigee_environment}.postman.json`, JSON.stringify(envVariables));
+  fs.writeFileSync(`e2e/environments/deploy.${apigee_environment}.postman.json`, JSON.stringify(envVariables));
 }
 
 function main(args) {
