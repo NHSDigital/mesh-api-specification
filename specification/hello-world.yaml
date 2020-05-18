@@ -114,6 +114,23 @@ paths:
       tags:
         - hello
 
+  /_status:
+    get:
+      summary: Health check endpoint.
+      operationId: getStatus
+      description: |
+        Returns an empty json response. This can be used to perform service healthcheck.
+
+        Use this API alongside our [open-access REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#open-access-rest-api-tutorial) to learn how to connect to our APIs.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+        - hello
 components:
 
   securitySchemes:

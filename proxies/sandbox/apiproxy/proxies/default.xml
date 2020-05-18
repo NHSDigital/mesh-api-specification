@@ -28,6 +28,16 @@
       </Response>
       <Condition>request.verb == "OPTIONS" AND request.header.origin != null AND request.header.Access-Control-Request-Method != null</Condition>
     </Flow>
+    <Flow name="AddStatusToPing">
+      <Description/>
+      <Request/>
+      <Response>
+        <Step>
+          <Name>AssignMessage.AddStatusToPing</Name>
+        </Step>
+      </Response>
+      <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "GET"))</Condition>
+    </Flow>
   </Flows>
   <PreFlow/>
   <HTTPProxyConnection>
@@ -36,6 +46,9 @@
   </HTTPProxyConnection>
   <RouteRule name="NoRoute">
     <Condition>request.verb == "OPTIONS" AND request.header.origin != null AND request.header.Access-Control-Request-Method != null</Condition>
+  </RouteRule>
+  <RouteRule name="Ping">
+    <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "GET"))</Condition>
   </RouteRule>
   <RouteRule name="sandbox">
     <TargetEndpoint>sandbox</TargetEndpoint>
