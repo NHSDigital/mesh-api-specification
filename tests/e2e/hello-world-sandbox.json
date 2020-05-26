@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "81e0e015-b3be-4582-81a2-9b38cd095fe1",
+		"_postman_id": "2f8d407b-fc97-432d-9f8c-adc8483bac8a",
 		"name": "Hello World API Sandbox",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -228,7 +228,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{base_url}}/_status",
 					"host": [
@@ -236,6 +242,13 @@
 					],
 					"path": [
 						"_status"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "{{apikey}}",
+							"disabled": true
+						}
 					]
 				}
 			},
