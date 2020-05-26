@@ -23,5 +23,6 @@ module "hello-world" {
   api_product_display_name = "Hello World Api"
   status_cake_username = var.status_cake_username
   status_cake_api_key = var.status_cake_api_key
+  status_cake_status_apikey = var.status_cake_status_apikey
   status_cake_contact_group = var.status_cake_contact_group
 }
