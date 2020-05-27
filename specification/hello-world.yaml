@@ -44,7 +44,7 @@ info:
     email: api.management@nhs.net
 
 servers:
-  - url: 'https://sandbox.api.service.nhs.uk/hello/'
+  - url: 'https://sandbox.api.service.nhs.uk/hello'
     description: Sandbox environment.
 
 paths:
