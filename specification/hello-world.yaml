@@ -9,6 +9,30 @@ info:
   description: |
     ## Overview
     Use this API alongside our [tutorials](https://digital.nhs.uk/developer/api-tutorials) to learn how to connect to our APIs.
+    You can:
+      * Try an open-access endpoint.
+      * Try an application-restricted endpoint.
+      * Try a user-restricted endpoint.
+
+    ## Technology
+    This API is [RESTful](https://digital.nhs.uk/developer/developer-reference/introduction-to-apis#basic-rest). 
+    
+    This API is available on the Internet, although access using NHS smartcards (see below) currently requires a connection to the Health and Social Care Network (HSCN).
+
+    ## Authorisation
+    This API showcases three differently authorised endpoints, [Open-access](https://digital.nhs.uk/developer/developer-reference/security-and-authorisation#open-access-apis), [Application-restricted](https://digital.nhs.uk/developer/developer-reference/security-and-authorisation#application-restricted-apis) and [User-restricted](https://digital.nhs.uk/developer/developer-reference/security-and-authorisation#user-restricted-apis).
+      * Open-access requires no authorisation.
+      * Application-restricted requires an API key presented in the 'apikey' header along with the request.
+      * User-restricted requires OAuth 2.0 authorisation. This involves an OAuth 2.0 Access Token presented in the 'Authorization' header along with the request.
+
+    ## Environments and Testing
+    You can test this API using our sandbox environment:
+      - `https://sandbox.api.service.nhs.uk/hello/`
+
+    For more details on sandbox testing, or to try out the sandbox using our "Try this API" feature, see the documentation for each endpoint.
+    Alternatively, you can try out the sandbox using our Postman collection:
+    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/426d37cb9cfe17b8b96d)
+      
 
     ## Endpoints
     To see details for specific endpoints, select from the list on the left hand side of the page:
@@ -20,7 +44,7 @@ info:
     email: api.management@nhs.net
 
 servers:
-  - url: 'https://sandbox.api.service.nhs.uk/hello-world'
+  - url: 'https://sandbox.api.service.nhs.uk/hello'
     description: Sandbox environment.
 
 paths:
