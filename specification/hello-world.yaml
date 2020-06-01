@@ -8,7 +8,7 @@ info:
   title: Hello World API
   description: |
     ## Overview
-    Use this API alongside our [tutorials](https://digital.nhs.uk/developer/api-tutorials) to learn how to connect to our APIs.
+    Use this API alongside our [tutorials](https://digital.nhs.uk/developer/tutorials) to learn how to connect to our APIs.
     You can:
       * Try an open-access endpoint.
       * Try an application-restricted endpoint.
@@ -36,9 +36,9 @@ info:
 
     ## Endpoints
     To see details for specific endpoints, select from the list on the left hand side of the page:
-    - `GET /world` - an example of an open-access endpoint
-    - `GET /application` - an example of an application-restricted endpoint
-    - `GET /user` - an example of a user-restricted endpoint
+    - `GET /hello/world` - an example of an open-access endpoint
+    - `GET /hello/application` - an example of an application-restricted endpoint
+    - `GET /hello/user` - an example of a user-restricted endpoint
   contact:
     name: API Management Support
     email: api.management@nhs.net
