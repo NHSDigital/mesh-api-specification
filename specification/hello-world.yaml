@@ -17,10 +17,10 @@ info:
 
 
     ## Technology
-    This API is [RESTful](https://digital.nhs.uk/developer/developer-reference/introduction-to-apis#basic-rest). And is available via the Internet, and over the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
+    This API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#basic-rest-apis). And is available via the Internet, and over the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
 
     ## Authorisation
-    This API showcases three differently authorised endpoints, [Open-access](https://digital.nhs.uk/developer/developer-reference/security-and-authorisation#open-access-apis), [Application-restricted](https://digital.nhs.uk/developer/developer-reference/security-and-authorisation#application-restricted-apis) and [User-restricted](https://digital.nhs.uk/developer/developer-reference/security-and-authorisation#user-restricted-apis).
+    This API showcases three differently authorised endpoints, [Open-access](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#open-access-apis), [Application-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis) and [User-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis).
       * Open-access requires no authorisation.
       * Application-restricted requires an API key presented in the 'apikey' header along with the request.
       * User-restricted requires OAuth 2.0 authorisation. This involves an OAuth 2.0 Access Token presented in the 'Authorization' header along with the request.
