@@ -52,7 +52,6 @@ deploy-spec: update-examples
 format:
 	poetry run black **/*.py
 
-
 build-proxy:
 	scripts/build_proxy.sh
 
