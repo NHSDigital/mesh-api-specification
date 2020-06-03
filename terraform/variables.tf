@@ -19,26 +19,6 @@ variable "namespace" {
   default = ""
 }
 
-variable "status_cake_username" {
-    type = string
-    description = "Statuscake username for monitoring and alerting"
-}
-
-variable "status_cake_api_key" {
-    type = string
-    description = "Statuscake apikey for monitoring and alerting"
-}
-
-variable "status_cake_status_apikey" {
-    type = string
-    description = "Statuscake apikey for the _status endpoint"
-}
-
-variable "status_cake_contact_group" {
-    type = string
-    description = "Statuscake Contact Group for monitoring and alerting"
-}
-
 variable "force_sandbox" {
     type = bool
     description = "Force a sandbox deploy instead of trying to detect if the deploy is happenning in a sandbox env"
