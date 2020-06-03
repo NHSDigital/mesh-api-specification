@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "2f8d407b-fc97-432d-9f8c-adc8483bac8a",
-		"name": "Hello World API Sandbox",
+		"_postman_id": "ca54822a-5a9b-4dff-8fd9-cd0b3d641b9d",
+		"name": "Hello World API Sandbox copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -11,7 +11,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "0c8c24ba-2462-4217-ba73-e13979a08c69",
+						"id": "99e7adf5-5ad6-4220-bf83-0a901e29ba9d",
 						"exec": [
 							"pm.environment.set(\"expected_greeting\", \"Hello World!\");"
 						],
@@ -21,7 +21,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "367cc013-a720-405f-a8c8-385032da1cd1",
+						"id": "e5c85463-44ec-4937-9598-a32c502c270f",
 						"exec": [
 							"pm.test(\"Returns status code 200 OK\", () => {",
 							"    pm.response.to.have.status(200);",
@@ -54,12 +54,48 @@
 			"response": []
 		},
 		{
+			"name": "Hello World - _ping response with deployed version",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "60d752ea-398c-40bd-82c8-1061edc960bb",
+						"exec": [
+							"pm.test(\"Status code\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var versionRegex = /v[0-9]+\\.[0-9]+\\.[0-9]+-\\w+/;",
+							"pm.test(\"Body has version\", function () {",
+							"    pm.expect(versionRegex.test(pm.response.text())).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/_ping",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"_ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Hello World - Application Restricted",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "ab0ed901-0437-4694-852d-116091ac4387",
+						"id": "9657f2d1-8d85-45cc-9e30-f0a3d566bc92",
 						"exec": [
 							"pm.environment.set(\"expected_greeting\", \"Hello Application!\");",
 							""
@@ -70,7 +106,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "bf5af5a9-0330-4e65-b9ab-819d12e8647f",
+						"id": "e5f9b27a-5a0d-473c-bd0c-6eade965eeb2",
 						"exec": [
 							"pm.test(\"Returns status code 200 OK\", () => {",
 							"    pm.response.to.have.status(200);",
@@ -130,7 +166,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "4f5cf672-d5f3-4f75-842a-ae431e051d21",
+						"id": "9d7097d2-6274-4d67-8e46-2fe49defcee7",
 						"exec": [
 							"pm.environment.set(\"expected_greeting\", \"Hello User!\");"
 						],
@@ -140,7 +176,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4df65138-80c4-4644-b352-5270e2a42c3d",
+						"id": "92d3f130-f012-4c6a-8f93-5492db3d5833",
 						"exec": [
 							"pm.test(\"Returns status code 200 OK\", () => {",
 							"    pm.response.to.have.status(200);",
@@ -205,7 +241,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "0c8c24ba-2462-4217-ba73-e13979a08c69",
+						"id": "8a680f1e-59b7-4cc6-a4cc-3ae2c0e34f32",
 						"exec": [
 							"pm.environment.set(\"expected_greeting\", \"Hello World!\");"
 						],
@@ -215,7 +251,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "367cc013-a720-405f-a8c8-385032da1cd1",
+						"id": "6cda8cfd-d538-4a1e-bf11-61ad8b2cf1e8",
 						"exec": [
 							"pm.test(\"Returns status code 200 OK\", () => {",
 							"    pm.response.to.have.status(200);",
@@ -259,7 +295,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "047efd32-3b9f-4ebf-979d-806d66fc9167",
+				"id": "31ab341c-fb8b-4eb9-bb2b-3fce46a88f78",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -269,7 +305,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "05b508f0-c6f0-49bb-9cb6-a85cfb66f193",
+				"id": "a1a7a6b7-30c5-4ad4-951f-f8fa47a34230",
 				"type": "text/javascript",
 				"exec": [
 					""
