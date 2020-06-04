@@ -33,7 +33,7 @@
       <Request/>
       <Response>
         <Step>
-          <Name>AssignMessage.AddVersionToPing</Name>
+          <Name>AssignMessage.AddPayloadToPing</Name>
         </Step>
       </Response>
       <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
