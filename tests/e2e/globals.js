@@ -10,6 +10,38 @@ const fs = require('fs')
 const docopt = require('docopt').docopt
 const puppeteer = require('puppeteer')
 
+async function retry(func, times) {
+  let result;
+  let success = false;
+  let error;
+
+  for (let i = 0; i < times; i++) {
+      try {
+          result = await func();
+          success = true;
+          break;
+      } catch (e) {
+          error = e;
+          console.error(e);
+      }
+  }
+
+  if (!success) {
+      throw error;
+  }
+
+  return result;
+}
+
+async function gotoLogin(browser, login_url) {
+  const page = await browser.newPage();
+  await page.goto(login_url, { waitUntil: 'networkidle2'});
+  await page.waitForSelector('#start');
+  await page.click("#start");
+  await page.waitForSelector('#idToken1');
+  return page;
+}
+
 function nhsIdLogin(username, password, apigee_environment, base_url, apikey, login_url, writeGlobals, writeEnvVariables) {
   (async () => {
     console.log('Oauth journey on ' + login_url)
@@ -19,10 +51,7 @@ function nhsIdLogin(username, password, apigee_environment, base_url, apikey, lo
       args: ['--no-sandbox', '--headless', '--disable-gpu']
     });
 
-    const page = await browser.newPage()
-    await page.goto(login_url, { waitUntil: 'networkidle2' })
-    await page.click('#start')
-    await page.waitForSelector('#idToken1')
+    const page = await retry(async () => { return await gotoLogin(browser, login_url); }, 3);
     await page.type('#idToken1', username)
     await page.type('#idToken2', password)
     await page.click('#loginButton_0')
