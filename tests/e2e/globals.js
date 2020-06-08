@@ -24,6 +24,7 @@ async function retry(func, times) {
           error = e;
           console.error(e);
       }
+      setTimeout(function(){ console.log("Waiting"); }, 2000 * i);
   }
 
   if (!success) {
