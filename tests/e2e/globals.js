@@ -38,7 +38,6 @@ async function gotoLogin(browser, login_url) {
   await page.goto(login_url, { waitUntil: 'networkidle2', timeout: 10000 });
   await page.waitForSelector('#start', { timeout: 10000 });
   await page.click("#start");
-  await sleep(10000); 
   await page.waitForSelector('#idToken1', { timeout: 10000 });
   return page;
 }
