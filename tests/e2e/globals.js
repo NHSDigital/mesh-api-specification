@@ -35,10 +35,11 @@ async function retry(func, times) {
 
 async function gotoLogin(browser, login_url) {
   const page = await browser.newPage();
-  await page.goto(login_url, { waitUntil: 'networkidle2'});
-  await page.waitForSelector('#start');
+  await page.goto(login_url, { waitUntil: 'networkidle2', timeout: 10000 });
+  await page.waitForSelector('#start', { timeout: 10000 });
   await page.click("#start");
-  await page.waitForSelector('#idToken1');
+  await sleep(10000); 
+  await page.waitForSelector('#idToken1', { timeout: 10000 });
   return page;
 }
 
