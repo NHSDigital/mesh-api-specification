@@ -7,7 +7,7 @@ install-python:
 
 install-node:
 	npm install
-	cd sandbox && npm install
+	$(MAKE) -C docker/* install
 
 install-hooks:
 	cp scripts/pre-commit .git/hooks/pre-commit
@@ -17,7 +17,7 @@ test:
 
 lint:
 	npm run lint
-	cd sandbox && npm run lint && cd ..
+	$(MAKE) -C docker/* lint
 	poetry run flake8 **/*.py
 	find -name '*.sh' | grep -v node_modules | xargs shellcheck
 
@@ -64,4 +64,8 @@ release: clean publish build-proxy
 	cp -r tests dist
 
 sandbox: update-examples
-	cd sandbox && npm run start
+	$(MAKE) -C docker/hello-world-api-sandbox build
+	$(MAKE) -C docker/hello-world-api-sandbox run
+
+kill-sandbox:
+	$(MAKE) -C docker/hello-world-api-sandbox kill

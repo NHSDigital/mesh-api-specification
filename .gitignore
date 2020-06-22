@@ -24,3 +24,5 @@ __pycache__/
 .DS_Store
 
 sandbox.postman_environment.json
+
+docker/*/node_modules
