@@ -7,8 +7,8 @@ Intended for "sandbox" functionality, and is the target endpoint for the hosted 
 ## Developing
 
 ```
-docker build -t hello-world-api-sandbox -f docker/hello-world-api-sandbox/Dockerfile ./docker/hello-world-api-sandbox
-docker run --name hello-world-api-sandbox -p 9000:9000 hello-world-api-sandbox:latest
+make build
+make run
 ```
 
  * Use the examples from the OAS (`components/examples/`) sym-linking them into the app.
