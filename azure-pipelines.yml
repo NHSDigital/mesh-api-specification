@@ -50,14 +50,14 @@ jobs:
           - bash: "python -m pip install --upgrade pip setuptools wheel && pip install poetry"
             displayName: Install python dependencies
 
-          - task: Cache@2
-            displayName: "Cache Python Dependencies"
-            inputs:
-                key: '"$(Agent.OS)" | "python" | poetry.lock'
-                path: ".poetry"
-                restoreKeys: |
-                    "$(Agent.OS)" | "python" | poetry.lock
-                    "$(Agent.OS)" | "pythons"
+#          - task: Cache@2
+#            displayName: "Cache Python Dependencies"
+#            inputs:
+#                key: '"$(Agent.OS)" | "python" | poetry.lock'
+#                path: ".poetry"
+#                restoreKeys: |
+#                    "$(Agent.OS)" | "python" | poetry.lock
+#                    "$(Agent.OS)" | "pythons"
 
           - task: Cache@2
             displayName: "Cache Package NPM Dependencies"
