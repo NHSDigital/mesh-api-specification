@@ -53,6 +53,9 @@ jobs:
           - bash: cd hello-world-api
             displayName: cd to main repo
 
+          - bash: "make install"
+            displayName: Install repo
+
           - task: Cache@2
             displayName: "Cache Python Dependencies"
             inputs:
@@ -79,9 +82,6 @@ jobs:
                 restoreKeys: |
                     "$(Agent.OS)" | "node-sandbox" | sandbox/package-lock.json
                     "$(Agent.OS)" | "node-sandbox"
-
-          - bash: "make install"
-            displayName: Install repo
 
           - bash: "mkdir dist"
             displayName: create dist dir
