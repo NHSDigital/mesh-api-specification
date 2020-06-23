@@ -3,6 +3,7 @@ name: "$(SourceBranchName)+$(BuildID)"
 resources:
     repositories:
         - repository: utils
+          type: github
           name: NHSDigital/api-management-utils
           endpoint: NHSDi
 
