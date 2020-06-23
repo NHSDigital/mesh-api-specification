@@ -51,6 +51,6 @@
     <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "GET"))</Condition>
   </RouteRule>
   <RouteRule name="sandbox">
-    <TargetEndpoint>sandbox</TargetEndpoint>
+    <TargetEndpoint>apim</TargetEndpoint>
   </RouteRule>
 </ProxyEndpoint>

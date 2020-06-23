@@ -12,4 +12,4 @@ RUN chmod -R a+x /app
 USER nobody
 
 EXPOSE 9000
-CMD ["node", "app.js"]
+CMD ["npm", "start"]
