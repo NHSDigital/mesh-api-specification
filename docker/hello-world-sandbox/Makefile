@@ -7,10 +7,10 @@ lint:
 	npm run lint
 
 build:
-	docker build -t hello-world-api-sandbox .
+	docker build -t hello-world-sandbox .
 
 run:
-	docker run -p 9000:9000 hello-world-api-sandbox:latest
+	docker run -p 9000:9000 hello-world-sandbox:latest
 
 kill:
 	docker kill $$(docker ps --filter "ancestor=hello-world-api-sandbox" --format "{{.Names}}")
