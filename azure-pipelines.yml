@@ -92,7 +92,7 @@ jobs:
           - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml"
             displayName: copy proxies deployment config
 
-          - template: ../utils/az/build-prereqs.yml@utils
+          - template: az/build-prereqs.yml@utils
 
           - template: az/create-build-env-vars.yml@utils
             parameters:
