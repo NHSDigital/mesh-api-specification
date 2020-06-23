@@ -5,7 +5,7 @@ resources:
         - repository: utils
           type: github
           name: NHSDigital/api-management-utils
-          endpoint: NHSDi
+          endpoint: NHSDigital
 
 trigger:
     branches:
