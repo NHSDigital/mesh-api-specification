@@ -1,5 +1,11 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
+resources:
+    repositories:
+        - repository: utils
+          name: NHSDigital/api-management-utils
+          endpoint: NHSDi
+
 trigger:
     branches:
         include:
@@ -24,7 +30,6 @@ jobs:
       steps:
           - checkout: self
           - checkout: utils
-            path: https://github.com/NHSDigital/api-management-utils
 
           - bash: echo "##vso[task.setvariable variable=BRANCH_NAME]`echo $(System.PullRequest.SourceBranch) | sed -r 's/[/|\\@":<>?*]+/-/g'`"
             displayName: Set and replace invalid characters in branch name
