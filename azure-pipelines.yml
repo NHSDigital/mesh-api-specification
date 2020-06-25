@@ -86,8 +86,8 @@ jobs:
           - bash: "mkdir dist"
             displayName: create dist dir
 
-          - bash: "cp proxies dist/proxies"
-            displayName: copy proxies
+          # - bash: "cp proxies dist/proxies"
+          #   displayName: copy proxies
 
           - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml"
             displayName: copy proxies deployment config
