@@ -11,6 +11,3 @@ build:
 
 run:
 	docker run -p 9000:9000 hello-world-sandbox:latest
-
-kill:
-	docker kill $$(docker ps --filter "ancestor=hello-world-api-sandbox" --format "{{.Names}}")
