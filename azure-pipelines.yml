@@ -53,9 +53,6 @@ jobs:
           - bash: "python -m pip install --upgrade pip setuptools wheel && pip install poetry"
             displayName: Install python dependencies
 
-          - bash: cd hello-world-api
-            displayName: cd to main repo
-
           - bash: "make install"
             displayName: Install repo
 
