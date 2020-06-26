@@ -14,4 +14,4 @@ docker_service:
           value: "{{ apigee_uri }}"
       health_check:
         matcher: "200"
-        path: "/_ping" 
+        path: "/_status" 
