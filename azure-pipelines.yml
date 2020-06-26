@@ -89,7 +89,7 @@ jobs:
           # - bash: "cp proxies dist/proxies"
           #   displayName: copy proxies
 
-          - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml"
+          - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-all.yml"
             displayName: copy proxies deployment config
 
           - template: az/build-prereqs.yml@utils
