@@ -105,9 +105,6 @@ jobs:
           - bash: "make release"
             displayName: Build Release Package
 
-          - bash: "mkdir dist"
-            displayName: create dist dir
-
           # - bash: "cp proxies dist/proxies"
           #   displayName: copy proxies
 
