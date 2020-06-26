@@ -53,8 +53,6 @@ jobs:
           - bash: "python -m pip install --upgrade pip setuptools wheel && pip install poetry"
             displayName: Install python dependencies
 
-          - bash: "make install"
-            displayName: Install repo
 
           - task: Cache@2
             displayName: "Cache Python Dependencies"
@@ -82,6 +80,30 @@ jobs:
                 restoreKeys: |
                     "$(Agent.OS)" | "node-sandbox" | docker/hello-world-sandbox/package-lock.json
                     "$(Agent.OS)" | "node-sandbox"
+  
+          - bash: "make install"
+            displayName: Install repo
+
+          - bash: "make sandbox &"
+            displayName: Start Sandbox Server
+
+          - bash: "make check-licenses"
+            displayName: Check licenses
+     
+          # - bash: "make lint"
+          #   displayName: Lint
+
+          - bash: "make publish"
+            displayName: Compile Spec
+
+          - bash: 'echo "##vso[task.setvariable variable=SPEC_VERSION]$(poetry run python scripts/calculate_version.py)"'
+            displayName: Set SPEC_VERSION
+
+          # - bash: "make test"
+          #   displayName: Run Tests
+
+          - bash: "make release"
+            displayName: Build Release Package
 
           - bash: "mkdir dist"
             displayName: create dist dir
@@ -107,32 +129,11 @@ jobs:
             parameters:
                 env_vars_dir: 'dist'
 
-          - bash: "make sandbox &"
-            displayName: Start Sandbox Server
-
-          - bash: "make check-licenses"
-            displayName: Check licenses
-
-          # - bash: "make lint"
-          #   displayName: Lint
-
-          - bash: "make publish"
-            displayName: Compile Spec
-
-          - bash: 'echo "##vso[task.setvariable variable=SPEC_VERSION]$(poetry run python scripts/calculate_version.py)"'
-            displayName: Set SPEC_VERSION
-
-          # - bash: "make test"
-          #   displayName: Run Tests
-
           - task: PublishTestResults@2
             inputs:
                 testResultsFormat: 'JUnit'
                 testResultsFiles: 'newman/*.xml'
                 failTaskOnFailedTests: true
-
-          - bash: "make release"
-            displayName: Build Release Package
 
           - publish: dist/
             artifact: hello-world-$(SPEC_VERSION)+$(Build.BuildNumber)
