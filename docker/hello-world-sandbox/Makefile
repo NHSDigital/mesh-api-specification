@@ -7,7 +7,7 @@ lint:
 	npm run lint
 
 build:
-	docker build -t hello-world-sandbox .
+	docker build -t hello-world-api-sandbox .
 
 run:
-	docker run -p 9000:9000 hello-world-sandbox:latest
+	docker run -p 9000:9000 hello-world-api-sandbox:latest
