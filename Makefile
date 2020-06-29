@@ -19,7 +19,7 @@ lint:
 	npm run lint
 	cd docker/hello-world-sandbox && npm run lint && cd ..
 	poetry run flake8 **/*.py
-	find -name '*.sh' | grep -v node_modules | xargs shellcheck
+	find . -name '*.sh' | grep -v node_modules | xargs shellcheck
 
 publish:
 	npm run publish 2> /dev/null

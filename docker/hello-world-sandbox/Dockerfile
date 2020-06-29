@@ -5,8 +5,9 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm install --only=production
+RUN mkdir src
 
-COPY src/ ./
+COPY src ./src
 RUN chmod -R a+x /app
 
 USER nobody
