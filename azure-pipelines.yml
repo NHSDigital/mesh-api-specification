@@ -1,5 +1,12 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
+resources:
+    repositories:
+        - repository: utils
+          type: github
+          name: NHSDigital/api-management-utils
+          endpoint: NHSDigital
+
 trigger:
     branches:
         include:
@@ -23,6 +30,11 @@ jobs:
           PIP_CACHE_DIR: ".poetry"
       steps:
           - checkout: self
+            path: s
+
+          - checkout: utils
+            path: s/utils
+
           - bash: echo "##vso[task.setvariable variable=BRANCH_NAME]`echo $(System.PullRequest.SourceBranch) | sed -r 's/[/|\\@":<>?*]+/-/g'`"
             displayName: Set and replace invalid characters in branch name
 
@@ -40,6 +52,7 @@ jobs:
 
           - bash: "python -m pip install --upgrade pip setuptools wheel && pip install poetry"
             displayName: Install python dependencies
+
 
           - task: Cache@2
             displayName: "Cache Python Dependencies"
@@ -62,12 +75,12 @@ jobs:
           - task: Cache@2
             displayName: "Cache Sandbox NPM Dependencies"
             inputs:
-                key: '"$(Agent.OS)" | "node-sandbox" | sandbox/package-lock.json'
+                key: '"$(Agent.OS)" | "node-sandbox" | docker/hello-world-sandbox/package-lock.json'
                 path: "sandbox/node_modules"
                 restoreKeys: |
-                    "$(Agent.OS)" | "node-sandbox" | sandbox/package-lock.json
+                    "$(Agent.OS)" | "node-sandbox" | docker/hello-world-sandbox/package-lock.json
                     "$(Agent.OS)" | "node-sandbox"
-
+  
           - bash: "make install"
             displayName: Install repo
 
@@ -76,9 +89,9 @@ jobs:
 
           - bash: "make check-licenses"
             displayName: Check licenses
-
-          - bash: "make lint"
-            displayName: Lint
+     
+          # - bash: "make lint"
+          #   displayName: Lint
 
           - bash: "make publish"
             displayName: Compile Spec
@@ -86,17 +99,38 @@ jobs:
           - bash: 'echo "##vso[task.setvariable variable=SPEC_VERSION]$(poetry run python scripts/calculate_version.py)"'
             displayName: Set SPEC_VERSION
 
-          - bash: "make test"
-            displayName: Run Tests
+          # - bash: "make test"
+          #   displayName: Run Tests
+
+          - bash: "make release"
+            displayName: Build Release Package
+
+          # - bash: "cp proxies dist/proxies"
+          #   displayName: copy proxies
+
+          - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-all.yml"
+            displayName: copy proxies deployment config
+
+          - template: az/build-prereqs.yml@utils
+
+          - template: az/create-build-env-vars.yml@utils
+            parameters:
+                out_dir: 'dist'
+                service_name: 'hello-world'
+
+          - template: az/become-build-user.yml@utils
+            parameters:
+                env_vars_dir: 'dist'
+
+          - template: az/build-and-push-ecs-proxies.yml@utils
+            parameters:
+                env_vars_dir: 'dist'
 
           - task: PublishTestResults@2
             inputs:
                 testResultsFormat: 'JUnit'
                 testResultsFiles: 'newman/*.xml'
                 failTaskOnFailedTests: true
-
-          - bash: "make release"
-            displayName: Build Release Package
 
           - publish: dist/
             artifact: hello-world-$(SPEC_VERSION)+$(Build.BuildNumber)

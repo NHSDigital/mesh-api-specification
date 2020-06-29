@@ -1,3 +1,2 @@
 #!/bin/sh
 make lint
-cd sandbox && npm run lint
