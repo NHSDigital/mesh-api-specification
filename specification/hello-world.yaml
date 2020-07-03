@@ -43,7 +43,7 @@ info:
     email: api.management@nhs.net
 
 servers:
-  - url: 'https://sandbox.api.service.nhs.uk/hello'
+  - url: 'https://sandbox.api.service.nhs.uk/hello-world-master'
     description: Sandbox environment.
 
 paths:
@@ -55,9 +55,9 @@ paths:
       description: |
         Get a "Hello world!" response from an open-access endpoint.
 
-        Use this API alongside our [open-access REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#open-access-rest-api-tutorial) to learn how to connect to our APIs.
+        Use this API alongside our [open-access REST API tutorial](https://digital.nhs.uk/developer/tutorials/open-access-rest-api-tutorial) to learn how to connect to our APIs.
       responses:
-        '200':
+        '200':                                                      
           description: Successful response.
           content:
             application/json:
@@ -79,7 +79,7 @@ paths:
       description: |
         Get a "Hello application!" response from an application-restricted endpoint.
 
-        Use this API alongside our [application-restricted REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#application-restricted-rest-api-tutorial) to learn how to connect to our APIs.
+        Use this API alongside our [application-restricted REST API tutorial](https://digital.nhs.uk/developer/tutorials/application-restricted-rest-api-tutorial) to learn how to connect to our APIs.
       responses:
         '200':
           description: Successful response
@@ -111,7 +111,7 @@ paths:
       description: |
         Get a "Hello user!" response from a user-restricted endpoint.
 
-        Use this API alongside our [user-restricted REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#user-restricted-rest-api-tutorial) to learn how to connect to our APIs.
+        Use this API alongside our [user-restricted REST API tutorial](https://digital.nhs.uk/developer/tutorials/user-restricted-rest-api-tutorial) to learn how to connect to our APIs.
 
       responses:
         '200':
@@ -144,7 +144,7 @@ paths:
       description: |
         Returns an empty json response. This can be used to perform service healthcheck.
 
-        Use this API alongside our [open-access REST API tutorial](https://digital.nhs.uk/developer/api-tutorials#open-access-rest-api-tutorial) to learn how to connect to our APIs.
+        Use this API alongside our [open-access REST API tutorial](https://digital.nhs.uk/developer/tutorials/open-access-rest-api-tutorial) to learn how to connect to our APIs.
       responses:
         '200':
           description: Successful response.
