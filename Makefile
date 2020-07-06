@@ -18,7 +18,7 @@ test:
 lint:
 	npm run lint
 	cd docker/hello-world-sandbox && npm run lint && cd ..
-	poetry run flake8 **/*.py
+	poetry run flake8
 	find . -name '*.sh' | grep -v node_modules | xargs shellcheck
 
 publish:
