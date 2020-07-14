@@ -38,7 +38,8 @@ async function gotoLogin(browser, login_url) {
   await page.goto(login_url, { waitUntil: 'networkidle2'});
   await page.waitForSelector('#start');
   await page.click("#start");
-  await page.waitForSelector('#idToken1');
+  await page.waitForSelector('button[class="btn btn-lg btn-primary btn-block"]', {timeout: 30000});
+  await page.click('button[class="btn btn-lg btn-primary btn-block"]');
   return page;
 }
 
@@ -52,10 +53,6 @@ function nhsIdLogin(username, password, apigee_environment, base_url, apikey, lo
     });
 
     const page = await retry(async () => { return await gotoLogin(browser, login_url); }, 3);
-    await page.type('#idToken1', username)
-    await page.type('#idToken2', password)
-    await page.click('#loginButton_0')
-    await page.waitForNavigation()
 
     let credentialsJSON = await page.$eval('body > div > div > pre', e => e.innerText)
     let credentials = credentialsJSON.replace(/'/g, '"')
