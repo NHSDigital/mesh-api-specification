@@ -1,13 +1,5 @@
-doc = `
-API Management Postman Test Runner
-Usage:
-  test-runner.js <username> <password> <apigee_environment> <base_url> <apikey> <token_app_url>
-  test-runner.js -h | --help
-  -h --help  Show this text.
-`
-
 const fs = require('fs')
-const docopt = require('docopt').docopt
+const process = require('process')
 const puppeteer = require('puppeteer')
 
 async function retry(func, times) {
@@ -43,7 +35,13 @@ async function gotoLogin(browser, login_url) {
   return page;
 }
 
-function nhsIdLogin(username, password, apigee_environment, base_url, apikey, login_url, writeGlobals, writeEnvVariables) {
+function nhsIdLogin(writeGlobals, writeEnvVariables) {
+  const apigee_environment = process.env['APIGEE_ENVIRONMENT'];
+  const base_url = process.env['BASE_URL'];
+  const apikey = process.env['API_KEY'];
+  const login_url = process.env['IDP_URL'];
+
+
   (async () => {
     console.log('Oauth journey on ' + login_url)
 
@@ -107,18 +105,11 @@ function writeEnvVariables(base_url, apigee_environment){
   fs.writeFileSync(`e2e/environments/deploy.${apigee_environment}.postman.json`, JSON.stringify(envVariables));
 }
 
-function main(args) {
+function main() {
   nhsIdLogin(
-    args['<username>'],
-    args['<password>'],
-    args['<apigee_environment>'],
-    args['<base_url>'],
-    args['<apikey>'],
-    args['<token_app_url>'],
     writeGlobals,
     writeEnvVariables,
   )
 }
 
-args = docopt(doc)
-main(args)
+main()
