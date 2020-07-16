@@ -52,25 +52,25 @@ function collectionRunner(serviceName, environmentName, basePath, credentials) {
 function main(args) {
   const credentials = getCredentialsFromEnv()
   const serviceName = args['<service_name>']
-  const basePath = args['<base_path>'] || `/${serviceName}`
+  const basePath = args['<base_path>'] === undefined ? `/${serviceName}` : args['<base_path>'] // empty string is valid (for sandbox)
 
   collectionRunner(serviceName, args['<environment>'], basePath, credentials)
 }
 
 function getCredentialsFromEnv() {
-  const accessToken = process.env['ACCESS_TOKEN'].trim()
+  const accessToken = process.env['ACCESS_TOKEN']
   if (!accessToken) {
     throw new Error("ACCESS_TOKEN is required.")
   }
 
-  const apiKey = process.env['API_KEY'].trim()
+  const apiKey = process.env['API_KEY']
   if (!apiKey) {
     throw new Error("API_KEY is required.")
   }
 
   return {
-    accessToken,
-    apiKey
+    accessToken: accessToken.trim(),
+    apiKey: apiKey.trim()
   }
 }
 
