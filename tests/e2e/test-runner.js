@@ -52,9 +52,8 @@ function collectionRunner(serviceName, environmentName, basePath, credentials) {
 function main(args) {
   const credentials = getCredentialsFromEnv()
   const serviceName = args['<service_name>']
-  const basePath = args['<base_path>'] === undefined ? `/${serviceName}` : args['<base_path>'] // empty string is valid (for sandbox)
 
-  collectionRunner(serviceName, args['<environment>'], basePath, credentials)
+  collectionRunner(serviceName, args['<environment>'], args['<base_path>'], credentials)
 }
 
 function getCredentialsFromEnv() {

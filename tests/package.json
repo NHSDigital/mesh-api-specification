@@ -4,15 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/node e2e/test-runner.js hello-world $APIGEE_ENVIRONMENT",
-    "test:local": "ACCESS_TOKEN=dummy_token API_KEY=dummy_api_key node_modules/.bin/node e2e/test-runner.js hello-world local \"\""
+    "start": "node_modules/.bin/node e2e/test-runner.js hello-world $APIGEE_ENVIRONMENT",
+    "test:local": "ACCESS_TOKEN=dummy_token API_KEY=dummy_api_key node_modules/.bin/node e2e/test-runner.js hello-world local"
   },
   "author": "",
   "license": "(MIT OR OGL)",
   "dependencies": {
     "docopt": "^0.6.2",
     "newman": "^5.0.0",
-    "node": "^13.12.0",
-    "puppeteer": "^5.1.0"
+    "node": "^13.12.0"
   }
 }
