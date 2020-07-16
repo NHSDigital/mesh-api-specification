@@ -52,6 +52,7 @@ function nhsIdLogin(writeGlobals, writeEnvVariables) {
 
     const page = await retry(async () => { return await gotoLogin(browser, login_url); }, 3);
 
+    await page.waitForSelector('body > div > div > pre', {timeout: 30000});
     let credentialsJSON = await page.$eval('body > div > div > pre', e => e.innerText)
     let credentials = credentialsJSON.replace(/'/g, '"')
     let credentialsObject = JSON.parse(credentials)
