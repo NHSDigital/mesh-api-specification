@@ -2,12 +2,17 @@
   "id": "f936d3f4-2f37-4f56-82b1-f3d1c7505404",
   "values": [
     {
-      "key": "token",
+      "key": "basePath",
+      "value": "/hello-world",
+      "enabled": true
+    },
+    {
+      "key": "accessToken",
       "value": "dummy_token",
       "enabled": true
     },
     {
-      "key": "apikey",
+      "key": "apiKey",
       "value": "dummy_application_restricted_apikey",
       "enabled": true
     }
