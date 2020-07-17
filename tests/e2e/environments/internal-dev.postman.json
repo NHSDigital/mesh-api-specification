@@ -1,11 +1,11 @@
-  
+
 {
 	"id": "f6516e5f-26bb-45d5-a4a5-ad6e17416db5",
 	"name": "internal-dev",
 	"values": [
 	  {
-		"key": "base_url",
-		"value": "base_url",
+		"key": "baseUrl",
+		"value": "https://internal-dev.api.service.nhs.uk",
 		"enabled": true
 	  }
 	],
