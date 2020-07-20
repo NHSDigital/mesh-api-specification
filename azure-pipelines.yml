@@ -108,7 +108,7 @@ jobs:
           # - bash: "cp proxies dist/proxies"
           #   displayName: copy proxies
 
-          - bash: "for env in internal-dev-sandbox internal-dev ref sandbox; do cp ecs-proxies-deploy.yml dist/ecs-deploy-$env.yml; done"
+          - bash: "for env in internal-dev-sandbox internal-dev sandbox; do cp ecs-proxies-deploy.yml dist/ecs-deploy-$env.yml; done"
             displayName: copy proxies deployment config
 
           - template: az/build-prereqs.yml@utils
