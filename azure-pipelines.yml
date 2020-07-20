@@ -80,7 +80,7 @@ jobs:
           #       restoreKeys: |
           #           "$(Agent.OS)" | "node-sandbox" | docker/hello-world-sandbox/package-lock.json
           #           "$(Agent.OS)" | "node-sandbox"
-  
+
           - bash: "make install"
             displayName: Install repo
 
@@ -89,7 +89,7 @@ jobs:
 
           - bash: "make check-licenses"
             displayName: Check licenses
-     
+
           - bash: "make lint"
             displayName: Lint
 
@@ -108,7 +108,7 @@ jobs:
           # - bash: "cp proxies dist/proxies"
           #   displayName: copy proxies
 
-          - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-all.yml"
+          - bash: "for env in internal-dev-sandbox internal-dev ref sandbox; cp ecs-proxies-deploy.yml dist/ecs-deploy-$env.yml; done"
             displayName: copy proxies deployment config
 
           - template: az/build-prereqs.yml@utils
