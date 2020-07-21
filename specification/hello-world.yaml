@@ -43,7 +43,7 @@ info:
     email: api.management@nhs.net
 
 servers:
-  - url: 'https://sandbox.api.service.nhs.uk/hello-world-master'
+  - url: 'https://sandbox.api.service.nhs.uk/hello-world'
     description: Sandbox environment.
 
 paths:
