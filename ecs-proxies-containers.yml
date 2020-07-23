@@ -1,5 +1,8 @@
 docker_containers:
-
     - name: hello-world
       dockerfile: "docker/hello-world-sandbox/Dockerfile"
       path: "docker/hello-world-sandbox"
+
+    - name: jwk-verifier
+      dockerfile: "docker/jwk-verifier/Dockerfile"
+      path: "docker/jwk-verifier"
