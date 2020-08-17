@@ -116,7 +116,7 @@ jobs:
           - template: azure/create-build-env-vars.yml@utils
             parameters:
                 out_dir: 'dist'
-                service_name: 'hello-world'
+                service_name: 'mesh-api'
 
           - template: azure/become-build-user.yml@utils
             parameters:
@@ -133,4 +133,4 @@ jobs:
                 failTaskOnFailedTests: true
 
           - publish: dist/
-            artifact: hello-world-$(SPEC_VERSION)+$(Build.BuildNumber)
+            artifact: mesh-api-$(SPEC_VERSION)+$(Build.BuildNumber)
