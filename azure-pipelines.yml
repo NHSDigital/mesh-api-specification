@@ -105,11 +105,14 @@ jobs:
           - bash: "make release"
             displayName: Build Release Package
 
-          - bash: "cp proxies dist/proxies"
-            displayName: copy proxies
+          # - bash: "cp proxies dist/proxies"
+          #   displayName: copy proxies
 
-          - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-all.yml"
-            displayName: copy proxies deployment config
+          # - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-all.yml"
+          #   displayName: copy proxies deployment config
+
+          - bash: "for env in internal-dev-sandbox internal-qa-sandbox sandbox; do cp ecs-proxies-deploy.yml dist/ecs-deploy-$env.yml; done"
+            displayName: Copy ECS deployment config  
 
           - template: azure/build-prereqs.yml@utils
 
