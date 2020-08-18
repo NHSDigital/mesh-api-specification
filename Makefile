@@ -7,7 +7,7 @@ install-python:
 
 install-node:
 	npm install
-	cd docker/hello-world-sandbox && npm install && cd ../../tests && npm install
+	cd docker/mesh-api-sandbox && npm install && cd ../../tests && npm install
 
 install-hooks:
 	cp scripts/pre-commit .git/hooks/pre-commit
@@ -17,7 +17,7 @@ test:
 
 lint:
 	npm run lint
-	cd docker/hello-world-sandbox && npm run lint && cd ..
+	cd docker/mesh-api-sandbox && npm run lint && cd ..
 	poetry run flake8
 	find . -name '*.sh' | grep -v node_modules | xargs shellcheck
 
@@ -33,7 +33,7 @@ clean:
 
 generate-examples: publish
 	mkdir -p build/examples
-	poetry run python scripts/generate_examples.py build/hello-world.json build/examples
+	poetry run python scripts/generate_examples.py build/mesh-api.json build/examples
 
 update-examples: generate-examples
 	jq -rM . <build/examples/resources/Greeting.json >specification/components/examples/Greeting.json
@@ -64,5 +64,5 @@ release: clean publish build-proxy
 	cp -r tests dist
 
 sandbox: update-examples
-	cd docker/hello-world-sandbox && npm run start
+	cd docker/mesh-api-sandbox && npm run start
 

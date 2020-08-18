@@ -3,7 +3,7 @@
 
 docker_service:
 
-    - name: hello-world
+    - name: mesh-api
       expose: true
       environment:
         - name: NODE_ENV

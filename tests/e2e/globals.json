@@ -3,7 +3,7 @@
   "values": [
     {
       "key": "basePath",
-      "value": "/hello-world",
+      "value": "/mesh-api",
       "enabled": true
     },
     {

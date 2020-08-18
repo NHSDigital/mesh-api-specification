@@ -1,6 +1,6 @@
-# hello-world-api
+# mesh-api-api
 
-![Build](https://github.com/NHSDigital/hello-world-api/workflows/Build/badge.svg?branch=master)
+![Build](https://github.com/NHSDigital/mesh-api-api/workflows/Build/badge.svg?branch=master)
 
 This is a RESTful HL7® FHIR® API specification for the *Hello World API*.
 
@@ -12,7 +12,7 @@ This is a RESTful HL7® FHIR® API specification for the *Hello World API*.
 Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://emea-demo8-nhsdportal.apigee.io/).
 
 ## Contributing
-Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/hello-world-api/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/hello-world-api/blob/master/CODE_OF_CONDUCT.md).
+Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/mesh-api-api/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/mesh-api-api/blob/master/CODE_OF_CONDUCT.md).
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
@@ -153,7 +153,7 @@ The base url of the proxy when deployed to apigee
 
 Github uses Github actions to deploy the code to apigee. The Github action uses secrets to populate environment variables.
 You need a Github secret for each environment variable. Each of the above environment variables need an equivalent secret in Github for
-the deployment to work. These are pre-populated for you [here](https://github.com/NHSDigital/hello-world-api/settings/secrets/new). 
+the deployment to work. These are pre-populated for you [here](https://github.com/NHSDigital/mesh-api-api/settings/secrets/new). 
 If you get a 404 for this page you will need to update your Github account permissions.
 
 ### Local Deployment

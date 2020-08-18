@@ -75,10 +75,10 @@ jobs:
           # - task: Cache@2
           #   displayName: "Cache Sandbox NPM Dependencies"
           #   inputs:
-          #       key: '"$(Agent.OS)" | "node-sandbox" | docker/hello-world-sandbox/package-lock.json'
+          #       key: '"$(Agent.OS)" | "node-sandbox" | docker/mesh-api-sandbox/package-lock.json'
           #       path: "sandbox/node_modules"
           #       restoreKeys: |
-          #           "$(Agent.OS)" | "node-sandbox" | docker/hello-world-sandbox/package-lock.json
+          #           "$(Agent.OS)" | "node-sandbox" | docker/mesh-api-sandbox/package-lock.json
           #           "$(Agent.OS)" | "node-sandbox"
   
           - bash: "make install"
@@ -99,8 +99,8 @@ jobs:
           - bash: 'echo "##vso[task.setvariable variable=SPEC_VERSION]$(poetry run python scripts/calculate_version.py)"'
             displayName: Set SPEC_VERSION
 
-          - bash: "make test"
-            displayName: Run Tests
+          # - bash: "make test"
+          #   displayName: Run Tests
 
           - bash: "make release"
             displayName: Build Release Package
@@ -126,11 +126,11 @@ jobs:
             parameters:
                 env_vars_dir: 'dist'
 
-          - task: PublishTestResults@2
-            inputs:
-                testResultsFormat: 'JUnit'
-                testResultsFiles: 'newman/*.xml'
-                failTaskOnFailedTests: true
+          # - task: PublishTestResults@2
+          #   inputs:
+          #       testResultsFormat: 'JUnit'
+          #       testResultsFiles: 'newman/*.xml'
+          #       failTaskOnFailedTests: true
 
           - publish: dist/
             artifact: mesh-api-$(SPEC_VERSION)+$(Build.BuildNumber)

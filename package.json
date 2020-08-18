@@ -11,7 +11,7 @@
   },
   "author": "NHS Digital",
   "license": "(MIT OR OGL)",
-  "homepage": "https://github.com/NHSDigital/hello-world-api",
+  "homepage": "https://github.com/NHSDigital/mesh-api-api",
   "dependencies": {
     "speccy": "^0.11.0"
   },

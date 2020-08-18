@@ -1,5 +1,5 @@
 docker_containers:
 
-    - name: hello-world
-      dockerfile: "docker/hello-world-sandbox/Dockerfile"
-      path: "docker/hello-world-sandbox"
+    - name: mesh-api
+      dockerfile: "docker/mesh-api-sandbox/Dockerfile"
+      path: "docker/mesh-api-sandbox"
