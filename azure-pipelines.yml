@@ -108,29 +108,29 @@ jobs:
           # - bash: "cp proxies dist/proxies"
           #   displayName: copy proxies
 
-          - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-all.yml"
-            displayName: copy proxies deployment config
+          # - bash: "cp ecs-proxies-deploy.yml dist/ecs-deploy-all.yml"
+          #   displayName: copy proxies deployment config
 
-          - template: azure/build-prereqs.yml@utils
+          # - template: azure/build-prereqs.yml@utils
 
-          - template: azure/create-build-env-vars.yml@utils
-            parameters:
-                out_dir: 'dist'
-                service_name: 'mesh-api'
+          # - template: azure/create-build-env-vars.yml@utils
+          #   parameters:
+          #       out_dir: 'dist'
+          #       service_name: 'mesh-api'
 
-          - template: azure/become-build-user.yml@utils
-            parameters:
-                env_vars_dir: 'dist'
+          # - template: azure/become-build-user.yml@utils
+          #   parameters:
+          #       env_vars_dir: 'dist'
 
-          - template: azure/build-and-push-ecs-proxies.yml@utils
-            parameters:
-                env_vars_dir: 'dist'
+          # - template: azure/build-and-push-ecs-proxies.yml@utils
+          #   parameters:
+          #       env_vars_dir: 'dist'
 
-          - task: PublishTestResults@2
-            inputs:
-                testResultsFormat: 'JUnit'
-                testResultsFiles: 'newman/*.xml'
-                failTaskOnFailedTests: true
+          # - task: PublishTestResults@2
+          #   inputs:
+          #       testResultsFormat: 'JUnit'
+          #       testResultsFiles: 'newman/*.xml'
+          #       failTaskOnFailedTests: true
 
           - publish: dist/
             artifact: mesh-api-$(SPEC_VERSION)+$(Build.BuildNumber)
