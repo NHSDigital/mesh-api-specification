@@ -1374,7 +1374,7 @@ paths:
     get:
       operationId: mesh-address-lookup
       tags:
-        - mesh-address-lookup
+        - endpoints
       summary: MESH address lookup
       description: |
         ## Overview
