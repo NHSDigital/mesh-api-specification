@@ -1,25 +1,7 @@
 openapi: 3.0.2
 tags:
-  - name: mesh-address-lookup
-    description: MESH address lookup
-  - name: authenticate-mailbox
-    description: Authenticate a mailbox (Handshake)
-  - name: check-inbox-count
-    description: Check an inbox's count
-  - name: check-inbox
-    description: Check an inbox
-  - name: send-message
-    description: Send message
-  - name: download-message
-    description: Download message
-  - name: acknowledge-message
-    description: Acknowledge message
-  - name: send-chunked-message
-    description: Send chunked message
-  - name: download-message-chunk
-    description: Download message chunk
-  - name: outbox-tracking
-    description: Outbox tracking
+  - name: endpoints
+    description: Endpoints
 info:
   version: v1.0.168-alpha
   title: Message Exchange for Social Care and Health - REST API
@@ -45,7 +27,7 @@ paths:
     get:
       operationId: authenticate-mailbox
       tags:
-        - authenticate-mailbox
+        - endpoints
       summary: Authenticate a mailbox (Handshake)
       description: |
         ## Overview
@@ -148,7 +130,7 @@ paths:
     get:
       operationId: check-inbox-count
       tags:
-        - check-inbox-count
+        - endpoints
       summary: Check an inbox's count
       description: |
         ## Overview
@@ -240,7 +222,7 @@ paths:
     get:
       operationId: check-inbox
       tags:
-        - check-inbox
+        - endpoints
       summary: Check an inbox
       description: |-
         ## Overview
@@ -325,7 +307,7 @@ paths:
     post:
       operationId: send-message
       tags:
-        - send-message
+        - endpoints
       summary: Send message
       description: |-
         ## Overview
@@ -474,7 +456,7 @@ paths:
     get:
       operationId: download-message
       tags:
-        - download-message
+        - endpoints
       summary: Download message
       description: |-
         ## Overview
@@ -567,7 +549,7 @@ paths:
     put:
       operationId: acknowledge-message
       tags:
-        - acknowledge-message
+        - endpoints
       summary: Acknowledge message
       description: |-
         ## Overview
@@ -682,7 +664,7 @@ paths:
     post:
       operationId: send-chunked-message
       tags:
-        - send-chunked-message
+        - endpoints
       summary: Send chunked message
       description: |-
         ## Overview
@@ -853,7 +835,7 @@ paths:
     get:
       operationId: download-message-chunk
       tags:
-        - download-message-chunk
+        - endpoints
       summary: Download message chunk
       description: |
         ## Overview
@@ -1049,7 +1031,7 @@ paths:
     get:
       operationId: outbox-tracking
       tags:
-        - outbox-tracking
+        - endpoints
       summary: Outbox tracking
       description: |
         ## Overview
