@@ -1,5 +1,7 @@
 openapi: 3.0.2
 tags:
+  - name: mesh-address-lookup
+    description: MESH address lookup
   - name: authenticate-mailbox
     description: Authenticate a mailbox (Handshake)
   - name: check-inbox-count
@@ -18,8 +20,6 @@ tags:
     description: Download message chunk
   - name: outbox-tracking
     description: Outbox tracking
-  - name: mesh-address-lookup
-    description: MESH address lookup
 info:
   version: v1.0.168-alpha
   title: Message Exchange for Social Care and Health - REST API
