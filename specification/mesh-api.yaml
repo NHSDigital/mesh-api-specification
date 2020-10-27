@@ -1,7 +1,25 @@
 openapi: 3.0.2
 tags:
-  - name: message-exchange
-    description: MESH Message Exchange
+  - name: authenticate-mailbox
+    description: Authenticate a mailbox (Handshake)
+  - name: check-inbox-count
+    description: Check an inbox's count
+  - name: check-inbox
+    description: Check an inbox
+  - name: send-message
+    description: Send message
+  - name: download-message
+    description: Download message
+  - name: acknowledge-message
+    description: Acknowledge message
+  - name: send-chunked-message
+    description: Send chunked message
+  - name: download-message-chunk
+    description: Download message chunk
+  - name: outbox-tracking
+    description: Outbox tracking
+  - name: mesh-address-lookup
+    description: MESH address lookup
 info:
   version: v1.0.168-alpha
   title: Message Exchange for Social Care and Health - REST API
@@ -27,10 +45,10 @@ paths:
     get:
       operationId: authenticate-mailbox
       tags:
-        - message-exchange
+        - authenticate-mailbox
       summary: Authenticate a mailbox (Handshake)
       description: |
-        ## Authenticate a mailbox (Handshake)
+        ## Overview
         Use this endpoint to check that MESH can be reached and that the authentication you are using is correct prior to trying to send messages. This endpoint updates the details of the connection history held for the mailbox and is similar to a keep-alive or ping message, in that it allows monitoring on the Spine to be aware of the ongoing utilisation of a mailbox despite a lack of traffic.
 
         ### Request
@@ -130,10 +148,10 @@ paths:
     get:
       operationId: check-inbox-count
       tags:
-        - message-exchange
+        - check-inbox-count
       summary: Check an inbox's count
       description: |
-        ## Check an inbox's count
+        ## Overview
         Use this endpoint to check the number of messages currently held in the MESH mailbox that are ready to download.
 
         ### Request
@@ -222,10 +240,10 @@ paths:
     get:
       operationId: check-inbox
       tags:
-        - message-exchange
+        - check-inbox
       summary: Check an inbox
       description: |-
-        ## Check an inbox
+        ## Overview
         Use this endpoint to return the `messageId` of the first 500 messages in the mailbox inbox. 
 
         ### Request
@@ -307,10 +325,10 @@ paths:
     post:
       operationId: send-message
       tags:
-        - message-exchange
-      summary: Send Message
+        - send-message
+      summary: Send message
       description: |-
-        ## Send Message 
+        ## Overview
         Use this endpoint to send a message via MESH. This must be done via the POST command to your virtual outbox. The message recipient is specified in the request headers, with the message contained in the request body.
 
         ### Messages larger than 100MB
@@ -456,10 +474,10 @@ paths:
     get:
       operationId: download-message
       tags:
-        - message-exchange
+        - download-message
       summary: Download message
       description: |-
-        ## Download message
+        ## Overview
         Use this endpoint to retrieve a message based on the `messageid` obtained from the 'Check Inbox' endpoint.
 
         ### Message expiration
@@ -549,10 +567,10 @@ paths:
     put:
       operationId: acknowledge-message
       tags:
-        - message-exchange
-      summary: Acknowledge Message
+        - acknowledge-message
+      summary: Acknowledge message
       description: |-
-        ## Acknowledge Message
+        ## Overview
         Use this endpoint to acknowledge the successful download of a message. This operation:
 
           * closes the message transaction on Spine
@@ -664,10 +682,10 @@ paths:
     post:
       operationId: send-chunked-message
       tags:
-        - message-exchange
+        - send-chunked-message
       summary: Send chunked message
       description: |-
-        ## Send chunked message
+        ## Overview
         Use this endpoint to send a chunked message. The 'Send Message' endpoint has a maximum payload size of 100MB. However, it is possible to send much larger messages (up to 20GB) by breaking up the message into chunks and transmitting it over multiple requests. 
 
           **Note**: Some `workflowIDs` do not support chunking because it is not currently supported in the MESH UI and older versions of the MESH client. Check with your receiving organisation before sending messages with this endpoint. 
@@ -835,10 +853,10 @@ paths:
     get:
       operationId: download-message-chunk
       tags:
-        - message-exchange
+        - download-message-chunk
       summary: Download message chunk
       description: |
-        ## Download message chunk
+        ## Overview
         Use this endpoint to download a chunked message. The initial step is to call the 'Download Message' endpoint with the `messageId` given by the 'Check Inbox' endpoint as usual. When the message is chunked, the load message endpoint response differs in two ways:
           * the response code is '206: Partial Content' (instead of '200: OK')
           * the response headers contain Mex-Chunk-Range: 1:n
@@ -1031,10 +1049,10 @@ paths:
     get:
       operationId: outbox-tracking
       tags:
-        - message-exchange
+        - outbox-tracking
       summary: Outbox tracking
       description: |
-        ## Outbox tracking
+        ## Overview
         Use this endpoint to inquire about the status of messages sent from your outbox. 
 
         This endpoint can only be used if the request to the 'Send Message' endpoint included the optional `Mex-LocalID` header, with a value distinct from all other messages sent from the organisation mailbox.
@@ -1374,10 +1392,10 @@ paths:
     get:
       operationId: mesh-address-lookup
       tags:
-        - message-exchange
+        - mesh-address-lookup
       summary: MESH address lookup
       description: |
-        ## MESH address lookup
+        ## Overview
         Use this endpoint to search for the mailbox of the organisation you will be sending data to, using their unique [Organisation Data Service (ODS) code](https://odsportal.hscic.gov.uk/Organisation/Search), their MESH `mailboxID` and the agreed `workflowID` for the data. 
 
         An example call:
