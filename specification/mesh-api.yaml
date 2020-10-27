@@ -1,7 +1,25 @@
 openapi: 3.0.2
 tags:
-  - name: message-exchange
-    description: MESH Message Exchange
+  - name: authenticate-mailbox
+    description: Authenticate a mailbox (Handshake)
+  - name: check-inbox-count
+    description: Check an inbox's count
+  - name: check-inbox
+    description: Check an inbox
+  - name: send-message
+    description: Send message
+  - name: download-message
+    description: Download message
+  - name: acknowledge-message
+    description: Acknowledge message
+  - name: send-chunked-message
+    description: Send chunked message
+  - name: download-message-chunk
+    description: Download message chunk
+  - name: outbox-tracking
+    description: Outbox tracking
+  - name: mesh-address-lookup
+    description: MESH address lookup
 info:
   version: v1.0.168-alpha
   title: Message Exchange for Social Care and Health - REST API
@@ -27,7 +45,7 @@ paths:
     get:
       operationId: authenticate-mailbox
       tags:
-        - message-exchange
+        - authenticate-mailbox
       summary: Authenticate a mailbox (Handshake)
       description: |
         ## Overview
@@ -130,7 +148,7 @@ paths:
     get:
       operationId: check-inbox-count
       tags:
-        - message-exchange
+        - check-inbox-count
       summary: Check an inbox's count
       description: |
         ## Overview
@@ -222,7 +240,7 @@ paths:
     get:
       operationId: check-inbox
       tags:
-        - message-exchange
+        - check-inbox
       summary: Check an inbox
       description: |-
         ## Overview
@@ -307,8 +325,8 @@ paths:
     post:
       operationId: send-message
       tags:
-        - message-exchange
-      summary: Send Message
+        - send-message
+      summary: Send message
       description: |-
         ## Overview
         Use this endpoint to send a message via MESH. This must be done via the POST command to your virtual outbox. The message recipient is specified in the request headers, with the message contained in the request body.
@@ -456,7 +474,7 @@ paths:
     get:
       operationId: download-message
       tags:
-        - message-exchange
+        - download-message
       summary: Download message
       description: |-
         ## Overview
@@ -549,8 +567,8 @@ paths:
     put:
       operationId: acknowledge-message
       tags:
-        - message-exchange
-      summary: Acknowledge Message
+        - acknowledge-message
+      summary: Acknowledge message
       description: |-
         ## Overview
         Use this endpoint to acknowledge the successful download of a message. This operation:
@@ -664,7 +682,7 @@ paths:
     post:
       operationId: send-chunked-message
       tags:
-        - message-exchange
+        - send-chunked-message
       summary: Send chunked message
       description: |-
         ## Overview
@@ -835,7 +853,7 @@ paths:
     get:
       operationId: download-message-chunk
       tags:
-        - message-exchange
+        - download-message-chunk
       summary: Download message chunk
       description: |
         ## Overview
@@ -1031,7 +1049,7 @@ paths:
     get:
       operationId: outbox-tracking
       tags:
-        - message-exchange
+        - outbox-tracking
       summary: Outbox tracking
       description: |
         ## Overview
@@ -1374,7 +1392,7 @@ paths:
     get:
       operationId: mesh-address-lookup
       tags:
-        - message-exchange
+        - mesh-address-lookup
       summary: MESH address lookup
       description: |
         ## Overview
