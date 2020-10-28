@@ -82,7 +82,8 @@ info:
       --cacert 'ca.cert.pem' \
       --key 'client.key.pem' \
       --cert 'client.cert.pem' \
-      'https://localhost:8000/'```
+      'https://localhost:8000/'
+    ```
     
     ## MESH Authorization header
     The MESH API requests require an authentication token in the `HTTP` Authorization Header.
