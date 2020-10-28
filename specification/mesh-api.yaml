@@ -77,7 +77,12 @@ info:
     With the certificates in place, getting the URL should result in a Not Found error. 
     Without the certificates, you will get a TLS error.
     
-    ```curl -k \\ --cacert 'ca.cert.pem' \\ --key 'client.key.pem' \\ --cert 'client.cert.pem' \\ 'https://localhost:8000/'```
+    ```
+    curl -k \ 
+      --cacert 'ca.cert.pem' \
+      --key 'client.key.pem' \
+      --cert 'client.cert.pem' \
+      'https://localhost:8000/'```
     
     ## MESH Authorization header
     The MESH API requests require an authentication token in the `HTTP` Authorization Header.
@@ -114,7 +119,7 @@ info:
     ### Example implementation
     Here is an implementation of the above in `python3`.
     ```python 
-    \"\"\" Python code to generate a valid authorization header. \"\"\"
+    """ Python code to generate a valid authorization header. """
     import hmac
     import uuid
     import datetime from hashlib
@@ -122,27 +127,28 @@ info:
     
     AUTHSCHEMANAME = \"NHSMESH \" # Note: Space at the end of the schema.
     HMACSECRETKEY = \"[REDACTED]\" # Note: Don't hard code your passwords in a real implementation.
+    
     def buildmeshauthorizationheader(mailboxid: str, password: str = \"password\", nonce: str = None, noncecount: int = 0):
-    \t\"\"\" Generate MESH Authorization header for mailboxid. \"\"\"
-    \t# Generate a GUID if required.
-    \tif not nonce:
-    \t\tnonce = str(uuid.uuid4())
-    \t# Current time formatted as yyyyMMddHHmm
-    \t# for example, 4th May 2020 13:05 would be 202005041305
-    \ttimestamp = datetime.datetime.now().strftime(\"%Y%m%d%H%M\")
+      """ Generate MESH Authorization header for mailboxid. """
+      # Generate a GUID if required.
+      if not nonce:
+        nonce = str(uuid.uuid4())
+      # Current time formatted as yyyyMMddHHmm
+      # for example, 4th May 2020 13:05 would be 202005041305
+      timestamp = datetime.datetime.now().strftime(\"%Y%m%d%H%M\")
       
-    \t# for example, NHSMESH AMP01HC001:bd0e2bd5-218e-41d0-83a9-73fdec414803:0:202005041305
-    \thmac_msg = mailbox_id + \":\" + nonce + \":\" + str(nonce_count) + \":\" + password + \":\" + timestamp
+      # for example, NHSMESH AMP01HC001:bd0e2bd5-218e-41d0-83a9-73fdec414803:0:202005041305
+      hmac_msg = mailbox_id + ":" + nonce + ":" + str(nonce_count) + ":" + password + ":" + timestamp
       
-    \t# HMAC is a standard crypto hash method built in the python standard library.
-    \thash_code = hmac.HMAC(HMAC_SECRET_KEY.encode(), hmac_msg.encode(), sha256).hexdigest()
-    \treturn (
-    \tAUTH_SCHEMA_NAME # Note: No colon between 1st and 2nd elements.
-    \t+ mailbox_id + \":\"
-    \t+ nonce + \":\"
-    \t+ str(nonce_count) + \":\"
-    \t+ timestamp+ \":\"
-    \t+ hash_code
+      # HMAC is a standard crypto hash method built in the python standard library.
+      hash_code = hmac.HMAC(HMAC_SECRET_KEY.encode(), hmac_msg.encode(), sha256).hexdigest()
+      return (
+        AUTH_SCHEMA_NAME # Note: No colon between 1st and 2nd elements.
+        + mailbox_id + ":"
+        + nonce + ":"
+        + str(nonce_count) + ":"
+        + timestamp+ ":"
+        + hash_code
     )
     ```
     
