@@ -66,7 +66,9 @@ info:
     
     With the example RESTful mesh client installed, you can run the mock server with; 
     
-    ```python3 -m mesh_client.mock_server```
+    ```
+    python3 -m mesh_client.mock_server
+    ```
     
     The client TLS certificates which you need to connect to the mock server are in the python library. You can either copy them from the python library directory to your working directory, or download them from here: 
     
@@ -126,10 +128,10 @@ info:
     import datetime from hashlib
     import sha256
     
-    AUTHSCHEMANAME = \"NHSMESH \" # Note: Space at the end of the schema.
-    HMACSECRETKEY = \"[REDACTED]\" # Note: Don't hard code your passwords in a real implementation.
+    AUTHSCHEMANAME = "NHSMESH " # Note: Space at the end of the schema.
+    HMACSECRETKEY = "[REDACTED]" # Note: Don't hard code your passwords in a real implementation.
     
-    def buildmeshauthorizationheader(mailboxid: str, password: str = \"password\", nonce: str = None, noncecount: int = 0):
+    def buildmeshauthorizationheader(mailboxid: str, password: str = "password", nonce: str = None, noncecount: int = 0):
       """ Generate MESH Authorization header for mailboxid. """
       # Generate a GUID if required.
       if not nonce:
