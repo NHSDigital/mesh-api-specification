@@ -2,4 +2,7 @@ type: object
 properties:
   message:
     type: string
-    example: "Hello user!"
+    example: Hello user!
+x-examples:
+  example-1:
+    message: 'Hello, world!'
