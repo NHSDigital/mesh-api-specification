@@ -8,48 +8,48 @@ info:
   description: |
     ## Overview
     Use this API to securely transfer healthcare data between organisations using the [Message Exchange for Social Care and Health (MESH)](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh), which is a component of [Spine](https://digital.nhs.uk/services/spine).
-    
+
     You can interact with MESH via a virtual mailbox, only accessible by your organisation. Incoming messages appear in the `inbox` section of the mailbox. To send a message, place it in the `outbox` section of your mailbox. Outgoing messages are tagged with the receiving organisation's `mailboxID`. Spine then delivers the message to the receiving organisation's `mailbox` inbox.
     In addition to the sender and receiver `mailboxID's` you must also include a `workflowID` label in each message. MESH provides all the `workflowID` codes, as they identify what type of data the message contains. This helps the receiving organisation process the data after they receive it (For example, the receiver may process X-ray images very differently from blood test results).
     There is a Java based MESH client you can use to access MESH, which calls the RESTful MESH API under the hood. If you want a more tightly knitted interface with MESH you can also call the MESH API directly in your applications.
-    
+
     This guide documents the MESH API endpoints and describes how they should be used.
-    
+
     ## Legal Use
     This API can only be used where there is a legal basis to do so. You should make an access request before you go too far with your development.
-    
+
     You must have made this request before you can go live (see 'Onboarding' below).
-    
+
     ## Prerequisites
     You must [register with MESH](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox) to use the API. As part your registration, we will provide you with these items:
       - MESH mailbox (with a unique ID and password)
       - client Transport Layer Security (TLS) certificates
       - environment shared secret
       - list of workflow IDs to identify types of messages your organisation will send and receive
-    
+
     ## Related APIs
     None.
-    
+
     ## API Status and Roadmap
     This API is currently [live](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status).
-    
+
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/suggestions/127790/message-exchange-for-social-care-and-health-rest-api).
-    
+
     ## Technology
     This API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#basic-rest).
-    
+
     ## Network access
     This API is available on the internet and, indirectly, on the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
-    
+
     To use this API with NHS smartcards (see below) you do need a HSCN connection, although internet facing alternatives are available.
-    
+
     For more details see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
-    
+
     ## Environments and Testing
     There are several independent, externally accessible instances of MESH for use by parties external to NHS Digital for testing, each with a different root URL.
-    
+
     Some environments require a connection to the [HSCN network](https://digital.nhs.uk/services/health-and-social-care-network).
-    
+
     | Purpose       | URL                                       | HSCN required |
     | ------------- | ----------------------------------------- | ------------- |
     | Development   | `https://nww.dev.spine2.ncrs.nhs.uk/`     | Yes |
@@ -58,27 +58,27 @@ info:
     | Deployment    | `https://nww.dep.spine2.ncrs.nhs.uk/`     | Yes |
     | Production    | `https://mesh-sync.national.ncrs.nhs.uk/` | Yes |
     | Production    | `https://mesh.spineservices.nhs.uk`       | No  |
-    
+
     **Note** - each environment has the same shared secret but requires different client TLS certificates.
-    
+
     ## Develop against a local MESH sandbox server 
     Here is an existing example of a RESTful interface on [Github](https://github.com/NHSDigital/mesh-client). This python client also contains a mock MESH server which you can run locally without any real MESH credentials.
-    
+
     With the example RESTful mesh client installed, you can run the mock server with; 
-    
+
     ```
     python3 -m mesh_client.mock_server
     ```
-    
+
     The client TLS certificates which you need to connect to the mock server are in the python library. You can either copy them from the python library directory to your working directory, or download them from here: 
-    
+
     -   client.cert.pem
     -   client.key.pem
     -   ca.cert.pem
-    
+
     With the certificates in place, getting the URL should result in a Not Found error. 
     Without the certificates, you will get a TLS error.
-    
+
     ```
     curl -k \ 
       --cacert 'ca.cert.pem' \
@@ -86,14 +86,14 @@ info:
       --cert 'client.cert.pem' \
       'https://localhost:8000/'
     ```
-    
+
     ## MESH Authorization header
     The MESH API requests require an authentication token in the `HTTP` Authorization Header.
     To be valid, the authorization tokens must match the schema described below. The token includes cryptographic hashes of your organisation's MESH mailbox password and the environment-wide shared secret. 
     As an additional security measure each token which matches the schema is valid for one request only, so a new token must be generated for every request. Any repeated use of a token will result in a `403: Not Authorized` response from the MESH server.
-    
+
     The Authorization token is made up of six elements. With the exception of the first and second elements, each element is separated from the next by a colon, `:`.
-    
+
     | Name          | Description                                       |
     | ------------- | ------------------------------------------------- |
     | `NHSMESH` | The name of the Custom Authentication Schema. The Authentication Header should prefix the generated authentication token. The space at the end of the schema is important |
@@ -102,9 +102,9 @@ info:
     | `nonce_count` | The number of times that the same `Nonce` has been used |
     | `timestamp` | The current date and time in `yyyyMMddHHmm` format |
     | `hash` | `HMAC-SHA256` hash see the list below |
-    
+
     The `hash` is compiled of the following items:
-    
+
     * The `key` is the MESH environment shared secret
     * The `message` is the concatenation of the 5 following elements, joined by ':'
       - `mailbox_id` - same as element 2
@@ -112,13 +112,13 @@ info:
       - `nonce_count` - same as element 4
       - `mailbox_password` - The password for the MESH Mailbox
       - `timestamp` - same as element 5
-    
+
     Changing the `nonce` and/or `nonce_count` elements between requests ensures the Authorization header is unique and valid. 
 
     **Notes**
     - the server will reject the request if the `timestamp` supplied is not within 2 hours of the server time
     - in the example below `HMACSECRETKEY` has been `[REDACTED]`, this is the 'environment shared secret' which you received as part of creating your mailbox
-    
+
     ### Example implementation
     Here is an implementation of the above in `python3`.
     ```python 
@@ -127,10 +127,10 @@ info:
     import uuid
     import datetime from hashlib
     import sha256
-    
+
     AUTHSCHEMANAME = "NHSMESH " # Note: Space at the end of the schema.
     HMACSECRETKEY = "[REDACTED]" # Note: Don't hard code your passwords in a real implementation.
-    
+
     def buildmeshauthorizationheader(mailboxid: str, password: str = "password", nonce: str = None, noncecount: int = 0):
       """ Generate MESH Authorization header for mailboxid. """
       # Generate a GUID if required.
@@ -154,37 +154,38 @@ info:
         + hash_code
     )
     ```
-    
+
     ## MESH API pseudocode
     Here is the flow of API calls you should make to use MESH effectively:
-    
+
     - inbox poll cycle
     - outbox workflow
-    
+
     ### Inbox poll cycle
     Spine gives each message a unique `messageID` after you post it to your outbox. It is the primary identifier for the message during MESH transit.
-    
+
     You should poll mailboxes at most every 5 minutes, but at least every 24 hours. The pseudo code for a mailbox's poll is:
-    
+
     1. Handshake with MESH.
     2. Get the number of messages in the inbox from the Inbox count endpoint.
     3. Get the messageId of the first 500 messages from the Inbox endpoint.
+        * if you receive exactly 500 messages then you should poll again to receive more, untill you receive less then 500 
     4. For `messageID` from step 3, you should:
         * download the message from the Download message endpoint
         * if identified as a chunked message, download all remaining chunks from the Download message chunk endpoint
         * acknowledge receipt of the message via the Acknowledge message endpoint
     5. Repeat step 4 until you have processed the number of messages returned in step 2.
-    
+
     ### Asynchronous error reporting
     Most problems with message transfer are indicated synchronously (that is immediately) when the 'Send Message' endpoint is called. However, it is possible that some errors may occur after a successful request (that is, asynchronously). Such asynchronous errors are reported to the sending organisation as messages in their inbox to be accessed as part of the inbox poll cycle.
     Error reports differ from regular messages in these ways:
     - the Download message endpoint will have a different value for the Mex-Messagetype header
-    - data for a regular organisation-to-organisation message
-    - report for an error report
+      * DATA for a regular organisation-to-organisation message
+      * REPORT for an error report
     - the Download message response body of an error report message is empty
-    
+
     We strongly recommend that you check the value of `Mex-Messagetype` after downloading each message so that you can take appropriate follow up action if needed.
-    
+
     | Error Report Header       | Description                                       |
     | ------------------------- | ------------------------------------------------- |
     | `Mex-Statusevent`        | Step in the MESH server side process when the error occurred |
@@ -199,33 +200,36 @@ info:
     | `Mex-To`                 | Intended receiver of the undelivered message |
     | `Mex-Messagetype`        | REPORT |
     | `Mex-Subject`            | The subject of the undelivered message |
-    
-    
+
+
     ### Outbox Workflow
     The maximum amount of data allowed by MESH in a single request message is 100MB (50MB over Internet, 100MB over HSCN). The MESH API allows larger messages to be sent by breaking the message into \"chunks\" that are transmitted as a single message over multiple requests. The upper limit of a single chunked message is 20GB.
-    
-    **Note**: the [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. It is prudent to ensure that the receiver's interface to MESH for your `workflowId` handles chunked messages prior to sending. To do this:
-    
+
+    The [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. It is prudent to ensure that the receiver's interface to MESH for your `workflowId` handles chunked messages prior to sending. To do this:
+
     1. Handshake with MESH.
     2. If you wish to enable outbox tracking, create an alphanumeric `localId` that is unique among messages sent from your outbox.
     3. Determine the size of your message data (after compression) with a standard algorithm (such as `gzip`). If the compressed message is larger than 100MB, smaller than 20GB, and the receiving mailbox / `workflowId` supports chunking, then you can send a chunked message. To prepare for this: 
-        *  split the **uncompressed** data into ordered chunks - do this by using the split command Linux
+        *  split the **uncompressed** data into ordered chunks - do this in your code by using the split command in Linux for example
         * **independently** compress each chunk with the **same** compression algorithm (such as `gzip`) such that each chunk is smaller than 100MB
         * use the first chunk (after compression) as the initial message data
     4. Send a message with appropriate `workflowId`, `receiver` & `mailboxId`. To do this:
         * optionally include `localId` from step 2 for tracking
         * if sending a chunked message, include an extra header to indicate that this is the first in a series of chunks, then submit the subsequent chunks via the 'Send Chunked Message' endpoint
     5. If you included a `localId` with your message you may poll the 'Outbox Tracking' endpoint, which will indicate when the receiver has acknowledged the message after download.
-    
+
     ## Onboarding
     You need to get your software approved by us before it can go live with this API. We call this onboarding. The onboarding process can sometimes be quite long, so it's worth planning well ahead.
-    
+
     - request a mailbox using the [request form](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
     - read carefully so you understand [how to request your certificate](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/certificate-guidance#)
     - send your business use case to [sa.servicedesk@nhs.net](mailto:sa.servicedesk@nhs.net)
     - upon receiving the TOM (Target Operating Model) fill in and return to [sa.servicedesk@nhs.net](mailto:sa.servicedesk@nhs.net)
     - your integration will now be certificated by Solutions Assurance and ready to publish
     - any other queries please contact us via our support mailbox; [api.management@nhs.net](mailto:api.management@nhs.net)
+
+    ### Information
+    'Try this now' feature on the below endpoints are currently unavailable and awaiting removal.
   contact:
     name: API Management Support
     email: api.management@nhs.net
@@ -266,7 +270,7 @@ paths:
             --header 'Mex-OSArchitecture: x86_64' \
             --header 'Mex-OSName: Linux' \
             --header 'Mex-OSVersion: #44~18.04.2-Ubuntu' \
-            https://mesh.spineservices.nhs.uk//messageexchange/X26HC005
+            https://mesh.spineservices.nhs.uk/messageexchange/X26HC005
           ```
 
         ### Response
@@ -310,6 +314,16 @@ paths:
           example: '#44~18.04.2-Ubuntu'
           schema:
             type: string
+        - schema:
+            type: string
+          in: header
+          description: '{Operating System Architecture}'
+          name: Mex-OSArchitecture
+        - schema:
+            type: string
+          in: header
+          name: Mex-JavaVersion
+          description: '{JVM Version Number}'
       responses:
         '200':
           description: OK
@@ -590,9 +604,9 @@ paths:
           schema:
             type: string
         - in: header
-          name: Mex-Filename
+          name: Mex-FileName
           required: true
-          description: File name
+          description: '{Original File Name}'
           example: '{Message content should have this file name after receipt}'
           schema:
             type: string
@@ -611,12 +625,68 @@ paths:
           schema:
             type: string
         - in: header
-          name: Mex-workflowid
+          name: Mex-WorkflowID
           required: true
-          description: Workflow ID
+          description: Identifies the Business Workflow associated with the message
           example: '{Workflow ID}'
           schema:
             type: string
+        - schema:
+            type: string
+          in: header
+          name: Mex-Chunk-Range
+          description: '1:{n} {if first of n chunks, see Send chunked message}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-Content-Compress
+          description: Flag to indicate that the contents have been automically compressed by the client using GZip compression
+        - schema:
+            type: string
+          in: header
+          name: Mex-Content-Encrypted
+          description: '{Indicate to the receiver that contents are encrypted}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-Localid
+          description: '{A unique ID generated by you to track the message}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-Processid
+          description: '{Currently disabled}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-Subject
+          description: '{Subject line for message to SMTP MESH mailboxes}'
+        - schema:
+            type: string
+          in: header
+          name: Content-Encoding
+          description: Algorithm used to compress the file e.g. 'gzip'
+        - schema:
+            type: string
+          in: header
+          name: Mex-MessageType
+          required: true
+          description: DATA
+        - schema:
+            type: string
+          in: header
+          name: Mex-ProcesslID
+          description: '{Local process identifer}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-ProcessID
+          description: DTS Process ID
+        - schema:
+            type: string
+          in: header
+          name: mex-Content-Checksum
+          description: Checksum of the original file contents
       responses:
         '202':
           description: Accepted
@@ -694,7 +764,7 @@ paths:
             --key 'mesh-client-key.pem' \
             --cert 'mesh-client-cert.pem' \
             --header 'Authorization: NHSMESH X26HC005:2942264f-46e5-450f-90fc-22a0c09efa37:0:202006041718:bba1c9550e6ce5f2fff2c98712b27c4bf7f8b8bf9dfda3f52e27e6db71dd8f9d' \
-            https://mesh.spineservices.nhs.uk//messageexchange/X26HC005/inbox
+            https://msg.int.spine2.ncrs.nhs.uk/messageexchange/recipient/inbox/messageID
           ```
 
         ### Response
@@ -778,8 +848,7 @@ paths:
           * closes the message transaction on Spine
           * removes the message from your mailbox inbox (which means that the `messageId` will not appear in subsequent calls to the Check Inbox endpoint)
           
-          The sender organisation can see this acknowledgement on future polls of the Outbox tracking endpoint. If you fail to acknowledge a message after five days in the inbox this will result in an error.
-
+          The sender organisation can see this acknowledgement on future polls of the Outbox tracking endpoint. If you fail to acknowledge a message after five days in the inbox this will result in a non delivery report to the senders inbox.
           
         ### Request
 
@@ -801,6 +870,8 @@ paths:
         ```
           
         ### Example error report
+        The Response Body is the binary contents of the message. If the message is an error report, the body will be empty.
+
         If you do not acknowledge a message after 5 days this is considered "not collected" and removed from the inbox (see Message expiration). At this point an error report like the example below is sent to the sender organisation.
 
         ```shell
@@ -810,8 +881,9 @@ paths:
         At this point the sender may contact you by other means to arrange a re-send of the data. The message is not truly deleted on Spine for 30 days after delivery (25 days after the error report). If the sending organisation cannot re-send the data, it can also contact the [NHS Digital national service desk](https://digital.nhs.uk/developer/help-and-support) with the details in the error report and request for the message to be placed in your inbox again.
 
         ### Error codes
+        Some of the below errors are only applicable for some API calls. For example, error code 15 would only be found when calling 'Child Protection Information Services' (CP-IS).
 
-        | Error code       | Typical description                    |
+        | Error code    | Typical description                       |
         | ------------- | ----------------------------------------- |
         | 02       | Data file is missing or inaccessible |
         | 06       | Malformed control file |
