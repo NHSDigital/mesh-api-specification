@@ -169,6 +169,7 @@ info:
     1. Handshake with MESH.
     2. Get the number of messages in the inbox from the Inbox count endpoint.
     3. Get the messageId of the first 500 messages from the Inbox endpoint.
+        * if you receive exactly 500 messages then you should poll again to receive more, untill you receive less then 500 
     4. For `messageID` from step 3, you should:
         * download the message from the Download message endpoint
         * if identified as a chunked message, download all remaining chunks from the Download message chunk endpoint
@@ -179,8 +180,8 @@ info:
     Most problems with message transfer are indicated synchronously (that is immediately) when the 'Send Message' endpoint is called. However, it is possible that some errors may occur after a successful request (that is, asynchronously). Such asynchronous errors are reported to the sending organisation as messages in their inbox to be accessed as part of the inbox poll cycle.
     Error reports differ from regular messages in these ways:
     - the Download message endpoint will have a different value for the Mex-Messagetype header
-    - data for a regular organisation-to-organisation message
-    - report for an error report
+      * DATA for a regular organisation-to-organisation message
+      * REPORT for an error report
     - the Download message response body of an error report message is empty
 
     We strongly recommend that you check the value of `Mex-Messagetype` after downloading each message so that you can take appropriate follow up action if needed.
@@ -204,12 +205,12 @@ info:
     ### Outbox Workflow
     The maximum amount of data allowed by MESH in a single request message is 100MB (50MB over Internet, 100MB over HSCN). The MESH API allows larger messages to be sent by breaking the message into \"chunks\" that are transmitted as a single message over multiple requests. The upper limit of a single chunked message is 20GB.
 
-    **Note**: the [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. It is prudent to ensure that the receiver's interface to MESH for your `workflowId` handles chunked messages prior to sending. To do this:
+    The [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. It is prudent to ensure that the receiver's interface to MESH for your `workflowId` handles chunked messages prior to sending. To do this:
 
     1. Handshake with MESH.
     2. If you wish to enable outbox tracking, create an alphanumeric `localId` that is unique among messages sent from your outbox.
     3. Determine the size of your message data (after compression) with a standard algorithm (such as `gzip`). If the compressed message is larger than 100MB, smaller than 20GB, and the receiving mailbox / `workflowId` supports chunking, then you can send a chunked message. To prepare for this: 
-        *  split the **uncompressed** data into ordered chunks - do this by using the split command Linux
+        *  split the **uncompressed** data into ordered chunks - do this in your code by using the split command in Linux for example
         * **independently** compress each chunk with the **same** compression algorithm (such as `gzip`) such that each chunk is smaller than 100MB
         * use the first chunk (after compression) as the initial message data
     4. Send a message with appropriate `workflowId`, `receiver` & `mailboxId`. To do this:
@@ -269,7 +270,7 @@ paths:
             --header 'Mex-OSArchitecture: x86_64' \
             --header 'Mex-OSName: Linux' \
             --header 'Mex-OSVersion: #44~18.04.2-Ubuntu' \
-            https://mesh.spineservices.nhs.uk//messageexchange/X26HC005
+            https://mesh.spineservices.nhs.uk/messageexchange/X26HC005
           ```
 
         ### Response
@@ -313,6 +314,16 @@ paths:
           example: '#44~18.04.2-Ubuntu'
           schema:
             type: string
+        - schema:
+            type: string
+          in: header
+          description: '{Operating System Architecture}'
+          name: Mex-OSArchitecture
+        - schema:
+            type: string
+          in: header
+          name: Mex-JavaVersion
+          description: '{JVM Version Number}'
       responses:
         '200':
           description: OK
@@ -593,9 +604,9 @@ paths:
           schema:
             type: string
         - in: header
-          name: Mex-Filename
+          name: Mex-FileName
           required: true
-          description: File name
+          description: '{Original File Name}'
           example: '{Message content should have this file name after receipt}'
           schema:
             type: string
@@ -614,12 +625,68 @@ paths:
           schema:
             type: string
         - in: header
-          name: Mex-workflowid
+          name: Mex-WorkflowID
           required: true
-          description: Workflow ID
+          description: Identifies the Business Workflow associated with the message
           example: '{Workflow ID}'
           schema:
             type: string
+        - schema:
+            type: string
+          in: header
+          name: Mex-Chunk-Range
+          description: '1:{n} {if first of n chunks, see Send chunked message}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-Content-Compress
+          description: Flag to indicate that the contents have been automically compressed by the client using GZip compression
+        - schema:
+            type: string
+          in: header
+          name: Mex-Content-Encrypted
+          description: '{Indicate to the receiver that contents are encrypted}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-Localid
+          description: '{A unique ID generated by you to track the message}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-Processid
+          description: '{Currently disabled}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-Subject
+          description: '{Subject line for message to SMTP MESH mailboxes}'
+        - schema:
+            type: string
+          in: header
+          name: Content-Encoding
+          description: Algorithm used to compress the file e.g. 'gzip'
+        - schema:
+            type: string
+          in: header
+          name: Mex-MessageType
+          required: true
+          description: DATA
+        - schema:
+            type: string
+          in: header
+          name: Mex-ProcesslID
+          description: '{Local process identifer}'
+        - schema:
+            type: string
+          in: header
+          name: Mex-ProcessID
+          description: DTS Process ID
+        - schema:
+            type: string
+          in: header
+          name: mex-Content-Checksum
+          description: Checksum of the original file contents
       responses:
         '202':
           description: Accepted
@@ -781,7 +848,7 @@ paths:
           * closes the message transaction on Spine
           * removes the message from your mailbox inbox (which means that the `messageId` will not appear in subsequent calls to the Check Inbox endpoint)
           
-          The sender organisation can see this acknowledgement on future polls of the Outbox tracking endpoint. If you fail to acknowledge a message after five days in the inbox this will result in an error.
+          The sender organisation can see this acknowledgement on future polls of the Outbox tracking endpoint. If you fail to acknowledge a message after five days in the inbox this will result in a non delivery report to the senders inbox.
           
         ### Request
 
@@ -851,157 +918,6 @@ paths:
           example: MAILBOX01
           schema:
             type: string
-        - schema:
-            type: string
-          in: header
-          name: Content-Encoding
-          description: 'gzip {if response body is gzipped}'
-        - schema:
-            type: string
-          in: header
-          name: Content-Length
-          required: true
-          description: '{Length of the message}'
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          description: application/octet-stream
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Etag
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Mex-Addresstype
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Mex-Chunk-Range
-          description: '1:{n} {where we just downloaded first of chunks, see Download message chunk}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Content-Compress
-          description: Value of Mex-Content-Compress supplied by sender
-        - schema:
-            type: string
-          in: header
-          name: Mex-Content-Compressed
-          description: 'N {if response body is NOT gzipped}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Content-Encrypted
-          description: '{Value of Mex-Content-Encrypted supplied by sender}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Filename
-          required: true
-          description: '{Value of Mex-Filename supplied by sender}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-From
-          required: true
-          description: '{Mailbox ID of sending organisation}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Fromsmtp
-          required: true
-          description: '{SMTP address of the sender''s mailbox}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Linkedmsgid
-          description: '{see Asynchronous error reporting}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Localid
-          description: '{Value of Mex-Localid supplied by sender}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Messageid
-          required: true
-          description: '{Unique message ID}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Messagetype
-          required: true
-          description: '{see Asynchronous error reporting}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Processid
-          description: '{Value of Mex-ProcessID supplied by sender}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Statuscode
-          required: true
-          description: '{see Asynchronous error reporting}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Statusdescription
-          required: true
-          description: '{see Asynchronous error reporting}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Statusevent
-          required: true
-          description: '{see Asynchronous error reporting}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Statussuccess
-          description: 'SUCCESS or ERROR {see Asynchronous error reporting}'
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Mex-Statustimestamp
-          required: true
-          description: '{see Asynchronous error reporting}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Subject
-          description: '{Value of Mex-Subject provided by the sender}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-To
-          required: true
-          description: '{Mailbox ID of receiving organisation}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Tosmtp
-          required: true
-          description: '{SMTP address associated with receiving Mailbox ID}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Version
-          required: true
-          description: '{Client version}'
-        - schema:
-            type: string
-          in: header
-          name: Mex-Workflowid
-          required: true
-          description: '{Value of Mex-Workflowid supplied by sender}'
       responses:
         '200':
           description: OK
