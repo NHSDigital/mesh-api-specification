@@ -246,6 +246,9 @@ servers:
     description: Production
   - url: 'https://mesh.spineservices.nhs.uk'
     description: Production
+x-spec-publication:
+  try-this-api:
+    disabled: true
 paths:
   '/messageexchange/{mailboxID}':
     get:
