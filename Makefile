@@ -19,7 +19,7 @@ lint:
 	npm run lint
 	cd docker/mesh-api-sandbox && npm run lint && cd ..
 	poetry run flake8
-	find . -name '*.sh' | grep -v node_modules | xargs shellcheck
+	
 
 publish:
 	npm run publish 2> /dev/null
