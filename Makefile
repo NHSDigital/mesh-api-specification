@@ -64,7 +64,6 @@ release: clean publish build-proxy
 	done
 
 	cp -r build/. dist
-	cp -r api_tests dist
 	cp -r tests dist
 
 # release: clean publish build-proxy
