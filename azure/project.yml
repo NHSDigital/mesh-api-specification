@@ -2,4 +2,6 @@ variables:
   service_name: mesh-api-specification
   service_base_path: mesh-api-specification
   short_service_name: mesh-api-specification
+  product_display_name: MESH Api Specification
+  product_description: MESH Api Specification
   spec_file: mesh-api.json
