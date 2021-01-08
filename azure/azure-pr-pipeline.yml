@@ -12,7 +12,7 @@ resources:
 
   pipelines:
   - pipeline: build_pipeline
-    source: "MESH-Api-Specification-Build"
+    source: "MESH-Api-Build"
     trigger:
       branches:
         exclude:
@@ -21,7 +21,7 @@ resources:
           - refs/tags/v*
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'AWS-ECS'
 
 variables:
   - template: project.yml
@@ -39,6 +39,3 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         make_spec_visible: true
-        post_deploy:
-            parameters:
-              service_name: ${{ variables.service_name }}
