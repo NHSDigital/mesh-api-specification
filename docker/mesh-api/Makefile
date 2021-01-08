@@ -7,7 +7,7 @@ lint:
 	npm run lint
 
 build:
-	docker build -t mesh-api-sandbox .
+	docker build -t mesh-api .
 
 run:
-	docker run -p 9000:9000 mesh-api-sandbox:latest
+	docker run -p 9000:9000 mesh-api:latest

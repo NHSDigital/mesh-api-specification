@@ -7,7 +7,7 @@ install-python:
 
 install-node:
 	npm install
-	cd docker/mesh-api-sandbox && npm install && cd ../../tests && npm install
+	cd docker/mesh-api && npm install && cd ../../tests && npm install
 
 install-hooks:
 	cp scripts/pre-commit .git/hooks/pre-commit
@@ -17,7 +17,7 @@ test:
 
 lint:
 	npm run lint
-	cd docker/mesh-api-sandbox && npm run lint && cd ..
+	cd docker/mesh-api && npm run lint && cd ..
 	poetry run flake8
 	
 
@@ -75,5 +75,5 @@ release: clean publish build-proxy
 # 	cp -r tests dist
 
 sandbox: update-examples
-	cd docker/mesh-api-sandbox && npm run start
+	cd docker/mesh-api && npm run start
 
