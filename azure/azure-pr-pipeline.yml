@@ -13,7 +13,7 @@ resources:
 
   pipelines:
   - pipeline: build_pipeline
-    source: "MESH-Api-Build"
+    source: "MESH-Api-Specification-Build"
     trigger:
       branches:
         exclude:
