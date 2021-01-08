@@ -1,0 +1,5 @@
+variables:
+  service_name: mesh-api-specification
+  service_base_path: mesh-api-specification
+  short_service_name: mesh-api-specification
+  spec_file: mesh-api.json
