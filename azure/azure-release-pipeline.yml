@@ -13,7 +13,7 @@ resources:
 
   pipelines:
   - pipeline: build_pipeline
-    source: "MESH-Api-Specification-Build"
+    source: "MESH-API-Specification-Build"
     trigger:
       branches:
         include:
@@ -38,11 +38,7 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         make_spec_visible: true
-        post_deploy:
-              parameters:
-                  service_name: ${{ variables.service_name }}
       - environment: int
         make_spec_visible: true
-        post_deploy:
-              parameters:
-                  service_name: ${{ variables.service_name }}
+        depends_on:
+            - internal_dev
