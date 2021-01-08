@@ -1,5 +1,5 @@
 docker_containers:
 
     - name: mesh-api
-      dockerfile: "docker/mesh-api-sandbox/Dockerfile"
-      path: "docker/mesh-api-sandbox"
+      dockerfile: "docker/mesh-api/Dockerfile"
+      path: "docker/mesh-api"

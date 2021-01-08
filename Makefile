@@ -7,7 +7,7 @@ install-python:
 
 install-node:
 	npm install
-	cd docker/mesh-api-sandbox && npm install && cd ../../tests && npm install
+	cd docker/mesh-api && npm install && cd ../../tests && npm install
 
 install-hooks:
 	cp scripts/pre-commit .git/hooks/pre-commit
@@ -17,9 +17,9 @@ test:
 
 lint:
 	npm run lint
-	cd docker/mesh-api-sandbox && npm run lint && cd ..
+	cd docker/mesh-api && npm run lint && cd ..
 	poetry run flake8
-	find . -name '*.sh' | grep -v node_modules | xargs shellcheck
+	
 
 publish:
 	npm run publish 2> /dev/null
@@ -59,10 +59,20 @@ build-proxy:
 release: clean publish build-proxy
 	mkdir -p dist
 	tar -zcvf dist/package.tar.gz build
-	cp -r terraform dist
+	for env in internal-dev int; do \
+			cp ecs-proxies-deploy.yml dist/ecs-deploy-$$env.yml; \
+	done
+
 	cp -r build/. dist
 	cp -r tests dist
 
+# release: clean publish build-proxy
+# 	mkdir -p dist
+# 	tar -zcvf dist/package.tar.gz build
+# 	cp -r terraform dist
+# 	cp -r build/. dist
+# 	cp -r tests dist
+
 sandbox: update-examples
-	cd docker/mesh-api-sandbox && npm run start
+	cd docker/mesh-api && npm run start
 
