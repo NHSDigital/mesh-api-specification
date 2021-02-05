@@ -382,7 +382,7 @@ paths:
               --key 'mesh-client-key.pem' \
               --cert 'mesh-client-cert.pem' \
               --header 'Authorization: NHSMESH X26HC005:9869b5a0-a3f0-488f-b03b-ee924b687b4a:0:202006041718:f06b35e5f1bd4274564948478aec96c0f2d0efbb602cfaec006b1a9365fc45fb' \
-              https://mesh.spineservices.nhs.uk//messageexchange/X26HC005/count 
+              https://mesh.spineservices.nhs.uk/messageexchange/X26HC005/count 
           ```
          ### Response
          
