@@ -382,7 +382,7 @@ paths:
               --key 'mesh-client-key.pem' \
               --cert 'mesh-client-cert.pem' \
               --header 'Authorization: NHSMESH X26HC005:9869b5a0-a3f0-488f-b03b-ee924b687b4a:0:202006041718:f06b35e5f1bd4274564948478aec96c0f2d0efbb602cfaec006b1a9365fc45fb' \
-              https://mesh.spineservices.nhs.uk//messageexchange/X26HC005/count 
+              https://mesh.spineservices.nhs.uk/messageexchange/X26HC005/count 
           ```
          ### Response
          
@@ -474,7 +474,7 @@ paths:
             --key 'mesh-client-key.pem' \
             --cert 'mesh-client-cert.pem' \
             --header 'Authorization: NHSMESH X26HC005:66eef28b-e097-421d-998d-ea0c92c2c2fb:0:202006041718:60e25fb4c6b400d7e3dfa901b68715b2fda4cfbcd27b8bff3d21dbaae06a65d5' \
-            https://mesh.spineservices.nhs.uk//messageexchange/X26HC005/inbox
+            https://mesh.spineservices.nhs.uk/messageexchange/X26HC005/inbox
           ```
 
           
@@ -576,7 +576,7 @@ paths:
               --header 'Mex-FileName: None' \
               --header 'Mex-LocalID: api-docs-bob-greets-alice' \
               --data 'This is a message' \
-              https://mesh.spineservices.nhs.uk//messageexchange/X26HC006/outbox
+              https://mesh.spineservices.nhs.uk/messageexchange/X26HC006/outbox
           ```
             
         ### Response
@@ -862,7 +862,7 @@ paths:
               --key 'mesh-client-key.pem' \
               --cert 'mesh-client-cert.pem' \
               --header 'Authorization: NHSMESH X26HC005:bb59be38-e50b-4e5a-9f11-e566e7509552:0:202006041718:8c415905280304918033bcab054909e4582e5fdf544eb18a9dd7366fb868bcf3' \
-              https://mesh.spineservices.nhs.uk//messageexchange/X26HC005/inbox/\
+              https://mesh.spineservices.nhs.uk/messageexchange/X26HC005/inbox/\
               20200529155357895317_3573F8/status/acknowledged
         ```
 
@@ -1031,7 +1031,7 @@ paths:
             --header 'Mex-Chunk-Range: 1:2' \
             --header 'Content-Encoding: gzip' \
             --data-binary '@message.txt_aa.gz' \
-            https://mesh.spineservices.nhs.uk//messageexchange/X26HC006/outbox
+            https://mesh.spineservices.nhs.uk/messageexchange/X26HC006/outbox
         ```
         ```shell
             curl -k \
@@ -1042,7 +1042,7 @@ paths:
             --header 'Authorization: NHSMESH X26HC006:06bf0527-ba77-47f0-b22f-d7d08a88ad26:0:202006041718:d41a9c41e98159e180234ba7940a3a208c67389dc2cb22516dd4a11f57ccfabc' \
             --header 'Mex-Chunk-Range: 2:2' \
             --data-binary '@./message.txt_ab.gz' \
-            https://mesh.spineservices.nhs.uk//messageexchange/X26HC006/outbox/\
+            https://mesh.spineservices.nhs.uk/messageexchange/X26HC006/outbox/\
             20200601122152994285_D59900/2
         ```
       parameters:
@@ -1153,7 +1153,7 @@ paths:
           --cert 'mesh-client-cert.pem' \
           --request 'GET' \
           --header 'Authorization: NHSMESH X26HC005:142b8a1e-e953-4e5e-98a8-b27741e15747:0:202006041718:0ab046e6c9ed7ed0e47eef3e04725846047d7ee3e71e868c84ffda32e24926f4' \
-          https://mesh.spineservices.nhs.uk//messageexchange/X26HC005/inbox
+          https://mesh.spineservices.nhs.uk/messageexchange/X26HC005/inbox
         ```
 
         She downloads the first part of the message. **Note** this use of `curl` uses the `--include` argument, to show the value of the HTTP headers in the MESH response.
@@ -1166,7 +1166,7 @@ paths:
           --key 'mesh-client-key.pem' \
           --cert 'mesh-client-cert.pem' \
           --header 'Authorization: NHSMESH X26HC005:777670ce-02f7-44fe-a53b-eb33eb1cb564:0:202006041718:8d22e541bbfd55baeccb6e088704320c75ea150fc8fa7dc137121cbdf939a7bb' \
-          https://mesh.spineservices.nhs.uk//messageexchange/X26HC005/inbox/\
+          https://mesh.spineservices.nhs.uk/messageexchange/X26HC005/inbox/\
           20200601122152994285_D59900 | tr -d '\r'
         ```
 
@@ -1216,7 +1216,7 @@ paths:
           --key 'mesh-client-key.pem' \
           --cert 'mesh-client-cert.pem' \
           --header 'Authorization: NHSMESH X26HC005:71139532-9215-4ff8-8a74-d602386bac30:0:202006041718:a23d903df6b10388e9c0b12d651ce3cc0e2016006dc72e2f9671f596c9bb70c4' \
-          https://mesh.spineservices.nhs.uk//messageexchange/X26HC005/inbox/\
+          https://mesh.spineservices.nhs.uk/messageexchange/X26HC005/inbox/\
           20200601122152994285_D59900/2 | tr -d '\r'
         ```
 
@@ -1345,7 +1345,7 @@ paths:
           --key 'mesh-client-key.pem' \
           --cert 'mesh-client-cert.pem' \
           --header 'Authorization: NHSMESH X26HC006:1f6c9442-eb9a-440c-b4ed-ee4fd525e176:0:202006041718:c2d92e6abd637e664fd8bdbf1d753c7d42a16ee2bc317f62a654ef649a9956d7' \
-          https://mesh.spineservices.nhs.uk//messageexchange/X26HC006/outbox/tracking/api-docs-bob-sends-alice-a-chunked-file
+          https://mesh.spineservices.nhs.uk/messageexchange/X26HC006/outbox/tracking/api-docs-bob-sends-alice-a-chunked-file
         ```
 
         ### Response
@@ -1417,7 +1417,7 @@ paths:
           --key 'mesh-client-key.pem' \
           --cert 'mesh-client-cert.pem' \
           --header 'Authorization: NHSMESH X26HC005:57db9dd2-2156-4c02-90d4-66e7082179db:0:202006041718:aae81ea5fc3757a6218df2a6dc9991d447dbd406dba15e1ca67540f9411e7388' \
-          https://mesh.spineservices.nhs.uk//messageexchange/X26HC005/inbox/\
+          https://mesh.spineservices.nhs.uk/messageexchange/X26HC005/inbox/\
           20200601122152994285_D59900/status/acknowledged
         ```
 
@@ -1437,7 +1437,7 @@ paths:
           --key 'mesh-client-key.pem' \
           --cert 'mesh-client-cert.pem' \
           --header 'Authorization: NHSMESH X26HC006:dd3f8609-b2c3-4f5a-aa62-c456579b8f77:0:202006041718:9d5dc80e4ac8d89c1ce0e8feaa1e14b2c3ab9ee3ccc95f3f8483086e2ed40bd8' \
-          https://mesh.spineservices.nhs.uk//messageexchange/X26HC006/outbox/tracking/api-docs-bob-sends-alice-a-chunked-file
+          https://mesh.spineservices.nhs.uk/messageexchange/X26HC006/outbox/tracking/api-docs-bob-sends-alice-a-chunked-file
         ```
 
         ### Response
