@@ -133,17 +133,17 @@ info:
 
     def buildmeshauthorizationheader(mailboxid: str, password: str = "password", nonce: str = None, noncecount: int = 0):
       """ Generate MESH Authorization header for mailboxid. """
-      # Generate a GUID if required.
+      #Generate a GUID if required.
       if not nonce:
         nonce = str(uuid.uuid4())
-      # Current time formatted as yyyyMMddHHmm
-      # for example, 4th May 2020 13:05 would be 202005041305
+      #Current time formatted as yyyyMMddHHmm
+      #for example, 4th May 2020 13:05 would be 202005041305
       timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M")
       
-      # for example, NHSMESH AMP01HC001:bd0e2bd5-218e-41d0-83a9-73fdec414803:0:202005041305
+      #for example, NHSMESH AMP01HC001:bd0e2bd5-218e-41d0-83a9-73fdec414803:0:202005041305
       hmac_msg = mailbox_id + ":" + nonce + ":" + str(nonce_count) + ":" + password + ":" + timestamp
       
-      # HMAC is a standard crypto hash method built in the python standard library.
+      #HMAC is a standard crypto hash method built in the python standard library.
       hash_code = hmac.HMAC(HMAC_SECRET_KEY.encode(), hmac_msg.encode(), sha256).hexdigest()
       return (
         AUTH_SCHEMA_NAME # Note: No colon between 1st and 2nd elements.
