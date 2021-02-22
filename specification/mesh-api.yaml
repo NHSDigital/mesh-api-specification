@@ -1723,7 +1723,7 @@ paths:
         | EPL-150       | Too many mailbox matches |
         | EPL-151       | No mailbox matches |
         | EPL-152       | Invalid NHS number |
-        | EPL-153       | NHS Number not found |
+        | EPL-153       | NHS number not found |
         | EPL-154       | No demographics match |
       parameters:
         - in: path
