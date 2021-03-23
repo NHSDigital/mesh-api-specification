@@ -1323,7 +1323,7 @@ paths:
             application/json:
               schema:
                 type: object
-  '/messageexchange/{mailboxID}/outbox/tracking?messageID={messageId}':
+  '/messageexchange/{mailboxID}/outbox/tracking':
     get:
       operationId: outbox-tracking
       tags:
@@ -1599,7 +1599,7 @@ paths:
   '/messageexchange/{mailboxID}/outbox/tracking/{localID}':
     get:
       deprecated: true
-      operationId: outbox-tracking
+      operationId: outbox-tracking-localID
       tags:
         - endpoints
       summary: Outbox tracking
