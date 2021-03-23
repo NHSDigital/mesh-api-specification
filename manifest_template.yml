@@ -1,0 +1,30 @@
+## Manifest template ##
+# To view the expanded version of this template locally, clone api-management-utils
+#
+#   $ cd /path/to/local/api-management-utils/ansible
+#   $ DIST_DIR=/path/to/this/repo make template-manifest
+#
+#
+APIGEE_ENVIRONMENTS:
+- name: internal-dev
+- name: int
+- name: prod
+---
+meta:
+  api:
+    name: mesh-api-specification
+    guid: a3213966-9b13-400c-8fdd-e239e56a2742
+    spec_guids: ['73a3d6dd-912b-4793-bf4c-bf80c4bc34d1']
+  schema_version: 1
+apigee:
+  environments:
+
+{% for ENV in APIGEE_ENVIRONMENTS %}
+{% set NAME = 'mesh-api-specification-' + ENV.name %}
+  - name: {{ ENV.name }}
+    products: []
+    specs:
+      - name: {{ NAME }}
+        path: mesh-api.json
+    api_catalog: []
+{% endfor %}

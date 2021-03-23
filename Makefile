@@ -19,7 +19,6 @@ lint:
 	npm run lint
 	cd docker/mesh-api && npm run lint && cd ..
 	poetry run flake8
-	
 
 publish:
 	npm run publish 2> /dev/null
