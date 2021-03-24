@@ -201,12 +201,12 @@ info:
 
 
     ### Outbox Workflow
-    The maximum amount of data allowed by MESH in a single request message is 100MB (50MB over Internet, 100MB over HSCN). The MESH API allows larger messages to be sent by breaking the message into \"chunks\" that are transmitted as a single message over multiple requests. The upper limit of a single chunked message is 20GB.
+    The maximum amount of data allowed by MESH in a single request message is 100MB (20MB over Internet, 100MB over HSCN). The MESH API allows larger messages to be sent by breaking the message into \"chunks\" that are transmitted as a single message over multiple requests. The upper limit of a single chunked message is 20GB.
 
     The [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. It is prudent to ensure that the receiver's interface to MESH for your `workflowId` handles chunked messages prior to sending. To do this:
 
     1. Determine the size of your message data (after compression) with a standard algorithm (such as `gzip`). If the compressed message is larger than 100MB, smaller than 20GB, and the receiving mailbox / `workflowId` supports chunking, then you can send a chunked message. To prepare for this: 
-        *  split the **uncompressed** data into ordered chunks - do this in your code by using the split command in Linux for example
+        *  split the **uncompressed** data into ordered chunks
         * **independently** compress each chunk with the **same** compression algorithm (such as `gzip`) such that each chunk is smaller than 100MB
         * use the first chunk (after compression) as the initial message data
     2. Send a message with appropriate `workflowId`, `receiver` & `mailboxId`. To do this:
@@ -1606,123 +1606,7 @@ paths:
       description: |
         ## Overview
         This endpoint is now `deprecated` `tracking?messageID` should be used instead. 
-
-        Use this endpoint to inquire about the status of messages sent from your outbox.  When determining the frequency of the calling of this endpoint consider that MESH is asynchronous and it may be sometime (hours) until the recipient downloads.  This endpoint must not be frequently polled.
-
-        This endpoint can only be used if the request to the 'Send Message' endpoint included the optional `Mex-LocalID` header, with a value distinct from all other messages sent from the organisation mailbox.
-        
-        This endpoint must not be used to replace a business ack message. If the business process requires confirmation that the recipient has processed the message then a business ACK should be sent over MESH (convention is the same workflow is used appended with _ACK).
-
-
-
-        ### Request
-        It is possible for Bob to check the status of the chunked message he sent to Alice. (Note that in this example, Alice has not acknowledged the chunked message she received from Bob).
-
-
-        ```shell
-          curl -k \
-          --cacert 'mesh-ca.pem' \
-          --key 'mesh-client-key.pem' \
-          --cert 'mesh-client-cert.pem' \
-          --header 'Authorization: NHSMESH X26HC006:1f6c9442-eb9a-440c-b4ed-ee4fd525e176:0:202006041718:c2d92e6abd637e664fd8bdbf1d753c7d42a16ee2bc317f62a654ef649a9956d7' \
-          https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/tracking/api-docs-bob-sends-alice-a-chunked-file
-        ```
-
-        ### Response
-
-        ```json
-          {
-            "processId": null,
-            "addressType": "ALL",
-            "localId": "api-docs-bob-sends-alice-a-chunked-file",
-            "recipientBillingEntity": "England",
-            "dtsId": "20200601122152994285_D59900",
-            "statusSuccess": null,
-            "messageType": "DATA",
-            "statusTimestamp": null,
-            "senderBillingEntity": "England",
-            "senderOdsCode": "X26",
-            "partnerId": null,
-            "recipientName": "APIM bebop",
-            "senderName": "APIM bebop",
-            "subject": null,
-            "statusEvent": null,
-            "version": "1.0",
-            "encryptedFlag": null,
-            "statusDescription": null,
-            "senderOrgName": "TEST Org Partnership Trust",
-            "status": "Accepted",
-            "workflowId": "API-DOCS-TEST",
-            "senderOrgCode": "TestOrg",
-            "recipientOrgName": "TEST Org Partnership Trust",
-            "expiryTime": "20200606122153",
-            "senderSmtp": "x26hc006@dts.nhs.uk",
-            "fileName": "message.txt.gz",
-            "recipientSmtp": "x26hc005@dts.nhs.uk",
-            "meshRecipientOdsCode": "X26",
-            "compressFlag": null,
-            "uploadTimestamp": "20200601122152",
-            "recipient": "X26HC005",
-            "contentsBase64": true,
-            "sender": "X26HC006",
-            "checksum": null,
-            "isCompressed": null,
-            "contentEncoding": "gzip",
-            "recipientOrgCode": "TestOrg",
-            "messageId": "20200601122152994285_D59900",
-          "statusCode": null,
-            "fileSize": 187
-          }
-        ```
-
-        Suppose Alice only now acknowledges the message Bob sent.
-
-        ### Request
-
-        ```shell
-          curl -k \
-          --request 'PUT' \
-          --cacert 'mesh-ca.pem' \
-          --key 'mesh-client-key.pem' \
-          --cert 'mesh-client-cert.pem' \
-          --header 'Authorization: NHSMESH X26HC005:57db9dd2-2156-4c02-90d4-66e7082179db:0:202006041718:aae81ea5fc3757a6218df2a6dc9991d447dbd406dba15e1ca67540f9411e7388' \
-          https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005/inbox/\
-          20200601122152994285_D59900/status/acknowledged
-        ```
-
-        ### Response
-
-        ```json
-          {"messageId" : "20200601122152994285_D59900" }
-        ```
-
-        The next call to Outbox tracking by Bob
-
-        ### Request
-
-        ```shell
-          curl -k \
-          --cacert 'mesh-ca.pem' \
-          --key 'mesh-client-key.pem' \
-          --cert 'mesh-client-cert.pem' \
-          --header 'Authorization: NHSMESH X26HC006:dd3f8609-b2c3-4f5a-aa62-c456579b8f77:0:202006041718:9d5dc80e4ac8d89c1ce0e8feaa1e14b2c3ab9ee3ccc95f3f8483086e2ed40bd8' \
-          https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/tracking/api-docs-bob-sends-alice-a-chunked-file
-        ```
-
-        ### Response
-
-        ```json
-          {
-            "downloadTimestamp": "20200601122957",
-            "status": "Acknowledged",
-            "messageId": "20200601122152994285_D59900"
-          }
-        ```
-
-        This shows the `status` field of the response has changed from `Accepted` to `Acknowledged`.  All of the fields in the previous response are also included.
-
-        **Note:** if tracking messages is important to your work flow in any way, it is vital that you supply the optional `Mex-LocalID` header and the header contains a unique value. If the value supplied is not unique the status tracking endpoint will return `300 Multiple Choices`.
-          
+ 
       parameters:
         - name: mailboxID
           in: path
@@ -1932,13 +1816,6 @@ paths:
           
           **Note:** neither the `ods-code` nor `workflowId` in this example are real.
 
-          
-        ### Error codes
-
-        | Error code       | Typical description                    |
-        | ------------- | ----------------------------------------- |
-        | EPL-150       | Too many mailbox matches |
-        | EPL-151       | No mailbox matches |
       parameters:
         - in: path
           name: odsCode
