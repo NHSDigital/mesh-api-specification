@@ -1,5 +1,12 @@
 # Changelog
 
+## 2021-03-25
+* Deprecated message tracking endpoint using a localID
+* New message tracking endpoint using messageID
+* Deprecated count endpoint
+* Correct URLs for the different environments
+* Improved the description for polling and download cycle
+
 ## 2020-04-23
 * Add step in pipeline to replace invalid characters in the branch name 
 
