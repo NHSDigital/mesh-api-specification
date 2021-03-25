@@ -5,11 +5,10 @@
 This is a RESTful HL7® FHIR® API specification for the *Message Exchange for Social Care and Health (MESH) API*.
 
 * `specification/` This [Open API Specification](https://swagger.io/docs/specification/about/) describes the endpoints, methods and messages exchanged by the API. Use it to generate interactive documentation; the contract between the API and its consumers.
-* `sandbox/` This NodeJS application implements a mock implementation of the service. Use it as a back-end service to the interactive documentation to illustrate interactions and concepts. It is not intended to provide an exhaustive/faithful environment suitable for full development and testing.
 * `scripts/` Utilities helpful to developers of this specification.
 * `apiproxy/` The Apigee API Proxy
 
-Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://digital.nhs.uk/developer/api-catalogue/message-exchange-for-social-care-and-health-api).
+Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://digital.nhs.uk/developer/api-catalogue/message-exchange-for-social-care-and-health-api).  A description of the MESH service can be found at the [NHS Digital Services](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh)
 
 ## Contributing
 Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/mesh-api-api/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/mesh-api-api/blob/master/CODE_OF_CONDUCT.md).
@@ -158,13 +157,3 @@ If you use the same APIGEE_BASE_PATH as an existing api proxy it will cause prob
 * `APIGEE_BASE_PATH`
 
 :bulb: Specify your own API Proxy (with base path) for use during development.
-
-#### Platform setup
-
-Successful deployment of the API Proxy requires:
-
- 1. A *Target Server* named `ig3`
- 2. A *Key-Value Map* named `pds-variables`, containing:
-    1. Key: `NHSD-ASID`, Value: Accredited System ID (ASID) identifying the API Gateway
-
-:bulb: For Sandbox-running environments (`test`) these need to be present for successful deployment but can be set to empty/dummy values.
