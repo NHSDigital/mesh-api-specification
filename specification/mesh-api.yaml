@@ -1,7 +1,5 @@
 openapi: 3.0.2
-tags:
-  - name: endpoints
-    description: Endpoints
+
 info:
   version: v1.0.168-alpha
   title: Message Exchange for Social Care and Health - REST API
@@ -271,8 +269,7 @@ paths:
   '/messageexchange/{mailboxID}':
     get:
       operationId: validate-mailbox
-      tags:
-        - endpoints
+
       summary: Validate a mailbox (Handshake)
       description: |
         ## Overview
@@ -386,8 +383,7 @@ paths:
     get:
       deprecated: true
       operationId: check-inbox-count
-      tags:
-        - endpoints
+
       summary: Check an inbox's count
       description: |
         ## Overview
@@ -455,8 +451,7 @@ paths:
   '/messageexchange/{mailboxID}/inbox':
     get:
       operationId: check-inbox
-      tags:
-        - endpoints
+
       summary: Check an inbox
       description: |-
         ## Overview
@@ -539,8 +534,7 @@ paths:
   '/messageexchange/{mailboxID}/outbox':
     post:
       operationId: send-message
-      tags:
-        - endpoints
+
       summary: Send message
       description: |-
         ## Overview
@@ -739,8 +733,7 @@ paths:
   '/messageexchange/{Recipient}/inbox/{messageID}':
     get:
       operationId: download-message
-      tags:
-        - endpoints
+
       summary: Download message
       description: |-
         ## Overview
@@ -840,8 +833,7 @@ paths:
   '/messageexchange/{mailboxID}/inbox/{messageID}/status/acknowledged':
     put:
       operationId: acknowledge-message
-      tags:
-        - endpoints
+
       summary: Acknowledge message
       description: |-
         ## Overview
@@ -929,8 +921,7 @@ paths:
   '/messageexchange/{mailboxID}/outbox/{messageID}/{chunkNo}':
     post:
       operationId: send-chunked-message
-      tags:
-        - endpoints
+
       summary: Send chunked message
       description: |-
         ## Overview
@@ -1100,8 +1091,7 @@ paths:
   '/messageexchange/{Recipient}/inbox/{messageID}/{chunkNo}':
     get:
       operationId: download-message-chunk
-      tags:
-        - endpoints
+
       summary: Download message chunk
       description: |
         ## Overview
@@ -1296,8 +1286,7 @@ paths:
   '/messageexchange/{mailboxID}/outbox/tracking':
     get:
       operationId: outbox-tracking
-      tags:
-        - endpoints
+
       summary: Outbox tracking
       description: |
         ## Overview
@@ -1570,8 +1559,7 @@ paths:
     get:
       deprecated: true
       operationId: outbox-tracking-localID
-      tags:
-        - endpoints
+
       summary: Outbox tracking
       description: |
         ## Overview
@@ -1739,8 +1727,7 @@ paths:
   '/endpointlookup/mesh/{odsCode}/{Mex-workflowid}':
     get:
       operationId: mesh-address-lookup
-      tags:
-        - endpoints
+
       summary: MESH address lookup
       description: |
         ## Overview
