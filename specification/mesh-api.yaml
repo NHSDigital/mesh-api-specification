@@ -552,9 +552,9 @@ paths:
 
         The `workflowId` should always be set, some `workflowIds` are restricted which means the mailbox sender and recipient must be configured for the `workflowId` being sent.
 
-        To discover the recipient mailbox either the `endpointlookup` endpoint can be used or for certain [workflows demographic details](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/endpoint-lookup-service-and-workflowids#using-the-to_dts-field-of-a-mesh-message-to-find-a-mailbox-) can be included in the `Mex-To` field. 
+        To discover the recipient mailbox either the `endpoint` endpoint can be used or for certain [workflows demographic details](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/endpoint-lookup-service-and-workflowids#using-the-to_dts-field-of-a-mesh-message-to-find-a-mailbox-) can be included in the `Mex-To` field. 
 
-        It is good practice to catpure the returned `messageId` as this provides a unique identifer which can be used for message tracking.
+        It is good practice to capture the returned `messageId` as this provides a unique identifer which can be used for message tracking.
         ### Request
 
           ```shell
@@ -1287,7 +1287,7 @@ paths:
     get:
       operationId: outbox-tracking
 
-      summary: Outbox tracking
+      summary: Track outbox
       description: |
         ## Overview
         Use this endpoint to inquire about the status of messages sent from your outbox.  When determining the frequency of the calling of this endpoint consider that MESH is asynchronous and it may be sometime (hours) until the recipient downloads.  This endpoint must not be frequently polled.
@@ -1377,7 +1377,7 @@ paths:
           {"messageId" : "20210311101813838554_1B8F53" }
         ```
 
-        The next call to Outbox tracking by Bob
+        The next call to Track outbox by Bob
 
         ### Request
 
@@ -1560,7 +1560,7 @@ paths:
       deprecated: true
       operationId: outbox-tracking-localID
 
-      summary: Outbox tracking
+      summary: Track outbox (deprecated)
       description: |
         ## Overview
         This endpoint is now `deprecated` `tracking?messageID` should be used instead. 
@@ -1728,7 +1728,7 @@ paths:
     get:
       operationId: mesh-address-lookup
 
-      summary: MESH address lookup
+      summary: Lookup MESH address
       description: |
         ## Overview
         Use this endpoint to search for the mailbox of the organisation you will be sending data to, using their unique [Organisation Data Service (ODS) code](https://odsportal.hscic.gov.uk/Organisation/Search), their MESH `mailboxID` and the agreed `workflowID` for the data. 
