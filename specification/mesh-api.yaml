@@ -1728,7 +1728,7 @@ paths:
     get:
       operationId: mesh-address-lookup
 
-      summary: Lookup MESH address
+      summary: Look up MESH address
       description: |
         ## Overview
         Use this endpoint to search for the mailbox of the organisation you will be sending data to, using their unique [Organisation Data Service (ODS) code](https://odsportal.hscic.gov.uk/Organisation/Search), their MESH `mailboxID` and the agreed `workflowID` for the data. 
