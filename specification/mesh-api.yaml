@@ -7,11 +7,26 @@ info:
     ## Overview
     Use this API to securely transfer healthcare data between organisations using the [Message Exchange for Social Care and Health (MESH)](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh), which is a component of [Spine](https://digital.nhs.uk/services/spine).
 
-    You can interact with MESH via a virtual mailbox, only accessible by your organisation. Incoming messages appear in the `inbox` section of the mailbox. To send a message, place it in the `outbox` section of your mailbox. Outgoing messages are tagged with the receiving organisation's `mailboxID`. Spine then delivers the message to the receiving organisation's `mailbox` inbox.
-    In addition to the sender and receiver `mailboxID's` you must also include a `workflowID` label in each message. MESH provides all the `workflowID` codes, as they identify what type of data the message contains. This helps the receiving organisation process the data after they receive it (For example, the receiver may process X-ray images very differently from blood test results).
-    There is a Java based MESH client you can use to access MESH, which calls the RESTful MESH API under the hood. If you want a more tightly knitted interface with MESH you can also call the MESH API directly in your applications.
+    You interact with MESH via a virtual mailbox, only accessible to your organisation, by making calls to this API from your application.
 
-    This guide documents the MESH API endpoints and describes how they should be used.
+    You can:
+
+      - check the number of messages in your inbox
+      - get the messageIDs of messages in your inbox that are ready for download
+      - download a message, or a larger message which was sent to you as a series of chunks
+      - acknowledge the successful download of a message, which removes it from your inbox
+      - look up the mailbox of an organisation you want to send data to
+      - send a message, or a larger message as series of chunks
+      - track the status of messages that you sent from your outbox
+      - validate your mailbox every 24 hours to let Spine know it's still active
+     
+    Messages must have a:
+
+      - sender mailbox ID
+      - receiver mailbox ID
+      - workflow ID provided by MESH, that identifies what type of data the message contains, so the receiving organisation knows how to process it. For example, the receiver might process X-ray image data differently from blood test results.
+
+    You can also interact with MESH via a Java-based [MESH client](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-client) or a web-based [MESH User Interface](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface).
 
     ## Who can use this API
     This API can only be used where there is a legal basis to do so. You should make an access request before you go too far with your development.
@@ -39,8 +54,6 @@ info:
     ## Network access
     This API is available on the internet and, indirectly, on the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
 
-    To use this API with NHS smartcards (see below) you do need a HSCN connection, although internet facing alternatives are available.
-
     For more details see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
 
     ## Environments and Testing
@@ -58,6 +71,7 @@ info:
     | Production    | `https://mesh-sync.spineservices.nhs.uk`  | No  |
 
     **Note** - each environment has the same shared secret but requires different client TLS certificates.
+    For any questions about our testing environments, contact our support mailbox [itoc.supportdesk@nhs.net](mailto:itoc.supportdesk@nhs.net).
 
     ## Develop against a local MESH sandbox server 
     Here is an existing (unsupported) example of a RESTful interface on [Github](https://github.com/NHSDigital/mesh-client). This python client also contains a mock MESH server which you can run locally without any real MESH credentials.
@@ -218,13 +232,13 @@ info:
 
 
     ### Outbox Workflow
-    The maximum amount of data allowed by MESH in a single request message is 100MB (20MB over Internet, 100MB over HSCN). The MESH API allows larger messages to be sent by breaking the message into \"chunks\" that are transmitted as a single message over multiple requests. The upper limit of a single chunked message is 20GB.
+    The maximum amount of data allowed by MESH in a single request message is 100MB over HSCN conections or 20MB over the internet. You can send larger messages by breaking them into \"chunks\" that are transmitted as a single message over multiple requests. The upper limit of a single chunked message is 20GB.
 
-    The [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. It is prudent to ensure that the receiver's interface to MESH for your `workflowId` handles chunked messages prior to sending. To do this:
+    The [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. Check that the receiver's interface to MESH for your `workflowId` handles chunked messages prior to sending. To do this:
 
-    1. Determine the size of your message data (after compression) with a standard algorithm (such as `gzip`). If the compressed message is larger than 100MB, smaller than 20GB, and the receiving mailbox / `workflowId` supports chunking, then you can send a chunked message. To prepare for this: 
+    1. Determine the size of your message data (after compression) with a standard algorithm (such as `gzip`). If the compressed message is larger than 100MB or 20MB if sending over the internet, is smaller than 20GB, and the receiving mailbox / `workflowId` supports chunking, then you can send a chunked message. To prepare for this: 
         *  split the **uncompressed** data into ordered chunks
-        * **independently** compress each chunk with the **same** compression algorithm (such as `gzip`) such that each chunk is smaller than 100MB
+        * **independently** compress each chunk with the **same** compression algorithm (such as `gzip`) such that each chunk is smaller than 100MB 
         * use the first chunk (after compression) as the initial message data
     2. Send a message with appropriate `workflowId`, `receiver` & `mailboxId`. To do this:
         * optionally include `localId` from step 2 for tracking.  This field must not contain PID.
@@ -242,10 +256,8 @@ info:
     - send your business use case to [sa.servicedesk@nhs.net](mailto:sa.servicedesk@nhs.net)
     - upon receiving the SCAL (Supplier Conformance Assessment List) fill in and return to [sa.servicedesk@nhs.net](mailto:sa.servicedesk@nhs.net)
     - your integration will now be certificated by Solutions Assurance and ready to publish
-    - any other queries please contact us via our support mailbox; [ssd.nationalservicedesk@nhs.net](mailto:ssd.nationalservicedesk@nhs.net)
-
-    ### Information
-    'Try this now' feature on the below endpoints are currently unavailable and awaiting removal.
+    - for any other queries, contact our support mailbox [ssd.nationalservicedesk@nhs.net](mailto:ssd.nationalservicedesk@nhs.net)
+    
   contact:
     name: National Service Desk
     email: ssd.nationalservicedesk@nhs.net
@@ -925,7 +937,7 @@ paths:
       summary: Send chunked message
       description: |-
         ## Overview
-        Use this endpoint to send a chunked message. The 'Send Message' endpoint has a maximum payload size of 100MB. However, it is possible to send much larger messages (up to 20GB) by breaking up the message into chunks and transmitting it over multiple requests. 
+        Use this endpoint to send a chunked message. The 'Send Message' endpoint has a maximum single request message payload size of 100MB over HSCN or 20MB over the internet. However, you can send much larger messages (up to 20GB) by breaking up the message into chunks and transmitting it over multiple requests. 
 
           **Note**: Some `workflowIDs` do not support chunking because it is not currently supported in the MESH UI and older versions of the MESH client. Check with your receiving organisation before sending messages with this endpoint. 
           To send a chunked message:
