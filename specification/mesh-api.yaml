@@ -1724,7 +1724,7 @@ paths:
             application/json:
               schema:
                 type: object
-  '/endpointlookup/mesh/{odsCode}/{Mex-workflowid}':
+  '/messageexchange/endpointlookup/{odsCode}/{Mex-workflowid}':
     get:
       operationId: mesh-address-lookup
 
@@ -1742,8 +1742,7 @@ paths:
           --cacert 'mesh-ca.pem' \
           --key 'mesh-client-key.pem' \
           --cert 'mesh-client-cert.pem' \
-          --header 'Authorization: NHSMESH X26HC005:a5d25a21-57c3-40d1-8794-bea42e82039b:0:202006041718:725665f0956b73c5f9ec5e0e0d413046fc0729e3b893864b6d5f672dda2bfd13' \
-          https://mesh-sync.spineservices.nhs.uk/endpointlookup/mesh/SCREEN2/SPINE_GPCAPITATION_EXTRACT
+          https://mesh-sync.spineservices.nhs.uk/messageexchange/endpointlookup/SCREEN2/SPINE_GPCAPITATION_EXTRACT
           ```
 
         ### Response
@@ -1781,13 +1780,6 @@ paths:
           example: SCREEN2
           schema:
             type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:291259e6a73cde3278f99cd5bd3c7ec9b3d1d5479077a8f711bddf58073d5555'
-          schema:
-            type: string
         - in: path
           name: Mex-workflowid
           required: true
@@ -1809,13 +1801,21 @@ paths:
                   results:
                     type: array
                     items:
-                      type: string
-        '403':
-          description: Message does not exist
-          content:
-            application/json:
-              schema:
-                type: object
+                      type: object
+                      properties:
+                        endpoint_type:
+                          type: string
+                          example: 'MESH'
+                          description: This will always be set to MESH
+                        description:
+                          type: string
+                          example: 'AAA Screening Services'
+                          description: This is a description of the mailbox as defined in MOLES.  Sometimes it may be the address of the mailbox owner
+                        address:
+                          type: string
+                          example: 'X26HC021'
+                          description: mailboxID
+
 components:
   parameters:
     mailboxID:
