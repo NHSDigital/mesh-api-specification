@@ -258,7 +258,7 @@ info:
     - your integration will now be certificated by Solutions Assurance and ready to publish
     - for any other queries, contact our support mailbox [ssd.nationalservicedesk@nhs.net](mailto:ssd.nationalservicedesk@nhs.net)
 
-contact:
+    contact:
     name: National Service Desk
     email: ssd.nationalservicedesk@nhs.net
 servers:
