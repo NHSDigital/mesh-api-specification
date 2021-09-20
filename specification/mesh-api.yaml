@@ -257,7 +257,10 @@ info:
     - upon receiving the SCAL (Supplier Conformance Assessment List) fill in and return to [sa.servicedesk@nhs.net](mailto:sa.servicedesk@nhs.net)
     - your integration will now be certificated by Solutions Assurance and ready to publish
     - for any other queries, contact our support mailbox [ssd.nationalservicedesk@nhs.net](mailto:ssd.nationalservicedesk@nhs.net)
-
+    
+  contact:
+    name: National Service Desk
+    email: ssd.nationalservicedesk@nhs.net
 servers:
   - url: 'https://msg.dev.spine2.ncrs.nhs.uk'
     description: Development
