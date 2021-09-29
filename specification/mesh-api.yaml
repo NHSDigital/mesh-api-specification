@@ -12,7 +12,7 @@ info:
     You can:
 
       - check the number of messages in your inbox
-      - get the messageIDs of messages in your inbox that are ready for download
+      - get the messageIds of messages in your inbox that are ready for download
       - download a message, or a larger message which was sent to you as a series of chunks
       - acknowledge the successful download of a message, which removes it from your inbox
       - look up the mailbox of an organisation you want to send data to
@@ -43,7 +43,7 @@ info:
     ## Related APIs
     None.
 
-    ## API Status and Roadmap
+    ## API status and roadmap
     This API is currently [stable](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status).
 
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?tag=mesh-api).
@@ -56,7 +56,7 @@ info:
 
     For more details see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
 
-    ## Environments and Testing
+    ## Environments and testing
     There are several independent, externally accessible instances of MESH for use by parties external to NHS Digital for testing, each with a different root URL.
 
     Some environments require a connection to the [HSCN network](https://digital.nhs.uk/services/health-and-social-care-network).
@@ -231,7 +231,7 @@ info:
     | 19       | `workflowId` does not support chunked files |
 
 
-    ### Outbox Workflow
+    ### Outbox workflow
     The maximum amount of data allowed by MESH in a single request message is 100MB over HSCN conections or 20MB over the internet. You can send larger messages by breaking them into \"chunks\" that are transmitted as a single message over multiple requests. The upper limit of a single chunked message is 20GB.
 
     The [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. Check that the receiver's interface to MESH for your `workflowId` handles chunked messages prior to sending. To do this:
