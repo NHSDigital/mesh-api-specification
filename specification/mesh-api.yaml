@@ -1305,7 +1305,7 @@ paths:
       summary: Track outbox
       description: |
         ## Overview
-        Use this endpoint to enquire about the status of messages sent from your outbox.  When determining the frequency of the calling of this endpoint consider that MESH is asynchronous and it might be some hours until the recipient downloads your message.  You must not poll this endpoint frequently.
+        Use this endpoint to enquire about the status of messages sent from your outbox. When determining the frequency of the calling of this endpoint consider that MESH is asynchronous and it might be some hours until the recipient downloads your message. You must not poll this endpoint frequently.
 
         The `messageId` is the value returned in the response to a message upload.
         
