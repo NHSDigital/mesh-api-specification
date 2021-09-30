@@ -41,7 +41,10 @@ info:
       - list of workflow IDs to identify types of messages your organisation will send and receive
 
     ## Related APIs
-    None.
+    A number of our APIs are messaging APIs that use MESH as the transport layer. For a full list, see [our API catalogue, filtered on MESH APIs](https://digital.nhs.uk/developer/api-catalogue?filter=mesh).
+    
+    In particular, this includes [National Event Management Service - FHIR API](https://digital.nhs.uk/developer/api-catalogue/national-events-management-service-fhir) -
+    our API for publishing and subscribing to healthcare events such as updates to patient demographic details.
 
     ## API status and roadmap
     This API is currently [stable](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status).
@@ -74,15 +77,15 @@ info:
     For any questions about our testing environments, contact our support mailbox [itoc.supportdesk@nhs.net](mailto:itoc.supportdesk@nhs.net).
 
     ### Develop against a local MESH sandbox server 
-    There is an existing (unsupported) example of a RESTful interface on [Github](https://github.com/NHSDigital/mesh-client). This python client also contains a mock MESH server which you can run locally without any real MESH credentials.
+    There is an existing (unsupported) example of a RESTful interface on [GitHub](https://github.com/NHSDigital/mesh-client). This Python client also contains a mock MESH server which you can run locally without any real MESH credentials.
 
-    With the example RESTful mesh client installed, you can run the mock server with: 
+    With the example RESTful MESH client installed, you can run the mock server with: 
 
     ```
     python3 -m mesh_client.mock_server
     ```
 
-    The client TLS certificates which you need to connect to the mock server are in the python library. You can either copy them from the python library directory to your working directory, or download them from here: 
+    The client TLS certificates which you need to connect to the mock server are in the Python library. You can either copy them from the python library directory to your working directory, or download them from:
 
     -   client.cert.pem
     -   client.key.pem
@@ -100,20 +103,20 @@ info:
     ```
 
     ## MESH Authorization header
-    Requests to the MESH API require an authentication token in the `HTTP` Authorization header.
-    To be valid, the authorization token must match the schema described below. The token includes cryptographic hashes of your organisation's MESH mailbox password and the environment-wide shared secret. 
+    Requests to the MESH API require an authorisation token in the HTTP `Authorization` header.
+    To be valid, the authorisation token must match the schema described below. The token includes cryptographic hashes of your organisation's MESH mailbox password and the environment-wide shared secret. 
     As an additional security measure each token which matches the schema is valid for one request only, so you must generate a new token for every request. Any repeated use of a token results in a `403: Not Authorized` response from the MESH API.
 
-    The Authorization token is made up of six elements. With the exception of the first and second elements, each element is separated from the next by a colon (:).
+    The authorisation token is made up of six elements. With the exception of the first and second elements, each element is separated from the next by a colon (:).
 
     | Name          | Description                                       |
     | ------------- | ------------------------------------------------- |
-    | `NHSMESH` | The name of the Custom Authentication Schema. The Authentication header should prefix the generated authentication token. The space at the end of the schema is important. |
-    | `mailbox_id` | ID of the Mailbox sending the HTTP Request, must be uppercase. |
-    | `nonce` | A GUID used as an encryption `Nonce`. |
-    | `nonce_count` | The number of times that the same `Nonce` has been used. |
+    | `NHSMESH ` | The name of the Custom Authentication Schema. The space at the end of the schema is important. |
+    | `mailbox_id` | ID of the mailbox sending the HTTP Request. Must be uppercase. |
+    | `nonce` | A GUID used as an encryption nonce. |
+    | `nonce_count` | The number of times that the same nonce has been used. |
     | `timestamp` | The current date and time in `yyyyMMddHHmm` format. |
-    | `hash` | `HMAC-SHA256` hash see the list below. |
+    | `hash` | HMAC-SHA256 hash - see the list below. |
 
     The `hash` is compiled of the following items:
 
@@ -122,7 +125,7 @@ info:
       - `mailbox_id` - same as element 2
       - `nonce` - same as element 3
       - `nonce_count` - same as element 4
-      - `mailbox_password` - The password for the MESH Mailbox
+      - `mailbox_password` - The password for the MESH mailbox
       - `timestamp` - same as element 5
 
     Changing the `nonce` and/or `nonce_count` elements between requests ensures the Authorization header is unique and valid. 
@@ -173,7 +176,7 @@ info:
     - inbox poll cycle
     - outbox workflow
 
-    Validate your mailbox once every 24 hours using the `Validate a mailbox` endpoint.
+    Validate your mailbox once every 24 hours using the 'Validate a mailbox' endpoint.
 
     ### Inbox poll cycle
     Spine gives each message a unique `messageID` after you post it to your outbox. It is the primary identifier for the message during MESH transit.
