@@ -64,7 +64,7 @@ info:
 
     Some environments require a connection to the [HSCN network](https://digital.nhs.uk/services/health-and-social-care-network).
 
-    | Purpose       | Network availabiity | URL                                       |
+    | Purpose       | Network availability | URL                                       |
     | ------------- | ------------------- | ----------------------------------------- |
     | Development   | HSCN                | `https://msg.dev.spine2.ncrs.nhs.uk/`     |
     | Integration   | HSCN                | `https://msg.int.spine2.ncrs.nhs.uk/`     |
