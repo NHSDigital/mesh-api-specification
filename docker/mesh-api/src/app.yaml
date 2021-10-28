@@ -1,4 +1,0 @@
- runtime: node
- env:
-   - name: NODE_ENV
-     value: production

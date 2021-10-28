@@ -1,0 +1,16 @@
+meta:
+  api:
+    name: mesh-api-specification
+    guid: a3213966-9b13-400c-8fdd-e239e56a2742
+    spec_guids: ['73a3d6dd-912b-4793-bf4c-bf80c4bc34d1']
+  schema_version: 1
+apigee:
+  environments:
+  - name: internal-dev
+    specs:
+      - name: mesh-api-specification-internal-dev
+        path: mesh-api.json
+  - name: int
+    specs:
+      - name: mesh-api-specification-int
+        path: mesh-api.json

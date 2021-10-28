@@ -1,5 +1,0 @@
-docker_containers:
-
-    - name: mesh-api
-      dockerfile: "docker/mesh-api/Dockerfile"
-      path: "docker/mesh-api"
