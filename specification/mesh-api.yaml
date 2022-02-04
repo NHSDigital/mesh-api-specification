@@ -1085,9 +1085,9 @@ paths:
                     type: string
                     example: 20200529155357895317_3573F8
                     description: 'Unique message ID, identical to initial Send message endpoint'
-                  blockID:
+                  blockId:
                     type: integer
-                    description: ID assigned to the block
+                    description: chunkNo assigned to the chunk as supplied in the Mex-chunk-range header, maintained for legacy support
         '403':
           description: Authentication failed
           content:
