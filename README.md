@@ -2,14 +2,13 @@
 
 ![Build](https://github.com/NHSDigital/mesh-api-api/workflows/Build/badge.svg?branch=master)
 
-This is a RESTful HL7® FHIR® API specification for the *Hello World API*.
+This is a RESTful HL7® FHIR® API specification for the *Message Exchange for Social Care and Health (MESH) API*.
 
 * `specification/` This [Open API Specification](https://swagger.io/docs/specification/about/) describes the endpoints, methods and messages exchanged by the API. Use it to generate interactive documentation; the contract between the API and its consumers.
-* `sandbox/` This NodeJS application implements a mock implementation of the service. Use it as a back-end service to the interactive documentation to illustrate interactions and concepts. It is not intended to provide an exhaustive/faithful environment suitable for full development and testing.
 * `scripts/` Utilities helpful to developers of this specification.
 * `apiproxy/` The Apigee API Proxy
 
-Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://emea-demo8-nhsdportal.apigee.io/).
+Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://digital.nhs.uk/developer/api-catalogue/message-exchange-for-social-care-and-health-api).  A description of the MESH service can be found at the [NHS Digital Services](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh)
 
 ## Contributing
 Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/mesh-api-api/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/mesh-api-api/blob/master/CODE_OF_CONDUCT.md).
@@ -51,26 +50,6 @@ There are `make` commands that alias some of this functionality:
  * `serve` -- Serves a preview of the specification in human-readable format
  * `generate-examples` -- generate example objects from the specification
 
-### Running tests
-#### End-to-end tests
-To run tests, you need to supply an environment. A `local` environment and an environment template are included under `tests/e2e/environments`.
-
-Set the following environment variables for local testing:
- * `ENVIRONMENT`: `local`
- * `API_TEST_ENV_FILE_PATH`: `tests/e2e/environments/local.postman_environment.json`
- * `API_TEST_URL`: `localhost:9000`
-
-In order for local tests to work, you must have the sandbox server running locally.
-```
-make sandbox
-```
-
-To run local tests, use:
-```
-make test
-```
-
-There is a template environment file available at `tests/e2e/environments/postman_environment.json.template` useful for configuring different testing environments (such as on the CI server).
 
 ### VS Code Plugins
 
@@ -103,15 +82,6 @@ Swagger UI unfortunately doesn't correctly render `$ref`s in examples, so use `s
 
 #### Apigee Portal
 The Apigee portal will not automatically pull examples from schemas, you must specify them manually.
-
-### Postman Collection
-
-`Patient Demographics Sandbox.postman_collection` must be kept in sync with the OAS and Sandbox manually.
-
-Procedure:
- * Import the collection into Postman
- * Update requests and export the collection back into the repo
- * Re-generate the [Run in Postman button](https://learning.getpostman.com/docs/postman-for-publishers/run-in-postman/creating-run-button/) Markdown button link and update the OAS
 
 ## Deployment
 
@@ -187,13 +157,3 @@ If you use the same APIGEE_BASE_PATH as an existing api proxy it will cause prob
 * `APIGEE_BASE_PATH`
 
 :bulb: Specify your own API Proxy (with base path) for use during development.
-
-#### Platform setup
-
-Successful deployment of the API Proxy requires:
-
- 1. A *Target Server* named `ig3`
- 2. A *Key-Value Map* named `pds-variables`, containing:
-    1. Key: `NHSD-ASID`, Value: Accredited System ID (ASID) identifying the API Gateway
-
-:bulb: For Sandbox-running environments (`test`) these need to be present for successful deployment but can be set to empty/dummy values.
