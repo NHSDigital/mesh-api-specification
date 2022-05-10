@@ -313,11 +313,6 @@ paths:
             https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005
           ```
 
-        ### Response
-
-          ```json
-            {"mailboxId" : "X26HC005"}
-          ```
       parameters:
         - name: mailboxID
           in: path
@@ -367,10 +362,7 @@ paths:
       responses:
         '200':
           description: OK
-          content:
-            application/json:
-              schema:
-                type: object
+
         '400':
           description: Bad Request
           content:
