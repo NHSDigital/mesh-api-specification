@@ -1739,7 +1739,7 @@ paths:
             application/json:
               schema:
                 type: object
-  '/endpointlookup/mesh/{odsCode}/{Mex-workflowid}':
+  '/endpointlookup/{odsCode}/{Mex-workflowid}':
     get:
       operationId: mesh-address-lookup
 
@@ -1758,7 +1758,7 @@ paths:
           --key 'mesh-client-key.pem' \
           --cert 'mesh-client-cert.pem' \
           --header 'Authorization: NHSMESH X26HC005:a5d25a21-57c3-40d1-8794-bea42e82039b:0:202006041718:725665f0956b73c5f9ec5e0e0d413046fc0729e3b893864b6d5f672dda2bfd13' \
-          https://mesh-sync.spineservices.nhs.uk/endpointlookup/mesh/SCREEN2/SPINE_GPCAPITATION_EXTRACT
+          https://mesh-sync.spineservices.nhs.uk/endpointlookup/SCREEN2/SPINE_GPCAPITATION_EXTRACT
           ```
 
         ### Response
