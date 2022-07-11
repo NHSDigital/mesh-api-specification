@@ -259,11 +259,12 @@ info:
     ## Onboarding
     You need to get your software approved by us before it can go live with this API. We call this onboarding. The onboarding process can sometimes be quite long, so it's worth planning well ahead:
 
-    - request a Test mailbox using the [form](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
+    - apply for a Testing (Path to Live) mailbox using the [form](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
     - read carefully [how to request your certificate](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/certificate-guidance#)
-    - send your business use case to [sa.servicedesk@nhs.net](mailto:sa.servicedesk@nhs.net)
-    - when you receive your SCAL (Supplier Conformance Assessment List), fill in and return it to [sa.servicedesk@nhs.net](mailto:sa.servicedesk@nhs.net)
-    - our solutions assurance team certificates your integration and it's ready to go live
+        
+    This API uses our online digital onboarding process. To get started, send us an email at [sm.cellone@nhs.net](mailto:sm.cellone@nhs.net).
+    
+    To find out more about the process, see [digital onboarding](https://digital.nhs.uk/developer/guides-and-documentation/onboarding-process#digital-onboarding). 
     
     For any other queries, contact our support mailbox [ssd.nationalservicedesk@nhs.net](mailto:ssd.nationalservicedesk@nhs.net).
     
