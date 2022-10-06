@@ -582,7 +582,7 @@ paths:
         ## Overview
         Use this endpoint to retrieve a message based on the message identifier obtained from the 'Check Inbox' endpoint.
         
-                **Note:** Headers should be treated case insensitively, most http clients will do this for you automatically, but please do not rely on explicit case.
+        **Note:** Headers should be treated case insensitively, most http clients will do this for you automatically, but please do not rely on explicit case.
 
         ### Message expiration
         Messages you do not download and acknowledge within five days of delivery are removed from your inbox. The sending organisation receives an error report explaining that the receiver did not collect the message. Uncollected messages are completely deleted from the MESH server 30 days after initial delivery. If the sending organisation cannot re-send the message within the intervening time, they can contact the [NHS Digital national service desk](https://digital.nhs.uk/developer/help-and-support) with the error report details and ask for the message to be re-sent.
