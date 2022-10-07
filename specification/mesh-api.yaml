@@ -1877,12 +1877,9 @@ servers:
     description: Production
 x-spec-publication:
   operation-order:
-    - group: Handshake
-      operations:
+    - operations:
       - method: GET
         path: /messageexchange/{mailbox_id}
-    - group: Inbox
-      operations:
       - method: GET
         path: /messageexchange/{mailbox_id}/inbox
       - method: GET
@@ -1893,20 +1890,14 @@ x-spec-publication:
         path: /messageexchange/{mailbox_id}/inbox/{message_id}/{chunkNo}
       - method: GET
         path: /messageexchange/{mailbox_id}/count
-    - group: Outbox
-      operations:
       - method: POST
         path: /messageexchange/{mailbox_id}/outbox
       - method: POST
         path: /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}
-    - group: Tracking
-      operations:
       - method: GET
         path: /messageexchange/{mailbox_id}/outbox/tracking
       - method: GET
         path: /messageexchange/{mailbox_id}/outbox/tracking/{local_id}
-    - group: Lookup
-      operations:
       - method: GET
         path: /messageexchange/endpointlookup/{ods_code}/{workflow_id}
   try-this-api:
