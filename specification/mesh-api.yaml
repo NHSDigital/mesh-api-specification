@@ -357,6 +357,8 @@ paths:
                     items:
                       type: string
       summary: Look up MESH address
+      tags:
+      - Lookup
   /messageexchange/{mailbox_id}:
     get:
       description: |
@@ -444,6 +446,8 @@ paths:
               schema:
                 type: object
       summary: Validate a mailbox (Handshake)
+      tags:
+      - Handshake
   /messageexchange/{mailbox_id}/count:
     get:
       description: |
@@ -495,6 +499,8 @@ paths:
         '403':
           description: Authentication failed
       summary: Check an inbox count (deprecated)
+      tags:
+      - Inbox
   /messageexchange/{mailbox_id}/inbox:
     get:
       description: |-
@@ -576,6 +582,8 @@ paths:
                     example: Description of the status
                     description: Description of the status
       summary: Check an inbox
+      tags:
+      - Inbox
   /messageexchange/{mailbox_id}/inbox/{message_id}:
     get:
       description: |-
@@ -657,6 +665,8 @@ paths:
               schema:
                 type: object
       summary: Download message
+      tags:
+      - Inbox
   /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged:
     put:
       description: |-
@@ -723,8 +733,9 @@ paths:
                     example: 20200529155357895317_3573F8
         '403':
           description: Authentication failed
-
       summary: Acknowledge message
+      tags:
+      - Inbox
   /messageexchange/{mailbox_id}/inbox/{message_id}/{chunkNo}:
     get:
       description: |
@@ -899,6 +910,8 @@ paths:
               schema:
                 type: object
       summary: Download message chunk
+      tags:
+      - Inbox
   /messageexchange/{mailbox_id}/outbox:
     post:
       description: |-
@@ -1062,6 +1075,8 @@ paths:
                     type: string
                     description: Description of the status
       summary: Send message
+      tags:
+      - Outbox
   /messageexchange/{mailbox_id}/outbox/tracking:
     get:
       description: |
@@ -1332,6 +1347,8 @@ paths:
               schema:
                 type: object
       summary: Track outbox
+      tags:
+      - Tracking
   /messageexchange/{mailbox_id}/outbox/tracking/{local_id}:
     get:
       description: |
@@ -1361,7 +1378,6 @@ paths:
           example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
           schema:
             type: string
-
       responses:
         '200':
           description: OK
@@ -1500,6 +1516,8 @@ paths:
               schema:
                 type: object
       summary: Track outbox (deprecated)
+      tags:
+      - Tracking
   /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}:
     post:
       description: |-
@@ -1646,9 +1664,9 @@ paths:
                     description: chunkNo assigned to the chunk as supplied in the Mex-chunk-range header, maintained for legacy support
         '403':
           description: Authentication failed
-
       summary: Send chunked message
-
+      tags:
+      - Outbox
 components:
   parameters:
     mailbox_id:
@@ -1880,38 +1898,38 @@ servers:
   - url: 'https://mesh-sync.spineservices.nhs.uk'
     description: Production
 x-spec-publication:
-  operation-order:
-    - group: Handshake
-      operations:
-        - method: GET
-          path: /messageexchange/{mailbox_id}
-    - group: Inbox
-      operations:
-        - method: GET
-          path: /messageexchange/{mailbox_id}/inbox
-        - method: GET
-          path: /messageexchange/{mailbox_id}/inbox/{message_id}
-        - method: GET
-          path: /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged
-        - method: GET
-          path: /messageexchange/{mailbox_id}/inbox/{message_id}/{chunkNo}
-        - method: GET
-          path: /messageexchange/{mailbox_id}/count
-    - group: Outbox
-      operations:
-        - method: POST
-          path: /messageexchange/{mailbox_id}/outbox
-        - method: POST
-          path: /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}
-    - group: Tracking
-      operations:
-        - method: GET
-          path: /messageexchange/{mailbox_id}/outbox/tracking
-        - method: GET
-          path: /messageexchange/{mailbox_id}/outbox/tracking/{local_id}
-    - group: Lookup
-      operations:
-        - method: GET
-          path: /messageexchange/endpointlookup/{ods_code}/{workflow_id}
+#  operation-order:
+#    - group: Handshake
+#      operations:
+#        - method: GET
+#          path: /messageexchange/{mailbox_id}
+#    - group: Inbox
+#      operations:
+#        - method: GET
+#          path: /messageexchange/{mailbox_id}/inbox
+#        - method: GET
+#          path: /messageexchange/{mailbox_id}/inbox/{message_id}
+#        - method: GET
+#          path: /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged
+#        - method: GET
+#          path: /messageexchange/{mailbox_id}/inbox/{message_id}/{chunkNo}
+#        - method: GET
+#          path: /messageexchange/{mailbox_id}/count
+#    - group: Outbox
+#      operations:
+#        - method: POST
+#          path: /messageexchange/{mailbox_id}/outbox
+#        - method: POST
+#          path: /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}
+#    - group: Tracking
+#      operations:
+#        - method: GET
+#          path: /messageexchange/{mailbox_id}/outbox/tracking
+#        - method: GET
+#          path: /messageexchange/{mailbox_id}/outbox/tracking/{local_id}
+#    - group: Lookup
+#      operations:
+#        - method: GET
+#          path: /messageexchange/endpointlookup/{ods_code}/{workflow_id}
   try-this-api:
     disabled: true
