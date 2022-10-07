@@ -273,92 +273,6 @@ info:
   version: v1.0.168-alpha
 openapi: 3.0.2
 paths:
-  /messageexchange/endpointlookup/{ods_code}/{workflow_id}:
-    get:
-      description: |
-        ## Overview
-        Use this endpoint to search for the mailbox of the organisation you want to send data to, using their unique [Organisation Data Service (ODS) code](https://odsportal.hscic.gov.uk/Organisation/Search), their MESH mailbox and the agreed workflow identifier for the data. 
-
-        An example call:
-
-        ### Request
-
-        ```shell
-        curl -k \
-        --cacert 'mesh-ca.pem' \
-        --key 'mesh-client-key.pem' \
-        --cert 'mesh-client-cert.pem' \
-        https://mesh-sync.spineservices.nhs.uk/messageexchange/endpointlookup/SCREEN2/SPINE_GPCAPITATION_EXTRACT
-        ```
-
-        ### Response
-
-        ```json
-        {
-          "query_id": "20200601131040203367_A441C2_1573484974",
-          "results": [
-            {
-              "endpoint_type": "MESH",
-              "description": "Breast Cancer Screening Services",
-              "address": "X26HC022"
-            },
-            {
-              "endpoint_type": "MESH",
-              "description": "AAA Screening Services",
-              "address": "X26HC021"
-            },
-            { 
-            "endpoint_type": "MESH",
-              "description": "Bowel Cancer Screening Services (England, DMS)",
-              "address": "X26HC020"
-            }
-          ]
-        }
-        ```
-
-        **Note:** neither the ODS code or workflow identifier in this example are real.
-
-      operationId: mesh-address-lookup
-      parameters:
-        - in: path
-          name: ods_code
-          required: true
-          description: All health and social care organisations have a unique ODS code
-          example: SCREEN2
-          schema:
-            type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-        - in: path
-          name: workflow_id
-          required: true
-          description: Workflow ID
-          example: '{Workflow ID}'
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  query_id:
-                    type: string
-                    example: 20200601131040203367_A441C2_1573484974
-                  results:
-                    type: array
-                    items:
-                      type: string
-      summary: Look up MESH address
-      tags:
-      - Lookup
   /messageexchange/{mailbox_id}:
     get:
       description: |
@@ -446,61 +360,6 @@ paths:
               schema:
                 type: object
       summary: Validate a mailbox (Handshake)
-      tags:
-      - Handshake
-  /messageexchange/{mailbox_id}/count:
-    get:
-      description: |
-        ## Overview
-        Use this endpoint to check the number of messages currently held in the MESH mailbox that are ready to download.
-
-        This endpoint is now deprecated as it is not needed as part of the polling cycle.
-      deprecated: true
-      operationId: check-inbox-count
-      parameters:
-        - name: mailbox_id
-          in: path
-          required: true
-          description: The ID of the mailbox
-          example: MAILBOX01
-          schema:
-            type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    description: number of messages in mailbox
-                  internalID:
-                    type: string
-                    description: Internal reference for diagnosis of errors
-                    example: 20200603094542820500_AEA7BA_1573484974
-                  allResultsIncluded:
-                    type: boolean
-                    description: 'In rare cases not all results can be included, if false the mailbox needs to download.'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-        '403':
-          description: Authentication failed
-      summary: Check an inbox count (deprecated)
-      tags:
-      - Inbox
   /messageexchange/{mailbox_id}/inbox:
     get:
       description: |-
@@ -582,8 +441,6 @@ paths:
                     example: Description of the status
                     description: Description of the status
       summary: Check an inbox
-      tags:
-      - Inbox
   /messageexchange/{mailbox_id}/inbox/{message_id}:
     get:
       description: |-
@@ -665,8 +522,6 @@ paths:
               schema:
                 type: object
       summary: Download message
-      tags:
-      - Inbox
   /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged:
     put:
       description: |-
@@ -734,8 +589,6 @@ paths:
         '403':
           description: Authentication failed
       summary: Acknowledge message
-      tags:
-      - Inbox
   /messageexchange/{mailbox_id}/inbox/{message_id}/{chunkNo}:
     get:
       description: |
@@ -910,8 +763,57 @@ paths:
               schema:
                 type: object
       summary: Download message chunk
-      tags:
-      - Inbox
+  /messageexchange/{mailbox_id}/count:
+    get:
+      description: |
+        ## Overview
+        Use this endpoint to check the number of messages currently held in the MESH mailbox that are ready to download.
+
+        This endpoint is now deprecated as it is not needed as part of the polling cycle.
+      deprecated: true
+      operationId: check-inbox-count
+      parameters:
+        - name: mailbox_id
+          in: path
+          required: true
+          description: The ID of the mailbox
+          example: MAILBOX01
+          schema:
+            type: string
+        - in: header
+          name: Authorization
+          required: true
+          description: Authentication headers
+          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: number of messages in mailbox
+                  internalID:
+                    type: string
+                    description: Internal reference for diagnosis of errors
+                    example: 20200603094542820500_AEA7BA_1573484974
+                  allResultsIncluded:
+                    type: boolean
+                    description: 'In rare cases not all results can be included, if false the mailbox needs to download.'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+        '403':
+          description: Authentication failed
+      summary: Check an inbox count (deprecated)
   /messageexchange/{mailbox_id}/outbox:
     post:
       description: |-
@@ -1075,8 +977,153 @@ paths:
                     type: string
                     description: Description of the status
       summary: Send message
-      tags:
-      - Outbox
+  /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}:
+    post:
+      description: |-
+        ## Overview
+        Use this endpoint to send a chunked message. The 'Send Message' endpoint has a maximum single request message payload size of 100MB over HSCN or 20MB over the internet. However, you can send much larger messages (up to 20GB) by breaking up the message into chunks and transmitting it over multiple requests. 
+
+        **Note**: Some workflow ids do not support chunking because it is not currently supported in the MESH UI and older versions of the MESH client. Check with your receiving organisation before sending messages with this endpoint.
+        
+        To send a chunked message:
+
+        1. Split it into separate files
+        2. Compress the individual chunks **separately** with the **same** compression program (e.g. `gzip`).
+            - **DO NOT** compress a large file and then split the compressed version
+        3. Upload the first file using the normal 'Send message' endpoint.
+            - include the `Mex-Chunk-Range` header with a value of `1:n` where `n` is the number of separate files your big data is split into
+            - capture the message identifier field in the returned JSON
+        4. Upload subsequent files in the correct order using the chunked message endpoint
+
+        **Note:** fewer headers are required for the chunked message endpoint because Spine uses the relevant metadata from the initial (`Mex-Chunk-Header=1:n`) call to the 'Send message' endpoint.
+
+        ### Request
+
+        Suppose Bob has a large file to send to Alice. In this example we will use **message.txt**. It is easily small enough to send in a single request, but we will chunk it anyway to illustrate the API calls.
+        ```shell
+        ls -sh message.txt
+        4.0kb message.txt
+        ```
+        ```shell
+        cat message.txt
+
+        Hi Alice,
+
+        This is Bob. It's really nice that we can communicate via SPINE!
+
+        I hope to hear more from you in the future,
+
+        Bob.
+        ```
+
+        First we break up our one "large" file into two smaller files. We will transmit one per request.
+
+        ```shell
+        split -b 100 message.txt message.txt_
+        ls -sh message.txt_*
+        ```
+        Large messages should be compressed to reduce the bandwidth and storage requirements for Spine.
+
+        ```shell
+        for chunk_file in message.txt_*; do
+            gzip -k -f $chunk_file;
+        done
+        ls -sh message.txt_*.gz
+
+        4.0kb message.txt_aa.gz
+        4.0kb message.txt_ab.gz
+        ```
+        ```shell
+        curl -k \
+        --cacert 'mesh-ca.pem' \
+        --key 'mesh-client-key.pem' \
+        --cert 'mesh-client-cert.pem' \
+        --request 'POST' \
+        --header 'Authorization: NHSMESH X26HC006:2c6e938e-9a72-4a7a-9664-96ac1f341331:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'Content-Type: application/octet-stream' \
+        --header 'Mex-From: X26HC006' \
+        --header 'Mex-To: X26HC005' \
+        --header 'Mex-WorkflowID: API-DOCS-TEST' \
+        --header 'Mex-FileName: message.txt.gz' \
+        --header 'Mex-LocalID: api-docs-bob-sends-alice-a-chunked-file' \
+        --header 'Mex-Chunk-Range: 1:2' \
+        --header 'Content-Encoding: gzip' \
+        --data-binary '@message.txt_aa.gz' \
+        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox
+        ```
+        ```shell
+        curl -k \
+        --cacert 'mesh-ca.pem' \
+        --key 'mesh-client-key.pem' \
+        --cert 'mesh-client-cert.pem' \
+        --request 'POST' \
+        --header 'Authorization: NHSMESH X26HC006:06bf0527-ba77-47f0-b22f-d7d08a88ad26:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'Mex-Chunk-Range: 2:2' \
+        --data-binary '@./message.txt_ab.gz' \
+        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/20200601122152994285_D59900/2
+        ```
+      operationId: send-chunked-message
+      parameters:
+        - name: mailbox_id
+          in: path
+          required: true
+          description: The ID of the mailbox
+          example: MAILBOX01
+          schema:
+            type: string
+        - in: header
+          name: Authorization
+          required: true
+          description: Authentication headers
+          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          schema:
+            type: string
+        - in: path
+          name: message_id
+          required: true
+          description: The ID of the message
+          schema:
+            type: string
+        - in: path
+          name: chunkNo
+          required: true
+          description: The index number of the chunk
+          example: 1
+          schema:
+            type: integer
+        - in: header
+          name: Content-Type
+          required: true
+          description: Type of sent content
+          example: application/octet-stream
+          schema:
+            type: string
+        - in: header
+          name: Mex-Chunk-Range
+          required: true
+          description: describes which chunk of the range is sent.
+          example: '124'
+          schema:
+            type: string
+            format: 'integer:integer'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messageID:
+                    type: string
+                    example: 20200529155357895317_3573F8
+                    description: 'Unique message ID, identical to initial Send message endpoint'
+                  blockId:
+                    type: integer
+                    description: chunkNo assigned to the chunk as supplied in the Mex-chunk-range header, maintained for legacy support
+        '403':
+          description: Authentication failed
+      summary: Send chunked message
   /messageexchange/{mailbox_id}/outbox/tracking:
     get:
       description: |
@@ -1347,8 +1394,6 @@ paths:
               schema:
                 type: object
       summary: Track outbox
-      tags:
-      - Tracking
   /messageexchange/{mailbox_id}/outbox/tracking/{local_id}:
     get:
       description: |
@@ -1516,100 +1561,58 @@ paths:
               schema:
                 type: object
       summary: Track outbox (deprecated)
-      tags:
-      - Tracking
-  /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}:
-    post:
-      description: |-
+  /messageexchange/endpointlookup/{ods_code}/{workflow_id}:
+    get:
+      description: |
         ## Overview
-        Use this endpoint to send a chunked message. The 'Send Message' endpoint has a maximum single request message payload size of 100MB over HSCN or 20MB over the internet. However, you can send much larger messages (up to 20GB) by breaking up the message into chunks and transmitting it over multiple requests. 
+        Use this endpoint to search for the mailbox of the organisation you want to send data to, using their unique [Organisation Data Service (ODS) code](https://odsportal.hscic.gov.uk/Organisation/Search), their MESH mailbox and the agreed workflow identifier for the data. 
 
-        **Note**: Some workflow ids do not support chunking because it is not currently supported in the MESH UI and older versions of the MESH client. Check with your receiving organisation before sending messages with this endpoint.
-        
-        To send a chunked message:
-
-        1. Split it into separate files
-        2. Compress the individual chunks **separately** with the **same** compression program (e.g. `gzip`).
-            - **DO NOT** compress a large file and then split the compressed version
-        3. Upload the first file using the normal 'Send message' endpoint.
-            - include the `Mex-Chunk-Range` header with a value of `1:n` where `n` is the number of separate files your big data is split into
-            - capture the message identifier field in the returned JSON
-        4. Upload subsequent files in the correct order using the chunked message endpoint
-
-        **Note:** fewer headers are required for the chunked message endpoint because Spine uses the relevant metadata from the initial (`Mex-Chunk-Header=1:n`) call to the 'Send message' endpoint.
+        An example call:
 
         ### Request
 
-        Suppose Bob has a large file to send to Alice. In this example we will use **message.txt**. It is easily small enough to send in a single request, but we will chunk it anyway to illustrate the API calls.
-        ```shell
-        ls -sh message.txt
-        4.0kb message.txt
-        ```
-        ```shell
-        cat message.txt
-
-        Hi Alice,
-
-        This is Bob. It's really nice that we can communicate via SPINE!
-
-        I hope to hear more from you in the future,
-
-        Bob.
-        ```
-
-        First we break up our one "large" file into two smaller files. We will transmit one per request.
-
-        ```shell
-        split -b 100 message.txt message.txt_
-        ls -sh message.txt_*
-        ```
-        Large messages should be compressed to reduce the bandwidth and storage requirements for Spine.
-
-        ```shell
-        for chunk_file in message.txt_*; do
-            gzip -k -f $chunk_file;
-        done
-        ls -sh message.txt_*.gz
-
-        4.0kb message.txt_aa.gz
-        4.0kb message.txt_ab.gz
-        ```
         ```shell
         curl -k \
         --cacert 'mesh-ca.pem' \
         --key 'mesh-client-key.pem' \
         --cert 'mesh-client-cert.pem' \
-        --request 'POST' \
-        --header 'Authorization: NHSMESH X26HC006:2c6e938e-9a72-4a7a-9664-96ac1f341331:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        --header 'Content-Type: application/octet-stream' \
-        --header 'Mex-From: X26HC006' \
-        --header 'Mex-To: X26HC005' \
-        --header 'Mex-WorkflowID: API-DOCS-TEST' \
-        --header 'Mex-FileName: message.txt.gz' \
-        --header 'Mex-LocalID: api-docs-bob-sends-alice-a-chunked-file' \
-        --header 'Mex-Chunk-Range: 1:2' \
-        --header 'Content-Encoding: gzip' \
-        --data-binary '@message.txt_aa.gz' \
-        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox
+        https://mesh-sync.spineservices.nhs.uk/messageexchange/endpointlookup/SCREEN2/SPINE_GPCAPITATION_EXTRACT
         ```
-        ```shell
-        curl -k \
-        --cacert 'mesh-ca.pem' \
-        --key 'mesh-client-key.pem' \
-        --cert 'mesh-client-cert.pem' \
-        --request 'POST' \
-        --header 'Authorization: NHSMESH X26HC006:06bf0527-ba77-47f0-b22f-d7d08a88ad26:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        --header 'Mex-Chunk-Range: 2:2' \
-        --data-binary '@./message.txt_ab.gz' \
-        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/20200601122152994285_D59900/2
+
+        ### Response
+
+        ```json
+        {
+          "query_id": "20200601131040203367_A441C2_1573484974",
+          "results": [
+            {
+              "endpoint_type": "MESH",
+              "description": "Breast Cancer Screening Services",
+              "address": "X26HC022"
+            },
+            {
+              "endpoint_type": "MESH",
+              "description": "AAA Screening Services",
+              "address": "X26HC021"
+            },
+            { 
+            "endpoint_type": "MESH",
+              "description": "Bowel Cancer Screening Services (England, DMS)",
+              "address": "X26HC020"
+            }
+          ]
+        }
         ```
-      operationId: send-chunked-message
+
+        **Note:** neither the ODS code or workflow identifier in this example are real.
+
+      operationId: mesh-address-lookup
       parameters:
-        - name: mailbox_id
-          in: path
+        - in: path
+          name: ods_code
           required: true
-          description: The ID of the mailbox
-          example: MAILBOX01
+          description: All health and social care organisations have a unique ODS code
+          example: SCREEN2
           schema:
             type: string
         - in: header
@@ -1620,53 +1623,28 @@ paths:
           schema:
             type: string
         - in: path
-          name: message_id
+          name: workflow_id
           required: true
-          description: The ID of the message
+          description: Workflow ID
+          example: '{Workflow ID}'
           schema:
             type: string
-        - in: path
-          name: chunkNo
-          required: true
-          description: The index number of the chunk
-          example: 1
-          schema:
-            type: integer
-        - in: header
-          name: Content-Type
-          required: true
-          description: Type of sent content
-          example: application/octet-stream
-          schema:
-            type: string
-        - in: header
-          name: Mex-Chunk-Range
-          required: true
-          description: describes which chunk of the range is sent.
-          example: '124'
-          schema:
-            type: string
-            format: 'integer:integer'
       responses:
-        '202':
-          description: Accepted
+        '200':
+          description: OK
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  messageID:
+                  query_id:
                     type: string
-                    example: 20200529155357895317_3573F8
-                    description: 'Unique message ID, identical to initial Send message endpoint'
-                  blockId:
-                    type: integer
-                    description: chunkNo assigned to the chunk as supplied in the Mex-chunk-range header, maintained for legacy support
-        '403':
-          description: Authentication failed
-      summary: Send chunked message
-      tags:
-      - Outbox
+                    example: 20200601131040203367_A441C2_1573484974
+                  results:
+                    type: array
+                    items:
+                      type: string
+      summary: Look up MESH address
 components:
   parameters:
     mailbox_id:
@@ -1899,28 +1877,37 @@ servers:
     description: Production
 x-spec-publication:
   operation-order:
-  - operations:
-    - method: GET
-      path: /messageexchange/{mailbox_id}
-    - method: GET
-      path: /messageexchange/{mailbox_id}/inbox
-    - method: GET
-      path: /messageexchange/{mailbox_id}/inbox/{message_id}
-    - method: GET
-      path: /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged
-    - method: GET
-      path: /messageexchange/{mailbox_id}/inbox/{message_id}/{chunkNo}
-    - method: GET
-      path: /messageexchange/{mailbox_id}/count
-    - method: POST
-      path: /messageexchange/{mailbox_id}/outbox
-    - method: POST
-      path: /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}
-    - method: GET
-      path: /messageexchange/{mailbox_id}/outbox/tracking
-    - method: GET
-      path: /messageexchange/{mailbox_id}/outbox/tracking/{local_id}
-    - method: GET
-      path: /messageexchange/endpointlookup/{ods_code}/{workflow_id}
+    - group: Handshake
+      operations:
+      - method: GET
+        path: /messageexchange/{mailbox_id}
+    - group: Inbox
+      operations:
+      - method: GET
+        path: /messageexchange/{mailbox_id}/inbox
+      - method: GET
+        path: /messageexchange/{mailbox_id}/inbox/{message_id}
+      - method: GET
+        path: /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged
+      - method: GET
+        path: /messageexchange/{mailbox_id}/inbox/{message_id}/{chunkNo}
+      - method: GET
+        path: /messageexchange/{mailbox_id}/count
+    - group: Outbox
+      operations:
+      - method: POST
+        path: /messageexchange/{mailbox_id}/outbox
+      - method: POST
+        path: /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}
+    - group: Tracking
+      operations:
+      - method: GET
+        path: /messageexchange/{mailbox_id}/outbox/tracking
+      - method: GET
+        path: /messageexchange/{mailbox_id}/outbox/tracking/{local_id}
+    - group: Lookup
+      operations:
+      - method: GET
+        path: /messageexchange/endpointlookup/{ods_code}/{workflow_id}
   try-this-api:
     disabled: true
