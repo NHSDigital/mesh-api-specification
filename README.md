@@ -2,6 +2,8 @@
 
 ![Build](https://github.com/NHSDigital/mesh-api-api/workflows/Build/badge.svg?branch=master)
 
+* IMPORTANT: please read, https://nhsd-confluence.digital.nhs.uk/display/APM/Previewing+API+specification+on+Bloomreach+UAT+website
+
 This is a RESTful HL7® FHIR® API specification for the *Message Exchange for Social Care and Health (MESH) API*.
 
 * `specification/` This [Open API Specification](https://swagger.io/docs/specification/about/) describes the endpoints, methods and messages exchanged by the API. Use it to generate interactive documentation; the contract between the API and its consumers.
