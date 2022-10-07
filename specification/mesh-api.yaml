@@ -1898,29 +1898,5 @@ servers:
   - url: 'https://mesh-sync.spineservices.nhs.uk'
     description: Production
 x-spec-publication:
-  operation-order:
-    operations:
-    - method: GET
-      path: /messageexchange/{mailbox_id}
-    - method: GET
-      path: /messageexchange/{mailbox_id}/inbox
-    - method: GET
-      path: /messageexchange/{mailbox_id}/inbox/{message_id}
-    - method: GET
-      path: /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged
-    - method: GET
-      path: /messageexchange/{mailbox_id}/inbox/{message_id}/{chunkNo}
-    - method: GET
-      path: /messageexchange/{mailbox_id}/count
-    - method: POST
-      path: /messageexchange/{mailbox_id}/outbox
-    - method: POST
-      path: /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}
-    - method: GET
-      path: /messageexchange/{mailbox_id}/outbox/tracking
-    - method: GET
-      path: /messageexchange/{mailbox_id}/outbox/tracking/{local_id}
-    - method: GET
-      path: /messageexchange/endpointlookup/{ods_code}/{workflow_id}
   try-this-api:
     disabled: true
