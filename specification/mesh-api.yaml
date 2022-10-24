@@ -46,7 +46,7 @@ info:
     our API for publishing and subscribing to healthcare events such as updates to patient demographic details.
 
     ## API status and roadmap
-    This API is currently [stable](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status).
+    This API is [in production](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses).
 
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?tag=mesh-api).
     
