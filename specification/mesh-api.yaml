@@ -4,40 +4,137 @@ info:
     name: National Service Desk
   description: |
     ## Overview
-    Use this API to securely transfer healthcare data between organisations using the [Message Exchange for Social Care and Health (MESH)](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh), which is a component of [Spine](https://digital.nhs.uk/services/spine).
 
-    You interact with MESH via a virtual mailbox, only accessible to your organisation, by making calls to this API from your application.
+    Use this API to securely transfer healthcare data between organisations using the Message Exchange for Social Care and Health (MESH). You interact with MESH via a virtual mailbox, only accessible to your organisation, by making calls to this API from your application.
 
-    You can:
+    With the API, you can:
+    
+    - check the number of messages in your inbox
+    - get the messageIds of messages in your inbox that are ready for download
+    - download a message, or a larger message which was sent to you as a series of chunks
+    - acknowledge the successful download of a message, which removes it from your inbox
+    - look up the mailbox of an organisation you want to send data to
+    - send a message, or a larger message as series of chunks
+    - track the status of messages that you sent from your outbox
+    - validate your mailbox every 24 hours to let Spine know it's still active
 
-      - check the number of messages in your inbox
-      - get the messageIds of messages in your inbox that are ready for download
-      - download a message, or a larger message which was sent to you as a series of chunks
-      - acknowledge the successful download of a message, which removes it from your inbox
-      - look up the mailbox of an organisation you want to send data to
-      - send a message, or a larger message as series of chunks
-      - track the status of messages that you sent from your outbox
-      - validate your mailbox every 24 hours to let Spine know it's still active
-     
+    This API can only be used where there is a legal basis to do so.
+
+    The onboarding process for the API is longer than other MESH options. This is because we need to know that the product you’re developing meets our security standards. The length of time it takes to onboard is heavily dependent on the resources your organisation puts into the process in developing your software and completing the application form. Expect the process to take a month or more.
+
+    ### Get started
+
+    You will need:
+    - a developer account to access the digital onboarding service
+    - a MESH mailbox (with a unique ID and password)
+    - a client Transport Layer Security (TLS) certificate
+    - an environment shared secret to include it within the [MESH authorization header](#api-description__mesh-authorization-header)
+
+    We will provide these at different stages of your onboarding process.
+
+    ## Onboarding
+    You need to get your software approved by us before it can go live with this API. This assurance process is managed by the [digital onboarding service](https://digital.nhs.uk/developer/guides-and-documentation/digital-onboarding). The steps below outline the full onboarding journey.
+
+    ### 1. Create a developer account
+
+    You will need to create a developer account to access the [digital onboarding service](https://digital.nhs.uk/developer/guides-and-documentation/digital-onboarding) where you will start and manage your MESH API application.
+
+    Make sure no one else in your organisation has started a MESH API application, as we cannot merge the applications.
+
+    [Sign in or create a developer account](https://onboarding.prod.api.platform.nhs.uk)
+
+    ### 2. Start your MESH application
+
+    Once you’ve activated your developer account and logged into it for the first time, you’ll need to:
+    - tell us your organisation name
+    - tell us the name of your product
+    - select MESH from the ‘APIs to be used’ list
+
+    ### 3. Tell us how you’ll use the MESH API
+    You must show you have an appropriate reason to use the MESH API. You do this by completing and submitting the ‘Setup and eligibility section’ of your developer account which will be reviewed by a member of our team.
+
+    You will receive a response within 10 working days.
+
+    If you have been approved to use the MESH API, our assurance team will contact you via email with a supplier pack containing the testing requirements you will need to fulfill. You will work alongside this team to get your solution assured.
+
+    ### 4. Get your mailbox for the Path to live - integration environment
+
+    Once we have approved your request, apply for a MESH mailbox to be used in a Path to live - integration environment.
+
+    You interact with MESH via a virtual mailbox by making calls to this API from your software. Your MESH mailbox can only be accessed by your organisation.
+
     Messages must have a:
+    - sender mailbox ID
+    - receiver mailbox ID
+    - workflow ID
 
-      - sender mailbox ID
-      - receiver mailbox ID
-      - workflow ID provided by MESH, that identifies what type of data the message contains, so the receiving organisation knows how to process it. For example, the receiver might process X-ray image data differently from blood test results.
+    The workflow ID identifies what type of data the message contains, so the receiving organisation knows how to process it. For example, the receiver might process X-ray image data differently from blood test results.
 
-    You can also interact with MESH via a Java-based [MESH client](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-client) or a web-based [MESH User Interface](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface).
+    To apply for a MESH mailbox, you need to provide information about:
+    - your organisation
+    - the people responsible for managing your MESH mailbox
+    - the [workflow groups and IDs](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/workflow-groups-and-workflow-ids) associated with the messages you're sending
 
-    ## Who can use this API
-    This API can only be used where there is a legal basis to do so. You should make an access request before you go too far with your development.
+    [Apply for a MESH mailbox](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
 
-    You must have made this request before you can go live (see 'Onboarding' below).
+    ### 5. Receive your credentials for the Path to live - integration environment
 
-    ## Prerequisites
-    You must [register with MESH](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox) to use the API. As part your registration, we will provide you with these items:
-      - MESH mailbox (with a unique ID and password)
-      - client Transport Layer Security (TLS) certificates
-      - environment shared secret
-      - list of workflow IDs to identify types of messages your organisation will send and receive
+    Once you have applied, we will email you your mailbox ID and password. Keep this safe as they will be required to access your MESH mailbox. We’ll ask you for this if you need help from our support teams.
+
+    You will receive the shared secret. You’ll need to include this in the [MESH authorization header](#api-description__mesh-authorization-header) when you develop this part of your software.
+
+    ### 6. Get a Transport Layer Security (TLS) certificate
+
+    The MESH API requires a certificate to connect to the MESH server to send and receive messages. This ensures communication is safe and secure.
+
+    [Find out how to get a certificate](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/certificate-guidance)
+
+    ### 7. Develop and test your software with the MESH API
+
+    Now that you have a MESH mailbox for a path to live - integration environment, start developing your software using the MESH API.
+
+    ### 8. Get a technical conformance certificate
+
+    A technical conformance certificate is proof that your software has been developed to our standards.
+
+    To get a conformance certificate, you will need to:
+    - show that your software meets non-functional requirements
+    - show that your software meets technical conformation
+    - complete a witness test
+
+    In the Digital Onboarding Service there are specific sections to be completed to show your solution meets our non-functional requirements and technical conformance.
+
+    You would need to organise a date with the assurance team for the witness testing to take place. The witness testing should take half a day. In some cases you will be asked to prepare test data a few days before the day of the witness testing.
+
+    Once the witness test is complete, you will be issued with a technical conformance certificate.
+
+    [Sign in to the digital onboarding service](https://onboarding.prod.api.platform.nhs.uk)
+
+    ### 9. Sign connection agreement
+
+    Now that we know that your software is safe and secure, you will need to sign a connection agreement.
+
+    We will send you a customised connection agreemen to sign.
+
+    Once you’ve signed the connection agreement, you need to upload it to your developer account in the ‘Legal agreement’ section.
+
+    [Sign in to the digital onboarding service](https://onboarding.prod.api.platform.nhs.uk)
+
+    ### 10. Get a mailbox for your live software
+
+    When you’ve tested your software and need to send or receive real data, apply for a mailbox in the production environment.
+
+    [Apply for a MESH mailbox](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
+
+    ### 11. Get a Transport Layer Security (TLS) certificate for the production environment
+
+    You will now need to get a certificate to send and receive messages from a MESH mailbox in the production environment.
+
+    [Find out how to get a certificate](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/certificate-guidance)
+
+    ### 12. Deploy
+
+    You have now completed onboarding and can use the MESH API with your software.
 
     ## Related APIs
     A number of our APIs are messaging APIs that use MESH as the transport layer. For a full list, see [our API catalogue, filtered on MESH APIs](https://digital.nhs.uk/developer/api-catalogue?filter=mesh).
@@ -46,12 +143,12 @@ info:
     our API for publishing and subscribing to healthcare events such as updates to patient demographic details.
 
     ## API status and roadmap
-    This API is [in production](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses).
+    This API is [in production](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status).
 
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?tag=mesh-api).
     
     ## Service level
-    This API is a silver service, meaning it is operational 24 x 7 x 365 but only supported during business hours (8am to 6pm), Monday to Friday excluding Bank Holidays.
+    This API is a platinum service, meaning it is operational and supported 24 x 7 x 365.
 
     For more details, see [service levels](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#service-levels).
 
@@ -81,37 +178,16 @@ info:
     For any questions about our testing environments, contact our support mailbox [itoc.supportdesk@nhs.net](mailto:itoc.supportdesk@nhs.net).
 
     ### Develop against a local MESH sandbox server 
-    There is an existing (unsupported) example of a RESTful interface on [GitHub](https://github.com/NHSDigital/mesh-client). This Python client also contains a mock MESH server which you can run locally without any real MESH credentials.
+    There is a basic sandbox implementation of the MESH API available [mesh-sandbox](https://github.com/NHSDigital/mesh-sandbox).
 
-    With the example RESTful MESH client installed, you can run the mock server with: 
-
-    ```
-    python3 -m mesh_client.mock_server
-    ```
-
-    The client TLS certificates which you need to connect to the mock server are in the Python library. You can either copy them from the python library directory to your working directory, or download them from:
-
-    -   client.cert.pem
-    -   client.key.pem
-    -   ca.cert.pem
-
-    With the certificates in place, getting the URL should result in a Not Found error. 
-    Without the certificates, you will get a TLS error.
-
-    ```
-    curl -k \ 
-      --cacert 'ca.cert.pem' \
-      --key 'client.key.pem' \
-      --cert 'client.cert.pem' \
-      'https://localhost:8000/'
-    ```
+    This sandbox can be used for local development and currently does not require a client certificate
 
     ## MESH Authorization header
     Requests to the MESH API require an authorisation token in the HTTP `Authorization` header.
-    To be valid, the authorisation token must match the schema described below. The token includes cryptographic hashes of your organisation's MESH mailbox password and the environment-wide shared secret. 
+    To be valid, the authorisation token must match the schema described below. The token includes cryptographic hashes of your organisation's MESH mailbox password and the environment-wide shared secret.
     As an additional security measure each token which matches the schema is valid for one request only, so you must generate a new token for every request. Any repeated use of a token results in a `403: Not Authorized` response from the MESH API.
 
-    The authorisation token is made up of six elements. With the exception of the first and second elements, each element is separated from the next by a colon (:).
+    The authorisation token is made up of six elements. Except for the first and second elements, each element is separated from the next by a colon (:).
 
     | Name          | Description                                                                                    |
     |---------------|------------------------------------------------------------------------------------------------|
@@ -124,15 +200,15 @@ info:
 
     The `hash` is compiled of the following items:
 
-    * The `key` is the MESH environment shared secret, provided by [itoc.supportdesk@nhs.net](mailto:itoc.supportdesk@nhs.net) as part of onboarding to the PTL environment.
+    * The `shared_key` is the MESH environment shared secret, provided by [itoc.supportdesk@nhs.net](mailto:itoc.supportdesk@nhs.net) as part of onboarding to the PTL environment.
     * The `message` is the concatenation of the 5 following elements, joined by a colon (:):
       - `mailbox_id`
       - `nonce`
       - `nonce_count`
       - `mailbox_password`
-      - `timestamp` 
+      - `timestamp`
 
-    Changing the `nonce` and/or `nonce_count` elements between requests ensures the Authorization header is unique and valid. 
+    Changing the `nonce` and/or `nonce_count` elements between requests ensures the Authorization header is unique and valid.
 
     **Notes**
     - the API rejects the request if the `timestamp` supplied is not within 2 hours of the server time
@@ -140,7 +216,7 @@ info:
 
     ### Example implementation
     Here is an implementation of the above in `python3`.
-    ```python 
+    ```python
     """ Python code to generate a valid authorization header. """
     import hmac
     import uuid
@@ -185,7 +261,7 @@ info:
     ### Inbox poll cycle
     Spine gives each message a unique message identifier after you post it to your outbox. It is the primary identifier for the message during MESH transit.
 
-    Poll your mailbox at most every 5 minutes, but at least every 24 hours. The pseudocode for a mailbox poll is:
+    It is suggested to poll your mailbox every 5 minutes, but at least every 24 hours. The pseudocode for a mailbox poll is:
 
     1. Poll to get the messageIds of messages ready to download from the 'Check an inbox' endpoint.
     2. For each message identifier returned in step 1:
@@ -244,9 +320,9 @@ info:
 
     The [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. Check that the receiver's interface to MESH for your workflow identifier handles chunked messages prior to sending. To do this:
 
-    1. Determine the size of your message data (after compression) with a standard algorithm (such as `gzip`). If the compressed message is larger than 100MB or 20MB if sending over the internet, is smaller than 20GB, and the receiving mailbox / workflow identifier supports chunking, then you can send a chunked message. To prepare for this: 
+    1. Determine the size of your message data (after compression) with a standard algorithm (such as `gzip`). If the compressed message is larger than 100MB or 20MB if sending over the internet, is smaller than 20GB, and the receiving mailbox / workflow identifier supports chunking, then you can send a chunked message. To prepare for this:
         *  split the **uncompressed** data into ordered chunks
-        * **independently** compress each chunk with the **same** compression algorithm (such as `gzip`) such that each chunk is smaller than 100MB 
+        * **independently** compress each chunk with the **same** compression algorithm (such as `gzip`) such that each chunk is smaller than 100MB
         * use the first chunk (after compression) as the initial message data
     2. Send a message with appropriate workflow identifier and `Mex-To` (recipient mailbox) header. To do this:
         * optionally include a local identifier from step 2 for tracking.  This field must not contain PID.
@@ -256,18 +332,7 @@ info:
     ### Message expiration
     Messages that are not downloaded and acknowledged within five days of delivery are removed from your inbox. The sending organisation receives an error report explaining that the receiver did not collect the message. Uncollected messages are completely deleted from the MESH server 30 days after the initial delivery. If the sending organisation cannot re-send the message within the intervening time, it may contact the [NHS Digital national service desk](https://digital.nhs.uk/developer/help-and-support) with the error report details and ask for the message to be placed in your inbox again.
 
-    ## Onboarding
-    You need to get your software approved by us before it can go live with this API. We call this onboarding. The onboarding process can sometimes be quite long, so it's worth planning well ahead:
 
-    - apply for a Testing (Path to Live) mailbox using the [form](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
-    - read carefully [how to request your certificate](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/certificate-guidance#)
-        
-    This API uses our online digital onboarding process. 
-    
-    For more details, and to get started, see [digital onboarding](https://digital.nhs.uk/developer/guides-and-documentation/digital-onboarding#using-the-digital-onboarding-portal). 
-    
-    For any other queries, contact our support mailbox [ssd.nationalservicedesk@nhs.net](mailto:ssd.nationalservicedesk@nhs.net).
-    
 
   title: Message Exchange for Social Care and Health - REST API
   version: v1.0.168-alpha
