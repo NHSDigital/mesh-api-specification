@@ -15,6 +15,8 @@ Consumers of the API will find developer documentation on the [NHS Digital Devel
 ## Contributing
 Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/mesh-api-api/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/mesh-api-api/blob/master/CODE_OF_CONDUCT.md).
 
+* IMPORTANT: please read, https://nhsd-confluence.digital.nhs.uk/display/APM/Previewing+API+specification+on+Bloomreach+UAT+website
+
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
 
