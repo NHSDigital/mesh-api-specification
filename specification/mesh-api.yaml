@@ -212,7 +212,7 @@ info:
 
     **Notes**
     - the API rejects the request if the `timestamp` supplied is not within 2 hours of the server time
-    - in the example below `HMACSECRETKEY` has been `[REDACTED]`, this is the 'environment shared secret' which you received as part of creating your mailbox
+    - in the example below `SHARED_KEY` has been `[REDACTED]`, this is the 'environment shared secret' which you received as part of creating your mailbox
 
     ### Example implementation
     Here is an implementation of the above in `python3`.
@@ -222,11 +222,11 @@ info:
     import uuid
     import datetime from hashlib
     import sha256
-
+    
     AUTHSCHEMANAME = "NHSMESH " # Note: Space at the end of the schema.
-    HMACSECRETKEY = "[REDACTED]" # Note: Don't hard code your passwords in a real implementation.
-
-    def buildmeshauthorizationheader(mailboxid: str, password: str = "password", nonce: str = None, noncecount: int = 0):
+    SHARED_KEY = "[REDACTED]" # Note: Don't hard code your passwords in a real implementation.
+    
+    def build_auth_header(mailbox_id: str, password: str = "password", nonce: str = None, noncecount: int = 0):
       """ Generate MESH Authorization header for mailboxid. """
       #Generate a GUID if required.
       if not nonce:
@@ -239,7 +239,7 @@ info:
       hmac_msg = mailbox_id + ":" + nonce + ":" + str(nonce_count) + ":" + password + ":" + timestamp
       
       #HMAC is a standard crypto hash method built in the python standard library.
-      hash_code = hmac.HMAC(HMAC_SECRET_KEY.encode(), hmac_msg.encode(), sha256).hexdigest()
+      hash_code = hmac.HMAC(SHARED_KEY.encode(), hmac_msg.encode(), sha256).hexdigest()
       return (
         AUTH_SCHEMA_NAME # Note: No colon between 1st and 2nd elements.
         + mailbox_id + ":"
@@ -247,7 +247,7 @@ info:
         + str(nonce_count) + ":"
         + timestamp+ ":"
         + hash_code
-    )
+      )
     ```
 
     ## MESH API pseudocode
