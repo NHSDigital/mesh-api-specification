@@ -18,6 +18,7 @@ info:
     - track the status of messages that you sent from your outbox
     - validate your mailbox every 24 hours to let Spine know it's still active
 
+
     This API can only be used where there is a legal basis to do so.
 
     The onboarding process for the API is longer than other MESH options. This is because we need to know that the product you’re developing meets our security standards. The length of time it takes to onboard is heavily dependent on the resources your organisation puts into the process in developing your software and completing the application form. Expect the process to take a month or more.
