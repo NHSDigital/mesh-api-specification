@@ -175,6 +175,7 @@ info:
     | Production    | Internet             | `https://mesh-sync.spineservices.nhs.uk/` |
 
     **Note** - each environment has the same shared secret but requires different client TLS certificates.
+
     For any questions about our testing environments, contact our support mailbox [itoc.supportdesk@nhs.net](mailto:itoc.supportdesk@nhs.net).
 
     ### Develop against a local MESH sandbox server 
