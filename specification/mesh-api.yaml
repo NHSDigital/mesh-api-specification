@@ -558,8 +558,8 @@ paths:
                     description: number of messages in mailbox
                   internalID:
                     type: string
-                    description: Internal reference for diagnosis of errors
-                    example: 20200603094542820500_AEA7BA_1573484974
+                    description: internal identifier to help error diagnosis, be aware the format of this may change in line with internal system changes and the format should not be parsed or validated or otherwise depended on
+                    example: 20200601122152994285_af20cED
                   allResultsIncluded:
                     type: boolean
                     description: 'In rare cases not all results can be included, if false the mailbox needs to download.'
