@@ -54,7 +54,7 @@ info:
     
     ### Versioning
   
-    MESH API now has BETA support for versioning on certain endpoints in order to allow us to safely make new features and capabilities available to API consumers. For information on how to call a versioned API endpoint see [API Versioning](#section/API-Versioning).
+    MESH API now has BETA support for versioning on certain endpoints in order to allow us to safely make new features and capabilities available to API consumers. For information on how to call a versioned API endpoint see [API Versioning](#api-description__api-versioning).
 
     ### Get started
     
