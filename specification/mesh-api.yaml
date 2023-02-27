@@ -5,136 +5,187 @@ info:
   description: |
     ## Overview
 
-    Use this API to securely transfer healthcare data between organisations using the Message Exchange for Social Care and Health (MESH). You interact with MESH via a virtual mailbox, only accessible to your organisation, by making calls to this API from your application.
+    You interact with MESH by making calls to this API from your application.
 
     With the API, you can:
     
     - check the number of messages in your inbox
-    - get the messageIds of messages in your inbox that are ready for download
+    - send a message, or a larger message as series of chunks
     - download a message, or a larger message which was sent to you as a series of chunks
     - acknowledge the successful download of a message, which removes it from your inbox
-    - look up the mailbox of an organisation you want to send data to
-    - send a message, or a larger message as series of chunks
+    - get the identifiers of messages in your inbox that are ready for download
     - track the status of messages that you sent from your outbox
+    - look up the mailbox of an organisation you want to send data to
     - validate your mailbox every 24 hours to let Spine know it's still active
 
-    This API can only be used where there is a legal basis to do so.
+    ## Who can use this API
 
-    The onboarding process for the API is longer than other MESH options. This is because we need to know that the product you’re developing meets our security standards. The length of time it takes to onboard is heavily dependent on the resources your organisation puts into the process in developing your software and completing the application form. Expect the process to take a month or more.
+    This API can only be used where there is a legal basis to do so. We'll ask you to demonstrate this as part of the digital onboarding process before your software goes live.
+
+    ## Requirements for using this API
+    There are 2 parts to getting the MESH API, these are:
+    
+    1. developing and integrating your software
+    2. getting your software approved to go live
+
+    ### 1. Developing and integrating your software
+
+    You'll need some things at different stages of your development to integrate with the MESH API.
+    For each environment you use, you'll need a:
+    - MESH mailbox ID and password
+    - Transport Layer Security (TLS) certificate
+    - shared secret to include in the MESH authorization header
+    
+    ### 2. Getting your software approved to go live
+    
+    This is also called digital onboarding. You'll need to submit information that demonstrates:
+    - you have a valid use case
+    - you can manage risks
+    - your software conforms technically with the requirements for this API
+
+    ## End-to-end process to integrate with MESH API
+
+    The length of time it takes to get your software live depends on the resources your organisation puts into:
+    - developing your software
+    - getting things you need for your integration like TLS certificates
+    - completing onboarding processes and waiting for approval
+    
+    You can do some things while you wait, but expect the end-to-end integration process to take 1 month or more.
+    
+    ### Versioning
+  
+    MESH API now has BETA support for versioning on certain endpoints in order to allow us to safely make new features and capabilities available to API consumers. For information on how to call a versioned API endpoint see [API Versioning](#section/API-Versioning).
 
     ### Get started
+    
+    To get started, sign in or create a developer account for digital onboarding, complete the 'Setup and eligibility' section and submit it.
 
-    You will need:
-    - a developer account to access the digital onboarding service
-    - a MESH mailbox (with a unique ID and password)
-    - a client Transport Layer Security (TLS) certificate
-    - an environment shared secret to include it within the [MESH authorization header](#api-description__mesh-authorization-header)
+    If you're new to digital onboarding, add your product and select 'MESH' from the 'APIs to be used' list.
+    Submitting this information shows us that you have a legal basis to use the MESH API. We'll review the information you submit and respond within 5 to 10 working days.
 
-    We will provide these at different stages of your onboarding process.
+    If we approve your request to use the MESH API, we'll also email you a supplier pack within 10 working days. Read through this as it contains the testing requirements you'll need to fulfil later on.
 
-    ## Onboarding
-    You need to get your software approved by us before it can go live with this API. This assurance process is managed by the [digital onboarding service](https://digital.nhs.uk/developer/guides-and-documentation/digital-onboarding). The steps below outline the full onboarding journey.
-
-    ### 1. Create a developer account
-
-    You will need to create a developer account to access the [digital onboarding service](https://digital.nhs.uk/developer/guides-and-documentation/digital-onboarding) where you will start and manage your MESH API application.
-
-    Make sure no one else in your organisation has started a MESH API application, as we cannot merge the applications.
-
-    [Sign in or create a developer account](https://onboarding.prod.api.platform.nhs.uk)
-
-    ### 2. Start your MESH application
-
-    Once you’ve activated your developer account and logged into it for the first time, you’ll need to:
-    - tell us your organisation name
-    - tell us the name of your product
-    - select MESH from the ‘APIs to be used’ list
-
-    ### 3. Tell us how you’ll use the MESH API
-    You must show you have an appropriate reason to use the MESH API. You do this by completing and submitting the ‘Setup and eligibility section’ of your developer account which will be reviewed by a member of our team.
+    You should get your use case approved before you go too far with development. You can choose to proceed with your integration while you wait for approval, but you'll be doing this at your own risk.
+    
+     [Sign in or create a developer account for digital onboarding](https://onboarding.prod.api.platform.nhs.uk)
+    
 
     You will receive a response within 10 working days.
 
     If you have been approved to use the MESH API, our assurance team will contact you via email with a supplier pack containing the testing requirements you will need to fulfill. You will work alongside this team to get your solution assured.
 
-    ### 4. Get your mailbox for the Path to live - integration environment
+    ### Request a mailbox
 
-    Once we have approved your request, apply for a MESH mailbox to be used in a Path to live - integration environment.
+    Once we've approved your request to use the MESH API, you'll need to request a MESH Mailbox to use in a 'Path to Live integration environment'. This is how you'll interact with the MESH API. A MESH Mailbox is secure and only your organisation can access it.
 
-    You interact with MESH via a virtual mailbox by making calls to this API from your software. Your MESH mailbox can only be accessed by your organisation.
+    To request a MESH Mailbox, you'll need to fill in an online form. It takes 5 to 10 minutes to complete.
 
-    Messages must have a:
-    - sender mailbox ID
-    - receiver mailbox ID
-    - workflow ID
+    You'll need to know:
+    - your [ODS code](https://odsportal.digital.nhs.uk/)
+    - the [workflow groups or IDs](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/workflow-groups-and-workflow-ids) for the files you plan to send or receive
+    - the contact details of the person who will be managing the mailbox in your organisation
+    
+    [Request a 'Path to Live integration' MESH Mailbox](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
+    
+    ### Receive your credentials for the 'Path to Live integration' environment
 
-    The workflow ID identifies what type of data the message contains, so the receiving organisation knows how to process it. For example, the receiver might process X-ray image data differently from blood test results.
+    Once you've requested a MESH Mailbox, we will email you your Mailbox ID and password within 5 working days. Keep these details safe as we'll also ask you for this if you need help from our support teams.
 
-    To apply for a MESH mailbox, you need to provide information about:
-    - your organisation
-    - the people responsible for managing your MESH mailbox
-    - the [workflow groups and IDs](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/workflow-groups-and-workflow-ids) associated with the messages you're sending
+    You will also receive the shared secret. You'll need to include this in the [MESH authorization header](https://digital.nhs.uk/developer/api-catalogue/message-exchange-for-social-care-and-health-api#api-description__mesh-authorization-header) when you develop this part of your software.
+    
+    ### Get a TLS certificate
 
-    [Apply for a MESH mailbox](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
+    You'll need a TLS certificate to establish a secure connection to MESH.
+    
+    How to get a TLS certificate
+    
+    1. Generate a private key using your preferred method, with the naming convention cn=mailboxid.odscode.api.mesh-client.nhs.uk
+    2. Generate a certificate signing request (CSR) based on the private key and your Mailbox ID.
+    3. Email the CSR to [itoc.supportdesk@nhs.net](mailto:itoc.supportdesk@nhs.net) - this needs to contain the common name from your CSR 'Subject' using the format local_id.ods_code.api.mesh-client.nhs.uk
 
-    ### 5. Receive your credentials for the Path to live - integration environment
+    The local_id is a local identifier such as a server name and ods_code is your ODS code, for example, SERVER001.X26.api.mesh-client.nhs.uk.
 
-    Once you have applied, we will email you your mailbox ID and password. Keep this safe as they will be required to access your MESH mailbox. We’ll ask you for this if you need help from our support teams.
+    Once we receive your CSR, we'll send you a TLS certificate within 5 working days.
 
-    You will receive the shared secret. You’ll need to include this in the [MESH authorization header](#api-description__mesh-authorization-header) when you develop this part of your software.
+    Depending on how you implement MESH API, you may also need to [download a RootCA and SubCA certificate](https://digital.nhs.uk/services/path-to-live-environments/integration-environment#rootca-and-subca-certificates). These are also required to establish a secure connection.
 
-    ### 6. Get a Transport Layer Security (TLS) certificate
+    ### Develop and test your software
+    
+    Now that you have a MESH Mailbox for a 'Path to Live integration' environment and a TLS certificate, start developing your software using the MESH API.
+    
+    When you're ready to go live, you'll need to:
+    - request a TLS certificate for the production environment
+    - request a MESH mailbox for the production environment
+    - get a conformance certificate
+    - sign a connection agreement
 
-    The MESH API requires a certificate to connect to the MESH server to send and receive messages. This ensures communication is safe and secure.
+    ### Submit non-functional requirements
 
-    [Find out how to get a certificate](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/certificate-guidance)
+    Once you've developed your software, you'll need to answer some questions in digital onboarding about the processes you use for:
+    - handling data securely
+    - managing clinical risk
+    - using our production environment
+    
+    This shows that your software meets our non-functional requirements.
+    
+    [Sign in to the digital onboarding to answer questions on 'non-functional' requirements](https://identity.prod.api.platform.nhs.uk/auth/realms/developer-identity/login-actions/authenticate?client_id=digital-onboarding-service&tab_id=YTe9EqJeUCc) 
 
-    ### 7. Develop and test your software with the MESH API
+    ### Demonstrate technical conformance
 
-    Now that you have a MESH mailbox for a path to live - integration environment, start developing your software using the MESH API.
+    Before you can go live, in digital onboarding, you'll need to:
+    - answer some questions to show you conform to the technical requirements of our APIs
+    - upload a conformance certificate
 
-    ### 8. Get a technical conformance certificate
+    To get a technical conformance certificate, you'll need to complete the testing requirements in the supplier pack we sent to you.
 
-    A technical conformance certificate is proof that your software has been developed to our standards.
+    Some of these tests have to be witnessed by us. To arrange a witness test, reply to the email that contains the supplier pack. The witness testing takes 2 to 3 hours.
 
-    To get a conformance certificate, you will need to:
-    - show that your software meets non-functional requirements
-    - show that your software meets technical conformation
-    - complete a witness test
+    In some cases, we may ask you to prepare test data a few days before the day of the witness testing.
 
-    In the Digital Onboarding Service there are specific sections to be completed to show your solution meets our non-functional requirements and technical conformance.
+    When you've completed a witness test, we'll email a technical conformance certificate to you within 5 working days. You can then upload it to digital onboarding.
+    
+    [Sign in to the digital onboarding to upload a technical conformance certificate](https://identity.prod.api.platform.nhs.uk/auth/realms/developer-identity/login-actions/authenticate?client_id=digital-onboarding-service&tab_id=vYrgcflr9fs)
 
-    You will need to organise a date with the assurance team for the witness testing to take place. The witness testing should take half a day. In some cases you will be asked to prepare test data a few days before the day of the witness testing.
+    ### Get a MESH Mailbox for your live software
 
-    Once the witness test is complete, you will be issued with a technical conformance certificate.
+    When you're ready to send or receive real data, you'll need a MESH Mailbox in the production environment. We'll ask to see the conformance certificate for your software before we issue this.
 
-    [Sign in to the digital onboarding service](https://onboarding.prod.api.platform.nhs.uk)
+    MESH Mailboxes are specific to environments, this means you'll need a different MESH Mailbox ID for each environment you use.
 
-    ### 9. Sign connection agreement
+    To request a MESH Mailbox, you'll need to fill in an online form. It takes 5 to 10 minutes to complete.
 
-    Now that we know that your software is safe and secure, you will need to sign a connection agreement.
+    You'll need to know:
+    - your [ODS code](https://odsportal.digital.nhs.uk/)
+    - the [workflow groups or IDs](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/workflow-groups-and-workflow-ids) for the files you plan to send or receive
+    - the contact details of the person who will be managing the mailbox in your organisation
 
-    We will send you a customised connection agreement to sign.
+    [Request a 'Live' MESH Mailbox](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
+    
+    ### Get a TLS certificate for the production environment
 
-    Once you’ve signed the connection agreement, you need to upload it to your developer account in the ‘Legal agreement’ section.
+    Once you have a Mailbox ID, you'll need to get a TLS certificate. This allows you to establish a secure connection to MESH in the production environment.
 
-    [Sign in to the digital onboarding service](https://onboarding.prod.api.platform.nhs.uk)
+    How to get a TLS certificate
+    1. Generate a private key using your preferred method, with the naming convention cn=mailboxid.odscode.api.mesh-client.nhs.uk
+    2. Generate a CSR based on the private key and your Mailbox ID
+    3. Email the CSR and technical conformance certificate to [ssd.nationalservicedesk@nhs.uk](mailto:ssd.nationalservicedesk@nhs.uk) - this needs to contain the common name from your CSR 'Subject' using the format local_id.ods_code.api.mesh-client.nhs.uk
 
-    ### 10. Get a mailbox for your live software
+    The local_id is a local identifier such as a server name and ods_code is your ODS code, for example, SERVER001.X26.api.mesh-client.nhs.uk.
 
-    When you’ve tested your software and need to send or receive real data, apply for a mailbox in the production environment.
+    Once we receive your CSR and technical conformance certificate, we'll send you a TLS certificate for the production environment within 5 working days.
 
-    [Apply for a MESH mailbox](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
+    Depending on how you implement MESH API, you may also need to [download a RootCA and SubCA certificate](https://digital.nhs.uk/services/path-to-live-environments/integration-environment#rootca-and-subca-certificates). These are also required to establish a secure connection.
 
-    ### 11. Get a Transport Layer Security (TLS) certificate for the production environment
 
-    You will now need to get a certificate to send and receive messages from a MESH mailbox in the production environment.
+    ### Sign connection agreement
 
-    [Find out how to get a certificate](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/certificate-guidance)
+    You'll need to sign a connection agreement before your software can go live. Once you've signed it, you need to upload it to the 'Legal agreement' section in digital onboarding. We'll email your connection agreement to you within 5 working days of completing your witness test.
 
-    ### 12. Deploy
+    [Sign in to the digital onboarding to upload your connection agreement](https://identity.prod.api.platform.nhs.uk/auth/realms/developer-identity/login-actions/authenticate?client_id=digital-onboarding-service&tab_id=p19cQckpJso)
 
-    You have now completed onboarding and can use the MESH API with your software.
+    ### Go live with your software
+
+    You have now completed all integration and onboarding steps. This means you can use the MESH API with your live software.
 
     ## Related APIs
     A number of our APIs are messaging APIs that use MESH as the transport layer. For a full list, see [our API catalogue, filtered on MESH APIs](https://digital.nhs.uk/developer/api-catalogue?filter=mesh).
@@ -182,6 +233,20 @@ info:
     There is a basic sandbox implementation of the MESH API available [mesh-sandbox](https://github.com/NHSDigital/mesh-sandbox).
 
     This sandbox can be used for local development and currently does not require a client certificate
+    
+    
+    ## API Versioning
+      
+    MESH uses the `Accept` header to support different versions in the same API, sending a different `Accept` header will vary the response, refer to individual API endpoints for more detail.
+    
+    If not specified `Accept: application/json` will be assumed and the lowest supported response version for that particular endpoint will be returned.
+      
+    **Note:** please refer to the table below for more detail on the status of a given API version.
+  
+    | Version | Accept                                               | Status    |
+    |---------|------------------------------------------------------|-----------|
+    | 1       | `application/json` or `application/vnd.mesh.v1+json` | live      |
+    | 2       | `application/vnd.mesh.v2+json`                       | live-beta |
 
     ## MESH Authorization header
     Requests to the MESH API require an authorisation token in the HTTP `Authorization` header.
@@ -332,6 +397,12 @@ info:
 
     ### Message expiration
     Messages that are not downloaded and acknowledged within five days of delivery are removed from your inbox. The sending organisation receives an error report explaining that the receiver did not collect the message. Uncollected messages are completely deleted from the MESH server 30 days after the initial delivery. If the sending organisation cannot re-send the message within the intervening time, it may contact the [NHS Digital national service desk](https://digital.nhs.uk/developer/help-and-support) with the error report details and ask for the message to be placed in your inbox again.
+
+    ## Onboarding
+    
+    You need to get your software approved by us before it can go live with this API. We call this onboarding. The onboarding process can sometimes be quite long, so it's worth planning well ahead.
+    
+    To get started with the MESH API you will need to create a developer account. This is where you can demonstrate that you can manage risks and that your software conforms technically with the requirements for this API. You can also manage onboarding for other APIs in your account.
 
     ## Errors
     We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
