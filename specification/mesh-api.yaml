@@ -52,10 +52,6 @@ info:
     
     You can do some things while you wait, but expect the end-to-end integration process to take 1 month or more.
     
-    ### Versioning
-  
-    MESH API now has BETA support for versioning on certain endpoints in order to allow us to safely make new features and capabilities available to API consumers. For information on how to call a versioned API endpoint see [API Versioning](#api-description__api-versioning).
-
     ### Get started
     
     To get started, sign in or create a developer account for digital onboarding, complete the 'Setup and eligibility' section and submit it.
@@ -234,9 +230,10 @@ info:
 
     This sandbox can be used for local development and currently does not require a client certificate
     
-    
     ## API Versioning
-      
+    
+    MESH API now has `live-beta` support for versioning on certain endpoints in order to allow us to safely make new features and capabilities available to API consumers.   
+    
     MESH uses the `Accept` header to support different versions in the same API, sending a different `Accept` header will vary the response, refer to individual API endpoints for more detail.
     
     If not specified `Accept: application/json` will be assumed and the lowest supported response version for that particular endpoint will be returned.
