@@ -87,8 +87,8 @@ info:
 
     Once you've requested a MESH Mailbox, we will email you your Mailbox ID and password within 5 working days. Keep these details safe as we'll also ask you for this if you need help from our support teams.
 
-    You will also receive the shared secret. You'll need to include this in the [MESH authorization header](https://digital.nhs.uk/developer/api-catalogue/message-exchange-for-social-care-and-health-api#api-description__mesh-authorization-header) when you develop this part of your software.
-    
+    You will also receive the shared secret. You'll need to include this in the [MESH authorization header](#overview--mesh-authorization-header) when you develop this part of your software.
+
     ### Get a TLS certificate
 
     You'll need a TLS certificate to establish a secure connection to MESH.
