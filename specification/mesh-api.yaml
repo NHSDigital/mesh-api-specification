@@ -1,14 +1,13 @@
+openapi: 3.0.2
 info:
-  contact:
-    email: ssd.nationalservicedesk@nhs.net
-    name: National Service Desk
-  description: |
+  title: Message Exchange for Social Care and Health - REST API
+  description: |-
     ## Overview
 
     You interact with MESH by making calls to this API from your application.
 
     With the API, you can:
-    
+
     - check the number of messages in your inbox
     - send a message, or a larger message as series of chunks
     - download a message, or a larger message which was sent to you as a series of chunks
@@ -24,7 +23,7 @@ info:
 
     ## Requirements for using this API
     There are 2 parts to getting the MESH API, these are:
-    
+
     1. developing and integrating your software
     2. getting your software approved to go live
 
@@ -35,9 +34,9 @@ info:
     - MESH mailbox ID and password
     - Transport Layer Security (TLS) certificate
     - shared secret to include in the MESH authorization header
-    
+
     ### 2. Getting your software approved to go live
-    
+
     This is also called digital onboarding. You'll need to submit information that demonstrates:
     - you have a valid use case
     - you can manage risks
@@ -49,11 +48,11 @@ info:
     - developing your software
     - getting things you need for your integration like TLS certificates
     - completing onboarding processes and waiting for approval
-    
+
     You can do some things while you wait, but expect the end-to-end integration process to take 1 month or more.
-    
+
     ### Get started
-    
+
     To get started, sign in or create a developer account for digital onboarding, complete the 'Setup and eligibility' section and submit it.
 
     If you're new to digital onboarding, add your product and select 'MESH' from the 'APIs to be used' list.
@@ -62,9 +61,9 @@ info:
     If we approve your request to use the MESH API, we'll also email you a supplier pack within 10 working days. Read through this as it contains the testing requirements you'll need to fulfil later on.
 
     You should get your use case approved before you go too far with development. You can choose to proceed with your integration while you wait for approval, but you'll be doing this at your own risk.
-    
+
      [Sign in or create a developer account for digital onboarding](https://onboarding.prod.api.platform.nhs.uk)
-    
+
 
     You will receive a response within 10 working days.
 
@@ -80,9 +79,9 @@ info:
     - your [ODS code](https://odsportal.digital.nhs.uk/)
     - the [workflow groups or IDs](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/workflow-groups-and-workflow-ids) for the files you plan to send or receive
     - the contact details of the person who will be managing the mailbox in your organisation
-    
+
     [Request a 'Path to Live integration' MESH Mailbox](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
-    
+
     ### Receive your credentials for the 'Path to Live integration' environment
 
     Once you've requested a MESH Mailbox, we will email you your Mailbox ID and password within 5 working days. Keep these details safe as we'll also ask you for this if you need help from our support teams.
@@ -92,9 +91,9 @@ info:
     ### Get a TLS certificate
 
     You'll need a TLS certificate to establish a secure connection to MESH.
-    
+
     How to get a TLS certificate
-    
+
     1. Generate a private key using your preferred method, with the naming convention cn=mailboxid.odscode.api.mesh-client.nhs.uk
     2. Generate a certificate signing request (CSR) based on the private key and your Mailbox ID.
     3. Email the CSR to [itoc.supportdesk@nhs.net](mailto:itoc.supportdesk@nhs.net) - this needs to contain the common name from your CSR 'Subject' using the format local_id.ods_code.api.mesh-client.nhs.uk
@@ -106,9 +105,9 @@ info:
     Depending on how you implement MESH API, you may also need to [download a RootCA and SubCA certificate](https://digital.nhs.uk/services/path-to-live-environments/integration-environment#rootca-and-subca-certificates). These are also required to establish a secure connection.
 
     ### Develop and test your software
-    
+
     Now that you have a MESH Mailbox for a 'Path to Live integration' environment and a TLS certificate, start developing your software using the MESH API.
-    
+
     When you're ready to go live, you'll need to:
     - request a TLS certificate for the production environment
     - request a MESH mailbox for the production environment
@@ -121,10 +120,10 @@ info:
     - handling data securely
     - managing clinical risk
     - using our production environment
-    
+
     This shows that your software meets our non-functional requirements.
-    
-    [Sign in to the digital onboarding to answer questions on 'non-functional' requirements](https://identity.prod.api.platform.nhs.uk/auth/realms/developer-identity/login-actions/authenticate?client_id=digital-onboarding-service&tab_id=YTe9EqJeUCc) 
+
+    [Sign in to the digital onboarding to answer questions on 'non-functional' requirements](https://identity.prod.api.platform.nhs.uk/auth/realms/developer-identity/login-actions/authenticate?client_id=digital-onboarding-service&tab_id=YTe9EqJeUCc)
 
     ### Demonstrate technical conformance
 
@@ -139,7 +138,7 @@ info:
     In some cases, we may ask you to prepare test data a few days before the day of the witness testing.
 
     When you've completed a witness test, we'll email a technical conformance certificate to you within 5 working days. You can then upload it to digital onboarding.
-    
+
     [Sign in to the digital onboarding to upload a technical conformance certificate](https://identity.prod.api.platform.nhs.uk/auth/realms/developer-identity/login-actions/authenticate?client_id=digital-onboarding-service&tab_id=vYrgcflr9fs)
 
     ### Get a MESH Mailbox for your live software
@@ -156,7 +155,7 @@ info:
     - the contact details of the person who will be managing the mailbox in your organisation
 
     [Request a 'Live' MESH Mailbox](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/messaging-exchange-for-social-care-and-health-apply-for-a-mailbox)
-    
+
     ### Get a TLS certificate for the production environment
 
     Once you have a Mailbox ID, you'll need to get a TLS certificate. This allows you to establish a secure connection to MESH in the production environment.
@@ -185,7 +184,7 @@ info:
 
     ## Related APIs
     A number of our APIs are messaging APIs that use MESH as the transport layer. For a full list, see [our API catalogue, filtered on MESH APIs](https://digital.nhs.uk/developer/api-catalogue?filter=mesh).
-    
+
     In particular, this includes [National Event Management Service - FHIR API](https://digital.nhs.uk/developer/api-catalogue/national-events-management-service-fhir) -
     our API for publishing and subscribing to healthcare events such as updates to patient demographic details.
 
@@ -193,7 +192,7 @@ info:
     This API is [in production](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses).
 
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?tag=mesh-api).
-    
+
     ## Service level
     This API is a platinum service, meaning it is operational and supported 24 x 7 x 365.
 
@@ -225,21 +224,21 @@ info:
 
     For any questions about our testing environments, contact our support mailbox [itoc.supportdesk@nhs.net](mailto:itoc.supportdesk@nhs.net).
 
-    ### Develop against a local MESH sandbox server 
+    ### Develop against a local MESH sandbox server
     There is a basic sandbox implementation of the MESH API available [mesh-sandbox](https://github.com/NHSDigital/mesh-sandbox).
 
     This sandbox can be used for local development and currently does not require a client certificate
-    
+
     ## API Versioning
-    
-    MESH API now has `live-beta` support for versioning on certain endpoints in order to allow us to safely make new features and capabilities available to API consumers.   
-    
+
+    MESH API now has `live-beta` support for versioning on certain endpoints in order to allow us to safely make new features and capabilities available to API consumers.
+
     MESH uses the `Accept` header to support different versions in the same API, sending a different `Accept` header will vary the response, refer to individual API endpoints for more detail.
-    
+
     If not specified `Accept: application/json` will be assumed and the lowest supported response version for that particular endpoint will be returned.
-      
+
     **Note:** please refer to the table below for more detail on the status of a given API version.
-  
+
     | Version | Accept                                               | Status    |
     |---------|------------------------------------------------------|-----------|
     | 1       | `application/json` or `application/vnd.mesh.v1+json` | live      |
@@ -285,10 +284,10 @@ info:
     import uuid
     import datetime from hashlib
     import sha256
-    
+
     AUTHSCHEMANAME = "NHSMESH " # Note: Space at the end of the schema.
     SHARED_KEY = "[REDACTED]" # Note: Don't hard code your passwords in a real implementation.
-    
+
     def build_auth_header(mailbox_id: str, password: str = "password", nonce: str = None, noncecount: int = 0):
       """ Generate MESH Authorization header for mailboxid. """
       #Generate a GUID if required.
@@ -297,10 +296,10 @@ info:
       #Current time formatted as yyyyMMddHHmm
       #for example, 4th May 2020 13:05 would be 202005041305
       timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M")
-      
+
       #for example, NHSMESH AMP01HC001:bd0e2bd5-218e-41d0-83a9-73fdec414803:0:202005041305
       hmac_msg = mailbox_id + ":" + nonce + ":" + str(nonce_count) + ":" + password + ":" + timestamp
-      
+
       #HMAC is a standard crypto hash method built in the python standard library.
       hash_code = hmac.HMAC(SHARED_KEY.encode(), hmac_msg.encode(), sha256).hexdigest()
       return (
@@ -358,7 +357,7 @@ info:
     | `Mex-To`                | Intended receiver of the undelivered message                             |
     | `Mex-MessageType`       | REPORT                                                                   |
     | `Mex-Subject`           | The subject of the undelivered message                                   |
-    
+
     **Note:** Headers should be treated case insensitively, most http clients will do this for you automatically, but please do not rely on explicit case.
 
     ### Error codes
@@ -396,9 +395,9 @@ info:
     Messages that are not downloaded and acknowledged within five days of delivery are removed from your inbox. The sending organisation receives an error report explaining that the receiver did not collect the message. Uncollected messages are completely deleted from the MESH server 30 days after the initial delivery. If the sending organisation cannot re-send the message within the intervening time, it may contact the [NHS Digital national service desk](https://digital.nhs.uk/developer/help-and-support) with the error report details and ask for the message to be placed in your inbox again.
 
     ## Onboarding
-    
+
     You need to get your software approved by us before it can go live with this API. We call this onboarding. The onboarding process can sometimes be quite long, so it's worth planning well ahead.
-    
+
     To understand how our online digital onboarding process works, see [digital onboarding](https://digital.nhs.uk/developer/guides-and-documentation/digital-onboarding). This is where you can demonstrate that you can manage risks and that your software conforms technically with the requirements for this API. You can also manage onboarding for other APIs in your account.
 
     <div class="nhsd-m-emphasis-box nhsd-m-emphasis-box--emphasis nhsd-!t-margin-bottom-6" aria-label="Highlighted Information">
@@ -411,11 +410,13 @@ info:
                 </figure>
             </div>
             <div class="nhsd-m-emphasis-box__content-box">
-                <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break"><p class="nhsd-t-body">To get started, sign in or create a <a href="http://onboarding.prod.api.platform.nhs.uk/">developer account</a>, then select 'product onboarding'.</p></div>            
+                <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break">
+                    <p class="nhsd-t-body">To get started, sign in or create a <a href="http://onboarding.prod.api.platform.nhs.uk/">developer account</a>, then select 'product onboarding'.</p>
+                </div>
             </div>
         </div>
-    </div> 
-    
+    </div>
+
     ## Errors
     We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
 
@@ -424,100 +425,17 @@ info:
     * 500 to 599 if it failed because of an error on our server
 
     Errors specific to each API are shown in the Endpoints section, under Response. See our [reference guide](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#http-status-codes) for more on errors.
-
-  title: Message Exchange for Social Care and Health - REST API
-  version: v1.0.168-alpha
-openapi: 3.0.2
+  contact:
+    name: National Service Desk
+    email: ssd.nationalservicedesk@nhs.net
+  version: 2.0.0
 paths:
-  /messageexchange/endpointlookup/{ods_code}/{workflow_id}:
-    get:
-      description: |
-        ## Overview
-        Use this endpoint to search for the mailbox of the organisation you want to send data to, using their unique [Organisation Data Service (ODS) code](https://odsportal.hscic.gov.uk/Organisation/Search), their MESH mailbox and the agreed workflow identifier for the data. 
-
-        An example call:
-
-        ### Request
-
-        ```shell
-        curl -k \
-        --cacert 'mesh-ca.pem' \
-        --key 'mesh-client-key.pem' \
-        --cert 'mesh-client-cert.pem' \
-        https://mesh-sync.spineservices.nhs.uk/messageexchange/endpointlookup/SCREEN2/SPINE_GPCAPITATION_EXTRACT
-        ```
-
-        ### Response
-
-        ```json
-        {
-          "query_id": "20200601131040203367_A441C2_1573484974",
-          "results": [
-            {
-              "endpoint_type": "MESH",
-              "description": "Breast Cancer Screening Services",
-              "address": "X26HC022"
-            },
-            {
-              "endpoint_type": "MESH",
-              "description": "AAA Screening Services",
-              "address": "X26HC021"
-            },
-            { 
-            "endpoint_type": "MESH",
-              "description": "Bowel Cancer Screening Services (England, DMS)",
-              "address": "X26HC020"
-            }
-          ]
-        }
-        ```
-
-        **Note:** neither the ODS code or workflow identifier in this example are real.
-
-      operationId: mesh-address-lookup
-      parameters:
-        - in: path
-          name: ods_code
-          required: true
-          description: All health and social care organisations have a unique ODS code
-          example: SCREEN2
-          schema:
-            type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-        - in: path
-          name: workflow_id
-          required: true
-          description: Workflow ID
-          example: '{Workflow ID}'
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  query_id:
-                    type: string
-                    example: 20200601131040203367_A441C2_1573484974
-                  results:
-                    type: array
-                    items:
-                      type: string
-      summary: Look up MESH address
-      tags:
-      - Lookup
   /messageexchange/{mailbox_id}:
-    get:
-      description: |
+    post:
+      tags:
+        - Handshake
+      summary: Validate a mailbox (Handshake)
+      description: |-
         ## Overview
         Use this endpoint to check that MESH can be reached and that the authentication you are using is correct.  This endpoint only needs to be called once every 24 hours.
         This endpoint updates the details of the connection history held for your mailbox and is similar to a keep-alive or ping message, in that it allows monitoring on the Spine to be aware of the active use of a mailbox despite a lack of traffic.
@@ -526,144 +444,133 @@ paths:
 
         ```shell
         curl -k \
-          --request 'GET' \
-          --cacert 'mesh-ca.pem' \
-          --key 'mesh-client-key.pem' \
-          --cert 'mesh-client-cert.pem' \
-          --header 'Authorization: NHSMESH X26HC005:1c820cd4-be3e-43ff-807f-e65362892722:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-          --header 'Mex-ClientVersion: ApiDocs==0.0.1' \
-          --header 'Mex-OSArchitecture: x86_64' \
-          --header 'Mex-OSName: Linux' \
-          --header 'Mex-OSVersion: #44~18.04.2-Ubuntu' \
-          https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005
+        --request 'GET' \
+        --cacert 'mesh-ca.pem' \
+        --key 'mesh-client-key.pem' \
+        --cert 'mesh-client-cert.pem' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC005:1c820cd4-be3e-43ff-807f-e65362892722:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'mex-clientversion: ApiDocs==0.0.1' \
+        --header 'mex-osarchitecture: x86_64' \
+        --header 'mex-osname: Linux' \
+        --header 'mex-osversion: #44~18.04.2-Ubuntu' \
+        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005
         ```
-
+      operationId: handshake_messageexchange__mailbox_id__post
       parameters:
-        - name: mailbox_id
-          in: path
+        - description: mailbox identifier
           required: true
-          description: The ID of the mailbox
+          schema:
+            title: mailbox_id
+            minLength: 1
+            type: string
+            description: mailbox identifier
           example: MAILBOX01
+          name: mailbox_id
+          in: path
+        - description: User agent string
+          required: false
           schema:
+            title: User-Agent
             type: string
-        - in: header
-          name: Authorization
+            description: User agent string
+            default: ''
+          example: my-client;windows-10;
+          name: user-agent
+          in: header
+        - description: Client version number
           required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
           schema:
+            title: mex-ClientVersion
             type: string
-        - in: header
-          name: Mex-ClientVersion
-          required: true
-          description: Client version number
+            description: Client version number
           example: ApiDocs==0.0.1
-          schema:
-            type: string
-        - in: header
-          name: Mex-OSName
+          name: mex-clientversion
+          in: header
+        - description: Operating system name
           required: true
-          description: Operating system name
+          schema:
+            title: mex-OSName
+            type: string
+            description: Operating system name
           example: Linux
-          schema:
-            type: string
-        - in: header
-          name: Mex-OSVersion
+          name: mex-osname
+          in: header
+        - description: Operating system version
           required: true
-          description: Operating system version
+          schema:
+            title: mex-OSVersion
+            type: string
+            description: Operating system version
           example: '#44~18.04.2-Ubuntu'
+          name: mex-osversion
+          in: header
+        - description: Authorisation header
+          required: true
           schema:
+            title: Authorization
             type: string
-        - schema:
-            type: string
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
           in: header
-          description: '{Operating System Architecture}'
-          name: Mex-OSArchitecture
-        - schema:
+        - description: the accepts header can be used to vary the response type
+          required: false
+          schema:
+            title: Accept
             type: string
+            description: the accepts header can be used to vary the response type
+            default: application/json
+          example: application/vnd.mesh.v2+json
+          name: accept
           in: header
-          name: Mex-JavaVersion
-          description: '{JVM Version Number}'
-      operationId: validate-mailbox
       responses:
         '200':
-          description: OK
-
+          description: Successful Response
         '400':
-          description: Bad Request
+          description: Validation Error
           content:
             application/json:
               schema:
+                title: HTTPValidationError
                 type: object
+                properties: &id001
+                  detail:
+                    title: Detail
+                    type: array
+                    items:
+                      title: ValidationError
+                      required:
+                        - loc
+                        - msg
+                        - type
+                      type: object
+                      properties:
+                        loc:
+                          title: Location
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                              - type: integer
+                        msg:
+                          title: Message
+                          type: string
+                        type:
+                          title: Error Type
+                          type: string
         '403':
           description: Authentication failed
-          content:
-            application/json:
-              schema:
-                type: object
-      summary: Validate a mailbox (Handshake)
-      tags:
-      - Handshake
-  /messageexchange/{mailbox_id}/count:
-    get:
-      description: |
-        ## Overview
-        Use this endpoint to check the number of messages currently held in the MESH mailbox that are ready to download.
-
-        This endpoint is now deprecated as it is not needed as part of the polling cycle.
-      deprecated: true
-      operationId: check-inbox-count
-      parameters:
-        - name: mailbox_id
-          in: path
-          required: true
-          description: The ID of the mailbox
-          example: MAILBOX01
-          schema:
-            type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    description: number of messages in mailbox
-                  internalID:
-                    type: string
-                    description: internal identifier to help error diagnosis, be aware the format of this may change in line with internal system changes and the format should not be parsed or validated or otherwise depended on
-                    example: 20200601122152994285_af20cED
-                  allResultsIncluded:
-                    type: boolean
-                    description: 'In rare cases not all results can be included, if false the mailbox needs to download.'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-        '403':
-          description: Authentication failed
-      summary: Check an inbox count (deprecated)
-      tags:
-      - Inbox
   /messageexchange/{mailbox_id}/inbox:
     get:
+      tags:
+        - Inbox
+      summary: Check an inbox
       description: |-
         ## Overview
-        Use this endpoint to return the message identifier of messages in the mailbox inbox ready for download. 
+        Use this endpoint to return the message identifier of messages in the mailbox inbox ready for download.
         Client systems MUST poll their assigned inbox a minimum of once a day and a maximum of once every five minutes for messages (unless there are more messages waiting to download).
-        
+
         A maximum of 500 message identifier are returned in every request.  Continue the polling and download cycle until you empty the mailbox and you receive less than 500 messages in the response.
 
         ### Request
@@ -674,85 +581,191 @@ paths:
         --cacert 'mesh-ca.pem' \
         --key 'mesh-client-key.pem' \
         --cert 'mesh-client-cert.pem' \
-        --header 'Authorization: NHSMESH X26HC005:66eef28b-e097-421d-998d-ea0c92c2c2fb:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC005:66eef28b-e097-421d-998d-ea0c92c2c2fb:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
         https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005/inbox
         ```
 
+
         ### Response
 
+        for `accept: application/vnd.mesh.v2+json` and later if the inbox contains more than 500 messages, then 'links.next' will provide a way to page through all the messages in the inbox
         ```json
-        {"messages": []}
+        {
+          "messages": ["20220228174323222_ABCDEF", "20220228174323333_ABCDEF"],
+          "links": {
+            "self": "/messageexchange/mb12345/inbox?max_results=10",
+            "next": "/messageexchange/mb12345/inbox?max_results=10&continue_from=eyJwayI6ICJNQiNNU0cjTUIjMTIzNEhDMTIzNCMiLCAic2siOiAiTUIjTVNHIzIwMjIwMjI4MTc0MzIzMTIzX0FDREVEMSMifQ%3D%3D"
+          }
+        }
         ```
-      operationId: check-inbox
+        for `accept: application/vnd.mesh.v1+json` or `accept: application/json`
+        ```json
+        {
+          "messages" : ["20200529155357895317_3573F8", "20220228174323333_ABCDEF"]
+        }
+        ```
+      operationId: list_messages_messageexchange__mailbox_id__inbox_get
       parameters:
-        - name: mailbox_id
-          in: path
+        - description: mailbox identifier
           required: true
-          description: The ID of the mailbox
+          schema:
+            title: mailbox_id
+            minLength: 1
+            type: string
+            description: mailbox identifier
           example: MAILBOX01
+          name: mailbox_id
+          in: path
+        - description: 'maximum results to return when using `accept: application/vnd.mesh.v2+json` if more results exist, `links.next` will be populated'
+          required: false
           schema:
+            title: Max results
+            maximum: 5000.0
+            minimum: 10.0
+            type: integer
+            description: 'maximum results to return when using `accept: application/vnd.mesh.v2+json` if more results exist, `links.next` will be populated'
+            default: 500
+          example: '100'
+          name: max_results
+          in: query
+        - description: if more results exist than `max_results`, use `continue_from` to continue retrieving results from `links.next`
+          required: false
+          schema:
+            title: Continue From
+            maxLength: 1000
+            minLength: 24
             type: string
-        - in: header
-          name: Authorization
+            description: if more results exist than `max_results`, use `continue_from` to continue retrieving results from `links.next`
+          examples:
+            'accept: application/vnd.mesh.v2+json':
+              value: eyJwayI6ICJNQiNNU0cjTUIjMTIzNEhDMTIzNCMiLCAic2siOiAiTUIjTVNHIzIwMjIwMjI4MTc0MzIzMTIzX0FDREVEMSMifQ%3D%3D
+            'accept: application/json':
+              value: 20220228174323123_ACDED1
+          name: continue_from
+          in: query
+        - description: |-
+            filter inbox by workflow id, conditions:
+            * equals: =WORKFLOW1
+            * does not equal: =!WORKFLOW1
+            * begins with: =WORKFL\*
+            * does not begin with: =!WORKFL\*
+            * contains: =\*_ACK\*
+            * does not contain: =!\*_ACK\*
+          required: false
+          schema:
+            title: Workflow Id filter
+            maxLength: 255
+            minLength: 2
+            type: string
+            description: |-
+              filter inbox by workflow id, conditions:
+              * equals: =WORKFLOW1
+              * does not equal: =!WORKFLOW1
+              * begins with: =WORKFL\*
+              * does not begin with: =!WORKFL\*
+              * contains: =\*_ACK\*
+              * does not contain: =!\*_ACK\*
+          example: '!*_ACK*'
+          name: workflow_filter
+          in: query
+        - description: Authorisation header
           required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
           schema:
+            title: Authorization
             type: string
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
+        - description: the accepts header can be used to vary the response type
+          required: false
+          schema:
+            title: Accept
+            type: string
+            description: the accepts header can be used to vary the response type
+            default: application/json
+          example: application/vnd.mesh.v2+json
+          name: accept
+          in: header
       responses:
         '200':
-          description: OK
+          description: Successful Response
           content:
-            application/json:
+            application/vnd.mesh.v2+json:
               schema:
+                title: Inbox
+                required:
+                  - messages
                 type: object
                 properties:
                   messages:
+                    title: Messages
                     type: array
                     items:
                       type: string
-                    description: Array of strings of messageId in inbox
-        '400':
-          description: Bad Request
-          content:
+                    description: list of message ids in the inbox, up to `max_results`
+                  links:
+                    title: Links
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: map of links, e.g. `links.next` if more results exist
+                  approx_inbox_count:
+                    title: Approx Inbox Count
+                    type: integer
+                    description: approximate inbox count, this is eventually consistent and should be used as an indication of inbox size only
+                example:
+                  messages:
+                    - 20220228174323222_ABCDEF
+                    - 20220228174323333_ABCDEF
+                  links:
+                    self: /messageexchange/mb12345/inbox?max_results=10
+                    next: /messageexchange/mb12345/inbox?max_results=10&continue_from=eyJwayI6ICJNQiNNU0cjTUIjMTIzNEhDMTIzNCMiLCAic2siOiAiTUIjTVNHIzIwMjIwMjI4MTc0MzIzMTIzX0FDREVEMSMifQ%3D%3D
+                  approx_inbox_count: 100
             application/json:
               schema:
-                type: object
-        '403':
-          description: Authentication failed
-          content:
-            application/json:
-              schema:
+                title: Inbox
+                required:
+                  - messages
                 type: object
                 properties:
-                  errorEvent:
-                    type: string
-                    example: status event
-                    description: Status event
-                  errorCode:
-                    type: integer
-                    description: Status code
-                    example: 403
-                  errorDescription:
-                    type: string
-                    example: Description of the status
-                    description: Description of the status
-      summary: Check an inbox
-      tags:
-      - Inbox
+                  messages:
+                    title: Messages
+                    type: array
+                    items:
+                      type: string
+                    description: list of message ids in the inbox, up to `max_results`
+                example:
+                  messages:
+                    - 20220228174323222_ABCDEF
+                    - 20220228174323333_ABCDEF
+        '403':
+          description: Authentication failed
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                title: HTTPValidationError
+                type: object
+                properties: *id001
   /messageexchange/{mailbox_id}/inbox/{message_id}:
     get:
+      tags:
+        - Inbox
+      summary: Get Message
       description: |-
         ## Overview
         Use this endpoint to retrieve a message based on the message identifier obtained from the 'Check Inbox' endpoint.
-        
+
         **Note:** Headers should be treated case insensitively, most http clients will do this for you automatically, but please do not rely on explicit case.
 
         ### Message expiration
         Messages you do not download and acknowledge within five days of delivery are removed from your inbox. The sending organisation receives an error report explaining that the receiver did not collect the message. Uncollected messages are completely deleted from the MESH server 30 days after initial delivery. If the sending organisation cannot re-send the message within the intervening time, they can contact the [NHS Digital national service desk](https://digital.nhs.uk/developer/help-and-support) with the error report details and ask for the message to be re-sent.
 
         ### Report Messages
-        The `Mex-MessageType` header indicates if the payload is a `DATA` message or a `REPORT`.  
+        The `Mex-MessageType` header indicates if the payload is a `DATA` message or a `REPORT`.
         Error reports differ from regular messages in these ways:
         - the Download message endpoint has a different value for the Mex-MessageType header
           * DATA for a normal organisation-to-organisation message
@@ -762,80 +775,217 @@ paths:
         ### Request
 
         ```shell
-        curl -k \
-        --request 'GET' \
-        --cacert 'mesh-ca.pem' \
-        --key 'mesh-client-key.pem' \
-        --cert 'mesh-client-cert.pem' \
-        --header 'Authorization: NHSMESH X26HC005:2942264f-46e5-450f-90fc-22a0c09efa37:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        https://msg.int.spine2.ncrs.nhs.uk/messageexchange/X26HC005/inbox/20200529155357895317_3573F8
+          curl -k \
+          --request 'GET' \
+          --cacert 'mesh-ca.pem' \
+          --key 'mesh-client-key.pem' \
+          --cert 'mesh-client-cert.pem' \
+          --header 'accept: application/vnd.mesh.v2+json' \
+          --header 'authorization: NHSMESH X26HC005:2942264f-46e5-450f-90fc-22a0c09efa37:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+          https://msg.int.spine2.ncrs.nhs.uk/messageexchange/X26HC005/inbox/20200529155357895317_3573F8
         ```
 
         ### Response
 
-        ```json
-        {"messages": ["20200529155357895317_3573F8"]}
+        ```shell
+        HTTP/1.1 200 OK
+        content-type: application/octet-stream
+        content-length: 27
+        mex-content-compressed: N
+        mex-addresstype: ALL
+        mex-localid: api-docs-bob-sends-alice-a-chunked-file
+        mex-chunk-range: 2:2
+        etag: "866243ab74e0107a4d5835f8d6552e7f20c39ee1"
+        mex-filename: message.txt.gz
+        mex-version: 1.0
+        mex-workflowid: API-DOCS-TEST
+        mex-to: X26HC005
+        mex-messagetype: DATA
+        mex-messageid: 20200601122152994285_D59900
+        mex-from: X26HC006
+
+        m you in the future,
+
+        Bob.
         ```
-      operationId: download-message
+      operationId: retrieve_message_messageexchange__mailbox_id__inbox__message_id__get
       parameters:
-        - in: path
-          name: message_id
+        - description: mailbox identifier
           required: true
-          description: The ID of the message
           schema:
+            title: mailbox_id
+            minLength: 1
             type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-        - in: path
+            description: mailbox identifier
+          example: MAILBOX01
           name: mailbox_id
+          in: path
+        - description: message identifier
           required: true
-          description: Mailbox ID
-          example: '{Mailbox ID}'
           schema:
+            title: message_id
+            minLength: 1
             type: string
+            description: message identifier
+          example: 20210311101813838554_1B8F53
+          name: message_id
+          in: path
+        - description: client accepted content encoding(s)
+          required: false
+          schema:
+            title: Accept-Encoding
+            type: string
+            description: client accepted content encoding(s)
+            default: ''
+          example: gzip
+          name: accept-encoding
+          in: header
+        - description: Authorisation header
+          required: true
+          schema:
+            title: Authorization
+            type: string
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-        '206':
-          description: Partial download – Indicates that chunk has been downloaded successfully and that there are further chunks.
-          content:
-            binary:
-              schema:
-                type: object
+          description: OK, full message retrieved
+          content: {}
         '403':
           description: Authentication failed
-
+        '206':
+          description: Partial Content - Indicates that chunk has been downloaded successfully and that there are further chunks.
+          content: {}
+        '404':
+          description: Not Found, messages does not exist
         '410':
-          description: 'Gone, message has already been downloaded and acknowledged'
+          description: Gone, message has expired or otherwise failed
+        '400':
+          description: Validation Error
           content:
             application/json:
               schema:
+                title: HTTPValidationError
                 type: object
-      summary: Download message
+                properties: *id001
+    head:
       tags:
-      - Inbox
-  /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged:
-    put:
+        - Inbox
+      summary: Head Message
       description: |-
         ## Overview
-        Use this endpoint to acknowledge the successful download of a message. 
-        
+        Use this endpoint to retrieve a message metadata based on the `message_id` obtained from the 'Check Inbox' endpoint.
+
+        ### Message expiration
+        Messages you do not download and acknowledge within five days of delivery are removed from your inbox. The sending organisation receives an error report explaining that the receiver did not collect the message. Uncollected messages are completely deleted from the MESH server 30 days after initial delivery. If the sending organisation cannot re-send the message within the intervening time, they can contact the [NHS Digital national service desk](https://digital.nhs.uk/developer/help-and-support) with the error report details and ask for the message to be re-sent.
+
+        ### Report Messages
+        The `Mex-MessageType` header indicates if the payload is a `DATA` message or a `REPORT`.
+        Error reports differ from regular messages in these ways:
+        - the Download message endpoint has a different value for the `Mex-MessageType` header
+          * DATA for a normal organisation-to-organisation message
+          * REPORT for an error report
+
+        **Note:** Headers should be treated case insensitively, most http clients will do this for you automatically, but please do not rely on explicit case.
+
+        ### Request
+
+        ```shell
+          curl -k \
+          --request 'HEAD' \
+          --cacert 'mesh-ca.pem' \
+          --key 'mesh-client-key.pem' \
+          --cert 'mesh-client-cert.pem' \
+          --header 'accept: application/vnd.mesh.v2+json' \
+          --header 'authorization: NHSMESH X26HC005:2942264f-46e5-450f-90fc-22a0c09efa37:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+          https://msg.int.spine2.ncrs.nhs.uk/messageexchange/{mailbox_id}/inbox/{message_id}
+        ```
+
+        ### Response
+
+        ```shell
+        HTTP/1.1 200 OK
+        content-type: application/vnd.mesh.v2+json
+        content-length: 0
+        mex-content-compressed: N
+        mex-addresstype: ALL
+        mex-localid: api-docs-bob-sends-alice-a-chunked-file
+        mex-chunk-range: 2:2
+        etag: "866243ab74e0107a4d5835f8d6552e7f20c39ee1"
+        mex-filename: message.txt.gz
+        mex-version: 1.0
+        mex-workflowid: API-DOCS-TEST
+        mex-to: X26HC005
+        mex-messagetype: DATA
+        mex-messageid: 20200601122152994285_D59900
+        mex-from: X26HC006
+        ```
+      operationId: head_message_messageexchange__mailbox_id__inbox__message_id__head
+      parameters:
+        - description: mailbox identifier
+          required: true
+          schema:
+            title: mailbox_id
+            minLength: 1
+            type: string
+            description: mailbox identifier
+          example: MAILBOX01
+          name: mailbox_id
+          in: path
+        - description: message identifier
+          required: true
+          schema:
+            title: message_id
+            minLength: 1
+            type: string
+            description: message identifier
+          example: 20210311101813838554_1B8F53
+          name: message_id
+          in: path
+        - description: Authorisation header
+          required: true
+          schema:
+            title: Authorization
+            type: string
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+        '403':
+          description: Authentication failed
+        '404':
+          description: Not Found, messages does not exist
+        '410':
+          description: Gone, message has expired or otherwise failed
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                title: HTTPValidationError
+                type: object
+                properties: *id001
+  /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged:
+    put:
+      tags:
+        - Inbox
+      summary: Acknowledge message
+      description: |-
+        ## Overview
+        Use this endpoint to acknowledge the successful download of a message.
+
         This operation:
 
         * closes the message transaction on Spine
-        * removes the message from your mailbox inbox, which means that the message identifier does not appear in subsequent calls to the 'Check inbox' endpoint and cannot be downloaded again
-        
+        * removes the message from your mailbox inbox, which means that the `message_id` does not appear in subsequent calls to the 'Check inbox' endpoint and cannot be downloaded again
+
         **Note:** If you fail to acknowledge a message after five days in the inbox this sends a non-delivery report to the sender's inbox.
-        
+
         ### Request
 
         ```shell
@@ -844,65 +994,86 @@ paths:
         --cacert 'mesh-ca.pem' \
         --key 'mesh-client-key.pem' \
         --cert 'mesh-client-cert.pem' \
-        --header 'Authorization: NHSMESH X26HC005:bb59be38-e50b-4e5a-9f11-e566e7509552:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC005:bb59be38-e50b-4e5a-9f11-e566e7509552:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
         https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005/inbox/20200529155357895317_3573F8/status/acknowledged
         ```
 
         ### Response
 
+        for `accept: application/vnd.mesh.v2+json` no response body will be returned
+
+        for `accept: application/vnd.mesh.v1+json` or `accept: application/json`
         ```json
         { "messageId" : "20200529155357895317_3573F8" }
         ```
-
-      operationId: acknowledge-message
+      operationId: acknowledge_message_messageexchange__mailbox_id__inbox__message_id__status_acknowledged_put
       parameters:
-        - in: path
-          name: message_id
+        - description: mailbox identifier
           required: true
-          description: The ID of the message
           schema:
+            title: mailbox_id
+            minLength: 1
             type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-        - name: mailbox_id
-          in: path
-          required: true
-          description: The ID of the mailbox
+            description: mailbox identifier
           example: MAILBOX01
+          name: mailbox_id
+          in: path
+        - description: message identifier
+          required: true
           schema:
+            title: message_id
+            minLength: 1
             type: string
+            description: message identifier
+          example: 20210311101813838554_1B8F53
+          name: message_id
+          in: path
+        - description: Authorisation header
+          required: true
+          schema:
+            title: Authorization
+            type: string
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
+        - description: the accepts header can be used to vary the response type
+          required: false
+          schema:
+            title: Accept
+            type: string
+            description: the accepts header can be used to vary the response type
+            default: application/json
+          example: application/vnd.mesh.v2+json
+          name: accept
+          in: header
       responses:
         '200':
-          description: OK
+          description: Successful Response
+        '403':
+          description: Authentication failed
+        '400':
+          description: Validation Error
           content:
             application/json:
               schema:
+                title: HTTPValidationError
                 type: object
-                properties:
-                  messageID:
-                    type: string
-                    example: 20200529155357895317_3573F8
-        '403':
-          description: Authentication failed
-      summary: Acknowledge message
-      tags:
-      - Inbox
-  /messageexchange/{mailbox_id}/inbox/{message_id}/{chunkNo}:
+                properties: *id001
+  /messageexchange/{mailbox_id}/inbox/{message_id}/{chunk_number}:
     get:
-      description: |
-        ## Overview
+      tags:
+        - Inbox
+      summary: Get Message chunk
+      description: |-
         Use this endpoint to download a chunked message. Initially, call the 'Download Message' endpoint with the message identifier given by the 'Check Inbox' endpoint as usual. When the message is chunked, the 'Download message' endpoint response differs in two ways:
         * the response code is '206: Partial Content' (instead of '200: OK')
         * the response headers contain Mex-Chunk-Range: 1:n
 
 
-        This endpoint is used to download the remaining n-1 chunks. 
-        
+        This endpoint is used to download the remaining n-1 chunks.
+
         **Note:** Headers should be treated case insensitively, most http clients will do this for you automatically, but please do not rely on explicit case.
 
         ### Request
@@ -916,7 +1087,8 @@ paths:
         --key 'mesh-client-key.pem' \
         --cert 'mesh-client-cert.pem' \
         --request 'GET' \
-        --header 'Authorization: NHSMESH X26HC005:142b8a1e-e953-4e5e-98a8-b27741e15747:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC005:142b8a1e-e953-4e5e-98a8-b27741e15747:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
         https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005/inbox
         ```
 
@@ -929,35 +1101,30 @@ paths:
         --cacert 'mesh-ca.pem' \
         --key 'mesh-client-key.pem' \
         --cert 'mesh-client-cert.pem' \
-        --header 'Authorization: NHSMESH X26HC005:777670ce-02f7-44fe-a53b-eb33eb1cb564:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC005:777670ce-02f7-44fe-a53b-eb33eb1cb564:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
         https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005/inbox/20200601122152994285_D59900
         ```
 
         ```shell
         HTTP/1.1 206 Partial Content
-        Server: nginx
-        Date: Mon, 01 Jun 2020 12:24:09 GMT
-        Content-Type: application/octet-stream
-        Content-Length: 100
-        Connection: keep-alive
-        Mex-Chunk-Range: 1:2
-        Mex-WorkflowID: API-DOCS-TEST
-        Mex-Content-Compressed: N
-        Mex-AddressType: ALL
-        Mex-StatusSuccess: SUCCESS
-        Mex-StatusDescription: Transferred to recipient mailbox
-        Mex-MessageType: DATA
-        Mex-StatusEvent: TRANSFER
-        Mex-ToSMTP: x26hc005@dts.nhs.uk
-        Mex-Version: 1.0
-        Mex-FromSMTP: x26hc006@dts.nhs.uk
-        Mex-To: X26HC005
-        Mex-StatusTimestamp: 20200601122152
-        Mex-LocalID: api-docs-bob-sends-alice-a-chunked-file
-        Mex-StatusCode: 00
-        Mex-FileName: message.txt.gz
-        Mex-MessageID: 20200601122152994285_D59900
-        Mex-From: X26HC006
+        content-type: application/octet-stream
+        content-length: 100
+        mex-chunk-range: 1:2
+        mex-workflowid: API-DOCS-TEST
+        mex-content-compressed: N
+        mex-addresstype: ALL
+        mex-statussuccess: SUCCESS
+        mex-statusdescription: Transferred to recipient mailbox
+        nex-messagetype: DATA
+        mex-statusevent: TRANSFER
+        mex-to: X26HC005
+        mex-statustimestamp: 20200601122152
+        mex-localid: api-docs-bob-sends-alice-a-chunked-file
+        mex-statuscode: 00
+        mex-filename: message.txt.gz
+        mex-messageid: 20200601122152994285_D59900
+        mex-from: X26HC006
 
         Hi Alice,
 
@@ -978,31 +1145,27 @@ paths:
         --cacert 'mesh-ca.pem' \
         --key 'mesh-client-key.pem' \
         --cert 'mesh-client-cert.pem' \
-        --header 'Authorization: NHSMESH X26HC005:71139532-9215-4ff8-8a74-d602386bac30:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005/inbox/20200601122152994285_D59900/2
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC005:71139532-9215-4ff8-8a74-d602386bac30:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005/inbox/20200601122152994285_D59900/2 | tr -d '\r'
         ```
 
         ```shell
         HTTP/1.1 200 OK
-        Server: nginx
-        Date: Mon, 01 Jun 2020 12:24:17 GMT
-        Content-Type: application/octet-stream
-        Content-Length: 27
-        Connection: keep-alive
-        Mex-Content-Compressed: N
-        Mex-AddressType: ALL
-        Mex-LocalID: api-docs-bob-sends-alice-a-chunked-file
-        Mex-ToSMTP: x26hc005@dts.nhs.uk
-        Mex-Chunk-Range: 2:2
-        Etag: "866243ab74e0107a4d5835f8d6552e7f20c39ee1"
-        Mex-FileName: message.txt.gz
-        Mex-Version: 1.0
-        Mex-FromSMTP: x26hc006@dts.nhs.uk
-        Mex-WorkflowID: API-DOCS-TEST
-        Mex-To: X26HC005
-        Mex-MessageType: DATA
-        Mex-MessageID: 20200601122152994285_D59900
-        Mex-From: X26HC006
+        content-type: application/octet-stream
+        content-length: 27
+        mex-content-compressed: N
+        mex-addresstype: ALL
+        mex-localid: api-docs-bob-sends-alice-a-chunked-file
+        mex-chunk-range: 2:2
+        etag: "866243ab74e0107a4d5835f8d6552e7f20c39ee1"
+        mex-filename: message.txt.gz
+        mex-version: 1.0
+        mex-workflowid: API-DOCS-TEST
+        mex-to: X26HC005
+        mex-messagetype: DATA
+        mex-messageid: 20200601122152994285_D59900
+        mex-from: X26HC006
 
         m you in the future,
 
@@ -1013,83 +1176,186 @@ paths:
 
         -   the response code is `200 OK` rather than `206 Partial Content`
         -   the `Mex-Chunk-Range` response header is `2:2`
-
-      operationId: download-message-chunk
+      operationId: retrieve_chunk_messageexchange__mailbox_id__inbox__message_id___chunk_number__get
       parameters:
-        - in: path
-          name: mailbox_id
+        - description: The index number of the chunk
           required: true
-          description: Recipient mailbox ID
-          example: '{Recipient Mailbox ID}'
           schema:
-            type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-        - in: path
-          name: message_id
-          required: true
-          description: The ID of the message
-          schema:
-            type: string
-        - in: path
-          name: chunkNo
-          required: true
-          description: The index number of the chunk
-          example: 1
-          schema:
+            title: chunk_number
+            minimum: 1.0
             type: integer
+            description: The index number of the chunk
+          example: '1'
+          name: chunk_number
+          in: path
+        - description: mailbox identifier
+          required: true
+          schema:
+            title: mailbox_id
+            minLength: 1
+            type: string
+            description: mailbox identifier
+          example: MAILBOX01
+          name: mailbox_id
+          in: path
+        - description: message identifier
+          required: true
+          schema:
+            title: message_id
+            minLength: 1
+            type: string
+            description: message identifier
+          example: 20210311101813838554_1B8F53
+          name: message_id
+          in: path
+        - description: client accepted content encoding(s)
+          required: false
+          schema:
+            title: Accept-Encoding
+            type: string
+            description: client accepted content encoding(s)
+            default: ''
+          example: gzip
+          name: accept-encoding
+          in: header
+        - description: Authorisation header
+          required: true
+          schema:
+            title: Authorization
+            type: string
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-        '206':
-          description: Partial download – Indicates that chunk has been downloaded successfully and that there are further chunks.
-          content:
-            binary:
-              schema:
-                type: object
+          description: OK - chunk downloaded and no further chunks exist
+          content: {}
         '403':
           description: Authentication failed
-
+        '206':
+          description: Partial Content - Indicates that chunk has been downloaded successfully and that there are further chunks.
+          content: {}
         '404':
-          description: Message does not exist
+          description: Not Found, messages does not exist
+        '410':
+          description: Gone, message has expired or otherwise failed
+        '400':
+          description: Validation Error
           content:
             application/json:
               schema:
+                title: HTTPValidationError
                 type: object
-      summary: Download message chunk
+                properties: *id001
+  /messageexchange/{mailbox_id}/count:
+    get:
       tags:
-      - Inbox
+        - Inbox
+      summary: Check an inbox count (deprecated)
+      description: |-
+        ## Overview
+        Use this endpoint to check the number of messages currently held in the MESH mailbox that are ready to download.
+
+        This endpoint is now deprecated as it is not needed as part of the polling cycle.
+      operationId: count_messages_in_inbox_messageexchange__mailbox_id__count_get
+      parameters:
+        - description: mailbox identifier
+          required: true
+          schema:
+            title: mailbox_id
+            minLength: 1
+            type: string
+            description: mailbox identifier
+          example: MAILBOX01
+          name: mailbox_id
+          in: path
+        - description: Authorisation header
+          required: true
+          schema:
+            title: Authorization
+            type: string
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/vnd.mesh.v2+json:
+              schema:
+                title: InboxCount
+                required:
+                  - count
+                type: object
+                properties:
+                  count:
+                    title: Count
+                    type: integer
+                    description: number of messages in the inbox
+                example:
+                  count: 1234
+            application/json:
+              schema:
+                title: InboxCount
+                required:
+                  - count
+                  - internalID
+                  - allResultsIncluded
+                type: object
+                properties:
+                  count:
+                    title: Count
+                    type: integer
+                    description: number of messages in the inbox
+                  internalID:
+                    title: Internalid
+                    type: string
+                    description: internal identifier to help error diagnosis, be aware the format of this may change in line withinternal system changes and the format should not be parsed or validated or otherwise depended on
+                  allResultsIncluded:
+                    title: Allresultsincluded
+                    type: boolean
+                    description: indicates if the count was based on a partial result
+                example:
+                  count: 1234
+                  internalID: 20200601122152994285_af20cED
+                  allResultsIncluded: true
+        '403':
+          description: Forbidden
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                title: HTTPValidationError
+                type: object
+                properties: *id001
   /messageexchange/{mailbox_id}/outbox:
     post:
+      tags:
+        - Outbox
+      summary: Send message
       description: |-
         ## Overview
         Use this endpoint to send a message via MESH. Use the POST command to your virtual outbox. Specify the message recipient in the request headers, with the message contained in the request body.
 
         ### Messages larger than 100MB
-        100MB (20MB on internet) is the largest data payload the MESH API accepts in a single request. Compress larger messages to reduce bandwidth and data storage on Spine. If compression does not sufficiently reduce the message size enough for transmission in a single request then you can break it up into smaller chunks and transmit them separately provided: 
+        100MB (20MB on internet) is the largest data payload the MESH API accepts in a single request. Compress larger messages to reduce bandwidth and data storage on Spine. If compression does not sufficiently reduce the message size enough for transmission in a single request then you can break it up into smaller chunks and transmit them separately provided:
           1.  The total compressed size of the message is < 100MB - this is the Spine upper limit for a single message.
           2.  The receiver mailbox and workflow identifier support the downloading of chunked messages. MESH UI and older versions of the MESH client do not support this.
 
-        To correctly break the outbound message into valid chunks: 
+        To correctly break the outbound message into valid chunks:
           1.  Split the **uncompressed** message into `n` ordered chunks such that each (compressed) chunk is smaller than 20MB.
           2.  **Independently** compress each chunk with the same compression algorithm (e.g. `gzip`).
           3.  The first (compressed) chunk of the message should be transmitted using this endpoint (the normal send message endpoint). Include the optional `Mex-Chunk-Range` header with a value `1:n` to tell Spine that this is a chunked message and to wait for `n-1` other requests before delivering the message. The message identifier of this initial server response **must** be captured as it is a required path element of the Send chunked message URL.
 
         Always set the workflow identifier as some workflows are restricted which means the mailbox sender and recipient must be configured for the workflow identifier you send.
 
-        To discover the recipient mailbox either use the `endpointlookup` endpoint or for certain workflows you can include [demographic details](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/endpoint-lookup-service-and-workflowids#using-the-to_dts-field-of-a-mesh-message-to-find-a-mailbox-) in the `Mex-To` field. 
+        To discover the recipient mailbox either use the `endpointlookup` endpoint or for certain workflows you can include [demographic details](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/mesh-guidance-hub/endpoint-lookup-service-and-workflowids#using-the-to_dts-field-of-a-mesh-message-to-find-a-mailbox-) in the `Mex-To` field.
 
         It is good practice to capture the returned message identifier as this provides a unique identifier which you can use for message tracking.
-        
+
         ### Request
 
         ```shell
@@ -1098,598 +1364,269 @@ paths:
         --cacert 'mesh-ca.pem' \
         --key 'mesh-client-key.pem' \
         --cert 'mesh-client-cert.pem' \
-        --header 'Authorization: NHSMESH X26HC006:c1f2df9c-fe9e-4d11-ba78-49a8bc705eb4:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        --header 'Content-Type: application/octet-stream' \
-        --header 'Mex-From: X26HC006' \
-        --header 'Mex-To: X26HC005' \
-        --header 'Mex-WorkflowID: API-DOCS-TEST' \
-        --header 'Mex-FileName: None' \
-        --header 'Mex-LocalID: api-docs-bob-greets-alice' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC006:c1f2df9c-fe9e-4d11-ba78-49a8bc705eb4:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'content-type: application/octet-stream' \
+        --header 'mex-from: X26HC006' \
+        --header 'mex-to: X26HC005' \
+        --header 'mex-workflowid: API-DOCS-TEST' \
+        --header 'mex-filename: None' \
+        --header 'mex-localid: api-docs-bob-greets-alice' \
         --data 'This is a message' \
         https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox
         ```
 
         ### Response
 
+        for `accept: application/vnd.mesh.v2+json`
+        ```json
+        {"message_id": "20200529155357895317_3573F8"}
+        ```
+        for `accept: application/vnd.mesh.v1+json` or `accept: application/json`
         ```json
         {"messageID": "20200529155357895317_3573F8"}
         ```
-      operationId: send-message
+      operationId: send_message_messageexchange__mailbox_id__outbox_post
       parameters:
-        - name: mailbox_id
-          in: path
+        - description: mailbox identifier
           required: true
-          description: The ID of the mailbox
+          schema:
+            title: mailbox_id
+            minLength: 1
+            type: string
+            description: mailbox identifier
           example: MAILBOX01
-          schema:
-            type: string
-        - in: header
-          name: Authorization
+          name: mailbox_id
+          in: path
+        - description: Authorisation header
           required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
           schema:
+            title: Authorization
             type: string
-        - in: header
-          name: Content-Type
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
+        - description: Recipient mailbox ID
           required: true
-          description: Type of sent content
-          example: application/octet-stream
           schema:
+            title: mex-To
+            maxLength: 100
             type: string
-        - schema:
-            type: string
+            description: Recipient mailbox ID
+            default: ''
+          example: MAILBOX01
+          name: mex-to
           in: header
-          name: Content-Encoding
-          description: Algorithm used to compress the file e.g. 'gzip'
-        - in: header
-          name: Mex-FileName
+        - description: Identifies the type of message being sent e.g. Pathology, GP Capitation.
           required: true
-          description: '{Original File Name}'
-          example: '{Message content should have this file name after receipt}'
           schema:
+            title: mex-WorkflowID
+            maxLength: 300
             type: string
-        - in: header
-          name: Mex-From
-          required: true
-          description: Sending organisation's mailbox ID
-          example: '{Sending organisation''s mailbox ID}'
+            description: Identifies the type of message being sent e.g. Pathology, GP Capitation.
+            default: ''
+          name: mex-workflowid
+          in: header
+        - description: chunk range
+          required: false
           schema:
+            title: mex-Chunk-Range
+            maxLength: 20
             type: string
-        - in: header
-          name: Mex-To
-          required: true
-          description: Recipient mailbox ID
-          example: '{Recipient Mailbox ID}'
+            description: chunk range
+            default: ''
+          example: '1:2'
+          name: mex-chunk-range
+          in: header
+        - description: additional message subject
+          required: false
           schema:
+            title: mex-Subject
+            maxLength: 500
             type: string
-        - in: header
-          name: Mex-WorkflowID
-          required: true
-          description: Identifies the Business Workflow associated with the message
-          example: '{Workflow ID}'
+            description: additional message subject
+            default: ''
+          name: mex-subject
+          in: header
+        - description: local identifier, your reference
+          required: false
           schema:
+            title: mex-LocalID
+            maxLength: 300
             type: string
-        - schema:
-            type: string
+            description: local identifier, your reference
+            default: ''
+          name: mex-localid
           in: header
-          name: Mex-Chunk-Range
-          description: '1:{n} {if first of n chunks, see Send chunked message}'
-        - schema:
+        - description: local filename
+          required: false
+          schema:
+            title: mex-FileName
+            maxLength: 300
             type: string
+            description: local filename
+            default: ''
+          name: mex-filename
           in: header
-          name: Mex-LocalID
-          description: 'A unique ID generated by you, must not contain Patient Identifiable Data PID'
-        - schema:
+        - description: Checksum of the original message contents, as provided by the message sender
+          required: false
+          schema:
+            title: mex-Content-Checksum
+            maxLength: 100
             type: string
+            description: Checksum of the original message contents, as provided by the message sender
+            default: ''
+          example: b10a8db164e0754105b7a99be72e3fe5
+          name: mex-content-checksum
           in: header
-          name: Mex-Subject
-          description: 'Message subject information, avoid including PID'
-        - schema:
+        - description: content type of the message when decoded
+          required: false
+          schema:
+            title: Content-Type
             type: string
+            description: content type of the message when decoded
+            default: ''
+          example: text/csv
+          name: content-type
           in: header
-          name: Mex-Content-Checksum
-          description: Checksum of the original file contents
-        - schema:
+        - description: content encoding
+          required: false
+          schema:
+            title: Content-Encoding
             type: string
+            description: content encoding
+            default: ''
+          example: gzip
+          name: content-encoding
           in: header
-          name: Mex-Content-Encrypted
-          description: 'Indicate to the receiver that contents are encrypted'
+        - description: the accepts header can be used to vary the response type
+          required: false
+          schema:
+            title: Accept
+            type: string
+            description: the accepts header can be used to vary the response type
+            default: application/json
+          example: application/vnd.mesh.v2+json
+          name: accept
+          in: header
       responses:
         '202':
-          description: Accepted
+          description: Successful Response
           content:
+            application/vnd.mesh.v2+json:
+              schema:
+                title: SendMessage
+                required:
+                  - message_id
+                type: object
+                properties:
+                  message_id:
+                    title: Message Id
+                    type: string
+                    description: message identifier of the accepted message
+                example:
+                  message_id: 20220228174323222_ABCDEF
             application/json:
               schema:
+                title: SendMessage
+                required:
+                  - messageID
                 type: object
                 properties:
                   messageID:
+                    title: Messageid
                     type: string
-                    example: 20200529155357895317_3573F8
-                    description: Unique Id assigned by the MESH server
+                    description: message identifier of the accepted message
+                example:
+                  messageID: 20220228174323222_ABCDEF
         '403':
-          description: Authentication failed
-
+          description: Forbidden
         '417':
-          description: Invalid Recipient or the workflow is restricted
+          description: Expectation Failed
           content:
+            application/vnd.mesh.v2+json:
+              schema:
+                title: MeshError
+                type: object
+                properties:
+                  message_id:
+                    title: Message Id
+                    type: string
+                    description: message id associated with the error
+                  internal_id:
+                    title: Internal Id
+                    type: string
+                    description: internal id associated with the error
+                  detail:
+                    title: Detail
+                    type: array
+                    items:
+                      type: object
+                    description: error detail
+                example:
+                  message_id: 20220228174323222_ABCDEF
+                  internal_id: 20220228174323222_ABCDEF
+                  detail:
+                    - event: SEND
+                      code: '01'
+                      msg: send failed for some reason
             application/json:
               schema:
+                title: MeshError
                 type: object
                 properties:
                   messageID:
+                    title: Messageid
                     type: string
-                    description: ID of the allocated message
+                    description: message_id associated with the error
                   errorEvent:
+                    title: Errorevent
                     type: string
-                    description: Status event
+                    description: message error phase
+                    default: ''
                   errorCode:
-                    type: integer
-                    description: Status code
-                    example: 417
+                    title: Errorcode
+                    type: string
+                    description: message error code
+                    default: ''
                   errorDescription:
+                    title: Errordescription
                     type: string
-                    description: Description of the status
-      summary: Send message
-      tags:
-      - Outbox
-  /messageexchange/{mailbox_id}/outbox/tracking:
-    get:
-      description: |
-        ## Overview
-        Use this endpoint to enquire about the status of messages sent from your outbox. When determining the frequency of the calling of this endpoint consider that MESH is asynchronous, and it might be some hours until the recipient downloads your message. You must not poll this endpoint frequently.
-
-        The message identifier is the value returned in the response to a message upload.
-
-        Do not use this endpoint to replace a business ack message. If the business process requires confirmation that the recipient has processed the message then send a business ACK over MESH. The convention is to use the same workflow identifier appended with `_ACK`.
-
-        ### Request
-        It is possible for Bob to check the status of the chunked message he sent to Alice. (Note that in this example, Alice has not acknowledged the chunked message she received from Bob).
-
-
-        ```shell
-        curl -k \
-        --cacert 'mesh-ca.pem' \
-        --key 'mesh-client-key.pem' \
-        --cert 'mesh-client-cert.pem' \
-        --header 'Authorization: NHSMESH X26HC006:1f6c9442-eb9a-440c-b4ed-ee4fd525e176:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/tracking?messageID=20210311101813838554_1B8F53
-        ```
-
-        ### Response
-
-        ```json
-        {
-          "processId": null,
-          "addressType": "ALL",
-          "localId": "api-docs-bob-sends-alice-a-chunked-file",
-          "recipientBillingEntity": "England",
-          "dtsId": "20210311101813838554_1B8F53",
-          "statusSuccess": null,
-          "messageType": "DATA",
-          "statusTimestamp": null,
-          "senderBillingEntity": "England",
-          "senderOdsCode": "X26",
-          "partnerId": null,
-          "recipientName": "APIM bebop",
-          "senderName": "APIM bebop",
-          "subject": null,
-          "statusEvent": null,
-          "version": "1.0",
-          "encryptedFlag": null,
-          "statusDescription": null,
-          "senderOrgName": "TEST Org Partnership Trust",
-          "status": "Accepted",
-          "workflowId": "API-DOCS-TEST",
-          "senderOrgCode": "TestOrg",
-          "recipientOrgName": "TEST Org Partnership Trust",
-          "expiryTime": "20200606122153",
-          "senderSmtp": "x26hc006@dts.nhs.uk",
-          "fileName": "message.txt.gz",
-          "recipientSmtp": "x26hc005@dts.nhs.uk",
-          "meshRecipientOdsCode": "X26",
-          "compressFlag": null,
-          "uploadTimestamp": "20200601122152",
-          "recipient": "X26HC005",
-          "contentsBase64": true,
-          "sender": "X26HC006",
-          "checksum": null,
-          "isCompressed": null,
-          "contentEncoding": "gzip",
-          "recipientOrgCode": "TestOrg",
-          "messageId": "20210311101813838554_1B8F53",
-          "statusCode": null,
-          "fileSize": 187
-        }
-        ```
-
-        Suppose Alice only now acknowledges the message Bob sent.
-
-        ### Request
-
-        ```shell
-        curl -k \
-        --request 'PUT' \
-        --cacert 'mesh-ca.pem' \
-        --key 'mesh-client-key.pem' \
-        --cert 'mesh-client-cert.pem' \
-        --header 'Authorization: NHSMESH X26HC005:57db9dd2-2156-4c02-90d4-66e7082179db:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005/inbox/20210311101813838554_1B8F53/status/acknowledged
-        ```
-
-        ### Response
-
-        ```json
-        {"messageId" : "20210311101813838554_1B8F53" }
-        ```
-
-        The next call to Track outbox by Bob
-
-        ### Request
-
-        ```shell
-        curl -k \
-        --cacert 'mesh-ca.pem' \
-        --key 'mesh-client-key.pem' \
-        --cert 'mesh-client-cert.pem' \
-        --header 'Authorization: NHSMESH X26HC006:dd3f8609-b2c3-4f5a-aa62-c456579b8f77:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/tracking?messageID=20210311101813838554_1B8F53
-        ```
-
-        ### Response
-
-        ```json
-        {
-          "downloadTimestamp": "20200601122957",
-          "status": "Acknowledged",
-          "messageId": "20210311101813838554_1B8F53"
-        }
-        ```
-
-        This shows the `status` field of the response has changed from `Accepted` to `Acknowledged`.  All the fields in the previous response are also included.
-
-      operationId: outbox-tracking
-      parameters:
-        - name: mailbox_id
-          in: path
-          required: true
-          description: The ID of the mailbox
-          example: MAILBOX01
-          schema:
-            type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-        - in: query
-          name: messageID
-          required: true
-          description: Value of messageID returned in the `send message` response
-          example: 20210311101813838554_1B8F53
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
+                    description: message error description
+                    default: ''
+                example:
+                  messageID: 20220228174323222_ABCDEF
+                  errorEvent: SEND
+                  errorCode: '01'
+                  errorDescription: send failed for some reason
+        '400':
+          description: Validation Error
           content:
             application/json:
               schema:
+                title: HTTPValidationError
                 type: object
-                properties:
-                  processId:
-                    type: string
-                    example: null
-                  addressType:
-                    type: string
-                    example: ALL
-                  localId:
-                    type: string
-                    example: api-docs-bob-sends-alice-a-chunked-file
-                  recipientBillingEntity:
-                    type: string
-                    example: England
-                  dtsId:
-                    type: string
-                    example: 20210311101813838554_1B8F53
-                  statusSuccess:
-                    type: string
-                    example: null
-                  messageType:
-                    type: string
-                    example: DATA
-                  statusTimestamp:
-                    type: string
-                    example: null
-                  senderBillingEntity:
-                    type: string
-                    example: England
-                  senderOdsCode:
-                    type: string
-                    example: X26
-                  partnerId:
-                    type: string
-                    example: null
-                  recipientName:
-                    type: string
-                    example: APIM bebop
-                  senderName:
-                    type: string
-                    example: APIM bebop
-                  subject:
-                    type: string
-                    example: null
-                  statusEvent:
-                    type: string
-                    example: null
-                  version:
-                    type: string
-                    example: '1.0'
-                  encryptedFlag:
-                    type: string
-                    example: null
-                  statusDescription:
-                    type: string
-                    example: null
-                  senderOrgName:
-                    type: string
-                    example: TEST Org Partnership Trust
-                  status:
-                    type: string
-                    example: Accepted
-                  workflowId:
-                    type: string
-                    example: API-DOCS-TEST
-                  senderOrgCode:
-                    type: string
-                    example: TestOrg
-                  recipientOrgName:
-                    type: string
-                    example: TEST Org Partnership Trust
-                  expiryTime:
-                    type: string
-                    example: '20200606122153'
-                  senderSmtp:
-                    type: string
-                    example: x26hc006@dts.nhs.uk
-                  fileName:
-                    type: string
-                    example: message.txt.gz
-                  recipientSmtp:
-                    type: string
-                    example: x26hc005@dts.nhs.uk
-                  meshRecipientOdsCode:
-                    type: string
-                    example: X26
-                  compressFlag:
-                    type: string
-                    example: null
-                  uploadTimestamp:
-                    type: string
-                    example: '20200601122152'
-                  recipient:
-                    type: string
-                    example: X26HC005
-                  sender:
-                    type: string
-                    example: X26HC006
-                  checksum:
-                    type: string
-                    example: null
-                  isCompressed:
-                    type: string
-                    example: null
-                  contentEncoding:
-                    type: string
-                    example: gzip
-                  recipientOrgCode:
-                    type: string
-                    example: TestOrg
-                  messageId:
-                    type: string
-                    example: 20210311101813838554_1B8F53
-                  statusCode:
-                    type: string
-                    example: null
-                  fileSize:
-                    type: integer
-                    example: 187
-        '403':
-          description: Message does not exist
-          content:
-            application/json:
-              schema:
-                type: object
-      summary: Track outbox
-      tags:
-      - Tracking
-  /messageexchange/{mailbox_id}/outbox/tracking/{local_id}:
-    get:
-      description: |
-        ## Overview
-        This endpoint is now `deprecated` `tracking?messageID` should be used instead.
-      deprecated: true
-      operationId: outbox-tracking-localID
-      parameters:
-        - name: mailbox_id
-          in: path
-          required: true
-          description: The ID of the mailbox
-          example: MAILBOX01
-          schema:
-            type: string
-        - in: path
-          name: local_id
-          required: true
-          description: Value of Mex-LocalID provided by sender
-          example: api-docs-bob-sends-alice-a-chunked-file
-          schema:
-            type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  processId:
-                    type: string
-                    example: null
-                  addressType:
-                    type: string
-                    example: ALL
-                  localId:
-                    type: string
-                    example: api-docs-bob-sends-alice-a-chunked-file
-                  recipientBillingEntity:
-                    type: string
-                    example: England
-                  dtsId:
-                    type: string
-                    example: 20200601122152994285_D59900
-                  statusSuccess:
-                    type: string
-                    example: null
-                  messageType:
-                    type: string
-                    example: DATA
-                  statusTimestamp:
-                    type: string
-                    example: null
-                  senderBillingEntity:
-                    type: string
-                    example: England
-                  senderOdsCode:
-                    type: string
-                    example: X26
-                  partnerId:
-                    type: string
-                    example: null
-                  recipientName:
-                    type: string
-                    example: APIM bebop
-                  senderName:
-                    type: string
-                    example: APIM bebop
-                  subject:
-                    type: string
-                    example: null
-                  statusEvent:
-                    type: string
-                    example: null
-                  version:
-                    type: string
-                    example: '1.0'
-                  encryptedFlag:
-                    type: string
-                    example: null
-                  statusDescription:
-                    type: string
-                    example: null
-                  senderOrgName:
-                    type: string
-                    example: TEST Org Partnership Trust
-                  status:
-                    type: string
-                    example: Accepted
-                  workflowId:
-                    type: string
-                    example: API-DOCS-TEST
-                  senderOrgCode:
-                    type: string
-                    example: TestOrg
-                  recipientOrgName:
-                    type: string
-                    example: TEST Org Partnership Trust
-                  expiryTime:
-                    type: string
-                    example: '20200606122153'
-                  senderSmtp:
-                    type: string
-                    example: x26hc006@dts.nhs.uk
-                  fileName:
-                    type: string
-                    example: message.txt.gz
-                  recipientSmtp:
-                    type: string
-                    example: x26hc005@dts.nhs.uk
-                  meshRecipientOdsCode:
-                    type: string
-                    example: X26
-                  compressFlag:
-                    type: string
-                    example: null
-                  uploadTimestamp:
-                    type: string
-                    example: '20200601122152'
-                  recipient:
-                    type: string
-                    example: X26HC005
-                  sender:
-                    type: string
-                    example: X26HC006
-                  checksum:
-                    type: string
-                    example: null
-                  isCompressed:
-                    type: string
-                    example: null
-                  contentEncoding:
-                    type: string
-                    example: gzip
-                  recipientOrgCode:
-                    type: string
-                    example: TestOrg
-                  messageId:
-                    type: string
-                    example: 20200601122152994285_D59900
-                  statusCode:
-                    type: string
-                    example: null
-                  fileSize:
-                    type: integer
-                    example: 187
-        '300':
-          description: Multiple options (The localId provided with the message was not unique)
-          content:
-            application/json:
-              schema:
-                type: object
-        '403':
-          description: Message does not exist
-          content:
-            application/json:
-              schema:
-                type: object
-      summary: Track outbox (deprecated)
-      tags:
-      - Tracking
-  /messageexchange/{mailbox_id}/outbox/{message_id}/{chunkNo}:
+                properties: *id001
+  /messageexchange/{mailbox_id}/outbox/{message_id}/{chunk_number}:
     post:
+      tags:
+        - Outbox
+      summary: Send chunked message
       description: |-
         ## Overview
-        Use this endpoint to send a chunked message. The 'Send Message' endpoint has a maximum single request message payload size of 100MB over HSCN or 20MB over the internet. However, you can send much larger messages (up to 20GB) by breaking up the message into chunks and transmitting it over multiple requests. 
+        Use this endpoint to send a chunked message. The 'Send Message' endpoint has a maximum single request message payload size of 100MB over HSCN or 20MB over the internet. However, you can send much larger messages (up to 20GB) by breaking up the message into chunks and transmitting it over multiple requests.
 
         **Note**: Some workflow ids do not support chunking because it is not currently supported in the MESH UI and older versions of the MESH client. Check with your receiving organisation before sending messages with this endpoint.
-        
+
         To send a chunked message:
 
         1. Split it into separate files
         2. Compress the individual chunks **separately** with the **same** compression program (e.g. `gzip`).
-            - **DO NOT** compress a large file and then split the compressed version
+           - **DO NOT** compress a large file and then split the compressed version
         3. Upload the first file using the normal 'Send message' endpoint.
-            - include the `Mex-Chunk-Range` header with a value of `1:n` where `n` is the number of separate files your big data is split into
-            - capture the message identifier field in the returned JSON
+           - include the `Mex-Chunk-Range` header with a value of `1:n` where `n` is the number of separate files your big data is split into
+           - capture the message identifier field in the returned JSON
         4. Upload subsequent files in the correct order using the chunked message endpoint
 
         **Note:** fewer headers are required for the chunked message endpoint because Spine uses the relevant metadata from the initial (`Mex-Chunk-Header=1:n`) call to the 'Send message' endpoint.
@@ -1713,17 +1650,17 @@ paths:
         Bob.
         ```
 
-        First we break up our one "large" file into two smaller files. We will transmit one per request.
+          First we break up our one "large" file into two smaller files. We will transmit one per request.
 
         ```shell
         split -b 100 message.txt message.txt_
         ls -sh message.txt_*
         ```
-        Large messages should be compressed to reduce the bandwidth and storage requirements for Spine.
 
+        Large messages should be compressed to reduce the bandwidth and storage requirements for Spine.
         ```shell
         for chunk_file in message.txt_*; do
-            gzip -k -f $chunk_file;
+          gzip -k -f $chunk_file;
         done
         ls -sh message.txt_*.gz
 
@@ -1736,15 +1673,16 @@ paths:
         --key 'mesh-client-key.pem' \
         --cert 'mesh-client-cert.pem' \
         --request 'POST' \
-        --header 'Authorization: NHSMESH X26HC006:2c6e938e-9a72-4a7a-9664-96ac1f341331:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        --header 'Content-Type: application/octet-stream' \
-        --header 'Mex-From: X26HC006' \
-        --header 'Mex-To: X26HC005' \
-        --header 'Mex-WorkflowID: API-DOCS-TEST' \
-        --header 'Mex-FileName: message.txt.gz' \
-        --header 'Mex-LocalID: api-docs-bob-sends-alice-a-chunked-file' \
-        --header 'Mex-Chunk-Range: 1:2' \
-        --header 'Content-Encoding: gzip' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC006:2c6e938e-9a72-4a7a-9664-96ac1f341331:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'content-type: application/octet-stream' \
+        --header 'mex-from: X26HC006' \
+        --header 'mex-to: X26HC005' \
+        --header 'mex-workflowid: API-DOCS-TEST' \
+        --header 'mex-filename: message.txt.gz' \
+        --header 'mex-localid: api-docs-bob-sends-alice-a-chunked-file' \
+        --header 'mex-chunk-range: 1:2' \
+        --header 'content-encoding: gzip' \
         --data-binary '@message.txt_aa.gz' \
         https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox
         ```
@@ -1754,304 +1692,1139 @@ paths:
         --key 'mesh-client-key.pem' \
         --cert 'mesh-client-cert.pem' \
         --request 'POST' \
-        --header 'Authorization: NHSMESH X26HC006:06bf0527-ba77-47f0-b22f-d7d08a88ad26:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
-        --header 'Mex-Chunk-Range: 2:2' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC006:06bf0527-ba77-47f0-b22f-d7d08a88ad26:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        --header 'mex-chunk-range: 2:2' \
         --data-binary '@./message.txt_ab.gz' \
         https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/20200601122152994285_D59900/2
         ```
-      operationId: send-chunked-message
+      operationId: send_chunk_messageexchange__mailbox_id__outbox__message_id___chunk_number__post
       parameters:
-        - name: mailbox_id
-          in: path
+        - description: The index number of the chunk
           required: true
-          description: The ID of the mailbox
-          example: MAILBOX01
           schema:
-            type: string
-        - in: header
-          name: Authorization
-          required: true
-          description: Authentication headers
-          example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          schema:
-            type: string
-        - in: path
-          name: message_id
-          required: true
-          description: The ID of the message
-          schema:
-            type: string
-        - in: path
-          name: chunkNo
-          required: true
-          description: The index number of the chunk
-          example: 1
-          schema:
+            title: chunk_number
             type: integer
-        - in: header
-          name: Content-Type
+            description: The index number of the chunk
+          example: '1'
+          name: chunk_number
+          in: path
+        - description: mailbox identifier
           required: true
-          description: Type of sent content
-          example: application/octet-stream
           schema:
+            title: mailbox_id
+            minLength: 1
             type: string
-        - in: header
-          name: Mex-Chunk-Range
+            description: mailbox identifier
+          example: MAILBOX01
+          name: mailbox_id
+          in: path
+        - description: message identifier
           required: true
-          description: describes which chunk of the range is sent.
-          example: '124'
           schema:
+            title: message_id
+            minLength: 1
             type: string
-            format: 'integer:integer'
+            description: message identifier
+          example: 20210311101813838554_1B8F53
+          name: message_id
+          in: path
+        - description: chunk range for the current chunk
+          required: false
+          schema:
+            title: mex-Chunk-Range
+            maxLength: 20
+            type: string
+            description: chunk range for the current chunk
+            default: ''
+          example: '2:3'
+          name: mex-chunk-range
+          in: header
+        - description: Authorisation header
+          required: true
+          schema:
+            title: Authorization
+            type: string
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
+        - description: content encoding
+          required: false
+          schema:
+            title: Content-Encoding
+            type: string
+            description: content encoding
+            default: ''
+          example: gzip
+          name: content-encoding
+          in: header
+        - description: the accepts header can be used to vary the response type
+          required: false
+          schema:
+            title: Accept
+            type: string
+            description: the accepts header can be used to vary the response type
+            default: application/json
+          example: application/vnd.mesh.v2+json
+          name: accept
+          in: header
       responses:
         '202':
-          description: Accepted
+          description: Successful Response
           content:
+            application/vnd.mesh.v2+json:
+              schema:
+                title: SendMessage
+                required:
+                  - message_id
+                type: object
+                properties:
+                  message_id:
+                    title: Message Id
+                    type: string
+                    description: message identifier of the accepted message
+                example:
+                  message_id: 20220228174323222_ABCDEF
             application/json:
               schema:
+                title: SendMessage
+                required:
+                  - messageID
                 type: object
                 properties:
                   messageID:
+                    title: Messageid
                     type: string
-                    example: 20200529155357895317_3573F8
-                    description: 'Unique message ID, identical to initial Send message endpoint'
-                  blockId:
-                    type: integer
-                    description: chunkNo assigned to the chunk as supplied in the Mex-chunk-range header, maintained for legacy support
+                    description: message identifier of the accepted message
+                example:
+                  messageID: 20220228174323222_ABCDEF
         '403':
-          description: Authentication failed
-      summary: Send chunked message
+          description: Forbidden
+        '417':
+          description: Expectation Failed
+          content:
+            application/vnd.mesh.v2+json:
+              schema:
+                title: MeshError
+                type: object
+                properties:
+                  message_id:
+                    title: Message Id
+                    type: string
+                    description: message id associated with the error
+                  internal_id:
+                    title: Internal Id
+                    type: string
+                    description: internal id associated with the error
+                  detail:
+                    title: Detail
+                    type: array
+                    items:
+                      type: object
+                    description: error detail
+                example:
+                  message_id: 20220228174323222_ABCDEF
+                  internal_id: 20220228174323222_ABCDEF
+                  detail:
+                    - event: SEND
+                      code: '01'
+                      msg: send failed for some reason
+            application/json:
+              schema:
+                title: MeshError
+                type: object
+                properties:
+                  messageID:
+                    title: Messageid
+                    type: string
+                    description: message_id associated with the error
+                  errorEvent:
+                    title: Errorevent
+                    type: string
+                    description: message error phase
+                    default: ''
+                  errorCode:
+                    title: Errorcode
+                    type: string
+                    description: message error code
+                    default: ''
+                  errorDescription:
+                    title: Errordescription
+                    type: string
+                    description: message error description
+                    default: ''
+                example:
+                  messageID: 20220228174323222_ABCDEF
+                  errorEvent: SEND
+                  errorCode: '01'
+                  errorDescription: send failed for some reason
+        '404':
+          description: Not Found, messages does not exist
+        '423':
+          description: Messages has been finalised no more chunks can be uploaded
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                title: HTTPValidationError
+                type: object
+                properties: *id001
+  /messageexchange/{mailbox_id}/outbox/tracking:
+    get:
       tags:
-      - Outbox
-components:
-  parameters:
-    mailbox_id:
-      name: mailbox_id
-      in: path
-      required: true
-      description: The ID of the mailbox
-      example: MAILBOX01
-      schema:
-        type: string
-    message_id:
-      in: path
-      name: message_id
-      required: true
-      description: The ID of the message
-      schema:
-        type: string
-    chunkNo:
-      in: path
-      name: chunkNo
-      required: true
-      description: The index number of the chunk
-      example: 1
-      schema:
-        type: integer
-    AuthorizationHeader:
-      in: header
-      name: Authorization
-      required: true
-      description: Authentication headers
-      example: 'Authorization: NHSMESH NONFUNC01:jt81ti68rlvta7379p3ng949rv:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-      schema:
-        type: string
-    AcceptEncodingHeader:
-      in: header
-      name: Accept-Encoding
-      required: false
-      description: client can accept & decompress messages in GZIP format
-      example: gzip
-      schema:
-        type: string
-    ContentTypeHeader:
-      in: header
-      name: Content-Type
-      required: true
-      description: Type of sent content
-      example: application/octet-stream
-      schema:
-        type: string
-    ContentEncodingHeader:
-      in: header
-      name: Content-Encoding
-      required: false
-      description: 'The Content-Encoding entity header is used to compress the media-type. When present, its value indicates which encodings were applied to the entity-body. It lets the client know how to decode in order to obtain the media-type referenced by the Content-Type header.'
-      example: gzip
-      schema:
-        type: string
-    MexChunkRange:
-      in: header
-      name: Mex-Chunk-Range
-      required: true
-      description: describes which chunk of the range is sent.
-      example: '124'
-      schema:
-        type: string
-        format: 'integer:integer'
-    Mex-ClientVersion:
-      in: header
-      name: Mex-ClientVersion
-      required: true
-      description: Client version number
-      example: ApiDocs==0.0.1
-      schema:
-        type: string
-    Mex-OSName:
-      in: header
-      name: Mex-OSName
-      required: true
-      description: Operating system name
-      example: Linux
-      schema:
-        type: string
-    Mex-OSVersion:
-      in: header
-      name: Mex-OSVersion
-      required: true
-      description: Operating system version
-      example: '#44~18.04.2-Ubuntu'
-      schema:
-        type: string
-    Mex-FileName:
-      in: header
-      name: Mex-FileName
-      required: true
-      description: File name
-      example: '{Message content should have this file name after receipt}'
-      schema:
-        type: string
-    Mex-From:
-      in: header
-      name: Mex-From
-      required: true
-      description: Sending organisation's mailbox ID
-      example: '{Sending organisation''s mailbox ID}'
-      schema:
-        type: string
-    Mex-To:
-      in: header
-      name: Mex-To
-      required: true
-      description: Recipient mailbox ID
-      example: '{Recipient Mailbox ID}'
-      schema:
-        type: string
-    Mex-WorkflowID:
-      in: header
-      name: Mex-WorkflowID
-      required: true
-      description: Workflow ID
-      example: '{Workflow ID}'
-      schema:
-        type: string
-    workflow_id:
-      in: path
-      name: workflow_id
-      required: true
-      description: Workflow ID
-      example: '{Workflow ID}'
-      schema:
-        type: string
-    localID:
-      in: path
-      name: localID
-      required: true
-      description: Value of Mex-LocalID provided by sender
-      example: api-docs-bob-sends-alice-a-chunked-file
-      schema:
-        type: string
-    ods_code:
-      in: path
-      name: ods_code
-      required: true
-      description: All health and social care organisations have a unique ODS code
-      example: SCREEN2
-      schema:
-        type: string
-  responses:
-    '200':
-      description: OK
-      content:
-        application/json:
+        - Tracking
+      summary: Track outbox
+      description: |-
+        ## Overview
+        Use this endpoint to enquire about the status of messages sent from your outbox. When determining the frequency of the calling of this endpoint consider that MESH is asynchronous, and it might be some hours until the recipient downloads your message. You must not poll this endpoint frequently.
+
+        The message identifier is the value returned in the response to a message upload.
+
+        Do not use this endpoint to replace a business ack message. If the business process requires confirmation that the recipient has processed the message then send a business ACK over MESH. The convention is to use the same workflow identifier appended with `_ACK`.
+
+        ### Request
+        It is possible for Bob to check the status of the chunked message he sent to Alice. (Note that in this example, Alice has not acknowledged the chunked message she received from Bob).
+
+
+        ```shell
+        curl -k \
+        --cacert 'mesh-ca.pem' \
+        --key 'mesh-client-key.pem' \
+        --cert 'mesh-client-cert.pem' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC006:1f6c9442-eb9a-440c-b4ed-ee4fd525e176:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/tracking?messageID=20210311101813838554_1B8F53
+        ```
+
+        ### Response
+
+        for `accept: application/vnd.mesh.v2+json`
+
+        ```json
+        {
+          "message_id": "20210311101813838554_1B8F53",
+          "local_id": "api-docs-bob-sends-alice-a-chunked-file",
+          "workflow_id": "API-DOCS-TEST",
+          "filename": "message.txt.gz",
+          "expiry_time": "20200606122153",
+          "upload_timestamp": "20200601122152",
+          "recipient": "X26HC005",
+          "recipient_name": "APIM bebop",
+          "recipient_ods_code": "X26",
+          "recipient_org_code": "TestOrg",
+          "recipient_org_name": "TEST Org Partnership Trust",
+          "status_success": true,
+          "status": "accepted",
+          "status_event": "TRANSFER",
+          "status_timestamp": "2020-06-01T12:21:52",
+          "status_description": "Success",
+          "status_code": "01"
+        }
+        ```
+        for `accept: application/vnd.mesh.v1+json` or `accept: application/json`
+
+        ```json
+        {
+          "addressType": "ALL",
+          "checksum": null,
+          "compressFlag": null,
+          "contentEncoding": "gzip",
+          "contentsBase64": true,
+          "dtsId": "20210311101813838554_1B8F53",
+          "encryptedFlag": null,
+          "expiryTime": "20200606122153",
+          "fileName": "message.txt.gz",
+          "fileSize": 187,
+          "isCompressed": null,
+          "localId": "api-docs-bob-sends-alice-a-chunked-file",
+          "meshRecipientOdsCode": "X26",
+          "messageId": "20210311101813838554_1B8F53",
+          "messageType": "DATA",
+          "partnerId": null,
+          "processId": null,
+          "recipient": "X26HC005",
+          "recipientBillingEntity": "England",
+          "recipientName": "APIM bebop",
+          "recipientOrgCode": "TestOrg",
+          "recipientOrgName": "TEST Org Partnership Trust",
+          "recipientSmtp": "x26hc005@dts.nhs.uk",
+          "sender": "X26HC006",
+          "senderBillingEntity": "England",
+          "senderName": "APIM bebop",
+          "senderOdsCode": "X26",
+          "senderOrgCode": "TestOrg",
+          "senderOrgName": "TEST Org Partnership Trust",
+          "senderSmtp": "x26hc006@dts.nhs.uk",
+          "status": "Accepted",
+          "statusCode": null,
+          "statusDescription": null,
+          "statusEvent": null,
+          "statusSuccess": null,
+          "statusTimestamp": null,
+          "subject": null,
+          "uploadTimestamp": "20200601122152",
+          "version": "1.0",
+          "workflowId": "API-DOCS-TEST"
+        }
+        ```
+
+        Suppose Alice only now acknowledges the message Bob sent.
+
+        ### Request
+
+        ```shell
+        curl -k \
+        --request 'PUT' \
+        --cacert 'mesh-ca.pem' \
+        --key 'mesh-client-key.pem' \
+        --cert 'mesh-client-cert.pem' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC005:57db9dd2-2156-4c02-90d4-66e7082179db:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC005/inbox/20210311101813838554_1B8F53/status/acknowledged
+        ```
+
+        ### Response
+
+        ```json
+        {"message_id" : "20210311101813838554_1B8F53" }
+        ```
+
+        The next call to Track outbox by Bob
+
+        ### Request
+
+        ```shell
+        curl -k \
+        --cacert 'mesh-ca.pem' \
+        --key 'mesh-client-key.pem' \
+        --cert 'mesh-client-cert.pem' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        --header 'authorization: NHSMESH X26HC006:dd3f8609-b2c3-4f5a-aa62-c456579b8f77:0:202006041718:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced' \
+        https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/tracking?messageID=20210311101813838554_1B8F53
+        ```
+
+        ### Response
+
+        ```json
+        {
+          "status_timestamp": "2020-06-01T12:21:52",
+          "status": "acknowledged",
+          "message_id": "20210311101813838554_1B8F53"
+        }
+        ```
+
+        This shows the `status` field of the response has changed from `Accepted` to `Acknowledged`.  All the fields in the previous response are also included.
+      operationId: tracking_by_message_id_messageexchange__mailbox_id__outbox_tracking_get
+      parameters:
+        - description: mailbox identifier
+          required: true
           schema:
-            type: object
-    '202':
-      description: Accepted
-      content:
-        application/json:
+            title: mailbox_id
+            minLength: 1
+            type: string
+            description: mailbox identifier
+          example: MAILBOX01
+          name: mailbox_id
+          in: path
+        - description: message identifier
+          required: true
           schema:
-            type: object
-            properties:
-              messageID:
-                type: string
-                example: allocatedMessageID
-                description: JSON which includes the message ID of the newly created message record.
-    '206':
-      description: Partial download – Indicates that chunk has been downloaded successfully and that there are further chunks.
-      content:
-        binary:
+            title: message identifier
+            minLength: 1
+            type: string
+            description: message identifier
+          example: 20210311101813838554_1B8F53
+          name: messageID
+          in: query
+        - description: Authorisation header
+          required: true
           schema:
-            type: object
-    '300':
-      description: Multiple options (The localId provided with the message was not unique)
-      content:
-        application/json:
+            title: Authorization
+            type: string
+            description: Authorisation header
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
+        - description: the accepts header can be used to vary the response type
+          required: false
           schema:
-            type: object
-    '400':
-      description: Bad Request
-      content:
-        application/json:
+            title: Accept
+            type: string
+            description: the accepts header can be used to vary the response type
+            default: application/json
+          example: application/vnd.mesh.v2+json
+          name: accept
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/vnd.mesh.v2+json:
+              schema:
+                title: Tracking
+                required:
+                  - message_id
+                type: object
+                properties:
+                  message_id:
+                    title: Message Id
+                    type: string
+                    description: message identifier
+                  local_id:
+                    title: Local Id
+                    type: string
+                    description: local identifier supplied by sender
+                  workflow_id:
+                    title: Workflow Id
+                    type: string
+                    description: message workflow identifier
+                  filename:
+                    title: Filename
+                    type: string
+                    description: local filename as supplied by the sender
+                  expiry_time:
+                    title: Expiry Time
+                    type: string
+                    description: iso timestamp that the message will expire from the inbox
+                    format: date-time
+                  upload_timestamp:
+                    title: Upload Timestamp
+                    type: string
+                    description: iso timestamp that the message was accepted
+                    format: date-time
+                  recipient:
+                    title: Recipient
+                    type: string
+                    description: recipient mailbox identifier
+                  recipient_name:
+                    title: Recipient Name
+                    type: string
+                    description: recipient mailbox name
+                  recipient_ods_code:
+                    title: Recipient Ods Code
+                    type: string
+                    description: recipient organisation ODS code
+                  recipient_org_code:
+                    title: Recipient Org Code
+                    type: string
+                    description: recipient organisation organisation code
+                  recipient_org_name:
+                    title: Recipient Org Name
+                    type: string
+                    description: recipient organisation name
+                  status_success:
+                    title: Status Success
+                    type: boolean
+                    description: SUCCESS or ERROR if the message accepted
+                  status:
+                    title: Status
+                    type: string
+                    description: message status e.g. 'accepted' 'acknowledged'
+                  status_event:
+                    title: Status Event
+                    type: string
+                    description: status event
+                  status_timestamp:
+                    title: Status Timestamp
+                    type: string
+                    description: iso timestamp last status change
+                    format: date-time
+                  status_description:
+                    title: Status Description
+                    type: string
+                    description: status description
+                  status_code:
+                    title: Status Code
+                    type: string
+                    description: status code
+            application/json:
+              schema:
+                title: Tracking
+                required:
+                  - dtsId
+                  - fileSize
+                  - messageId
+                type: object
+                properties:
+                  addressType:
+                    title: Addresstype
+                    type: string
+                    default: ALL
+                  checksum:
+                    title: Checksum
+                    type: string
+                    description: message status e.g. 'accepted' 'acknowledged'
+                  chunkCount:
+                    title: Chunkcount
+                    type: integer
+                    description: number of message chunks
+                  compressFlag:
+                    title: Compressflag
+                    type: string
+                  contentEncoding:
+                    title: Contentencoding
+                    type: string
+                    default: ''
+                  downloadTimestamp:
+                    title: Downloadtimestamp
+                    type: string
+                    description: timestamp the message was acknowledged
+                  dtsId:
+                    title: Dtsid
+                    type: string
+                    description: message identifier of the sent message
+                  encryptedFlag:
+                    title: Encryptedflag
+                    type: string
+                  expiryTime:
+                    title: Expirytime
+                    type: string
+                    description: timestamp that the message will expire from the inbox
+                  failureDate:
+                    title: Failuredate
+                    type: string
+                  failureDiagnostic:
+                    title: Failurediagnostic
+                    type: string
+                  fileName:
+                    title: Filename
+                    type: string
+                    description: local filename as supplied by the sender
+                  fileSize:
+                    title: Filesize
+                    type: integer
+                    description: the uploaded file size
+                  isCompressed:
+                    title: Iscompressed
+                    type: string
+                    default: ''
+                  linkedMsgId:
+                    title: Linkedmsgid
+                    type: string
+                    description: related message id
+                  localId:
+                    title: Localid
+                    type: string
+                    description: local identifier supplied by sender
+                  meshRecipientOdsCode:
+                    title: Meshrecipientodscode
+                    type: string
+                    description: recipient organisation ODS code
+                  messageId:
+                    title: Messageid
+                    type: string
+                    description: message identifier of the sent message
+                  messageType:
+                    title: Messagetype
+                    type: string
+                    description: DATA or REPORT
+                  partnerId:
+                    title: Partnerid
+                    type: string
+                    default: ''
+                  recipient:
+                    title: Recipient
+                    type: string
+                    description: recipient mailbox identifier
+                  recipientName:
+                    title: Recipientname
+                    type: string
+                    description: recipient mailbox name
+                  recipientOrgCode:
+                    title: Recipientorgcode
+                    type: string
+                    description: recipient organisation code
+                  recipientOrgName:
+                    title: Recipientorgname
+                    type: string
+                    description: recipient organisation name
+                  recipientSmtp:
+                    title: Recipientsmtp
+                    type: string
+                    default: ''
+                  sender:
+                    title: Sender
+                    type: string
+                    description: sender mailbox identifier
+                  senderName:
+                    title: Sendername
+                    type: string
+                    description: sender mailbox name
+                  senderOdsCode:
+                    title: Senderodscode
+                    type: string
+                    description: sender ods code
+                  senderOrgCode:
+                    title: Senderorgcode
+                    type: string
+                    description: sender organisation code
+                  senderOrgName:
+                    title: Senderorgname
+                    type: string
+                    description: sender organisation name
+                  senderSmtp:
+                    title: Sendersmtp
+                    type: string
+                    default: ''
+                  status:
+                    title: Status
+                    type: string
+                    description: message status e.g. 'accepted' 'acknowledged'
+                  statusCode:
+                    title: Statuscode
+                    type: string
+                    description: status code
+                  statusDescription:
+                    title: Statusdescription
+                    type: string
+                    description: status description
+                  statusEvent:
+                    title: Statusevent
+                    type: string
+                    description: status event
+                  statusSuccess:
+                    title: Statussuccess
+                    type: string
+                    description: SUCCESS or ERROR if the message accepted
+                  statusTimestamp:
+                    title: Statustimestamp
+                    type: string
+                    description: timestamp of the status change
+                  subject:
+                    title: Subject
+                    type: string
+                    description: message subject
+                  uploadTimestamp:
+                    title: Uploadtimestamp
+                    type: string
+                    description: timestamp that the message was accepted
+                  version:
+                    title: Version
+                    type: string
+                    default: '1.0'
+                  workflowId:
+                    title: Workflowid
+                    type: string
+                    description: message workflow identifier
+        '403':
+          description: Forbidden
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                title: HTTPValidationError
+                type: object
+                properties: *id001
+  /messageexchange/{mailbox_id}/outbox/tracking/{local_id}:
+    get:
+      tags:
+        - Tracking
+      summary: Track outbox (deprecated)
+      description: |-
+        ## Overview
+        This endpoint is now `deprecated` `tracking?messageID` should be used instead.
+      operationId: tracking_by_local_id_messageexchange__mailbox_id__outbox_tracking__local_id__get
+      parameters:
+        - description: The user supplied (local ID) of the message
+          required: true
           schema:
-            type: object
-    '403':
-      description: Authentication failed
-    '404':
-      description: Message does not exist
-      content:
-        application/json:
+            title: The local ID of the message
+            minLength: 1
+            type: string
+            description: The user supplied (local ID) of the message
+          example: api-docs-bob-sends-alice-a-chunked-file
+          name: local_id
+          in: path
+        - description: mailbox identifier
+          required: true
           schema:
-            type: object
-    '410':
-      description: 'Gone, message has already been downloaded'
-      content:
-        application/json:
+            title: mailbox_id
+            minLength: 1
+            type: string
+            description: mailbox identifier
+          example: MAILBOX01
+          name: mailbox_id
+          in: path
+        - description: Authorisation header
+          required: true
           schema:
-            type: object
-    '417':
-      description: Invalid Recipient or the workflow is restricted
-      content:
-        application/json:
+            title: Authorization
+            type: string
+            description: Authorisation header
+            default: ''
+          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+          name: authorization
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Tracking
+                required:
+                  - dtsId
+                  - fileSize
+                  - messageId
+                type: object
+                properties:
+                  addressType:
+                    title: Addresstype
+                    type: string
+                    default: ALL
+                  checksum:
+                    title: Checksum
+                    type: string
+                    description: message status e.g. 'accepted' 'acknowledged'
+                  chunkCount:
+                    title: Chunkcount
+                    type: integer
+                    description: number of message chunks
+                  compressFlag:
+                    title: Compressflag
+                    type: string
+                  contentEncoding:
+                    title: Contentencoding
+                    type: string
+                    default: ''
+                  downloadTimestamp:
+                    title: Downloadtimestamp
+                    type: string
+                    description: timestamp the message was acknowledged
+                  dtsId:
+                    title: Dtsid
+                    type: string
+                    description: message identifier of the sent message
+                  encryptedFlag:
+                    title: Encryptedflag
+                    type: string
+                  expiryTime:
+                    title: Expirytime
+                    type: string
+                    description: timestamp that the message will expire from the inbox
+                  failureDate:
+                    title: Failuredate
+                    type: string
+                  failureDiagnostic:
+                    title: Failurediagnostic
+                    type: string
+                  fileName:
+                    title: Filename
+                    type: string
+                    description: local filename as supplied by the sender
+                  fileSize:
+                    title: Filesize
+                    type: integer
+                    description: the uploaded file size
+                  isCompressed:
+                    title: Iscompressed
+                    type: string
+                    default: ''
+                  linkedMsgId:
+                    title: Linkedmsgid
+                    type: string
+                    description: related message id
+                  localId:
+                    title: Localid
+                    type: string
+                    description: local identifier supplied by sender
+                  meshRecipientOdsCode:
+                    title: Meshrecipientodscode
+                    type: string
+                    description: recipient organisation ODS code
+                  messageId:
+                    title: Messageid
+                    type: string
+                    description: message identifier of the sent message
+                  messageType:
+                    title: Messagetype
+                    type: string
+                    description: DATA or REPORT
+                  partnerId:
+                    title: Partnerid
+                    type: string
+                    default: ''
+                  recipient:
+                    title: Recipient
+                    type: string
+                    description: recipient mailbox identifier
+                  recipientName:
+                    title: Recipientname
+                    type: string
+                    description: recipient mailbox name
+                  recipientOrgCode:
+                    title: Recipientorgcode
+                    type: string
+                    description: recipient organisation code
+                  recipientOrgName:
+                    title: Recipientorgname
+                    type: string
+                    description: recipient organisation name
+                  recipientSmtp:
+                    title: Recipientsmtp
+                    type: string
+                    default: ''
+                  sender:
+                    title: Sender
+                    type: string
+                    description: sender mailbox identifier
+                  senderName:
+                    title: Sendername
+                    type: string
+                    description: sender mailbox name
+                  senderOdsCode:
+                    title: Senderodscode
+                    type: string
+                    description: sender ods code
+                  senderOrgCode:
+                    title: Senderorgcode
+                    type: string
+                    description: sender organisation code
+                  senderOrgName:
+                    title: Senderorgname
+                    type: string
+                    description: sender organisation name
+                  senderSmtp:
+                    title: Sendersmtp
+                    type: string
+                    default: ''
+                  status:
+                    title: Status
+                    type: string
+                    description: message status e.g. 'accepted' 'acknowledged'
+                  statusCode:
+                    title: Statuscode
+                    type: string
+                    description: status code
+                  statusDescription:
+                    title: Statusdescription
+                    type: string
+                    description: status description
+                  statusEvent:
+                    title: Statusevent
+                    type: string
+                    description: status event
+                  statusSuccess:
+                    title: Statussuccess
+                    type: string
+                    description: SUCCESS or ERROR if the message accepted
+                  statusTimestamp:
+                    title: Statustimestamp
+                    type: string
+                    description: timestamp of the status change
+                  subject:
+                    title: Subject
+                    type: string
+                    description: message subject
+                  uploadTimestamp:
+                    title: Uploadtimestamp
+                    type: string
+                    description: timestamp that the message was accepted
+                  version:
+                    title: Version
+                    type: string
+                    default: '1.0'
+                  workflowId:
+                    title: Workflowid
+                    type: string
+                    description: message workflow identifier
+        '403':
+          description: Forbidden
+        '300':
+          description: Multiple Choices, the `local_id` is not unique
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                title: HTTPValidationError
+                type: object
+                properties: *id001
+      deprecated: true
+  /messageexchange/endpointlookup/{ods_code}/{workflow_id}:
+    get:
+      tags:
+        - Lookup
+      summary: Look up MESH address
+      description: |-
+        ## Overview
+        Use this endpoint to search for the mailbox of the organisation you want to send data to, using their unique [Organisation Data Service (ODS) code](https://odsportal.hscic.gov.uk/Organisation/Search), their MESH mailbox and the agreed workflow identifier for the data.
+
+        An example call:
+
+        ### Request
+
+        ```shell
+        curl -k \
+        --cacert 'mesh-ca.pem' \
+        --key 'mesh-client-key.pem' \
+        --cert 'mesh-client-cert.pem' \
+        --header 'accept: application/vnd.mesh.v2+json' \
+        https://mesh-sync.spineservices.nhs.uk/messageexchange/endpointlookup/SCREEN2/SPINE_GPCAPITATION_EXTRACT
+        ```
+
+        ### Response
+
+        for `accept: application/vnd.mesh.v2+json`
+
+        ```json
+        {
+          "results": [
+            {"mailbox_id": "X2612345", "mailbox_name": "this is a test mailbox"},
+            {"mailbox_id": "X2612346", "mailbox_name": "this is a test mailbox too"}
+          ]
+        }
+        ```
+
+        for `accept: application/vnd.mesh.v1+json` or `accept: application/json`
+        ```json
+        {
+          "query_id": "20200601131040203367_A441C2_1573484974",
+          "results": [
+            {
+              "endpoint_type": "MESH",
+              "description": "Breast Cancer Screening Services",
+              "address": "X26HC022"
+            },
+            {
+              "endpoint_type": "MESH",
+              "description": "AAA Screening Services",
+              "address": "X26HC021"
+            },
+            {
+              "endpoint_type": "MESH",
+              "description": "Bowel Cancer Screening Services (England, DMS)",
+              "address": "X26HC020"
+            }
+          ]
+        }
+        ```
+
+        **Note:** neither the ODS code or workflow identifier in this example are real.
+      operationId: get_receiving_mailbox_ids_messageexchange_endpointlookup__ods_code___workflow_id__get
+      parameters:
+        - description: The ODS code of the organisation
+          required: true
           schema:
-            type: object
-            properties:
-              messageID:
-                type: string
-                description: ID of the allocated message
-              errorEvent:
-                type: string
-                description: Status event
-              errorCode:
-                type: integer
-                description: Status code
-                example: 417
-              errorDescription:
-                type: string
-                description: Description of the status
-  securitySchemes: {}
+            title: ods_code
+            type: string
+            description: The ODS code of the organisation
+          name: ods_code
+          in: path
+        - description: The Workflow ID of the message
+          required: true
+          schema:
+            title: workflow_id
+            type: string
+            description: The Workflow ID of the message
+          name: workflow_id
+          in: path
+        - description: the accepts header can be used to vary the response type
+          required: false
+          schema:
+            title: Accept
+            type: string
+            description: the accepts header can be used to vary the response type
+            default: application/json
+          example: application/vnd.mesh.v2+json
+          name: accept
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/vnd.mesh.v2+json:
+              schema:
+                title: lookup_v2
+                required:
+                  - results
+                type: object
+                properties:
+                  results:
+                    title: Results
+                    type: array
+                    items:
+                      title: LookupItem
+                      type: object
+                      properties:
+                        mailbox_id:
+                          title: Mailbox Id
+                          description: mailbox identifier
+                          type: string
+                        mailbox_name:
+                          title: Mailbox Name
+                          description: mailbox name
+                          type: string
+                      required:
+                        - mailbox_id
+                        - mailbox_name
+                    description: list of matched mailboxes
+                example:
+                  results:
+                    - mailbox_id: X2612345
+                      mailbox_name: this is a test mailbox
+            application/json:
+              schema:
+                title: EndpointLookup
+                required:
+                  - query_id
+                  - results
+                type: object
+                properties:
+                  query_id:
+                    title: Query Id
+                    type: string
+                    description: unique query identifier
+                  results:
+                    title: Results
+                    type: array
+                    items:
+                      title: LookupItem
+                      type: object
+                      properties:
+                        address:
+                          title: Address
+                          description: mailbox identifier
+                          type: string
+                        description:
+                          title: Description
+                          description: mailbox name
+                          type: string
+                        endpoint_type:
+                          title: Endpoint Type
+                          description: mailbox endpoint type, this will always be MESH
+                          type: string
+                      required:
+                        - address
+                        - description
+                        - endpoint_type
+                    description: list of matched mailboxes
+                example:
+                  query_id: 20220228174323222_ABCDEF
+                  results:
+                    - address: X2612345
+                      description: this is a test mailbox
+                      endpoint_type: MESH
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                title: HTTPValidationError
+                type: object
+                properties: *id001
+  /messageexchange/workflowsearch/{workflow_id}:
+    get:
+      tags:
+        - Lookup
+      summary: Lookup by workflow
+      operationId: get_receiving_mailbox_ids_messageexchange_workflowsearch__workflow_id__get
+      parameters:
+        - description: The Workflow ID of the message
+          required: true
+          schema:
+            title: workflow_id
+            type: string
+            description: The Workflow ID of the message
+          name: workflow_id
+          in: path
+        - description: the accepts header can be used to vary the response type
+          required: false
+          schema:
+            title: Accept
+            type: string
+            description: the accepts header can be used to vary the response type
+            default: application/json
+          example: application/vnd.mesh.v2+json
+          name: accept
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/vnd.mesh.v2+json:
+              schema:
+                title: lookup_v2
+                required:
+                  - results
+                type: object
+                properties:
+                  results:
+                    title: Results
+                    type: array
+                    items:
+                      title: LookupItem
+                      type: object
+                      properties:
+                        mailbox_id:
+                          title: Mailbox Id
+                          description: mailbox identifier
+                          type: string
+                        mailbox_name:
+                          title: Mailbox Name
+                          description: mailbox name
+                          type: string
+                      required:
+                        - mailbox_id
+                        - mailbox_name
+                    description: list of matched mailboxes
+                example:
+                  results:
+                    - mailbox_id: X2612345
+                      mailbox_name: this is a test mailbox
+            application/json:
+              schema:
+                title: lookup_v2
+                required:
+                  - results
+                type: object
+                properties:
+                  results:
+                    title: Results
+                    type: array
+                    items:
+                      title: LookupItem
+                      type: object
+                      properties:
+                        mailbox_id:
+                          title: Mailbox Id
+                          description: mailbox identifier
+                          type: string
+                        mailbox_name:
+                          title: Mailbox Name
+                          description: mailbox name
+                          type: string
+                      required:
+                        - mailbox_id
+                        - mailbox_name
+                    description: list of matched mailboxes
+                example:
+                  results:
+                    - mailbox_id: X2612345
+                      mailbox_name: this is a test mailbox
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                title: HTTPValidationError
+                type: object
+                properties: *id001
 servers:
-  - url: 'https://msg.dev.spine2.ncrs.nhs.uk'
+  - url: https://msg.dev.spine2.ncrs.nhs.uk
     description: Development
-  - url: 'https://msg.int.spine2.ncrs.nhs.uk'
+  - url: https://msg.int.spine2.ncrs.nhs.uk
     description: Integration
-  - url: 'https://msg.intspineservices.nhs.uk'
+  - url: https://msg.intspineservices.nhs.uk
     description: Integration
-  - url: 'https://msg.dep.spine2.ncrs.nhs.uk'
+  - url: https://msg.dep.spine2.ncrs.nhs.uk
     description: Deployment
-  - url: 'https://mesh-sync.national.ncrs.nhs.uk'
+  - url: https://mesh-sync.national.ncrs.nhs.uk
     description: Production
-  - url: 'https://mesh-sync.spineservices.nhs.uk'
+  - url: https://mesh-sync.spineservices.nhs.uk
     description: Production
 x-spec-publication:
   try-this-api:
