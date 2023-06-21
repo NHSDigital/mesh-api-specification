@@ -201,6 +201,14 @@ info:
     ## Technology
     This API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#basic-rest).
 
+    ### Open source
+    We have a number of open source assets that you might find useful:
+
+    | Asset | Description |
+    | MESH sandbox ([GitHub repo](https://github.com/NHSDigital/mesh-sandbox) \| [Python Package Index](https://pypi.org/project/mesh-sandbox/)) | For early developer testing, a realistic MESH experience that runs locally in docker or as an embedded python package. For more details, see 'Environments and testing' below. |
+    | MESH Python client ([GitHub repo](https://github.com/NHSDigital/mesh-client) \| [Python Package Index](https://pypi.org/project/Mesh-Client/)) | A sample client app written in Python. This is not the same as the MESH Java client. |
+    | MESH Validate Auth Header ([GitHub repo](https://github.com/NHSDigital/mesh_validate_auth_header) \| [GitHub pages UI](https://nhsdigital.github.io/mesh_validate_auth_header/#/)) | 
+
     ## Network access
     This API is available on the internet and on the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
 
