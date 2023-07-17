@@ -202,12 +202,12 @@ info:
     This API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#basic-rest).
 
     ### Open source
-    We have a number of open source assets that you might find useful:
+    We have a number of open source resources that you might find useful:
 
     | Asset                     | Description                                                                                                                                                                    | Links                                                                                                                                                  |
     |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
     | MESH sandbox              | For early developer testing, a realistic MESH experience that runs locally in docker or as an embedded python package. For more details, see 'Environments and testing' below. | [GitHub repo](https://github.com/NHSDigital/mesh-sandbox) \| [Python Package Index](https://pypi.org/project/mesh-sandbox/)                            |
-    | MESH Python client        | A fully-featured Python client library. This is not the same as the MESH Java client.                                                                                          | [GitHub repo](https://github.com/NHSDigital/mesh-client) \| [Python Package Index](https://pypi.org/project/Mesh-Client)                               |
+    | MESH Python client        | A fully-featured Python client library that conforms to our technical integration requirements. This is not the same as the MESH Java client.                                  | [GitHub repo](https://github.com/NHSDigital/mesh-client) \| [Python Package Index](https://pypi.org/project/Mesh-Client)                               |
     | MESH Validate Auth Header | A tool for validating the construction of the MESH authentication token.                                                                                                       | [GitHub repo](https://github.com/NHSDigital/mesh_validate_auth_header) \| [GitHub pages UI](https://nhsdigital.github.io/mesh_validate_auth_header/#/) |
 
     ## Network access
