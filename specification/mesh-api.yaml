@@ -194,14 +194,28 @@ info:
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?tag=mesh-api).
 
     ## Service level
-    This API is a platinum service, meaning it is operational and supported 24 x 7 x 365.
+    This API is a platinum service, meaning it is operational and supported 24 hours a day, 365 days a year.
 
     For more details, see [service levels](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#service-levels).
 
     ## Technology
     This API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#basic-rest).
 
-    ### Open source
+    ## Network access
+    This API is available on the internet and on the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
+
+    For more details see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
+
+    ## Errors
+    We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
+
+    * 200 to 299 if it succeeded, including code 202 if it was accepted by an API that needs to wait for further action
+    * 400 to 499 if it failed because of a client error by your application
+    * 500 to 599 if it failed because of an error on our server
+
+    Errors specific to each API are shown in the Endpoints section, under Response. See our [reference guide](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#http-status-codes) for more on errors.
+
+    ## Open source
     We have a number of open source resources that you might find useful:
 
     | Resource                  | Description                                                                                                                                                                    | Links                                                                                                                                                  |
@@ -210,10 +224,8 @@ info:
     | MESH Python client        | A fully-featured Python client library that conforms to our technical integration requirements. This is not the same as the MESH Java client.                                  | [GitHub repo](https://github.com/NHSDigital/mesh-client) \| [Python Package Index](https://pypi.org/project/Mesh-Client)                               |
     | MESH Validate Auth Header | A tool for validating the construction of the MESH authentication token.                                                                                                       | [GitHub repo](https://github.com/NHSDigital/mesh_validate_auth_header) \| [GitHub pages UI](https://nhsdigital.github.io/mesh_validate_auth_header/#/) |
 
-    ## Network access
-    This API is available on the internet and on the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
 
-    For more details see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
+    For more details, see [open source](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#open-source).
 
     ## Environments and testing
     There are several independent, externally accessible instances of MESH for use by parties external to NHS Digital for testing, each with a different root URL.
@@ -222,10 +234,8 @@ info:
 
     | Purpose       | Network availability | URL                                       |
     |---------------|----------------------|-------------------------------------------|
-    | Development   | HSCN                 | `https://msg.dev.spine2.ncrs.nhs.uk/`     |
     | Integration   | HSCN                 | `https://msg.int.spine2.ncrs.nhs.uk/`     |
     | Integration   | Internet             | `https://msg.intspineservices.nhs.uk/`    |
-    | Deployment    | HSCN                 | `https://msg.dep.spine2.ncrs.nhs.uk/`     |
     | Production    | HSCN                 | `https://mesh-sync.national.ncrs.nhs.uk/` |
     | Production    | Internet             | `https://mesh-sync.spineservices.nhs.uk/` |
 
@@ -420,20 +430,11 @@ info:
             </div>
             <div class="nhsd-m-emphasis-box__content-box">
                 <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break">
-                    <p class="nhsd-t-body">To get started, sign in or create a <a href="http://onboarding.prod.api.platform.nhs.uk/">developer account</a>, then select 'product onboarding'.</p>
+                    <p class="nhsd-t-body">To get started, sign in or create a <a href="https://onboarding.prod.api.platform.nhs.uk/">developer account</a>, then select 'product onboarding'.</p>
                 </div>
             </div>
         </div>
     </div>
-
-    ## Errors
-    We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
-
-    * 200 to 299 if it succeeded, including code 202 if it was accepted by an API that needs to wait for further action
-    * 400 to 499 if it failed because of a client error by your application
-    * 500 to 599 if it failed because of an error on our server
-
-    Errors specific to each API are shown in the Endpoints section, under Response. See our [reference guide](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#http-status-codes) for more on errors.
   contact:
     name: National Service Desk
     email: ssd.nationalservicedesk@nhs.net
@@ -442,7 +443,7 @@ paths:
   /messageexchange/{mailbox_id}:
     post:
       tags:
-        - Handshake
+      - Handshake
       summary: Validate a mailbox (Handshake)
       description: |-
         ## Overview
@@ -467,72 +468,72 @@ paths:
         ```
       operationId: handshake_messageexchange__mailbox_id__post
       parameters:
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: User agent string
-          required: false
-          schema:
-            title: User-Agent
-            type: string
-            description: User agent string
-            default: ''
-          example: my-client;windows-10;
-          name: user-agent
-          in: header
-        - description: Client version number
-          required: true
-          schema:
-            title: mex-ClientVersion
-            type: string
-            description: Client version number
-          example: ApiDocs==0.0.1
-          name: mex-clientversion
-          in: header
-        - description: Operating system name
-          required: true
-          schema:
-            title: mex-OSName
-            type: string
-            description: Operating system name
-          example: Linux
-          name: mex-osname
-          in: header
-        - description: Operating system version
-          required: true
-          schema:
-            title: mex-OSVersion
-            type: string
-            description: Operating system version
-          example: '#44~18.04.2-Ubuntu'
-          name: mex-osversion
-          in: header
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
-        - description: the accepts header can be used to vary the response type
-          required: false
-          schema:
-            title: Accept
-            type: string
-            description: the accepts header can be used to vary the response type
-            default: application/json
-          example: application/vnd.mesh.v2+json
-          name: accept
-          in: header
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: User agent string
+        required: false
+        schema:
+          title: User-Agent
+          type: string
+          description: User agent string
+          default: ''
+        example: my-client;windows-10;
+        name: user-agent
+        in: header
+      - description: Client version number
+        required: true
+        schema:
+          title: mex-ClientVersion
+          type: string
+          description: Client version number
+        example: ApiDocs==0.0.1
+        name: mex-clientversion
+        in: header
+      - description: Operating system name
+        required: true
+        schema:
+          title: mex-OSName
+          type: string
+          description: Operating system name
+        example: Linux
+        name: mex-osname
+        in: header
+      - description: Operating system version
+        required: true
+        schema:
+          title: mex-OSVersion
+          type: string
+          description: Operating system version
+        example: '#44~18.04.2-Ubuntu'
+        name: mex-osversion
+        in: header
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
+      - description: the accepts header can be used to vary the response type
+        required: false
+        schema:
+          title: Accept
+          type: string
+          description: the accepts header can be used to vary the response type
+          default: application/json
+        example: application/vnd.mesh.v2+json
+        name: accept
+        in: header
       responses:
         '200':
           description: Successful Response
@@ -550,9 +551,9 @@ paths:
                     items:
                       title: ValidationError
                       required:
-                        - loc
-                        - msg
-                        - type
+                      - loc
+                      - msg
+                      - type
                       type: object
                       properties:
                         loc:
@@ -560,8 +561,8 @@ paths:
                           type: array
                           items:
                             anyOf:
-                              - type: string
-                              - type: integer
+                            - type: string
+                            - type: integer
                         msg:
                           title: Message
                           type: string
@@ -573,7 +574,7 @@ paths:
   /messageexchange/{mailbox_id}/inbox:
     get:
       tags:
-        - Inbox
+      - Inbox
       summary: Check an inbox
       description: |-
         ## Overview
@@ -616,44 +617,58 @@ paths:
         ```
       operationId: list_messages_messageexchange__mailbox_id__inbox_get
       parameters:
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: 'maximum results to return when using `accept: application/vnd.mesh.v2+json` if more results exist, `links.next` will be populated'
-          required: false
-          schema:
-            title: Max results
-            maximum: 5000.0
-            minimum: 10.0
-            type: integer
-            description: 'maximum results to return when using `accept: application/vnd.mesh.v2+json` if more results exist, `links.next` will be populated'
-            default: 500
-          example: '100'
-          name: max_results
-          in: query
-        - description: if more results exist than `max_results`, use `continue_from` to continue retrieving results from `links.next`
-          required: false
-          schema:
-            title: Continue From
-            maxLength: 1000
-            minLength: 24
-            type: string
-            description: if more results exist than `max_results`, use `continue_from` to continue retrieving results from `links.next`
-          examples:
-            'accept: application/vnd.mesh.v2+json':
-              value: eyJwayI6ICJNQiNNU0cjTUIjMTIzNEhDMTIzNCMiLCAic2siOiAiTUIjTVNHIzIwMjIwMjI4MTc0MzIzMTIzX0FDREVEMSMifQ%3D%3D
-            'accept: application/json':
-              value: 20220228174323123_ACDED1
-          name: continue_from
-          in: query
-        - description: |-
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: 'maximum results to return when using `accept: application/vnd.mesh.v2+json` if more results exist, `links.next` will be populated'
+        required: false
+        schema:
+          title: Max results
+          maximum: 5000.0
+          minimum: 10.0
+          type: integer
+          description: 'maximum results to return when using `accept: application/vnd.mesh.v2+json` if more results exist, `links.next` will be populated'
+          default: 500
+        example: '100'
+        name: max_results
+        in: query
+      - description: if more results exist than `max_results`, use `continue_from` to continue retrieving results from `links.next`
+        required: false
+        schema:
+          title: Continue From
+          maxLength: 1000
+          minLength: 24
+          type: string
+          description: if more results exist than `max_results`, use `continue_from` to continue retrieving results from `links.next`
+        examples:
+          'accept: application/vnd.mesh.v2+json':
+            value: eyJwayI6ICJNQiNNU0cjTUIjMTIzNEhDMTIzNCMiLCAic2siOiAiTUIjTVNHIzIwMjIwMjI4MTc0MzIzMTIzX0FDREVEMSMifQ%3D%3D
+          'accept: application/json':
+            value: 20220228174323123_ACDED1
+        name: continue_from
+        in: query
+      - description: |-
+          filter inbox by workflow id, conditions:
+          * equals: =WORKFLOW1
+          * does not equal: =!WORKFLOW1
+          * begins with: =WORKFL\*
+          * does not begin with: =!WORKFL\*
+          * contains: =\*_ACK\*
+          * does not contain: =!\*_ACK\*
+        required: false
+        schema:
+          title: Workflow Id filter
+          maxLength: 255
+          minLength: 2
+          type: string
+          description: |-
             filter inbox by workflow id, conditions:
             * equals: =WORKFLOW1
             * does not equal: =!WORKFLOW1
@@ -661,42 +676,28 @@ paths:
             * does not begin with: =!WORKFL\*
             * contains: =\*_ACK\*
             * does not contain: =!\*_ACK\*
-          required: false
-          schema:
-            title: Workflow Id filter
-            maxLength: 255
-            minLength: 2
-            type: string
-            description: |-
-              filter inbox by workflow id, conditions:
-              * equals: =WORKFLOW1
-              * does not equal: =!WORKFLOW1
-              * begins with: =WORKFL\*
-              * does not begin with: =!WORKFL\*
-              * contains: =\*_ACK\*
-              * does not contain: =!\*_ACK\*
-          example: '!*_ACK*'
-          name: workflow_filter
-          in: query
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
-        - description: the accepts header can be used to vary the response type
-          required: false
-          schema:
-            title: Accept
-            type: string
-            description: the accepts header can be used to vary the response type
-            default: application/json
-          example: application/vnd.mesh.v2+json
-          name: accept
-          in: header
+        example: '!*_ACK*'
+        name: workflow_filter
+        in: query
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
+      - description: the accepts header can be used to vary the response type
+        required: false
+        schema:
+          title: Accept
+          type: string
+          description: the accepts header can be used to vary the response type
+          default: application/json
+        example: application/vnd.mesh.v2+json
+        name: accept
+        in: header
       responses:
         '200':
           description: Successful Response
@@ -705,7 +706,7 @@ paths:
               schema:
                 title: Inbox
                 required:
-                  - messages
+                - messages
                 type: object
                 properties:
                   messages:
@@ -726,8 +727,8 @@ paths:
                     description: approximate inbox count, this is eventually consistent and should be used as an indication of inbox size only
                 example:
                   messages:
-                    - 20220228174323222_ABCDEF
-                    - 20220228174323333_ABCDEF
+                  - 20220228174323222_ABCDEF
+                  - 20220228174323333_ABCDEF
                   links:
                     self: /messageexchange/mb12345/inbox?max_results=10
                     next: /messageexchange/mb12345/inbox?max_results=10&continue_from=eyJwayI6ICJNQiNNU0cjTUIjMTIzNEhDMTIzNCMiLCAic2siOiAiTUIjTVNHIzIwMjIwMjI4MTc0MzIzMTIzX0FDREVEMSMifQ%3D%3D
@@ -736,7 +737,7 @@ paths:
               schema:
                 title: Inbox
                 required:
-                  - messages
+                - messages
                 type: object
                 properties:
                   messages:
@@ -747,8 +748,8 @@ paths:
                     description: list of message ids in the inbox, up to `max_results`
                 example:
                   messages:
-                    - 20220228174323222_ABCDEF
-                    - 20220228174323333_ABCDEF
+                  - 20220228174323222_ABCDEF
+                  - 20220228174323333_ABCDEF
         '403':
           description: Authentication failed
         '400':
@@ -762,7 +763,7 @@ paths:
   /messageexchange/{mailbox_id}/inbox/{message_id}:
     get:
       tags:
-        - Inbox
+      - Inbox
       summary: Get Message
       description: |-
         ## Overview
@@ -819,45 +820,45 @@ paths:
         ```
       operationId: retrieve_message_messageexchange__mailbox_id__inbox__message_id__get
       parameters:
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: message identifier
-          required: true
-          schema:
-            title: message_id
-            minLength: 1
-            type: string
-            description: message identifier
-          example: 20210311101813838554_1B8F53
-          name: message_id
-          in: path
-        - description: client accepted content encoding(s)
-          required: false
-          schema:
-            title: Accept-Encoding
-            type: string
-            description: client accepted content encoding(s)
-            default: ''
-          example: gzip
-          name: accept-encoding
-          in: header
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: message identifier
+        required: true
+        schema:
+          title: message_id
+          minLength: 1
+          type: string
+          description: message identifier
+        example: 20210311101813838554_1B8F53
+        name: message_id
+        in: path
+      - description: client accepted content encoding(s)
+        required: false
+        schema:
+          title: Accept-Encoding
+          type: string
+          description: client accepted content encoding(s)
+          default: ''
+        example: gzip
+        name: accept-encoding
+        in: header
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
       responses:
         '200':
           description: OK, full message retrieved
@@ -868,7 +869,7 @@ paths:
           description: Partial Content - Indicates that chunk has been downloaded successfully and that there are further chunks.
           content: {}
         '404':
-          description: Not Found, messages does not exist
+          description: Not Found, message does not exist
         '410':
           description: Gone, message has expired or otherwise failed
         '400':
@@ -881,7 +882,7 @@ paths:
                 properties: *id001
     head:
       tags:
-        - Inbox
+      - Inbox
       summary: Head Message
       description: |-
         ## Overview
@@ -933,42 +934,42 @@ paths:
         ```
       operationId: head_message_messageexchange__mailbox_id__inbox__message_id__head
       parameters:
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: message identifier
-          required: true
-          schema:
-            title: message_id
-            minLength: 1
-            type: string
-            description: message identifier
-          example: 20210311101813838554_1B8F53
-          name: message_id
-          in: path
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: message identifier
+        required: true
+        schema:
+          title: message_id
+          minLength: 1
+          type: string
+          description: message identifier
+        example: 20210311101813838554_1B8F53
+        name: message_id
+        in: path
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
       responses:
         '200':
           description: Successful Response
         '403':
           description: Authentication failed
         '404':
-          description: Not Found, messages does not exist
+          description: Not Found, message does not exist
         '410':
           description: Gone, message has expired or otherwise failed
         '400':
@@ -982,7 +983,7 @@ paths:
   /messageexchange/{mailbox_id}/inbox/{message_id}/status/acknowledged:
     put:
       tags:
-        - Inbox
+      - Inbox
       summary: Acknowledge message
       description: |-
         ## Overview
@@ -1018,45 +1019,45 @@ paths:
         ```
       operationId: acknowledge_message_messageexchange__mailbox_id__inbox__message_id__status_acknowledged_put
       parameters:
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: message identifier
-          required: true
-          schema:
-            title: message_id
-            minLength: 1
-            type: string
-            description: message identifier
-          example: 20210311101813838554_1B8F53
-          name: message_id
-          in: path
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
-        - description: the accepts header can be used to vary the response type
-          required: false
-          schema:
-            title: Accept
-            type: string
-            description: the accepts header can be used to vary the response type
-            default: application/json
-          example: application/vnd.mesh.v2+json
-          name: accept
-          in: header
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: message identifier
+        required: true
+        schema:
+          title: message_id
+          minLength: 1
+          type: string
+          description: message identifier
+        example: 20210311101813838554_1B8F53
+        name: message_id
+        in: path
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
+      - description: the accepts header can be used to vary the response type
+        required: false
+        schema:
+          title: Accept
+          type: string
+          description: the accepts header can be used to vary the response type
+          default: application/json
+        example: application/vnd.mesh.v2+json
+        name: accept
+        in: header
       responses:
         '200':
           description: Successful Response
@@ -1073,7 +1074,7 @@ paths:
   /messageexchange/{mailbox_id}/inbox/{message_id}/{chunk_number}:
     get:
       tags:
-        - Inbox
+      - Inbox
       summary: Get Message chunk
       description: |-
         Use this endpoint to download a chunked message. Initially, call the 'Download Message' endpoint with the message identifier given by the 'Check Inbox' endpoint as usual. When the message is chunked, the 'Download message' endpoint response differs in two ways:
@@ -1187,55 +1188,55 @@ paths:
         -   the `Mex-Chunk-Range` response header is `2:2`
       operationId: retrieve_chunk_messageexchange__mailbox_id__inbox__message_id___chunk_number__get
       parameters:
-        - description: The index number of the chunk
-          required: true
-          schema:
-            title: chunk_number
-            minimum: 1.0
-            type: integer
-            description: The index number of the chunk
-          example: '1'
-          name: chunk_number
-          in: path
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: message identifier
-          required: true
-          schema:
-            title: message_id
-            minLength: 1
-            type: string
-            description: message identifier
-          example: 20210311101813838554_1B8F53
-          name: message_id
-          in: path
-        - description: client accepted content encoding(s)
-          required: false
-          schema:
-            title: Accept-Encoding
-            type: string
-            description: client accepted content encoding(s)
-            default: ''
-          example: gzip
-          name: accept-encoding
-          in: header
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
+      - description: The index number of the chunk
+        required: true
+        schema:
+          title: chunk_number
+          minimum: 1.0
+          type: integer
+          description: The index number of the chunk
+        example: '1'
+        name: chunk_number
+        in: path
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: message identifier
+        required: true
+        schema:
+          title: message_id
+          minLength: 1
+          type: string
+          description: message identifier
+        example: 20210311101813838554_1B8F53
+        name: message_id
+        in: path
+      - description: client accepted content encoding(s)
+        required: false
+        schema:
+          title: Accept-Encoding
+          type: string
+          description: client accepted content encoding(s)
+          default: ''
+        example: gzip
+        name: accept-encoding
+        in: header
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
       responses:
         '200':
           description: OK - chunk downloaded and no further chunks exist
@@ -1246,7 +1247,7 @@ paths:
           description: Partial Content - Indicates that chunk has been downloaded successfully and that there are further chunks.
           content: {}
         '404':
-          description: Not Found, messages does not exist
+          description: Not Found, message does not exist
         '410':
           description: Gone, message has expired or otherwise failed
         '400':
@@ -1260,7 +1261,7 @@ paths:
   /messageexchange/{mailbox_id}/count:
     get:
       tags:
-        - Inbox
+      - Inbox
       summary: Check an inbox count (deprecated)
       description: |-
         ## Overview
@@ -1269,25 +1270,25 @@ paths:
         This endpoint is now deprecated as it is not needed as part of the polling cycle.
       operationId: count_messages_in_inbox_messageexchange__mailbox_id__count_get
       parameters:
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
       responses:
         '200':
           description: Successful Response
@@ -1296,7 +1297,7 @@ paths:
               schema:
                 title: InboxCount
                 required:
-                  - count
+                - count
                 type: object
                 properties:
                   count:
@@ -1309,9 +1310,9 @@ paths:
               schema:
                 title: InboxCount
                 required:
-                  - count
-                  - internalID
-                  - allResultsIncluded
+                - count
+                - internalID
+                - allResultsIncluded
                 type: object
                 properties:
                   count:
@@ -1343,7 +1344,7 @@ paths:
   /messageexchange/{mailbox_id}/outbox:
     post:
       tags:
-        - Outbox
+      - Outbox
       summary: Send message
       description: |-
         ## Overview
@@ -1397,128 +1398,128 @@ paths:
         ```
       operationId: send_message_messageexchange__mailbox_id__outbox_post
       parameters:
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
-        - description: Recipient mailbox ID
-          required: true
-          schema:
-            title: mex-To
-            maxLength: 100
-            type: string
-            description: Recipient mailbox ID
-            default: ''
-          example: MAILBOX01
-          name: mex-to
-          in: header
-        - description: Identifies the type of message being sent e.g. Pathology, GP Capitation.
-          required: true
-          schema:
-            title: mex-WorkflowID
-            maxLength: 300
-            type: string
-            description: Identifies the type of message being sent e.g. Pathology, GP Capitation.
-            default: ''
-          name: mex-workflowid
-          in: header
-        - description: chunk range
-          required: false
-          schema:
-            title: mex-Chunk-Range
-            maxLength: 20
-            type: string
-            description: chunk range
-            default: ''
-          example: '1:2'
-          name: mex-chunk-range
-          in: header
-        - description: additional message subject
-          required: false
-          schema:
-            title: mex-Subject
-            maxLength: 500
-            type: string
-            description: additional message subject
-            default: ''
-          name: mex-subject
-          in: header
-        - description: local identifier, your reference
-          required: false
-          schema:
-            title: mex-LocalID
-            maxLength: 300
-            type: string
-            description: local identifier, your reference
-            default: ''
-          name: mex-localid
-          in: header
-        - description: local filename
-          required: false
-          schema:
-            title: mex-FileName
-            maxLength: 300
-            type: string
-            description: local filename
-            default: ''
-          name: mex-filename
-          in: header
-        - description: Checksum of the original message contents, as provided by the message sender
-          required: false
-          schema:
-            title: mex-Content-Checksum
-            maxLength: 100
-            type: string
-            description: Checksum of the original message contents, as provided by the message sender
-            default: ''
-          example: b10a8db164e0754105b7a99be72e3fe5
-          name: mex-content-checksum
-          in: header
-        - description: content type of the message when decoded
-          required: false
-          schema:
-            title: Content-Type
-            type: string
-            description: content type of the message when decoded
-            default: ''
-          example: text/csv
-          name: content-type
-          in: header
-        - description: content encoding
-          required: false
-          schema:
-            title: Content-Encoding
-            type: string
-            description: content encoding
-            default: ''
-          example: gzip
-          name: content-encoding
-          in: header
-        - description: the accepts header can be used to vary the response type
-          required: false
-          schema:
-            title: Accept
-            type: string
-            description: the accepts header can be used to vary the response type
-            default: application/json
-          example: application/vnd.mesh.v2+json
-          name: accept
-          in: header
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
+      - description: Recipient mailbox ID
+        required: true
+        schema:
+          title: mex-To
+          maxLength: 100
+          type: string
+          description: Recipient mailbox ID
+          default: ''
+        example: MAILBOX01
+        name: mex-to
+        in: header
+      - description: Identifies the type of message being sent e.g. Pathology, GP Capitation.
+        required: true
+        schema:
+          title: mex-WorkflowID
+          maxLength: 300
+          type: string
+          description: Identifies the type of message being sent e.g. Pathology, GP Capitation.
+          default: ''
+        name: mex-workflowid
+        in: header
+      - description: chunk range
+        required: false
+        schema:
+          title: mex-Chunk-Range
+          maxLength: 20
+          type: string
+          description: chunk range
+          default: ''
+        example: '1:2'
+        name: mex-chunk-range
+        in: header
+      - description: additional message subject
+        required: false
+        schema:
+          title: mex-Subject
+          maxLength: 500
+          type: string
+          description: additional message subject
+          default: ''
+        name: mex-subject
+        in: header
+      - description: local identifier, your reference
+        required: false
+        schema:
+          title: mex-LocalID
+          maxLength: 300
+          type: string
+          description: local identifier, your reference
+          default: ''
+        name: mex-localid
+        in: header
+      - description: local filename
+        required: false
+        schema:
+          title: mex-FileName
+          maxLength: 300
+          type: string
+          description: local filename
+          default: ''
+        name: mex-filename
+        in: header
+      - description: Checksum of the original message contents, as provided by the message sender
+        required: false
+        schema:
+          title: mex-Content-Checksum
+          maxLength: 100
+          type: string
+          description: Checksum of the original message contents, as provided by the message sender
+          default: ''
+        example: b10a8db164e0754105b7a99be72e3fe5
+        name: mex-content-checksum
+        in: header
+      - description: content type of the message when decoded
+        required: false
+        schema:
+          title: Content-Type
+          type: string
+          description: content type of the message when decoded
+          default: ''
+        example: text/csv
+        name: content-type
+        in: header
+      - description: content encoding
+        required: false
+        schema:
+          title: Content-Encoding
+          type: string
+          description: content encoding
+          default: ''
+        example: gzip
+        name: content-encoding
+        in: header
+      - description: the accepts header can be used to vary the response type
+        required: false
+        schema:
+          title: Accept
+          type: string
+          description: the accepts header can be used to vary the response type
+          default: application/json
+        example: application/vnd.mesh.v2+json
+        name: accept
+        in: header
       responses:
         '202':
           description: Successful Response
@@ -1527,7 +1528,7 @@ paths:
               schema:
                 title: SendMessage
                 required:
-                  - message_id
+                - message_id
                 type: object
                 properties:
                   message_id:
@@ -1540,7 +1541,7 @@ paths:
               schema:
                 title: SendMessage
                 required:
-                  - messageID
+                - messageID
                 type: object
                 properties:
                   messageID:
@@ -1577,9 +1578,9 @@ paths:
                   message_id: 20220228174323222_ABCDEF
                   internal_id: 20220228174323222_ABCDEF
                   detail:
-                    - event: SEND
-                      code: '01'
-                      msg: send failed for some reason
+                  - event: SEND
+                    code: '01'
+                    msg: send failed for some reason
             application/json:
               schema:
                 title: MeshError
@@ -1620,7 +1621,7 @@ paths:
   /messageexchange/{mailbox_id}/outbox/{message_id}/{chunk_number}:
     post:
       tags:
-        - Outbox
+      - Outbox
       summary: Send chunked message
       description: |-
         ## Overview
@@ -1709,75 +1710,75 @@ paths:
         ```
       operationId: send_chunk_messageexchange__mailbox_id__outbox__message_id___chunk_number__post
       parameters:
-        - description: The index number of the chunk
-          required: true
-          schema:
-            title: chunk_number
-            type: integer
-            description: The index number of the chunk
-          example: '1'
-          name: chunk_number
-          in: path
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: message identifier
-          required: true
-          schema:
-            title: message_id
-            minLength: 1
-            type: string
-            description: message identifier
-          example: 20210311101813838554_1B8F53
-          name: message_id
-          in: path
-        - description: chunk range for the current chunk
-          required: false
-          schema:
-            title: mex-Chunk-Range
-            maxLength: 20
-            type: string
-            description: chunk range for the current chunk
-            default: ''
-          example: '2:3'
-          name: mex-chunk-range
-          in: header
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
-        - description: content encoding
-          required: false
-          schema:
-            title: Content-Encoding
-            type: string
-            description: content encoding
-            default: ''
-          example: gzip
-          name: content-encoding
-          in: header
-        - description: the accepts header can be used to vary the response type
-          required: false
-          schema:
-            title: Accept
-            type: string
-            description: the accepts header can be used to vary the response type
-            default: application/json
-          example: application/vnd.mesh.v2+json
-          name: accept
-          in: header
+      - description: The index number of the chunk
+        required: true
+        schema:
+          title: chunk_number
+          type: integer
+          description: The index number of the chunk
+        example: '1'
+        name: chunk_number
+        in: path
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: message identifier
+        required: true
+        schema:
+          title: message_id
+          minLength: 1
+          type: string
+          description: message identifier
+        example: 20210311101813838554_1B8F53
+        name: message_id
+        in: path
+      - description: chunk range for the current chunk
+        required: false
+        schema:
+          title: mex-Chunk-Range
+          maxLength: 20
+          type: string
+          description: chunk range for the current chunk
+          default: ''
+        example: '2:3'
+        name: mex-chunk-range
+        in: header
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
+      - description: content encoding
+        required: false
+        schema:
+          title: Content-Encoding
+          type: string
+          description: content encoding
+          default: ''
+        example: gzip
+        name: content-encoding
+        in: header
+      - description: the accepts header can be used to vary the response type
+        required: false
+        schema:
+          title: Accept
+          type: string
+          description: the accepts header can be used to vary the response type
+          default: application/json
+        example: application/vnd.mesh.v2+json
+        name: accept
+        in: header
       responses:
         '202':
           description: Successful Response
@@ -1786,7 +1787,7 @@ paths:
               schema:
                 title: SendMessage
                 required:
-                  - message_id
+                - message_id
                 type: object
                 properties:
                   message_id:
@@ -1799,7 +1800,7 @@ paths:
               schema:
                 title: SendMessage
                 required:
-                  - messageID
+                - messageID
                 type: object
                 properties:
                   messageID:
@@ -1836,9 +1837,9 @@ paths:
                   message_id: 20220228174323222_ABCDEF
                   internal_id: 20220228174323222_ABCDEF
                   detail:
-                    - event: SEND
-                      code: '01'
-                      msg: send failed for some reason
+                  - event: SEND
+                    code: '01'
+                    msg: send failed for some reason
             application/json:
               schema:
                 title: MeshError
@@ -1869,9 +1870,9 @@ paths:
                   errorCode: '01'
                   errorDescription: send failed for some reason
         '404':
-          description: Not Found, messages does not exist
+          description: Not Found, message does not exist
         '423':
-          description: Messages has been finalised no more chunks can be uploaded
+          description: Messages has been finalised; no more chunks can be uploaded
         '400':
           description: Validation Error
           content:
@@ -1883,7 +1884,7 @@ paths:
   /messageexchange/{mailbox_id}/outbox/tracking:
     get:
       tags:
-        - Tracking
+      - Tracking
       summary: Track outbox
       description: |-
         ## Overview
@@ -2027,45 +2028,45 @@ paths:
         This shows the `status` field of the response has changed from `Accepted` to `Acknowledged`.  All the fields in the previous response are also included.
       operationId: tracking_by_message_id_messageexchange__mailbox_id__outbox_tracking_get
       parameters:
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: message identifier
-          required: true
-          schema:
-            title: message identifier
-            minLength: 1
-            type: string
-            description: message identifier
-          example: 20210311101813838554_1B8F53
-          name: messageID
-          in: query
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
-        - description: the accepts header can be used to vary the response type
-          required: false
-          schema:
-            title: Accept
-            type: string
-            description: the accepts header can be used to vary the response type
-            default: application/json
-          example: application/vnd.mesh.v2+json
-          name: accept
-          in: header
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: message identifier
+        required: true
+        schema:
+          title: message identifier
+          minLength: 1
+          type: string
+          description: message identifier
+        example: 20210311101813838554_1B8F53
+        name: messageID
+        in: query
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
+      - description: the accepts header can be used to vary the response type
+        required: false
+        schema:
+          title: Accept
+          type: string
+          description: the accepts header can be used to vary the response type
+          default: application/json
+        example: application/vnd.mesh.v2+json
+        name: accept
+        in: header
       responses:
         '200':
           description: Successful Response
@@ -2074,7 +2075,7 @@ paths:
               schema:
                 title: Tracking
                 required:
-                  - message_id
+                - message_id
                 type: object
                 properties:
                   message_id:
@@ -2152,9 +2153,9 @@ paths:
               schema:
                 title: Tracking
                 required:
-                  - dtsId
-                  - fileSize
-                  - messageId
+                - dtsId
+                - fileSize
+                - messageId
                 type: object
                 properties:
                   addressType:
@@ -2330,43 +2331,43 @@ paths:
   /messageexchange/{mailbox_id}/outbox/tracking/{local_id}:
     get:
       tags:
-        - Tracking
+      - Tracking
       summary: Track outbox (deprecated)
       description: |-
         ## Overview
         This endpoint is now `deprecated` `tracking?messageID` should be used instead.
       operationId: tracking_by_local_id_messageexchange__mailbox_id__outbox_tracking__local_id__get
       parameters:
-        - description: The user supplied (local ID) of the message
-          required: true
-          schema:
-            title: The local ID of the message
-            minLength: 1
-            type: string
-            description: The user supplied (local ID) of the message
-          example: api-docs-bob-sends-alice-a-chunked-file
-          name: local_id
-          in: path
-        - description: mailbox identifier
-          required: true
-          schema:
-            title: mailbox_id
-            minLength: 1
-            type: string
-            description: mailbox identifier
-          example: MAILBOX01
-          name: mailbox_id
-          in: path
-        - description: Authorisation header
-          required: true
-          schema:
-            title: Authorization
-            type: string
-            description: Authorisation header
-            default: ''
-          example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
-          name: authorization
-          in: header
+      - description: The user supplied (local ID) of the message
+        required: true
+        schema:
+          title: The local ID of the message
+          minLength: 1
+          type: string
+          description: The user supplied (local ID) of the message
+        example: api-docs-bob-sends-alice-a-chunked-file
+        name: local_id
+        in: path
+      - description: mailbox identifier
+        required: true
+        schema:
+          title: mailbox_id
+          minLength: 1
+          type: string
+          description: mailbox identifier
+        example: MAILBOX01
+        name: mailbox_id
+        in: path
+      - description: Authorisation header
+        required: true
+        schema:
+          title: Authorization
+          type: string
+          description: Authorisation header
+          default: ''
+        example: 'authorization: NHSMESH NONFUNC01:2c001608-5f09-4840-9611-bea43e666a30:1:201511201038:3cded68a9e0f9b83f2c5de1b79fc4dac45004523e6658d46145156fa6a03eced'
+        name: authorization
+        in: header
       responses:
         '200':
           description: Successful Response
@@ -2375,9 +2376,9 @@ paths:
               schema:
                 title: Tracking
                 required:
-                  - dtsId
-                  - fileSize
-                  - messageId
+                - dtsId
+                - fileSize
+                - messageId
                 type: object
                 properties:
                   addressType:
@@ -2556,7 +2557,7 @@ paths:
   /messageexchange/endpointlookup/{ods_code}/{workflow_id}:
     get:
       tags:
-        - Lookup
+      - Lookup
       summary: Look up MESH address
       description: |-
         ## Overview
@@ -2615,32 +2616,32 @@ paths:
         **Note:** neither the ODS code or workflow identifier in this example are real.
       operationId: get_receiving_mailbox_ids_messageexchange_endpointlookup__ods_code___workflow_id__get
       parameters:
-        - description: The ODS code of the organisation
-          required: true
-          schema:
-            title: ods_code
-            type: string
-            description: The ODS code of the organisation
-          name: ods_code
-          in: path
-        - description: The Workflow ID of the message
-          required: true
-          schema:
-            title: workflow_id
-            type: string
-            description: The Workflow ID of the message
-          name: workflow_id
-          in: path
-        - description: the accepts header can be used to vary the response type
-          required: false
-          schema:
-            title: Accept
-            type: string
-            description: the accepts header can be used to vary the response type
-            default: application/json
-          example: application/vnd.mesh.v2+json
-          name: accept
-          in: header
+      - description: The ODS code of the organisation
+        required: true
+        schema:
+          title: ods_code
+          type: string
+          description: The ODS code of the organisation
+        name: ods_code
+        in: path
+      - description: The Workflow ID of the message
+        required: true
+        schema:
+          title: workflow_id
+          type: string
+          description: The Workflow ID of the message
+        name: workflow_id
+        in: path
+      - description: the accepts header can be used to vary the response type
+        required: false
+        schema:
+          title: Accept
+          type: string
+          description: the accepts header can be used to vary the response type
+          default: application/json
+        example: application/vnd.mesh.v2+json
+        name: accept
+        in: header
       responses:
         '200':
           description: Successful Response
@@ -2649,7 +2650,7 @@ paths:
               schema:
                 title: lookup_v2
                 required:
-                  - results
+                - results
                 type: object
                 properties:
                   results:
@@ -2668,19 +2669,19 @@ paths:
                           description: mailbox name
                           type: string
                       required:
-                        - mailbox_id
-                        - mailbox_name
+                      - mailbox_id
+                      - mailbox_name
                     description: list of matched mailboxes
                 example:
                   results:
-                    - mailbox_id: X2612345
-                      mailbox_name: this is a test mailbox
+                  - mailbox_id: X2612345
+                    mailbox_name: this is a test mailbox
             application/json:
               schema:
                 title: EndpointLookup
                 required:
-                  - query_id
-                  - results
+                - query_id
+                - results
                 type: object
                 properties:
                   query_id:
@@ -2707,16 +2708,16 @@ paths:
                           description: mailbox endpoint type, this will always be MESH
                           type: string
                       required:
-                        - address
-                        - description
-                        - endpoint_type
+                      - address
+                      - description
+                      - endpoint_type
                     description: list of matched mailboxes
                 example:
                   query_id: 20220228174323222_ABCDEF
                   results:
-                    - address: X2612345
-                      description: this is a test mailbox
-                      endpoint_type: MESH
+                  - address: X2612345
+                    description: this is a test mailbox
+                    endpoint_type: MESH
         '400':
           description: Validation Error
           content:
@@ -2728,28 +2729,28 @@ paths:
   /messageexchange/workflowsearch/{workflow_id}:
     get:
       tags:
-        - Lookup
+      - Lookup
       summary: Lookup by workflow
       operationId: get_receiving_mailbox_ids_messageexchange_workflowsearch__workflow_id__get
       parameters:
-        - description: The Workflow ID of the message
-          required: true
-          schema:
-            title: workflow_id
-            type: string
-            description: The Workflow ID of the message
-          name: workflow_id
-          in: path
-        - description: the accepts header can be used to vary the response type
-          required: false
-          schema:
-            title: Accept
-            type: string
-            description: the accepts header can be used to vary the response type
-            default: application/json
-          example: application/vnd.mesh.v2+json
-          name: accept
-          in: header
+      - description: The Workflow ID of the message
+        required: true
+        schema:
+          title: workflow_id
+          type: string
+          description: The Workflow ID of the message
+        name: workflow_id
+        in: path
+      - description: the accepts header can be used to vary the response type
+        required: false
+        schema:
+          title: Accept
+          type: string
+          description: the accepts header can be used to vary the response type
+          default: application/json
+        example: application/vnd.mesh.v2+json
+        name: accept
+        in: header
       responses:
         '200':
           description: Successful Response
@@ -2758,7 +2759,7 @@ paths:
               schema:
                 title: lookup_v2
                 required:
-                  - results
+                - results
                 type: object
                 properties:
                   results:
@@ -2777,18 +2778,18 @@ paths:
                           description: mailbox name
                           type: string
                       required:
-                        - mailbox_id
-                        - mailbox_name
+                      - mailbox_id
+                      - mailbox_name
                     description: list of matched mailboxes
                 example:
                   results:
-                    - mailbox_id: X2612345
-                      mailbox_name: this is a test mailbox
+                  - mailbox_id: X2612345
+                    mailbox_name: this is a test mailbox
             application/json:
               schema:
                 title: lookup_v2
                 required:
-                  - results
+                - results
                 type: object
                 properties:
                   results:
@@ -2807,13 +2808,13 @@ paths:
                           description: mailbox name
                           type: string
                       required:
-                        - mailbox_id
-                        - mailbox_name
+                      - mailbox_id
+                      - mailbox_name
                     description: list of matched mailboxes
                 example:
                   results:
-                    - mailbox_id: X2612345
-                      mailbox_name: this is a test mailbox
+                  - mailbox_id: X2612345
+                    mailbox_name: this is a test mailbox
         '400':
           description: Validation Error
           content:
@@ -2823,18 +2824,14 @@ paths:
                 type: object
                 properties: *id001
 servers:
-  - url: https://msg.dev.spine2.ncrs.nhs.uk
-    description: Development
-  - url: https://msg.int.spine2.ncrs.nhs.uk
-    description: Integration
-  - url: https://msg.intspineservices.nhs.uk
-    description: Integration
-  - url: https://msg.dep.spine2.ncrs.nhs.uk
-    description: Deployment
-  - url: https://mesh-sync.national.ncrs.nhs.uk
-    description: Production
-  - url: https://mesh-sync.spineservices.nhs.uk
-    description: Production
+- url: https://msg.int.spine2.ncrs.nhs.uk
+  description: Integration
+- url: https://msg.intspineservices.nhs.uk
+  description: Integration
+- url: https://mesh-sync.national.ncrs.nhs.uk
+  description: Production
+- url: https://mesh-sync.spineservices.nhs.uk
+  description: Production
 x-spec-publication:
   try-this-api:
     disabled: true
