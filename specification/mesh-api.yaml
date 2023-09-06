@@ -293,7 +293,8 @@ info:
 
     **Notes**
     - the API rejects the request if the `timestamp` supplied is not within 2 hours of the server time
-    - in the example below `SHARED_KEY` has been `[REDACTED]`, this is the 'environment shared secret' which you received as part of creating your mailbox
+    - in the example below `SHARED_KEY` has been `[REDACTED_SHARED_KEY]`, this is the 'environment shared secret' which you received as part of creating your mailbox
+    - in the example below `MAILBOX_PASSWORD` has been `[REDACTED_PASSWORD]`, this is the 'mesh mailbox password' which you received as part of creating your mailbox
 
     ### Example implementation
     Here is an implementation of the above in `python3`.
@@ -301,34 +302,51 @@ info:
     """ Python code to generate a valid authorization header. """
     import hmac
     import uuid
-    import datetime from hashlib
-    import sha256
+    import datetime
+    from hashlib import sha256
 
-    AUTHSCHEMANAME = "NHSMESH " # Note: Space at the end of the schema.
-    SHARED_KEY = "[REDACTED]" # Note: Don't hard code your passwords in a real implementation.
+    AUTH_SCHEMA_NAME = "NHSMESH "  # Note: Space at the end of the schema.
+    SHARED_KEY = "[REDACTED_SHARED_KEY]"  # Note: Don't hard code your passwords in a real implementation.
 
-    def build_auth_header(mailbox_id: str, password: str = "password", nonce: str = None, noncecount: int = 0):
-      """ Generate MESH Authorization header for mailboxid. """
-      #Generate a GUID if required.
-      if not nonce:
-        nonce = str(uuid.uuid4())
-      #Current time formatted as yyyyMMddHHmm
-      #for example, 4th May 2020 13:05 would be 202005041305
-      timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M")
 
-      #for example, NHSMESH AMP01HC001:bd0e2bd5-218e-41d0-83a9-73fdec414803:0:202005041305
-      hmac_msg = mailbox_id + ":" + nonce + ":" + str(nonce_count) + ":" + password + ":" + timestamp
+    def build_auth_header(mailbox_id: str, password: str = "password",  nonce: str = None, nonce_count: int = 0):
+        """ Generate MESH Authorization header for mailboxid. """
+        # Generate a GUID if required.
+        if not nonce:
+            nonce = str(uuid.uuid4())
+        # Current time formatted as yyyyMMddHHmm
+        # for example, 4th May 2020 13:05 would be 202005041305
+        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M")
 
-      #HMAC is a standard crypto hash method built in the python standard library.
-      hash_code = hmac.HMAC(SHARED_KEY.encode(), hmac_msg.encode(), sha256).hexdigest()
-      return (
-        AUTH_SCHEMA_NAME # Note: No colon between 1st and 2nd elements.
-        + mailbox_id + ":"
-        + nonce + ":"
-        + str(nonce_count) + ":"
-        + timestamp+ ":"
-        + hash_code
-      )
+        # for example, NHSMESH AMP01HC001:bd0e2bd5-218e-41d0-83a9-73fdec414803:0:202005041305
+        hmac_msg = mailbox_id + ":" + nonce + ":" + str(nonce_count) + ":" + password + ":" + timestamp
+
+        # HMAC is a standard crypto hash method built in the python standard library.
+        hash_code = hmac.HMAC(SHARED_KEY.encode(), hmac_msg.encode(), sha256).hexdigest()
+        return (
+                AUTH_SCHEMA_NAME # Note: No colon between 1st and 2nd elements.
+                + mailbox_id + ":"
+                + nonce + ":"
+                + str(nonce_count) + ":"
+                + timestamp+ ":"
+                + hash_code
+        )
+
+
+    # example usage
+    MAILBOX_ID = "X26AB1234" # Note: Don't hard code your mailbox id in a real implementation.
+    MAILBOX_PASSWORD = "[REDACTED_PASSWORD]"  # Note: Don't hard code your passwords in a real implementation.
+
+    # send a new nonce each time
+    print(build_auth_header(MAILBOX_ID, MAILBOX_PASSWORD))
+
+    # or reuse the nonce and increment the nonce_count
+    my_nonce = str(uuid.uuid4())
+
+    print(build_auth_header(MAILBOX_ID, MAILBOX_PASSWORD, my_nonce, nonce_count=1))
+    print(build_auth_header(MAILBOX_ID, MAILBOX_PASSWORD, my_nonce, nonce_count=2))
+
+
     ```
 
     ## MESH API pseudocode
@@ -862,12 +880,18 @@ paths:
       responses:
         '200':
           description: OK, full message retrieved
-          content: {}
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
         '403':
           description: Authentication failed
         '206':
           description: Partial Content - Indicates that chunk has been downloaded successfully and that there are further chunks.
-          content: {}
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
         '404':
           description: Not Found, message does not exist
         '410':
@@ -1240,12 +1264,18 @@ paths:
       responses:
         '200':
           description: OK - chunk downloaded and no further chunks exist
-          content: {}
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
         '403':
           description: Authentication failed
         '206':
           description: Partial Content - Indicates that chunk has been downloaded successfully and that there are further chunks.
-          content: {}
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
         '404':
           description: Not Found, message does not exist
         '410':
@@ -1396,7 +1426,7 @@ paths:
         ```json
         {"messageID": "20200529155357895317_3573F8"}
         ```
-      operationId: send_message_messageexchange__mailbox_id__outbox_post
+      operationId: send_message
       parameters:
       - description: mailbox identifier
         required: true
@@ -1618,6 +1648,20 @@ paths:
                 title: HTTPValidationError
                 type: object
                 properties: *id001
+      requestBody:
+        description: message payload or chunk, optionally encoded with content-encoding
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              format: binary
+            example: '... message payload bytes...'
+          '*/*':
+            schema:
+              format: any
+            example: |-
+              message content....
+                                      any content type is acceptable but use application/octet-stream if you want a single default
   /messageexchange/{mailbox_id}/outbox/{message_id}/{chunk_number}:
     post:
       tags:
@@ -1708,7 +1752,7 @@ paths:
         --data-binary '@./message.txt_ab.gz' \
         https://mesh-sync.spineservices.nhs.uk/messageexchange/X26HC006/outbox/20200601122152994285_D59900/2
         ```
-      operationId: send_chunk_messageexchange__mailbox_id__outbox__message_id___chunk_number__post
+      operationId: send_chunk
       parameters:
       - description: The index number of the chunk
         required: true
@@ -1881,6 +1925,20 @@ paths:
                 title: HTTPValidationError
                 type: object
                 properties: *id001
+      requestBody:
+        description: message payload or chunk, optionally encoded with content-encoding
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              format: binary
+            example: '... message payload bytes...'
+          '*/*':
+            schema:
+              format: any
+            example: |-
+              message content....
+                                      any content type is acceptable but use application/octet-stream if you want a single default
   /messageexchange/{mailbox_id}/outbox/tracking:
     get:
       tags:
