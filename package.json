@@ -18,7 +18,7 @@
   "devDependencies": {
     "apigeetool": "^0.16.1",
     "license-checker": "^25.0.1",
-    "newman": "^4.5.7",
+    "newman": "^4.6.1",
     "newman-reporter-html": "^1.0.5",
     "newman-reporter-htmlextra": "^1.20.1",
     "node": "^13.12.0"
