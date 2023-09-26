@@ -81,14 +81,12 @@ select = [
     "SIM", # flake8-simplify
 ]
 src = ["."]
-ignore = [
-    "PT004",
-]
+ignore = []
 exclude = [
     ".git",
     ".venv",
 ]
-unfixable = ["SIM112"]
+unfixable = []
 line-length = 120
 target-version = "py310"
 
