@@ -14,9 +14,23 @@ install-hooks:
 test:
 	@echo disable for spec only
 
-lint:
+black:
+	poetry run black .
+
+black-check:
+	poetry run black . --check
+
+ruff: black
+	poetry run ruff --fix --show-fixes .
+
+ruff-check:
+	poetry run ruff .
+
+ruff-ci:
+	poetry run ruff --output-format=github .
+
+lint: ruff
 	npm run lint
-	poetry run flake8
 
 publish:
 	npm run publish 2> /dev/null

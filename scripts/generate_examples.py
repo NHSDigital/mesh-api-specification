@@ -9,11 +9,12 @@ Usage:
 import json
 import os
 import os.path
+
 from docopt import docopt
 from jsonpath_rw import parse
 
 
-def generate_resource_example(schema_dict, path=None):
+def generate_resource_example(schema_dict, path=None):  # noqa: C901 - complexity 11 instead of 10.
     """
     Generates resource examples from an OAS schema
 
@@ -29,50 +30,34 @@ def generate_resource_example(schema_dict, path=None):
         if property_value["type"] == "array":
             if "oneOf" in property_value["items"]:
                 example[property_name] = [
-                    generate_resource_example(t["properties"], path + [property_name])
+                    generate_resource_example(t["properties"], [*path, property_name])
                     for t in property_value["items"]["oneOf"]
                 ]
             elif "anyOf" in property_value["items"]:
                 example[property_name] = [
-                    generate_resource_example(t["properties"], path + [property_name])
+                    generate_resource_example(t["properties"], [*path, property_name])
                     for t in property_value["items"]["anyOf"]
                 ]
             elif property_value["items"]["type"] == "object":
                 example[property_name] = [
-                    generate_resource_example(
-                        property_value["items"]["properties"], path + [property_name]
-                    )
+                    generate_resource_example(property_value["items"]["properties"], [*path, property_name])
                 ]
             else:
                 if {"example", "default"} & set(property_value.get("items", {}).keys()):
                     items = property_value["items"]
-                    example[property_name] = [
-                        items.get("example", items.get("default"))
-                    ]
-                elif ("example" not in property_value) and (
-                    "default" not in property_value
-                ):
+                    example[property_name] = [items.get("example", items.get("default"))]
+                elif ("example" not in property_value) and ("default" not in property_value):
                     property_path = ".".join(path)
-                    raise RuntimeError(
-                        f"{property_path}.{property_name} has no example or default!"
-                    )
+                    raise RuntimeError(f"{property_path}.{property_name} has no example or default!")
                 else:
-                    example[property_name] = property_value.get(
-                        "example", property_value.get("default")
-                    )
+                    example[property_name] = property_value.get("example", property_value.get("default"))
         elif property_value["type"] == "object":
-            example[property_name] = generate_resource_example(
-                property_value["properties"], path + [property_name]
-            )
+            example[property_name] = generate_resource_example(property_value["properties"], [*path, property_name])
         else:
             if ("example" not in property_value) and ("default" not in property_value):
                 property_path = ".".join(path)
-                raise RuntimeError(
-                    f"{property_path}.{property_name} has no example or default!"
-                )
-            example[property_name] = property_value.get(
-                "example", property_value.get("default")
-            )
+                raise RuntimeError(f"{property_path}.{property_name} has no example or default!")
+            example[property_name] = property_value.get("example", property_value.get("default"))
 
     return example
 
@@ -82,7 +67,7 @@ def main(arguments):
     arguments = docopt(__doc__, version="0")
 
     # Load spec from file
-    with open(arguments["SPEC_FILE"], "r") as spec_file:
+    with open(arguments["SPEC_FILE"]) as spec_file:
         spec = json.loads(spec_file.read())
 
     # Create default dir structure
@@ -95,18 +80,10 @@ def main(arguments):
             os.path.join(arguments["OUT_DIR"], "resources", component_name + ".json"),
             "w",
         ) as out_file:
-            out_file.write(
-                json.dumps(
-                    generate_resource_example(
-                        component_spec["properties"], [component_name]
-                    )
-                )
-            )
+            out_file.write(json.dumps(generate_resource_example(component_spec["properties"], [component_name])))
 
     # Pull out responses
-    match_expr = parse(
-        "paths.*.*.(response|(responses.*)).content.*.(example|(examples.*.value))"
-    )
+    match_expr = parse("paths.*.*.(response|(responses.*)).content.*.(example|(examples.*.value))")
 
     for match in match_expr.find(spec):
         if "patch" in str(match.full_path):
