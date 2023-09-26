@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "OAS (Swagger v3) API Definition for MESH API",
   "scripts": {
-    "lint": "node_modules/.bin/speccy lint -s openapi-tags -s operation-tags specification/mesh-api.yaml --skip default-and-example-are-redundant --skip openapi-tags-alphabetical",
+    "lint": "node_modules/.bin/openapi-generator-cli validate -i specification/mesh-api.yaml",
     "test": "npm run --prefix tests test:sandbox",
-    "publish": "mkdir -p build && node_modules/.bin/speccy resolve specification/mesh-api.yaml -i | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/mesh-api.json",
+    "publish": "./node_modules/.bin/openapi-generator-cli generate -i specification/mesh-api.yaml --generator-key v3.0  -g openapi -o build && rm openapitools.json && mv build/openapi.json build/mesh-api.json",
     "serve": "node_modules/.bin/speccy serve build/mesh-api.json",
     "check-licenses": "node_modules/.bin/license-checker --failOn GPL --failOn LGPL"
   },
@@ -13,10 +13,9 @@
   "license": "(MIT OR OGL)",
   "homepage": "https://github.com/NHSDigital/mesh-api-api",
   "dependencies": {
-    "speccy": "^0.11.0"
   },
   "devDependencies": {
-    "apigeetool": "^0.16.1",
+    "@openapitools/openapi-generator-cli": "^2.5.1",
     "license-checker": "^25.0.1",
     "node": "^13.12.0"
   }
