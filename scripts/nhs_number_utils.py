@@ -50,9 +50,7 @@ def nhs_number_is_valid(nhs_number: str) -> bool:
 
 def main():
     """Main entrypoint"""
-    parser = argparse.ArgumentParser(
-        description="Validate NHS Numbers or generate check digit for a number"
-    )
+    parser = argparse.ArgumentParser(description="Validate NHS Numbers or generate check digit for a number")
     parser.add_argument(
         "operation",
         help="generate a check digit given 9-digit prefix, or validate a 10-digit NHS number",
