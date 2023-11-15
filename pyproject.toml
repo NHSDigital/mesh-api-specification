@@ -4,20 +4,20 @@ python = "^3.8"
 
 
 [tool.poetry]
-name = "apim-definitions"
+name = "mesh-api-specification"
 version = "0.0.1-alpha"
-description = "Hello World API Definitions"
+description = "MESH Api specification repo"
 
 license = "MIT"
 
 authors = [
-    "Paul Walkington <paul.walkington1@nhs.net>"
+    "NHS England"
 ]
 
 readme = 'README.md'
 
 repository = "https://github.com/NHSDigital/mesh-api-api"
-homepage = ""
+homepage = "https://digital.nhs.uk/developer/api-catalogue/message-exchange-for-social-care-and-health-api"
 
 keywords = ["healthcare", "uk", "nhs"]
 
@@ -31,7 +31,7 @@ gitpython = "^3.1.30"
 
 
 [tool.poetry.dev-dependencies]
-ruff = "^0.0.291"
+ruff = "^0.1.5"
 black = "^23.9.1"
 pip-licenses = "^2.0.1"
 jinja2 = "^3.1.2"

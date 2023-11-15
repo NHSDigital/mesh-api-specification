@@ -202,7 +202,7 @@ info:
     This API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#basic-rest).
 
     ## Network access
-    This API is available on the internet and on the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
+    This API is available on the internet.
 
     For more details see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
 
@@ -228,15 +228,12 @@ info:
     For more details, see [open source](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#open-source).
 
     ## Environments and testing
-    There are several independent, externally accessible instances of MESH for use by parties external to NHS Digital for testing, each with a different root URL.
+    There are multiple externally accessible instances of MESH for use by parties external to NHS Digital for testing, each with a different root URL.
 
-    Some environments require a connection to the [HSCN network](https://digital.nhs.uk/services/health-and-social-care-network).
 
     | Purpose       | Network availability | URL                                       |
     |---------------|----------------------|-------------------------------------------|
-    | Integration   | HSCN                 | `https://msg.int.spine2.ncrs.nhs.uk/`     |
     | Integration   | Internet             | `https://msg.intspineservices.nhs.uk/`    |
-    | Production    | HSCN                 | `https://mesh-sync.national.ncrs.nhs.uk/` |
     | Production    | Internet             | `https://mesh-sync.spineservices.nhs.uk/` |
 
     **Note** - each environment has the same shared secret but requires different client TLS certificates.
@@ -258,10 +255,10 @@ info:
 
     **Note:** please refer to the table below for more detail on the status of a given API version.
 
-    | Version | Accept                                               | Status    |
-    |---------|------------------------------------------------------|-----------|
-    | 1       | `application/json` or `application/vnd.mesh.v1+json` | live      |
-    | 2       | `application/vnd.mesh.v2+json`                       | live-beta |
+    | Version | Accept                                               | Status |
+    |---------|------------------------------------------------------|--------|
+    | 1       | `application/json` or `application/vnd.mesh.v1+json` | live   |
+    | 2       | `application/vnd.mesh.v2+json`                       | live   |
 
     ## MESH Authorization header
     Requests to the MESH API require an authorisation token in the HTTP `Authorization` header.
@@ -276,7 +273,7 @@ info:
     | `mailbox_id`  | The mailbox identifier sending the HTTP Request. Must be uppercase.                            |
     | `nonce`       | A GUID used as an encryption nonce.                                                            |
     | `nonce_count` | The number of times that the same nonce has been used.                                         |
-    | `timestamp`   | The current date and time in `yyyyMMddHHmm` format.                                            |
+    | `timestamp`   | The current UTC date and time in `yyyyMMddHHmm` format.                                        |
     | `hash`        | HMAC-SHA256 hash - see the list below.                                                         |
 
     The `hash` is compiled of the following items:
@@ -316,7 +313,7 @@ info:
             nonce = str(uuid.uuid4())
         # Current time formatted as yyyyMMddHHmm
         # for example, 4th May 2020 13:05 would be 202005041305
-        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M")
+        timestamp = datetime.datetime.utcnow().strftime("%Y%m%d%H%M")
 
         # for example, NHSMESH AMP01HC001:bd0e2bd5-218e-41d0-83a9-73fdec414803:0:202005041305
         hmac_msg = mailbox_id + ":" + nonce + ":" + str(nonce_count) + ":" + password + ":" + timestamp
@@ -415,11 +412,11 @@ info:
 
 
     ### Outbox workflow
-    The maximum amount of data allowed by MESH in a single request message is 100MB over HSCN connections or 20MB over the internet. You can send larger messages by breaking them into \"chunks\" that are transmitted as a single message over multiple requests. The upper limit of a single chunked message is 20GB.
+    The maximum amount of data allowed by MESH in a single request message is 100MB. You can send larger messages by breaking them into \"chunks\" that are transmitted as a single message over multiple requests. The upper limit of a single chunked message is 100GB (20GB if using the java client).
 
     The [MESH UI](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh/compare-mesh-services#mesh-user-interface) and older versions of the MESH client do not support chunking. Check that the receiver's interface to MESH for your workflow identifier handles chunked messages prior to sending. To do this:
 
-    1. Determine the size of your message data (after compression) with a standard algorithm (such as `gzip`). If the compressed message is larger than 100MB or 20MB if sending over the internet, is smaller than 20GB, and the receiving mailbox / workflow identifier supports chunking, then you can send a chunked message. To prepare for this:
+    1. Determine the size of your message data (after compression) with a standard algorithm (such as `gzip`). If the compressed message is larger than 100MB, is smaller than 100GB, and the receiving mailbox / workflow identifier supports chunking, then you can send a chunked message. To prepare for this:
         *  split the **uncompressed** data into ordered chunks
         * **independently** compress each chunk with the **same** compression algorithm (such as `gzip`) such that each chunk is smaller than 100MB
         * use the first chunk (after compression) as the initial message data
