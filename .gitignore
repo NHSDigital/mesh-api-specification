@@ -5,6 +5,7 @@ public/
 newman/
 build
 venv
+env/
 
 # utils directory will be clone during pipeline.
 utils
