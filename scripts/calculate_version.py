@@ -18,7 +18,6 @@ Commands:
 
 import itertools
 import os.path
-from itertools import pairwise
 
 import git
 import semver
@@ -54,7 +53,7 @@ def is_minor_inc(commit):
 
 def without_empty(commits):
     """Takes a list of commits and returns a list without empty commits"""
-    pairs = pairwise(commits)
+    pairs = zip(commits, commits[1:], strict=False)  # noqa: RUF007
 
     for fst, snd in pairs:
         if fst.tree != snd.tree:
