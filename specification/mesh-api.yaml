@@ -228,7 +228,7 @@ info:
     For more details, see [open source](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#open-source).
 
     ## Environments and testing
-    There are multiple externally accessible instances of MESH for use by parties external to NHS Digital for testing, each with a different root URL.
+    There are multiple externally accessible instances of MESH that can be used for testing, each with a different root URL.
 
 
     | Purpose       | Network availability | URL                                       |
@@ -426,7 +426,7 @@ info:
     3. A message identifier will be returned which is the unique identifier and can be used for tracking and helping with incident resolution. It would be good practice to log this identifier.
 
     ### Message expiration
-    Messages that are not downloaded and acknowledged within five days of delivery are removed from your inbox. The sending organisation receives an error report explaining that the receiver did not collect the message. Uncollected messages are completely deleted from the MESH server 30 days after the initial delivery. If the sending organisation cannot re-send the message within the intervening time, it may contact the [NHS Digital national service desk](https://digital.nhs.uk/developer/help-and-support) with the error report details and ask for the message to be placed in your inbox again.
+    Messages that are not downloaded and acknowledged within five days of delivery are removed from your inbox. The sending organisation receives an error report explaining that the receiver did not collect the message. Uncollected messages are completely deleted from the MESH server 30 days after the initial delivery. If the sending organisation cannot re-send the message within the intervening time, it may contact our [national service desk](https://digital.nhs.uk/developer/help-and-support) with the error report details and ask for the message to be placed in your inbox again.
 
     ## Onboarding
 
