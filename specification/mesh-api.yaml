@@ -228,7 +228,7 @@ info:
     For more details, see [open source](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#open-source).
 
     ## Environments and testing
-    There are multiple externally accessible instances of MESH for use by parties external to us for testing, each with a different root URL.
+    There are multiple externally accessible instances of MESH that can be used for testing, each with a different root URL.
 
 
     | Purpose       | Network availability | URL                                       |
