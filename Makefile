@@ -35,9 +35,6 @@ lint: ruff
 publish:
 	npm run publish 2> /dev/null
 
-serve: 
-	npm run serve
-
 clean:
 	rm -rf build
 	rm -rf dist
