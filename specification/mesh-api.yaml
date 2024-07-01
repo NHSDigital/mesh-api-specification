@@ -218,11 +218,12 @@ info:
     ## Open source
     We have a number of open source resources that you might find useful:
 
-    | Resource                  | Description                                                                                                                                                                    | Links                                                                                                                                                  |
-    |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | MESH sandbox              | For early developer testing, a realistic MESH experience that runs locally in docker or as an embedded python package. For more details, see 'Environments and testing' below. | [GitHub repo](https://github.com/NHSDigital/mesh-sandbox) \| [Python Package Index](https://pypi.org/project/mesh-sandbox/)                            |
-    | MESH Python client        | A fully-featured Python client library that conforms to our technical integration requirements. This is not the same as the MESH Java client.                                  | [GitHub repo](https://github.com/NHSDigital/mesh-client) \| [Python Package Index](https://pypi.org/project/Mesh-Client)                               |
-    | MESH Validate Auth Header | A tool for validating the construction of the MESH authentication token.                                                                                                       | [GitHub repo](https://github.com/NHSDigital/mesh_validate_auth_header) \| [GitHub pages UI](https://nhsdigital.github.io/mesh_validate_auth_header/#/) |
+    | Resource                   | Description                                                                                                                                                                    | Links                                                                                                                                                  |
+    |----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | MESH sandbox               | For early developer testing, a realistic MESH experience that runs locally in docker or as an embedded python package. For more details, see 'Environments and testing' below. | [GitHub repo](https://github.com/NHSDigital/mesh-sandbox) \| [Python Package Index](https://pypi.org/project/mesh-sandbox/)                            |
+    | MESH Python client         | A fully-featured Python client library that conforms to our technical integration requirements. This is not the same as the MESH Java client.                                  | [GitHub repo](https://github.com/NHSDigital/mesh-client) \| [Python Package Index](https://pypi.org/project/Mesh-Client)                               |
+    | MESH AWS Serverless client | A fully-featured MESH client built using terraform and AWS serverless components.                                                                                              | [GitHub repo](https://github.com/NHSDigital/terraform-aws-mesh-client)                                                                                 |
+    | MESH Validate Auth Header  | A tool for validating the construction of the MESH authentication token.                                                                                                       | [GitHub repo](https://github.com/NHSDigital/mesh_validate_auth_header) \| [GitHub pages UI](https://nhsdigital.github.io/mesh_validate_auth_header/#/) |
 
 
     For more details, see [open source](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#open-source).
@@ -1296,6 +1297,7 @@ paths:
 
         This endpoint is now deprecated as it is not needed as part of the polling cycle.
       operationId: count_messages_in_inbox_messageexchange__mailbox_id__count_get
+      deprecated: true
       parameters:
       - description: mailbox identifier
         required: true
