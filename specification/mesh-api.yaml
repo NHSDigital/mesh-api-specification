@@ -163,7 +163,7 @@ info:
     How to get a TLS certificate
     1. Generate a private key using your preferred method, with the naming convention cn=mailboxid.odscode.api.mesh-client.nhs.uk
     2. Generate a CSR based on the private key and your Mailbox ID
-    3. Email the CSR and technical conformance certificate to [ssd.nationalservicedesk@nhs.uk](mailto:ssd.nationalservicedesk@nhs.uk) - this needs to contain the common name from your CSR 'Subject' using the format local_id.ods_code.api.mesh-client.nhs.uk
+    3. Email the CSR and technical conformance certificate to [ssd.nationalservicedesk@nhs.net](mailto:ssd.nationalservicedesk@nhs.net) - this needs to contain the common name from your CSR 'Subject' using the format local_id.ods_code.api.mesh-client.nhs.uk
 
     The local_id is a local identifier such as a server name and ods_code is your ODS code, for example, SERVER001.X26.api.mesh-client.nhs.uk.
 
