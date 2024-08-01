@@ -33,7 +33,7 @@ gitpython = "^3.1.41"
 [tool.poetry.dev-dependencies]
 ruff = "^0.5.0"
 black = "^24.3.0"
-pip-licenses = "^4.3.3"
+pip-licenses = "^4.5.1"
 jinja2 = "^3.1.4"
 
 
