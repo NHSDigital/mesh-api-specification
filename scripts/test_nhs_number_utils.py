@@ -1,6 +1,7 @@
 """
 Tests for nhs_number_utils module
 """
+
 import unittest
 
 import pytest
