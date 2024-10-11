@@ -1397,12 +1397,12 @@ paths:
         Use this endpoint to send a message via MESH. Use the POST command to your virtual outbox. Specify the message recipient in the request headers, with the message contained in the request body.
 
         ### Messages larger than 100MB
-        100MB (20MB on internet) is the largest data payload the MESH API accepts in a single request. Compress larger messages to reduce bandwidth and data storage on Spine. If compression does not sufficiently reduce the message size enough for transmission in a single request then you can break it up into smaller chunks and transmit them separately provided:
+        The largest data payload the MESH API accepts in a single request is 100MB. Compress larger messages to reduce bandwidth and data storage on Spine. If compression does not sufficiently reduce the message size enough for transmission in a single request then you can break it up into smaller chunks and transmit them separately provided:
           1.  The total compressed size of the message is < 100MB - this is the Spine upper limit for a single message.
           2.  The receiver mailbox and workflow identifier support the downloading of chunked messages. MESH UI and older versions of the MESH client do not support this.
 
         To correctly break the outbound message into valid chunks:
-          1.  Split the **uncompressed** message into `n` ordered chunks such that each (compressed) chunk is smaller than 20MB.
+          1.  Split the **uncompressed** message into `n` ordered chunks such that each (compressed) chunk is smaller than 100MB.
           2.  **Independently** compress each chunk with the same compression algorithm (e.g. `gzip`).
           3.  The first (compressed) chunk of the message should be transmitted using this endpoint (the normal send message endpoint). Include the optional `Mex-Chunk-Range` header with a value `1:n` to tell Spine that this is a chunked message and to wait for `n-1` other requests before delivering the message. The message identifier of this initial server response **must** be captured as it is a required path element of the Send chunked message URL.
 
@@ -1685,7 +1685,7 @@ paths:
       summary: Send chunked message
       description: |-
         ## Overview
-        Use this endpoint to send a chunked message. The 'Send Message' endpoint has a maximum single request message payload size of 100MB over HSCN or 20MB over the internet. However, you can send much larger messages (up to 20GB) by breaking up the message into chunks and transmitting it over multiple requests.
+        Use this endpoint to send a chunked message. The 'Send Message' endpoint has a maximum single request message payload size of 100MB. However, you can send much larger messages (up to 20GB) by breaking up the message into chunks and transmitting it over multiple requests.
 
         **Note**: Some workflow ids do not support chunking because it is not currently supported in the MESH UI and older versions of the MESH client. Check with your receiving organisation before sending messages with this endpoint.
 
