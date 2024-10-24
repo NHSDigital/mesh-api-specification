@@ -2,23 +2,6 @@ openapi: 3.0.2
 info:
   title: Message Exchange for Social Care and Health - REST API
   description: |-
-  
-   <div class="nhsd-m-emphasis-box nhsd-m-emphasis-box--emphasis nhsd-!t-margin-bottom-6" aria-label="Highlighted Information">
-        <div class="nhsd-a-box nhsd-a-box--border-blue">
-            <div class="nhsd-m-emphasis-box__image-box">
-                <figure class="nhsd-a-image">
-                    <picture class="nhsd-a-image__picture">
-                        <img src="http://digital.nhs.uk/binaries/content/gallery/icons/info.svg?colour=231f20" alt="" style="object-fit:fill">
-                    </picture>
-                </figure>
-            </div>
-            <div class="nhsd-m-emphasis-box__content-box">
-            <p class="nhsd-t-heading-s nhsd-t-word-break" id="emphasis-emphasis-30709f1f" data-uipath="website.contentblock.emphasis.heading">Note</p>
-                <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break"><p class="nhsd-t-body">The online application service for new integrations with MESH is unavailable. You will next be able to apply on 21st October 2024.</p></div>            
-            </div>
-        </div>
-    </div> 
-    
     ## Overview
 
     You interact with MESH by making calls to this API from your application.
