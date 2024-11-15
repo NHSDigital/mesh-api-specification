@@ -123,7 +123,7 @@ info:
 
     This shows that your software meets our non-functional requirements.
 
-    [Sign in to the digital onboarding to answer questions on 'non-functional' requirements](https://identity.prod.api.platform.nhs.uk/auth/realms/developer-identity/login-actions/authenticate?client_id=digital-onboarding-service&tab_id=YTe9EqJeUCc)
+    [Sign in to the digital onboarding to answer questions on 'non-functional' requirements](https://onboarding.prod.api.platform.nhs.uk)
 
     ### Demonstrate technical conformance
 
@@ -139,7 +139,7 @@ info:
 
     When you've completed a witness test, we'll email a technical conformance certificate to you within 5 working days. You can then upload it to digital onboarding.
 
-    [Sign in to the digital onboarding to upload a technical conformance certificate](https://identity.prod.api.platform.nhs.uk/auth/realms/developer-identity/login-actions/authenticate?client_id=digital-onboarding-service&tab_id=vYrgcflr9fs)
+    [Sign in to the digital onboarding to upload a technical conformance certificate](https://onboarding.prod.api.platform.nhs.uk)
 
     ### Get a MESH Mailbox for your live software
 
@@ -176,7 +176,7 @@ info:
 
     You'll need to sign a connection agreement before your software can go live. Once you've signed it, you need to upload it to the 'Legal agreement' section in digital onboarding. We'll email your connection agreement to you within 5 working days of completing your witness test.
 
-    [Sign in to the digital onboarding to upload your connection agreement](https://identity.prod.api.platform.nhs.uk/auth/realms/developer-identity/login-actions/authenticate?client_id=digital-onboarding-service&tab_id=p19cQckpJso)
+    [Sign in to the digital onboarding to upload your connection agreement](https://onboarding.prod.api.platform.nhs.uk)
 
     ### Go live with your software
 
