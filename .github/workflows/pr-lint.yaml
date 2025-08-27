@@ -5,13 +5,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check ticket name conforms to requirements
-        run: echo ${{ github.event.pull_request.head.ref }} | grep -i -E -q "((apm|mesh|mesh2cloud|spinecore|spii|apmspii|amp)-[0-9]+)|(dependabot\/)"
+        env:
+          PR_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          echo "$PR_REF" | grep -i -E -q "((apm|mesh|mesh2cloud|spinecore|spii|apmspii|amp)-[0-9]+)|(dependabot\/)"
 
       - name: Grab ticket name
         if: contains(github.event.pull_request.head.ref, 'apm-') || contains(github.event.pull_request.head.ref, 'APM-') || contains(github.event.pull_request.head.ref, 'mesh-') || contains(github.event.pull_request.head.ref, 'MESH-') || contains(github.event.pull_request.head.ref, 'mesh2cloud-') || contains(github.event.pull_request.head.ref, 'MESH2CLOUD-') || contains(github.event.pull_request.head.ref, 'spii-') || contains(github.event.pull_request.head.ref, 'SPII-') || contains(github.event.pull_request.head.ref, 'spinecore-') || contains(github.event.pull_request.head.ref, 'SPINECORE-')
-        run: echo ::set-env name=TICKET_NAME::$(echo ${{ github.event.pull_request.head.ref }} | grep -i -o '\(\(apm\|mesh\|mesh2cloud\|spinecore\|spii\|apmspii\|amp\)-[0-9]\+\)' | tr '[:lower:]' '[:upper:]')
         env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+          PR_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          TICKET_NAME=$(echo "$PR_REF" | grep -i -o '\(\(apm\|mesh\|mesh2cloud\|spinecore\|spii\|apmspii\|amp\)-[0-9]\+\)' | tr '[:lower:]' '[:upper:]')
+          echo "TICKET_NAME=$TICKET_NAME" >> $GITHUB_ENV
 
       - name: Comment on PR
         if: contains(github.event.pull_request.head.ref, 'apm-') || contains(github.event.pull_request.head.ref, 'APM-') || contains(github.event.pull_request.head.ref, 'mesh-') || contains(github.event.pull_request.head.ref, 'MESH-') || contains(github.event.pull_request.head.ref, 'mesh2cloud-') || contains(github.event.pull_request.head.ref, 'MESH2CLOUD-') || contains(github.event.pull_request.head.ref, 'spii-') || contains(github.event.pull_request.head.ref, 'SPII-') || contains(github.event.pull_request.head.ref, 'spinecore-') || contains(github.event.pull_request.head.ref, 'SPINECORE-')
