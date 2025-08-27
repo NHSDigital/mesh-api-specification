@@ -191,8 +191,6 @@ info:
     ## API status and roadmap
     This API is [in production](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses).
 
-    To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?tag=mesh-api).
-
     ## Service level
     This API is a platinum service, meaning it is operational and supported 24 hours a day, 365 days a year.
 
@@ -453,6 +451,10 @@ info:
             </div>
         </div>
     </div>
+
+    ## Contact us
+    For help and support connecting to our APIs and to join our developer community, see [Help and support building healthcare software](https://digital.nhs.uk/developer/help-and-support).
+    
   contact:
     name: National Service Desk
     email: ssd.nationalservicedesk@nhs.net
