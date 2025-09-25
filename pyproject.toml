@@ -91,6 +91,4 @@ select = [
 ]
 ignore = []
 unfixable = []
-
-
-[tool.ruff.per-file-ignores]
+per-file-ignores = {}
