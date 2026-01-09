@@ -2,6 +2,10 @@ SHELL=/bin/bash -euo pipefail
 
 install: install-node install-python install-hooks
 
+update:
+	poetry update
+	npm update
+
 install-python:
 	poetry install
 
@@ -29,7 +33,8 @@ ruff-check:
 ruff-ci:
 	poetry run ruff check --output-format=github .
 
-lint: ruff
+lint:
+	ruff check
 	npm run lint
 
 publish:
