@@ -1942,6 +1942,38 @@ paths:
             example: |-
               message content....
                                       any content type is acceptable but use application/octet-stream if you want a single default
+    post:
+      tags:
+      - Outbox
+      summary: Carbon Copy (CC) a message
+      description: |-
+        ## Overview
+        CC creates an additional copy of a message and delivers it to another mailbox. The copied message will produce a new message with a different MESH message ID. The original recipient still receives the message. CC is configured by the MESH service team, to learn more about CC see our [Service Page](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh#mesh-cc-and-redirect).
+        
+        ### To CC a message:
+
+        The required field is:
+        - cc_to_mailbox_id (target mailbox)
+        
+        Plus at least one of:
+        - cc_if_sender
+        - cc_if_recipient
+        - workflow_id
+        
+    post:
+      tags:
+      - Outbox
+      summary: Redirect a message
+      description: |-
+        ## Overview
+        Redirect replaces the original recipient with a different mailbox. The original recipient does not receive the message. Redirects are configured by the MESH service team, to learn more about redirects see our [Service Page](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh#mesh-cc-and-redirect).
+        
+        ### To redirect a message:
+
+        The required fields are:
+        - redirect_to_mailbox_id (replacing mailbox)
+        - redirect_if_recipient (original intended recipient)
+ 
   /messageexchange/{mailbox_id}/outbox/tracking:
     get:
       tags:
