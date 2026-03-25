@@ -1,6 +1,6 @@
 [project]
 name="mesh_api_specification"
-python = "^3.8"
+python = "^3.14.0"
 
 
 [tool.poetry]
@@ -23,7 +23,7 @@ keywords = ["healthcare", "uk", "nhs"]
 
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.14.0"
 docopt = "^0.6.2"
 jsonpath-rw = "^1.4.0"
 semver = "^3.0.4"
@@ -32,19 +32,20 @@ gitpython = "^3.1.46"
 
 [tool.poetry.dev-dependencies]
 ruff = "^0.14.14"
-black = "^24.4.2"
+black = "^26.3.1"
 pip-licenses = "^4.3.3"
 jinja2 = "^3.1.6"
+pytest = "^9.0.2"
 
 
 [tool.poetry.scripts]
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.4.2"
+black = "^26.3.1"
 
 [tool.black]
 line-length = 120
-target-version = ['py38', 'py39', 'py310', 'py311']
+target-version = ['py314']
 include = '\.pyi?$'
 #extend-exclude = '''
 #/(
@@ -62,7 +63,7 @@ exclude = [
     ".venv",
 ]
 line-length = 120
-target-version = "py38"
+target-version = "py314"
 
 
 [tool.ruff.lint]

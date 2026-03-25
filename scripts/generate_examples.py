@@ -6,6 +6,7 @@ generate_example.py
 Usage:
   generate_example.py SPEC_FILE OUT_DIR
 """
+
 import json
 import os
 import os.path
