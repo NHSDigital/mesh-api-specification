@@ -7,6 +7,7 @@ python = "^3.14.0"
 name = "mesh-api-specification"
 version = "0.0.1-alpha"
 description = "MESH Api specification repo"
+package-mode = false
 
 license = "MIT"
 
