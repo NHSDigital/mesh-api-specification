@@ -16,6 +16,6 @@
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.30.0",
     "license-checker": "^25.0.1",
-    "node": "^25.7.0"
+    "node": "^25.8.2"
   }
 }
