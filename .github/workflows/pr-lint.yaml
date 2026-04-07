@@ -15,7 +15,7 @@ jobs:
         env:
           PR_REF: ${{ github.event.pull_request.head.ref }}
         run: |
-          TICKET_NAME=$(echo "$PR_REF" | grep -i -o '\(\(apm\|mesh\|mesh2cloud\|spinecore\|spii\|apmspii\|amp\)-[0-9]\+\)' | tr '[:lower:]' '[:upper:]')
+          TICKET_NAME=$(echo "$PR_REF" | grep -i -o '\(\(apm\|mesh\|mesh2cloud\|spinecore\|spii\|apmspii\|amp\|mns\)-[0-9]\+\)' | tr '[:lower:]' '[:upper:]')
           echo "TICKET_NAME=$TICKET_NAME" >> $GITHUB_ENV
 
       - name: Comment on PR
