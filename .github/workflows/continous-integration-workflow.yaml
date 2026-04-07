@@ -24,14 +24,14 @@ jobs:
           node-version-file: '.tool-versions'
           cache: 'npm'
 
+      - name: Install poetry
+        run: pipx install poetry==$(grep '^poetry ' .tool-versions | awk '{print $2}')
+
       - name: Install Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
         with:
           python-version-file: '.tool-versions'
           cache: 'poetry'
-
-      - name: Install poetry
-        run: pip install poetry==2.3.3
 
       - name: Install repo
         run: make install
