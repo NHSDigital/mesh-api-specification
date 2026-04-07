@@ -20,7 +20,7 @@ jobs:
 
       - name: Comment on PR
         if: contains(github.event.pull_request.head.ref, 'apm-') || contains(github.event.pull_request.head.ref, 'APM-') || contains(github.event.pull_request.head.ref, 'mesh-') || contains(github.event.pull_request.head.ref, 'MESH-') || contains(github.event.pull_request.head.ref, 'mesh2cloud-') || contains(github.event.pull_request.head.ref, 'MESH2CLOUD-') || contains(github.event.pull_request.head.ref, 'spii-') || contains(github.event.pull_request.head.ref, 'SPII-') || contains(github.event.pull_request.head.ref, 'spinecore-') || contains(github.event.pull_request.head.ref, 'SPINECORE-')
-        uses: unsplash/comment-on-pr@master
+        uses: unsplash/comment-on-pr@ffe8f97ccc63ce12c3c23c6885b169db67958d3b  # v1.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
