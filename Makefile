@@ -44,7 +44,7 @@ check-licenses:
 	scripts/check_python_licenses.sh
 
 format:
-	poetry run black **/*.py
+	poetry run black .
 
 release: clean publish
 	mkdir -p dist
