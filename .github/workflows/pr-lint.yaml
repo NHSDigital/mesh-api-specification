@@ -1,5 +1,7 @@
 name: PR Quality Check
 on: pull_request
+permissions:
+  pull-requests: write
 jobs:
   link-ticket:
     runs-on: ubuntu-latest
@@ -20,10 +22,33 @@ jobs:
 
       - name: Comment on PR
         if: contains(github.event.pull_request.head.ref, 'apm-') || contains(github.event.pull_request.head.ref, 'APM-') || contains(github.event.pull_request.head.ref, 'mesh-') || contains(github.event.pull_request.head.ref, 'MESH-') || contains(github.event.pull_request.head.ref, 'mesh2cloud-') || contains(github.event.pull_request.head.ref, 'MESH2CLOUD-') || contains(github.event.pull_request.head.ref, 'spii-') || contains(github.event.pull_request.head.ref, 'SPII-') || contains(github.event.pull_request.head.ref, 'spinecore-') || contains(github.event.pull_request.head.ref, 'SPINECORE-')
-        uses: unsplash/comment-on-pr@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@v7
         with:
-          msg: |
-            This branch is work on a ticket in the NHS Digital AMB JIRA Project. Here's a handy link to the ticket:
-            # [${{ env.TICKET_NAME }}](https://jira.digital.nhs.uk/browse/${{ env.TICKET_NAME}})
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.payload.pull_request.number;
+            const ticket = process.env.TICKET_NAME;
+            const message = `This branch is work on a ticket in the NHS Digital AMB JIRA Project. Here's a handy link to the ticket:\n# [${ticket}](https://jira.digital.nhs.uk/browse/${ticket})`;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number,
+              per_page: 100,
+            });
+
+            const existing = comments.find((comment) =>
+              comment.body && comment.body.includes(`https://jira.digital.nhs.uk/browse/${ticket}`)
+            );
+
+            if (!existing) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body: message,
+              });
+            }
+        env:
+          TICKET_NAME: ${{ env.TICKET_NAME }}
