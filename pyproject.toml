@@ -1,50 +1,37 @@
 [project]
-name="mesh_api_specification"
-python = "^3.8"
-
-
-[tool.poetry]
 name = "mesh-api-specification"
 version = "0.0.1-alpha"
 description = "MESH Api specification repo"
-
+readme = "README.md"
 license = "MIT"
-
 authors = [
-    "NHS England"
+    { name = "NHS England" }
+]
+keywords = ["healthcare", "uk", "nhs"]
+requires-python = ">=3.13,<4.0"
+dependencies = [
+    "docopt>=0.6.2,<0.7.0",
+    "jsonpath-rw>=1.4.0,<2.0.0",
+    "semver>=3.0.4,<4.0.0",
+    "gitpython>=3.1.46,<4.0.0",
 ]
 
-readme = 'README.md'
+[project.urls]
+Homepage = "https://digital.nhs.uk/developer/api-catalogue/message-exchange-for-social-care-and-health-api"
+Repository = "https://github.com/NHSDigital/mesh-api-api"
 
-repository = "https://github.com/NHSDigital/mesh-api-api"
-homepage = "https://digital.nhs.uk/developer/api-catalogue/message-exchange-for-social-care-and-health-api"
-
-keywords = ["healthcare", "uk", "nhs"]
-
-
-[tool.poetry.dependencies]
-python = "^3.8"
-docopt = "^0.6.2"
-jsonpath-rw = "^1.4.0"
-semver = "^3.0.4"
-gitpython = "^3.1.46"
-
-
-[tool.poetry.dev-dependencies]
-ruff = "^0.15.4"
-black = "^24.4.2"
-pip-licenses = "^4.3.3"
-jinja2 = "^3.1.6"
-
-
-[tool.poetry.scripts]
+[tool.poetry]
+package-mode = false
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.4.2"
+ruff = "^0.15.4"
+black = "^26.0.0"
+pip-licenses = "^5.5.5"
+jinja2 = "^3.1.6"
 
 [tool.black]
 line-length = 120
-target-version = ['py38', 'py39', 'py310', 'py311']
+target-version = ['py313']
 include = '\.pyi?$'
 #extend-exclude = '''
 #/(
@@ -62,7 +49,7 @@ exclude = [
     ".venv",
 ]
 line-length = 120
-target-version = "py38"
+target-version = "py313"
 
 
 [tool.ruff.lint]

@@ -16,6 +16,7 @@ Options:
   -f <path> --file=<path>   Template from file at path.
   -e --env                  Replace from environment variables instead of JSON argument.
 """
+
 import json
 import os
 import sys

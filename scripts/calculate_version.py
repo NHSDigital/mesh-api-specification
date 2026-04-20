@@ -53,7 +53,7 @@ def is_minor_inc(commit):
 
 def without_empty(commits):
     """Takes a list of commits and returns a list without empty commits"""
-    pairs = zip(commits, commits[1:])
+    pairs = itertools.pairwise(commits)
 
     for fst, snd in pairs:
         if fst.tree != snd.tree:
