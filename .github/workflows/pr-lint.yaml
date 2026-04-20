@@ -1,7 +1,5 @@
 name: PR Quality Check
 on: pull_request
-permissions:
-  pull-requests: write
 jobs:
   link-ticket:
     runs-on: ubuntu-latest
