@@ -22,10 +22,36 @@ jobs:
 
       - name: Comment on PR
         if: contains(github.event.pull_request.head.ref, 'apm-') || contains(github.event.pull_request.head.ref, 'APM-') || contains(github.event.pull_request.head.ref, 'mesh-') || contains(github.event.pull_request.head.ref, 'MESH-') || contains(github.event.pull_request.head.ref, 'mesh2cloud-') || contains(github.event.pull_request.head.ref, 'MESH2CLOUD-') || contains(github.event.pull_request.head.ref, 'spii-') || contains(github.event.pull_request.head.ref, 'SPII-') || contains(github.event.pull_request.head.ref, 'spinecore-') || contains(github.event.pull_request.head.ref, 'SPINECORE-')
-        uses: unsplash/comment-on-pr@b5610c6125a7197eaec80072ea35ef53e1fc6035  # v1.3.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@v7
         with:
-          msg: |
-            This branch is work on a ticket in the NHS Digital AMB JIRA Project. Here's a handy link to the ticket:
-            # [${{ env.TICKET_NAME }}](https://jira.digital.nhs.uk/browse/${{ env.TICKET_NAME}})
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const marker = '<!-- jira-ticket-link -->';
+            const body = `${marker}\nThis branch is work on a ticket in the NHS Digital AMB JIRA Project. Here's a handy link to the ticket:\n# [${process.env.TICKET_NAME}](https://jira.digital.nhs.uk/browse/${process.env.TICKET_NAME})`;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+
+            const existing = comments.find((comment) =>
+              comment.user?.type === 'Bot' && comment.body?.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
