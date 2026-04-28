@@ -27,7 +27,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const marker = '<!-- jira-ticket-link -->';
-            const body = `${marker}\nThis branch is work on a ticket in the NHS Digital AMB JIRA Project. Here's a handy link to the ticket:\n# [${process.env.TICKET_NAME}](https://jira.digital.nhs.uk/browse/${process.env.TICKET_NAME})`;
+            const body = `${marker}\nThis branch is work on a ticket in the MESH JIRA Project. Here's a handy link to the ticket:\n# [${process.env.TICKET_NAME}](https://jira.digital.nhs.uk/browse/${process.env.TICKET_NAME})`;
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
