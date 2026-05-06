@@ -5,5 +5,6 @@
 poetry.lock
 pyproject.toml
 package-lock.json
+package.json
 .github/workflows/*.yml
 .github/workflows/*.yaml
