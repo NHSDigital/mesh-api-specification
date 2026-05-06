@@ -1,1 +1,9 @@
 * @alisonkinloch-nhs @matt-mercer @nhsdigital/mesh-to-cloud-admins
+
+# Exempt for dependabot PRs
+
+poetry.lock
+pyproject.toml
+package-lock.json
+.github/workflows/*.yml
+.github/workflows/*.yaml
